@@ -18,6 +18,8 @@ namespace Hillerød_Sejlklub_Library.Models
         public DateTime End { get; private set; }
         public bool Overdue { get; }
 
+        public List<Member> ListOfMembers = new List<Member>();
+
         public Booking(string destination, DateTime start, DateTime end, bool overdue)
         {
             _bookingID++;
@@ -26,12 +28,12 @@ namespace Hillerød_Sejlklub_Library.Models
             Start = start;
             End = end;
             Overdue = overdue;
-            
+           
         }
 
         public override string ToString()
         {
-            return $"Destination: {Destination}\n Start: {Start}\n End: {End}\n Overdue: {Overdue}";
+            return $"BookingID: {BookingID}\n Destination: {Destination}\n Start: {Start}\n End: {End}\n Overdue: {Overdue}";
         }
     }
 }
