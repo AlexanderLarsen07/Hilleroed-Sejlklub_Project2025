@@ -10,9 +10,5 @@ namespace Hillerød_Sejlklub_Library.Models
     {
         public  int Id { get; set; }
 
-        public void PrintBrainrot(string BrainRot)
-        {
-
-        }
     }
 }
