@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hillerød_Sejlklub_Library.Interfaces
 {
-    internal class IMemberRepo
+    public class IMemberRepo
     {
     }
 }

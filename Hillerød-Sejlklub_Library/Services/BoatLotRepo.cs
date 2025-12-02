@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Hillerød_Sejlklub_Library.Services
 {
-    internal class BoatLotRepo
+    public class BoatLotRepo
     {
     }
 }
