@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Hillerød_Sejlklub_Library.Models
 {
-    internal class Member
+    public class Member
     {
-        public string Name { get; set; }
+        public string Name { get; private set; }
         public Member(string name) {
             Name = name;
         }

@@ -9,5 +9,9 @@ namespace Hillerød_Sejlklub_Library.Models
     public class Boat
     {
         public  int Id { get; set; }
+        public void PrintAlex()
+        {
+            Console.WriteLine(Id);
+        }
     }
 }
