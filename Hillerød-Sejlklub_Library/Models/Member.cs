@@ -12,7 +12,7 @@ namespace Hillerød_Sejlklub_Library.Models
         public string Name { get; }
         public enum Role { get }
         public int MemberID { get; }
-        public List<BoatLot> BoatLotsRented;
+        public List<BoatLot> _boatLotsRented;
         public bool IsFamily { get; }
         public string Mail { get; }
         public string Password { get; }
@@ -29,9 +29,10 @@ namespace Hillerød_Sejlklub_Library.Models
             
         }
 
-        public void CalculateMembershipFee(int age, bool isFamily, List<BoatLots> boatLotsRented)
-        {
-        }
+        //public void CalculateMembershipFee(int age, bool isFamily,)
+        //{
+            
+        //}
         public override string ToString()
         {
             return $"Name: {Name}";
