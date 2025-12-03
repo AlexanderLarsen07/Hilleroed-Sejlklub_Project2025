@@ -36,6 +36,7 @@ namespace Hillerød_Sejlklub_Library.Models
             //make new List of BoatLotsRented
             _boatLotsRented = new List<BoatLot>();
             CalculateInitialMembershipFee();
+            MembershipType();
         }
 
         Dictionary<int, MemberRepo> _members;
@@ -47,7 +48,6 @@ namespace Hillerød_Sejlklub_Library.Models
                 {
                     if (IsFamily == true)
                     {
-                        Type = "Familie (hele husstanden)";
                         SubscriptionFee = 1500;
                         SubscriptionFee = SubscriptionFee + (_boatLotsRented.Count * 400);
                     }
@@ -55,15 +55,12 @@ namespace Hillerød_Sejlklub_Library.Models
                     {
                         if (Age >= 19)
                         {
-
-                                Type = "Senior medlem";
                                 SubscriptionFee = 1100;
                                 SubscriptionFee = SubscriptionFee + (_boatLotsRented.Count * 400);
 
                         }
                         else if (Age <= 18)
                         {
-                                Type = "Junior medlem";
                                 SubscriptionFee = 750;
                         SubscriptionFee = SubscriptionFee + (_boatLotsRented.Count * 200);
                         }
@@ -71,13 +68,40 @@ namespace Hillerød_Sejlklub_Library.Models
                 }
                 else if(PassiveMedlem == true)
                 {
-                    Type = "Passiv medlem";
                     SubscriptionFee = 250;
                 }
             return SubscriptionFee = SubscriptionFee + 150;
         }
 
-       
+        public string MembershipType()
+        {
+            if (PassiveMedlem == false)
+            {
+                if (IsFamily == true)
+                {
+                    Type = "Familie (hele husstanden)";
+                }
+                else if (IsFamily == false)
+                {
+                    if (Age >= 19)
+                    {
+
+                        Type = "Senior medlem";
+                    }
+                    else if (Age <= 18)
+                    {
+                        Type = "Junior medlem";
+                        }
+                }
+            }
+            else if (PassiveMedlem == true)
+            {
+                Type = "Passiv medlem";
+            }
+            return Type;
+        }
+
+
         public override string ToString()
         {
             return $"{MemberID}" +

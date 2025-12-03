@@ -36,3 +36,6 @@ Console.WriteLine("---------------------------Test overdue true 6 hours---------
 //DateTime end2 = new DateTime(2025, 12, 3, 12, 0, 0);
 //Booking booking2 = new Booking("Roskilde", 2, start2, end2);
 //Console.WriteLine(booking2);
+
+Member m1 = new Member("Justin", 22, true, "ddkwajld@gmail.com", "jidajip", 839139);
+Console.WriteLine(m1);
