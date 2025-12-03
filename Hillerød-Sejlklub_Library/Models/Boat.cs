@@ -33,12 +33,12 @@ namespace Hillerød_Sejlklub_Library.Models
 
         public int ByggeÅr { get; private set; }
 
-        public List<RepairLog>
-        +RepairLog : list<string>
+        public bool CanSail { get; private set;}
 
-
+        public List<string> RepairLog;
+        
         public Boat(int sejlNummer, string name, string description, BådTypeEnum bådTypen, ModelEnum theModel, int maxPassengers, 
-            int lenght, int width, int dybgang, int byggeår, MotorInfo motor)
+            int lenght, int width, int dybgang, int byggeår, MotorInfo motor, bool canSail)
         {
             SejlNummer = sejlNummer;
             Name = name;
@@ -50,6 +50,10 @@ namespace Hillerød_Sejlklub_Library.Models
             Width = width;
             Dybgang = dybgang;
             ByggeÅr = byggeår;
+            Motor = motor;
+            CanSail = canSail;
+            RepairLog = new List<string>();
+
         }
 
 
@@ -58,9 +62,18 @@ namespace Hillerød_Sejlklub_Library.Models
             return $"SejlNummer: {SejlNummer}\n Name: {Name}\n Description: {Description}\n BådTypen: {BådTypen}\n TheModel: {TheModel} \n " +
                 $"MaxPassengers : {MaxPassengers}\n Motor: {Motor}\n Lenght {Lenght}\n Width: {Width}\n Dybgang: {Dybgang}\n ByggeÅr: {ByggeÅr}\n" +
                 $"Motor: {Motor}\n" +
+                $"CanSail: {CanSail}" +
                 $"RepairLog: {RepairLog}";
                
         }
+
+
+        public void RepairLogMethod()
+        {
+            foreach (string log in RepairLog)
+            {
+                Console.WriteLine(log);
+            }
+        }
     }
-    
 }
