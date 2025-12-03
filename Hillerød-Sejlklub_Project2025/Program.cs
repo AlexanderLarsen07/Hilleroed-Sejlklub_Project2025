@@ -39,7 +39,7 @@ DateTime end2 = new DateTime(2025, 12, 3, 12, 0, 0);
 
 
 Console.WriteLine("---------------------------Member Test-----------------------------");
-Member m1 = new Member("Joel", 22, true, "JoelsFanfictionMail@gmail.com","123141", 48481931);
+Member m1 = new Member("Joel", 22, false, "JoelsFanfictionMail@gmail.com","123141", 48481931);
 Console.WriteLine(m1);
 
 

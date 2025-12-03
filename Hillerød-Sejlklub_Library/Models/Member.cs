@@ -34,6 +34,7 @@ namespace Hillerød_Sejlklub_Library.Models
             MemberID = _memberID;
             //tilføj til MemberRepo
             //make new List of BoatLotsRented
+            _boatLotsRented = new List<BoatLot>();
             CalculateInitialMembershipFee();
         }
 
