@@ -20,7 +20,10 @@ namespace Hillerød_Sejlklub_Library.Models
 
         public DateTime End { get; private set; }
         
-       
+        public Member Member { get; private set; }
+
+        public Boat Boat {get; private set;}
+
         public bool Overdue
         {
             get {return Start.AddHours(5) < End;}    
@@ -28,7 +31,7 @@ namespace Hillerød_Sejlklub_Library.Models
 
         public List<Member> ListOfMembers = new List<Member>();
 
-        public Booking(string destination, int numberOfMembers, DateTime start, DateTime end)
+        public Booking(string destination, int numberOfMembers, DateTime start, DateTime end, Member member, Boat boat)
         {
             _bookingID++;
             BookingID = _bookingID;
@@ -36,14 +39,17 @@ namespace Hillerød_Sejlklub_Library.Models
             Destination = destination;
             Start = start;
             End = end;
-            
-
+            Member = member;
+            Boat = boat;
 
         }
 
         public override string ToString()
         {
-            return $"BookingID: {BookingID}\n NumberOfMembers: {NumberOfMembers}\n Destination: {Destination}\n Start: {Start}\n End: {End}\n Overdue: {Overdue}";
+            return $"BookingID: {BookingID}\n NumberOfMembers: {NumberOfMembers}\n Destination: {Destination}\n Start: {Start}\n End: {End}\n Overdue: {Overdue}" +
+                $"\nMember: {Member}" +
+                $"\nBoat {Boat}";
+
         }
 
         public void AddMember(Member member)
@@ -54,7 +60,7 @@ namespace Hillerød_Sejlklub_Library.Models
                 {
                     throw new Exception();
                 }
-                member.Add. 
+                ListOfMembers.Add(member);
             }
             
         }
