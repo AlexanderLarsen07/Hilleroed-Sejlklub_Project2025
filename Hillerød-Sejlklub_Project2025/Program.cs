@@ -19,7 +19,7 @@ Console.WriteLine(s2);
 Console.WriteLine();
 
 Console.WriteLine(eve1.ToString());
-using Hillerød_Sejlklub_Library.Models;
+
 Console.WriteLine("---------------------------Test overdue true 6 hours-----------------------------");
 DateTime start1 = new DateTime(2025, 12, 3, 6, 0, 0);
 DateTime end1 = new DateTime(2025, 12, 3, 12, 0, 0);

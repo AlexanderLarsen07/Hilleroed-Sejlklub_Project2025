@@ -3,20 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hillerød_Sejlklub_Library.Services;
 
 namespace Hillerød_Sejlklub_Library.Models
 {
     public class Event
     {
         #region Instance fields
-        private static int eventID = 1;
+        private static int _eventID = 1;
         public List<Signup> _signups;
         #endregion
         #region Properties
         public int EventID 
         { 
-            get { return eventID; }
-            private set { eventID = value; }
+            get { return _eventID; }
+            private set { _eventID = value; }
         }
         public int MaxMembers { get; private set; }
         public string Title { get; private set; }
@@ -27,7 +28,7 @@ namespace Hillerød_Sejlklub_Library.Models
         public Event(int maxMembers, string title, DateTime date, string description)
         {
             _signups = new List<Signup>();
-            EventID = eventID++;
+            EventID = _eventID++;
             MaxMembers = maxMembers;
             Title = title;
             Date = date;
