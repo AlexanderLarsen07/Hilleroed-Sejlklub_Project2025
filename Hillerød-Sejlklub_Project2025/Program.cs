@@ -1,1 +1,11 @@
-﻿
+﻿using Hillerød_Sejlklub_Library.Models;
+Console.WriteLine("---------------------------Test overdue true 6 hours-----------------------------");
+DateTime start1 = new DateTime(2025, 12, 3, 6, 0, 0);
+DateTime end1 = new DateTime(2025, 12, 3, 12, 0, 0);
+Booking booking1 = new Booking("Roskilde", 1, start1, end1);
+Console.WriteLine(booking1);
+Console.WriteLine("---------------------Test overdue false 3 hours------------------------");
+DateTime start2 = new DateTime(2025, 12, 3, 9, 0, 0);
+DateTime end2 = new DateTime(2025, 12, 3, 12, 0, 0);
+Booking booking2 = new Booking("Roskilde", 2, start2, end2);
+Console.WriteLine(booking2);
