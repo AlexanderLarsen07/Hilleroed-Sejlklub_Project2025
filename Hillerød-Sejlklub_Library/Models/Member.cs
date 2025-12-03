@@ -8,9 +8,29 @@ namespace Hillerød_Sejlklub_Library.Models
 {
     public class Member
     {
-        public string Name { get; private set; }
-        public Member(string name) {
+        private static int _memberID;
+        public string Name { get; }
+        public enum Role { get }
+        public int MemberID { get; }
+        public List<BoatLot> BoatLotsRented;
+        public bool IsFamily { get; }
+        public string Mail { get; }
+        public string Password { get; }
+        public int PhoneNumber { get; }
+
+        public Member(string name, bool isFamily, string mail, string password, int phoneNumber) {
             Name = name;
+            IsFamily = isFamily;
+            Mail = mail;
+            Password = password;
+            PhoneNumber = phoneNumber;
+            //Increment ID
+            MemberID = _memberID;
+            
+        }
+
+        public void CalculateMembershipFee(int age, bool isFamily, List<BoatLots> boatLotsRented)
+        {
         }
         public override string ToString()
         {
