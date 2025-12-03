@@ -34,21 +34,22 @@ namespace Hillerød_Sejlklub_Library.Models
 
         public Booking(string destination, int numberOfMembers, DateTime start, DateTime end, Member member, Boat boat)
         {
-            //_bookingID++;
-            try { }
-            if(Boat.CanSail == false)
+            if (Boat.CanSail == true)
+            {
+                BookingID = _bookingID++;
+                NumberOfMembers = numberOfMembers;
+                Destination = destination;
+                Start = start;
+                End = end;
+                MemberProp = member;
+                BoatProp = boat;
+                ListOfMembers = new List<Member>();
+            }
+            else
             {
                 throw new Exception("You booked a boat that cannot sail.");
             }
-            BookingID = _bookingID++;
-            NumberOfMembers = numberOfMembers;
-            Destination = destination;
-            Start = start;
-            End = end;
-            MemberProp = member;
-            BoatProp = boat;
-            ListOfMembers = new List<Member>();
-            
+
         }
 
         public override string ToString()
@@ -66,7 +67,7 @@ namespace Hillerød_Sejlklub_Library.Models
             {
                 if (members.ID == member.ID)
                 {
-                    throw new Exception();
+                    throw new Exception("Member ID already exist");
                 }
                 ListOfMembers.Add(member);
             }
