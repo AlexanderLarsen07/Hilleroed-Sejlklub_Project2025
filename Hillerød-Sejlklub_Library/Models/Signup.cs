@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hillerød_Sejlklub_Library.Exceptions;
+using Hillerød_Sejlklub_Library.Services;
 
 namespace Hillerød_Sejlklub_Library.Models
 {
     public class Signup
     {
         #region Instance fields
-        private DateTime dateOfSignup;
+        private DateTime _dateOfSignup;
         #endregion
         #region Properties
         public string Comment { get; private set; }
@@ -20,7 +21,7 @@ namespace Hillerød_Sejlklub_Library.Models
         #region Constructor
         public Signup(Event ev, Member member, string comment)
         {
-            dateOfSignup = DateTime.Now;
+            _dateOfSignup = DateTime.Now;
             Event = ev;
             Member = member;
             Comment = comment;
@@ -46,9 +47,11 @@ namespace Hillerød_Sejlklub_Library.Models
         {
             return $"\tMember : {Member.Name}" +
                 $"\n\tEvent : {Event.Title}\n\t" +
-                $"Signed up : {dateOfSignup}\n\t" +
+                $"Signed up : {_dateOfSignup}\n\t" +
                 $"Comment : {Comment}";
         }
         #endregion
     }
 }
+
+

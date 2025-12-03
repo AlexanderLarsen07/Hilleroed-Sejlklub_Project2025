@@ -34,21 +34,21 @@ namespace Hillerød_Sejlklub_Library.Models
 
         public Booking(string destination, int numberOfMembers, DateTime start, DateTime end, Member member, Boat boat)
         {
-            //if (Boat.CanSail == true)
-            //{
-            //    BookingID = _bookingID++;
-            //    NumberOfMembers = numberOfMembers;
-            //    Destination = destination;
-            //    Start = start;
-            //    End = end;
-            //    MemberProp = member;
-            //    BoatProp = boat;
-            //    ListOfMembers = new List<Member>();
-            //}
-            //else
-            //{
-            //    throw new Exception("You booked a boat that cannot sail.");
-            //}
+            if (boat.CanSail == true)
+            {
+                BookingID = _bookingID++;
+                NumberOfMembers = numberOfMembers;
+                Destination = destination;
+                Start = start;
+                End = end;
+                MemberProp = member;
+                BoatProp = boat;
+                ListOfMembers = new List<Member>();
+        }
+            else
+            {
+                throw new Exception("You booked a boat that cannot sail.");
+            }
 
         }
 
@@ -63,14 +63,14 @@ namespace Hillerød_Sejlklub_Library.Models
 
         public void AddMember(Member member)
         {
-            //foreach(Member members in ListOfMembers)
-            //{
-            //    if (members.ID == member.ID)
-            //    {
-            //        throw new Exception("Member ID already exist");
-            //    }
-            //    ListOfMembers.Add(member);
-            //}
+            foreach(Member members in ListOfMembers)
+            {
+                if (members.MemberID == member.MemberID)
+                {
+                    throw new Exception("Member ID already exist");
+                }
+                ListOfMembers.Add(member);
+            }
             
         }
     }
