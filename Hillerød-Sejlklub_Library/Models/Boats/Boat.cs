@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hillerød_Sejlklub_Library.Models
+namespace Hillerød_Sejlklub_Library.Models.Boats
 {
     public class Boat
     {
@@ -17,7 +17,7 @@ namespace Hillerød_Sejlklub_Library.Models
 
         public string Description { get; private set; }
 
-        public BoatTypeEnum BådTypen {get; private set; }
+        public BoatTypeEnum BoatType {get; private set; }
 
         public ModelEnum TheModel {get; private set; }
 
@@ -44,7 +44,7 @@ namespace Hillerød_Sejlklub_Library.Models
             SailNumber = sailNumber;
             Name = name;
             Description = description;
-            BadTypen = badTypen;
+            BoatType = boatType;
             TheModel = theModel;
             MaxPassengers = maxPassengers;
             Lenght = lenght;

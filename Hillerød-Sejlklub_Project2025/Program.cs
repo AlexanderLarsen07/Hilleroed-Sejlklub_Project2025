@@ -1,6 +1,7 @@
 ﻿using System.Runtime.CompilerServices;
 using Hillerød_Sejlklub_Library.Exceptions;
-using Hillerød_Sejlklub_Library.Models;
+using Hillerød_Sejlklub_Library.Models.Events;
+using Hillerød_Sejlklub_Library.Models.Members;
 DateTime d1 = new(2025, 12, 3, 6, 0, 0);
 Event eve1 = new(1, "title", d1, "description");
 Console.WriteLine(eve1);

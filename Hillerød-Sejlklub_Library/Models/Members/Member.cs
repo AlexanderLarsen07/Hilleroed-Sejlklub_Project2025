@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hillerød_Sejlklub_Library.Models
+namespace Hillerød_Sejlklub_Library.Models.Members
 {
     public class Member
     {
@@ -13,7 +13,7 @@ namespace Hillerød_Sejlklub_Library.Models
         public string Name { get; }
         public int Age { get; }
         public int SubscriptionFee { get; set; }
-        public enum Role { get }
+        public RoleEnum Role { get; }
         public int MemberID { get; }
         public List<BoatLot> _boatLotsRented;
         public bool IsFamily { get; }
@@ -49,20 +49,20 @@ namespace Hillerød_Sejlklub_Library.Models
                     if (IsFamily == true)
                     {
                         SubscriptionFee = 1500;
-                        SubscriptionFee = SubscriptionFee + (_boatLotsRented.Count * 400);
+                        SubscriptionFee = SubscriptionFee + _boatLotsRented.Count * 400;
                     }
                     else if (IsFamily == false)
                     {
                         if (Age >= 19)
                         {
                                 SubscriptionFee = 1100;
-                                SubscriptionFee = SubscriptionFee + (_boatLotsRented.Count * 400);
+                                SubscriptionFee = SubscriptionFee + _boatLotsRented.Count * 400;
 
                         }
                         else if (Age <= 18)
                         {
                                 SubscriptionFee = 750;
-                        SubscriptionFee = SubscriptionFee + (_boatLotsRented.Count * 200);
+                        SubscriptionFee = SubscriptionFee + _boatLotsRented.Count * 200;
                         }
                     }
                 }

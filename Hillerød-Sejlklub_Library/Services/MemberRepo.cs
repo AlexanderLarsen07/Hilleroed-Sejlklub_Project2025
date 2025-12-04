@@ -1,4 +1,4 @@
-﻿using Hillerød_Sejlklub_Library.Models;
+﻿using Hillerød_Sejlklub_Library.Models.Members;
 using System;
 using System.Collections.Generic;
 using System.Linq;
