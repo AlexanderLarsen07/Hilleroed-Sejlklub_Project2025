@@ -13,22 +13,29 @@ namespace ConsoleMenu.Menu
 {
     public class Menu
     {
-        private static string mainMenuChoices = "\t1.Vis Members";
+        // static strings for choices
 
-        private MemberRepo _memberRepository = new MemberRepo();
+        // lav repos
 
         private static string ReadChoice(string choices)
         {
-            Console.Clear();
+            Console.Write("\x1b[2J"); // Clear screen
+            Console.Write("\x1b[3J"); // Clear scrollback
+            Console.Write("\x1b[H");  // Set cursor to home
             Console.Write(choices);
             string choice = Console.ReadLine();
             Console.Clear();
             return choice.ToLower();
         }
 
-        public void ShowMenu()
-        {
-
-        }
+        // lav switch case
+        //    public void ShowMemberMenu()
+        //    {
+        //        string theChoice = ReadChoice();
+        //        while (theChoice != "q")
+        //        {
+        //            switch (theChoice)
+        //        }
+        //     }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using Hillerød_Sejlklub_Library.Interfaces;
-using Hillerød_Sejlklub_Library.Models.Blogs;
+using Hillerød_Sejlklub_Library.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +17,23 @@ namespace Hillerød_Sejlklub_Library.Services
 
         }
 
-        public void CreateBlog()
+        public void AddBlog(Blog blog)
         {
-
+            if (!BlogNameExist(blog.Headline))
+            {
+                _blogRepo.Add(blog);
+            }
+        }
+        public bool BlogNameExist (string headline)
+        {
+            foreach (var b in _blogRepo)
+            {
+                if (b.Headline == headline)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void EditBlog()
@@ -36,5 +50,7 @@ namespace Hillerød_Sejlklub_Library.Services
 
         }
 
+
+        //en metode for tjekke administrator eller formand
     }
 }
