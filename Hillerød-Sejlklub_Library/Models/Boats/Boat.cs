@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hillerød_Sejlklub_Library.Models
+namespace Hillerød_Sejlklub_Library.Models.Boats
 {
     public class Boat
     {
@@ -17,7 +17,7 @@ namespace Hillerød_Sejlklub_Library.Models
 
         public string Description { get; private set; }
 
-        public BoatTypeEnum BådTypen {get; private set; }
+        public BoatTypeEnum BoatType {get; private set; }
 
         public ModelEnum TheModel {get; private set; }
 
@@ -37,13 +37,13 @@ namespace Hillerød_Sejlklub_Library.Models
 
         public List<string> RepairLog;
         
-        public Boat(int sejlNummer, string name, string description, BoatTypeEnum bådTypen, ModelEnum theModel, int maxPassengers, 
+        public Boat(int sejlNummer, string name, string description, BoatTypeEnum boatType, ModelEnum theModel, int maxPassengers, 
             int lenght, int width, int dybgang, int byggeår, MotorInfo motor, bool canSail)
         {
             SejlNummer = sejlNummer;
             Name = name;
             Description = description;
-            BådTypen = bådTypen;
+            BoatType = boatType;
             TheModel = theModel;
             MaxPassengers = maxPassengers;
             Lenght = lenght;
@@ -59,7 +59,7 @@ namespace Hillerød_Sejlklub_Library.Models
 
         public override string ToString()
         {
-            return $"SejlNummer: {SejlNummer}\n Name: {Name}\n Description: {Description}\n BådTypen: {BådTypen}\n TheModel: {TheModel} \n " +
+            return $"SejlNummer: {SejlNummer}\n Name: {Name}\n Description: {Description}\n BådTypen: {BoatType}\n TheModel: {TheModel} \n " +
                 $"MaxPassengers : {MaxPassengers}\n Motor: {Motor}\n Lenght {Lenght}\n Width: {Width}\n Dybgang: {Dybgang}\n ByggeÅr: {ByggeÅr}\n" +
                 $"Motor: {Motor}\n" +
                 $"CanSail: {CanSail}" +

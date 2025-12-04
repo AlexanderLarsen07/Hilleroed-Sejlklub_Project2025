@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Hillerød_Sejlklub_Library.Services;
 
-namespace Hillerød_Sejlklub_Library.Models
+namespace Hillerød_Sejlklub_Library.Models.Events
 {
     public class Event
     {
