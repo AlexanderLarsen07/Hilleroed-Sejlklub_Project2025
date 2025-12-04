@@ -8,5 +8,6 @@ namespace Hillerød_Sejlklub_Library.Interfaces
 {
     public class IMemberRepo
     {
+
     }
 }
