@@ -2,6 +2,7 @@
 using Hillerød_Sejlklub_Library.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,7 @@ namespace Hillerød_Sejlklub_Library.Services
 
         public BlogRepo()
         {
-
+            _blogRepo = new List<Blog>();
         }
 
         public void AddBlog(Blog blog)
@@ -36,21 +37,32 @@ namespace Hillerød_Sejlklub_Library.Services
             return false;
         }
 
-        public void EditBlog()
+        public void EditBlog(Blog blog, string headline, string theText, string description)
         {
-
+            foreach(Blog b in _blogRepo)
+            {
+                if(b == blog)
+                {
+                    b.Headline = headline;
+                    b.TheText = theText;
+                    b.Description = description;
+                }
+            }
         }
-        public void Delete() //DeleteBlog metoden skal tilføjes i user story?
+        public void Delete(Blog blog) //DeleteBlog metoden skal tilføjes i user story?
         {
-
+            _blogRepo.Remove(blog);
         }
 
-        public void CommentOnBlog() //Skal nok have en anden return type 
+        
+        public void PrintAllComments()
         {
-
+            foreach(Blog c in _blogRepo)
+            {
+                Console.WriteLine(c.CommentsOnBlog);
+            }
         }
 
-
-        //en metode for tjekke administrator eller formand
+        //en metode for tjekke administrator eller formand?
     }
 }
