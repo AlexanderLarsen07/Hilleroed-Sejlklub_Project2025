@@ -38,11 +38,6 @@ namespace Hillerød_Sejlklub_Library.Models.Members
             CalculateInitialMembershipFee();
             MembershipType();
         }
-        public MemberRepo AddMemberInRepository()
-        {
-            
-            return null;
-        }
 
         public int CalculateInitialMembershipFee()
         {
