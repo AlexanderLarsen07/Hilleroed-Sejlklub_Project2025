@@ -11,7 +11,7 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
 {
     public class Boat
     {
-        public  int SailNumber { get; private set; }
+        public string SailNumber { get; private set; }
         
         public string Name { get; private set; }
 
@@ -33,12 +33,12 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
 
         public int YearBuilt { get; private set; }
 
-        public bool CanSail { get; private set;}
+        public bool CanSail { get; set;}
 
-        public List<string> RepairLog;
-        
-      
-        public Boat(int sailNumber, string name, string description, BoatTypeEnum boatType, ModelEnum theModel, int maxPassengers, 
+        public List<string> RepairLogList;
+
+
+        public Boat(string sailNumber, string name, string description, BoatTypeEnum boatType, ModelEnum theModel, int maxPassengers,
             int lenght, int width, int draft, int yearBuilt, MotorInfo motor, bool canSail)
         {
             SailNumber = sailNumber;
@@ -53,28 +53,32 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
             YearBuilt = yearBuilt;
             Motor = motor;
             CanSail = canSail;
-            RepairLog = new List<string>();
-
+            RepairLogList = new List<string>();
         }
-
+            
 
         public override string ToString()
         {
-            return $"SejlNummer: {SailNumber}\n Name: {Name}\n Description: {Description}\n BådTypen: {BoatType}\n TheModel: {TheModel} \n " +
-                $"MaxPassengers : {MaxPassengers}\n Motor: {Motor}\n Lenght {Lenght}\n Width: {Width}\n Dybgang: {Draft}\n ByggeÅr: {YearBuilt}\n" +
-                $"Motor: {Motor}\n" +
-                $"CanSail: {CanSail}" +
-                $"RepairLog: {RepairLog}";
+            string motorText;
+                if(Motor == null)
+                {
+                motorText = "No motor";
+                }
+                else
+                {
+                motorText = Motor.ToString();
+                }
+                
+            return $"SejlNummer: {SailNumber}\nName: {Name}\nDescription: {Description}\nBådTypen: {BoatType}\nTheModel: {TheModel} \n" +
+                $"MaxPassengers : {MaxPassengers}\nLenght {Lenght}\nWidth: {Width}\nDybgang: {Draft}\nByggeÅr: {YearBuilt}\n"+
+                $"Motor: {motorText}\n" +
+                $"CanSail: {CanSail}"
+                ;
                
         }
 
+        
+        
 
-        public void RepairLogMethod()
-        {
-            foreach (string log in RepairLog)
-            {
-                Console.WriteLine(log);
-            }
-        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Hillerød_Sejlklub_Library.Models;
+﻿using Hillerød_Sejlklub_Library.Interfaces;
+using Hillerød_Sejlklub_Library.Models;
 using Hillerød_Sejlklub_Library.Models.Boats;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Hillerød_Sejlklub_Library.Services
 {
-    public class BoatRepo
+    public class BoatRepo : IBoat
     {
         private List<Boat> _boat;
 
@@ -35,7 +36,7 @@ namespace Hillerød_Sejlklub_Library.Services
             _boat.Add(boat);
         }
 
-        public Boat GetBoatByID(int SailNumber)
+        public Boat GetBoatByID(string SailNumber)
         {
             for (int i = 0; _boat.Count > i; i++)
             {
@@ -44,11 +45,11 @@ namespace Hillerød_Sejlklub_Library.Services
                     return _boat[i];
                 }
             }
-            throw new Exception("BookingID doesn’t exist");
+            throw new Exception("SailNumber doesn’t exist");
         }
-       
 
-        public void RemoveBySailNumber(int SailNumber)
+
+        public void RemoveBySailNumber(string SailNumber)
         {
             int i = 0;
             while (_boat.Count > i)
@@ -57,9 +58,8 @@ namespace Hillerød_Sejlklub_Library.Services
                 {
                     _boat.RemoveAt(i);
                 }
-
+                i++;
             }
-            i++;
         }
 
         public void PrintAllBoats()
@@ -68,9 +68,20 @@ namespace Hillerød_Sejlklub_Library.Services
             {
                 Console.WriteLine(boatOnList);
             }
-
         }
 
+        public void CanSailSet(bool trueOrFalse, string SailNumber)
+        {
+            foreach (Boat boatOnList in _boat)
+            {
+                if(SailNumber == boatOnList.SailNumber)
+                {
+                    boatOnList.CanSail = trueOrFalse;
+                    return;
+                }
+            }
 
+                throw new Exception("SailNumber does not exist.");
+        }
     }
 }
