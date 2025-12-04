@@ -2,13 +2,14 @@
 using Hillerød_Sejlklub_Library.Exceptions;
 using Hillerød_Sejlklub_Library.Models.Events;
 using Hillerød_Sejlklub_Library.Models.Members;
+using Hillerød_Sejlklub_Library.Services;
 DateTime d1 = new(2025, 12, 3, 6, 0, 0);
 Event eve1 = new(1, "title", d1, "description");
 Console.WriteLine(eve1);
 Console.WriteLine();
 
-Member m1 = new("al", 12, true, "mail", "pass", 122212);
-Member m2 = new("la", 12, false, "laim", "ssap", 212221);
+Member m1 = new("al", 12, MembershipEnum.FamilieMedlem, "mail", "pass", 122212);
+Member m2 = new("la", 12, MembershipEnum.Medlem, "laim", "ssap", 212221);
 Console.WriteLine(m1);
 Console.WriteLine(m2);
 Console.WriteLine();
@@ -36,7 +37,6 @@ Console.WriteLine(eve1.ToString());
 
 
 Console.WriteLine("---------------------------Booking Test-----------------------------");
-
 
 Console.WriteLine("---------------------------Test overdue true 6 hours-----------------------------");
 //DateTime start1 = new DateTime(2025, 12, 3, 6, 0, 0);

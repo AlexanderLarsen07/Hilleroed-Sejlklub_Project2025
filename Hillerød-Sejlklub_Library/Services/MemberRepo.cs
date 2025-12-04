@@ -17,7 +17,11 @@ namespace Hillerød_Sejlklub_Library.Services
 
         public void AddMember()
         {
-
+            foreach(KeyValuePair<int, Member> member in _memberDictionary)
+            {
+                _memberDictionary.Add(member.Key, member.Value);
+            }
         }
+
     }
 }

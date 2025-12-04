@@ -1,5 +1,5 @@
 ﻿using Hillerød_Sejlklub_Library.Interfaces;
-using Hillerød_Sejlklub_Library.Models.Blogs;
+using Hillerød_Sejlklub_Library.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,5 +36,7 @@ namespace Hillerød_Sejlklub_Library.Services
 
         }
 
+
+        //en metode for tjekke administrator eller formand
     }
 }

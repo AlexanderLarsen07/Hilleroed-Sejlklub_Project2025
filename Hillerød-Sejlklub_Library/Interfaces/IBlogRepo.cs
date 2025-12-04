@@ -16,5 +16,8 @@ namespace Hillerød_Sejlklub_Library.Interfaces
         void Delete();
 
         void CommentOnBlog(); //Skal nok have en anden return type 
+
+
+        //en metode for tjekke administrator eller formand
     }
 }
