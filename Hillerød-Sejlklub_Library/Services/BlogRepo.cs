@@ -36,5 +36,7 @@ namespace Hillerød_Sejlklub_Library.Services
 
         }
 
+
+        //en metode for tjekke administrator eller formand
     }
 }
