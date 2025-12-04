@@ -43,7 +43,16 @@ namespace Hillerød_Sejlklub_Library
 
         public void RemoveBookingByID(int BookingID)
         {
-            throw new NotImplementedException();
+            int i = 0;
+            while(_bookings.Count > i)
+            {
+                if(BookingID == _bookings[i].BookingID)
+                {
+                    _bookings.RemoveAt(i);
+                }
+
+            }
+            i++;
         }
     }
 }
