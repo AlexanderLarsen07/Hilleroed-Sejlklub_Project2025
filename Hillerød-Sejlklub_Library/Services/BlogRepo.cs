@@ -17,9 +17,23 @@ namespace Hillerød_Sejlklub_Library.Services
 
         }
 
-        public void CreateBlog()
+        public void AddBlog(Blog blog)
         {
-
+            if (!BlogNameExist(blog.Headline))
+            {
+                _blogRepo.Add(blog);
+            }
+        }
+        public bool BlogNameExist (string headline)
+        {
+            foreach (var b in _blogRepo)
+            {
+                if (b.Headline == headline)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void EditBlog()

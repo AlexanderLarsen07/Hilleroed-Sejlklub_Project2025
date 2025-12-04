@@ -10,7 +10,8 @@ namespace Hillerød_Sejlklub_Library.Interfaces
     public interface IBlogRepo
     {
 
-        void CreateBlog();
+        void AddBlog(Blog blog);
+        bool BlogNameExist(string headline);
 
         void EditBlog();
         void Delete();
