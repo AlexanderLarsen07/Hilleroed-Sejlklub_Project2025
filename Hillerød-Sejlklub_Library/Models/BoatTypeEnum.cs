@@ -6,5 +6,8 @@ using System.Threading.Tasks;
 
 namespace Hillerød_Sejlklub_Library.Models
 {
-    public enum MærkeEnum { Mercury_Marine, Yamaha, Suzuki_Marine, Honda_Marine, Tohatsu}
+    public enum BoatTypeEnum
+    {
+        Begynderjolle, Voksenjolle, To_mandsjolle
+    }
 }

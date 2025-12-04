@@ -17,7 +17,7 @@ namespace Hillerød_Sejlklub_Library.Models
 
         public string Description { get; private set; }
 
-        public BådTypeEnum BådTypen {get; private set; }
+        public BoatTypeEnum BådTypen {get; private set; }
 
         public ModelEnum TheModel {get; private set; }
 
@@ -37,7 +37,7 @@ namespace Hillerød_Sejlklub_Library.Models
 
         public List<string> RepairLog;
         
-        public Boat(int sejlNummer, string name, string description, BådTypeEnum bådTypen, ModelEnum theModel, int maxPassengers, 
+        public Boat(int sejlNummer, string name, string description, BoatTypeEnum bådTypen, ModelEnum theModel, int maxPassengers, 
             int lenght, int width, int dybgang, int byggeår, MotorInfo motor, bool canSail)
         {
             SejlNummer = sejlNummer;
