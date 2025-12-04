@@ -1,4 +1,4 @@
-﻿using Hillerød_Sejlklub_Library.Models;
+﻿using Hillerød_Sejlklub_Library.Models.Boats;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +9,7 @@ namespace Hillerød_Sejlklub_Library.Interfaces
 {
     public interface IBookingRepo
     {
+        List<Booking> GetAll();
         void AddBooking(Booking booking);
         Booking GetBookingByID(int BookingID);
         void RemoveBookingByID(int BookingID);

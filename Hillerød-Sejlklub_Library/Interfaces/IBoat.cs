@@ -1,0 +1,21 @@
+﻿using Hillerød_Sejlklub_Library.Models;
+using Hillerød_Sejlklub_Library.Models.Boats;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Hillerød_Sejlklub_Library.Interfaces
+{
+    public interface IBoat
+    {
+        List<Boat> GetAll();
+        void AddBoat(Boat boat);
+        Boat GetBoatByID(int SailNumber);
+        void RemoveBySailNumber(int SailNumber);
+
+        void PrintAllBoats();
+
+    }
+}

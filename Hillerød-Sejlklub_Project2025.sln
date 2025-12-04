@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36623.8 d17.14
+VisualStudioVersion = 17.14.36623.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hillerød-Sejlklub_Project2025", "Hillerød-Sejlklub_Project2025\Hillerød-Sejlklub_Project2025.csproj", "{AC95DB36-4201-4EEA-A124-914C64DDD75B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hillerød-Sejlklub_Library", "Hillerød-Sejlklub_Library\Hillerød-Sejlklub_Library.csproj", "{E9781108-80D2-4FD3-8F77-F5CF1C0E6E96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleMenu", "ConsoleMenu\ConsoleMenu.csproj", "{B7388BE3-3FAC-40F5-A00E-D1BA11029674}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{E9781108-80D2-4FD3-8F77-F5CF1C0E6E96}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E9781108-80D2-4FD3-8F77-F5CF1C0E6E96}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E9781108-80D2-4FD3-8F77-F5CF1C0E6E96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7388BE3-3FAC-40F5-A00E-D1BA11029674}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7388BE3-3FAC-40F5-A00E-D1BA11029674}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7388BE3-3FAC-40F5-A00E-D1BA11029674}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7388BE3-3FAC-40F5-A00E-D1BA11029674}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

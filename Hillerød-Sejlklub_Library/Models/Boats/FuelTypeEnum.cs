@@ -4,10 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hillerød_Sejlklub_Library.Interfaces
+namespace Hillerød_Sejlklub_Library.Models.Boats
 {
-    public class IMemberRepo
-    {
-
-    }
+    public enum FuelTypeEnum { Diesel, Benzin, El}
 }

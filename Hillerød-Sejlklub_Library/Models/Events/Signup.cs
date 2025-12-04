@@ -4,9 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hillerød_Sejlklub_Library.Exceptions;
+using Hillerød_Sejlklub_Library.Models.Members;
 using Hillerød_Sejlklub_Library.Services;
 
-namespace Hillerød_Sejlklub_Library.Models
+namespace Hillerød_Sejlklub_Library.Models.Events
 {
     public class Signup
     {
@@ -25,8 +26,6 @@ namespace Hillerød_Sejlklub_Library.Models
             Event = ev;
             Member = member;
             Comment = comment;
-            try
-            {
                 if (Event._signups.Count < Event.MaxMembers)
                 {
                     Event._signups.Add(this);
@@ -35,11 +34,6 @@ namespace Hillerød_Sejlklub_Library.Models
                 {
                     throw new EventFullException("\tCouldn't sign up to event : Event full");
                 }
-            }
-            catch (EventFullException efe)
-            {
-                Console.WriteLine(efe.Message);
-            } 
         }
         #endregion
         #region Methods

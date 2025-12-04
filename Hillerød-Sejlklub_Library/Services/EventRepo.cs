@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hillerød_Sejlklub_Library.Interfaces;
-using Hillerød_Sejlklub_Library.Models;
+using Hillerød_Sejlklub_Library.Models.Events;
+using Hillerød_Sejlklub_Library.Models.Members;
 
 namespace Hillerød_Sejlklub_Library.Services
 {
@@ -33,14 +34,17 @@ namespace Hillerød_Sejlklub_Library.Services
             return null;
         }
 
-        public void RemoveEvent(int eventID)
+        public void RemoveEvent(int eventID, Member member) //member gemmes i menu efter login
         {
-            _events.Remove(eventID);
+            if(member.Role == RoleEnum.Administrator || member.Role == RoleEnum.Chairman)
+            {
+                _events.Remove(eventID);
+            }
         }
 
-        public void AddEvent(Event even)
+        public void AddEvent(Event even, Member member)// Tilføj check på members role enum
         {
-            if (!_events.ContainsKey(even.EventID))
+            if (!_events.ContainsKey(even.EventID) && member.Role == RoleEnum.Administrator || member.Role == RoleEnum.Chairman)
             {
                 _events.Add(even.EventID, even);
             }

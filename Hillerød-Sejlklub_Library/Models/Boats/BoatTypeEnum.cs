@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hillerød_Sejlklub_Library.Models
+namespace Hillerød_Sejlklub_Library.Models.Boats
 {
-    public enum BådTypeEnum
+    public enum BoatTypeEnum
     {
         Begynderjolle, Voksenjolle, To_mandsjolle
     }

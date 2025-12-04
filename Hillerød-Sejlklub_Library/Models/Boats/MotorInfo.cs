@@ -4,19 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hillerød_Sejlklub_Library.Models
+namespace Hillerød_Sejlklub_Library.Models.Boats
 {
     public class MotorInfo
     {
         public FuelTypeEnum FuelType {get; private set;}
 
-        public MærkeEnum Mærke { get; private set; }
+        public BrandEnum Mærke { get; private set; }
 
         public int HP {get; private set;}
 
         public int Weight {get; private set;}
 
-        public MotorInfo(FuelTypeEnum fuelType, MærkeEnum mærke, int hp, int weight)
+        public MotorInfo(FuelTypeEnum fuelType, BrandEnum mærke, int hp, int weight)
         {
             FuelType = fuelType;
             Mærke = mærke;

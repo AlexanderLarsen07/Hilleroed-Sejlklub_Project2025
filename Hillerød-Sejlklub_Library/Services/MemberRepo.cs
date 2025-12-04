@@ -1,4 +1,4 @@
-﻿using Hillerød_Sejlklub_Library.Models;
+﻿using Hillerød_Sejlklub_Library.Models.Members;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +17,11 @@ namespace Hillerød_Sejlklub_Library.Services
 
         public void AddMember()
         {
-
+            foreach(KeyValuePair<int, Member> member in _memberDictionary)
+            {
+                _memberDictionary.Add(member.Key, member.Value);
+            }
         }
+
     }
 }

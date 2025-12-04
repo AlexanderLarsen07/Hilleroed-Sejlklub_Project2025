@@ -7,17 +7,17 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hillerød_Sejlklub_Library.Models
+namespace Hillerød_Sejlklub_Library.Models.Boats
 {
     public class Boat
     {
-        public  int SejlNummer { get; private set; }
+        public  int SailNumber { get; private set; }
         
         public string Name { get; private set; }
 
         public string Description { get; private set; }
 
-        public BådTypeEnum BådTypen {get; private set; }
+        public BoatTypeEnum BoatType {get; private set; }
 
         public ModelEnum TheModel {get; private set; }
 
@@ -29,27 +29,28 @@ namespace Hillerød_Sejlklub_Library.Models
         
         public int Width {get; private set; }
         
-        public int Dybgang { get; private set; }
+        public int Draft { get; private set; }
 
-        public int ByggeÅr { get; private set; }
+        public int YearBuilt { get; private set; }
 
         public bool CanSail { get; private set;}
 
         public List<string> RepairLog;
         
-        public Boat(int sejlNummer, string name, string description, BådTypeEnum bådTypen, ModelEnum theModel, int maxPassengers, 
-            int lenght, int width, int dybgang, int byggeår, MotorInfo motor, bool canSail)
+      
+        public Boat(int sailNumber, string name, string description, BoatTypeEnum boatType, ModelEnum theModel, int maxPassengers, 
+            int lenght, int width, int draft, int yearBuilt, MotorInfo motor, bool canSail)
         {
-            SejlNummer = sejlNummer;
+            SailNumber = sailNumber;
             Name = name;
             Description = description;
-            BådTypen = bådTypen;
+            BoatType = boatType;
             TheModel = theModel;
             MaxPassengers = maxPassengers;
             Lenght = lenght;
             Width = width;
-            Dybgang = dybgang;
-            ByggeÅr = byggeår;
+            Draft = draft;
+            YearBuilt = yearBuilt;
             Motor = motor;
             CanSail = canSail;
             RepairLog = new List<string>();
@@ -59,8 +60,8 @@ namespace Hillerød_Sejlklub_Library.Models
 
         public override string ToString()
         {
-            return $"SejlNummer: {SejlNummer}\n Name: {Name}\n Description: {Description}\n BådTypen: {BådTypen}\n TheModel: {TheModel} \n " +
-                $"MaxPassengers : {MaxPassengers}\n Motor: {Motor}\n Lenght {Lenght}\n Width: {Width}\n Dybgang: {Dybgang}\n ByggeÅr: {ByggeÅr}\n" +
+            return $"SejlNummer: {SailNumber}\n Name: {Name}\n Description: {Description}\n BådTypen: {BoatType}\n TheModel: {TheModel} \n " +
+                $"MaxPassengers : {MaxPassengers}\n Motor: {Motor}\n Lenght {Lenght}\n Width: {Width}\n Dybgang: {Draft}\n ByggeÅr: {YearBuilt}\n" +
                 $"Motor: {Motor}\n" +
                 $"CanSail: {CanSail}" +
                 $"RepairLog: {RepairLog}";
