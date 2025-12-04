@@ -9,7 +9,7 @@ namespace Hillerød_Sejlklub_Library.Interfaces
 {
     public interface IMemberRepo
     {
-        Dictionary<int, Member> GetAll();
+        List<Member> GetAll();
         void AddMember(Member member);
         Member GetCustomerById(int id);
         void RemoveMember(int id);
