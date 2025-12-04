@@ -9,6 +9,7 @@ namespace Hillerød_Sejlklub_Library.Interfaces
 {
     public interface IBookingRepo
     {
+        List<Booking> GetAll();
         void AddBooking(Booking booking);
         Booking GetBookingByID(int BookingID);
         void RemoveBookingByID(int BookingID);

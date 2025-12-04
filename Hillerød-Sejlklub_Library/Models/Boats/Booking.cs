@@ -22,9 +22,9 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
 
         public DateTime End { get; private set; }
         
-        public Member MemberProp { get; private set; }
+        public Member TheMember { get; private set; }
 
-        public Boat BoatProp {get; private set;}
+        public Boat TheBoat {get; private set;}
 
         public bool Overdue
         {
@@ -33,17 +33,17 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
 
         public List<Member> ListOfMembers;
 
-        public Booking(string destination, int numberOfMembers, DateTime start, DateTime end, Member member, Boat boat)
+        public Booking(string destination, int numberOfMembers, DateTime start, DateTime end, Member theMember, Boat theBoat)
         {
-            if (boat.CanSail == true)
+            if (theBoat.CanSail == true)
             {
                 BookingID = _bookingID++;
                 NumberOfMembers = numberOfMembers;
                 Destination = destination;
                 Start = start;
                 End = end;
-                MemberProp = member;
-                BoatProp = boat;
+                TheMember = theMember;
+                TheBoat = theBoat;
                 ListOfMembers = new List<Member>();
         }
             else
@@ -57,8 +57,8 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
         {
             return $"BookingID: {BookingID}\n NumberOfMembers: {NumberOfMembers}\n Destination: {Destination}\n Start: {Start}\n End: {End}\n Overdue: {Overdue}" +
                 $"ListOfMembers: {ListOfMembers.Count}"+
-                $"\nMember: {MemberProp}" +
-                $"\nBoat {BoatProp}";
+                $"\nMember: {TheMember}" +
+                $"\nBoat {TheBoat}";
 
         }
 

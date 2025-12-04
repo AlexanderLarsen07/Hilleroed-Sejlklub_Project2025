@@ -11,6 +11,12 @@ namespace Hillerød_Sejlklub_Library
         {
             _bookings = new List<Booking>();
         }
+
+        public List<Booking> GetAll()
+        {
+            return _bookings;
+        }
+
         public void AddBooking(Booking booking)
         {
             foreach (Booking bookingOnList in _bookings)
@@ -23,6 +29,8 @@ namespace Hillerød_Sejlklub_Library
             }
             _bookings.Add(booking);
         }
+
+       
 
         public Booking GetBookingByID(int BookingID)
         {
@@ -38,12 +46,27 @@ namespace Hillerød_Sejlklub_Library
 
         public void PrintAllBookings()
         {
-            throw new NotImplementedException();
+            foreach(Booking bookingOnList in _bookings)
+            {
+                Console.WriteLine(bookingOnList);
+            }
+            
         }
 
         public void RemoveBookingByID(int BookingID)
         {
-            throw new NotImplementedException();
+            int i = 0;
+            while(_bookings.Count > i)
+            {
+                if(BookingID == _bookings[i].BookingID)
+                {
+                    _bookings.RemoveAt(i);
+                }
+
+            }
+            i++;
         }
+
+       
     }
 }
