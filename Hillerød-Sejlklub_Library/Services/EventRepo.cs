@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Hillerød_Sejlklub_Library.Interfaces;
 using Hillerød_Sejlklub_Library.Models.Events;
 using Hillerød_Sejlklub_Library.Models.Members;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Hillerød_Sejlklub_Library.Services
 {
@@ -34,17 +36,14 @@ namespace Hillerød_Sejlklub_Library.Services
             return null;
         }
 
-        public void RemoveEvent(int eventID, Member member) //member gemmes i menu efter login
+        public void RemoveEvent(int eventID) //member gemmes i menu efter login, hvor Member.Role Enum checkes
         {
-            if(member.Role == RoleEnum.Administrator || member.Role == RoleEnum.Chairman)
-            {
                 _events.Remove(eventID);
-            }
         }
 
-        public void AddEvent(Event even, Member member)// Tilføj check på members role enum
+        public void AddEvent(Event even)
         {
-            if (!_events.ContainsKey(even.EventID) && member.Role == RoleEnum.Administrator || member.Role == RoleEnum.Chairman)
+            if (!_events.ContainsKey(even.EventID))
             {
                 _events.Add(even.EventID, even);
             }
@@ -57,6 +56,31 @@ namespace Hillerød_Sejlklub_Library.Services
             {
                 Console.WriteLine(even.Value);
             }
+        }
+
+        public void EditEvent(int id, string title, int maxMembers, string description)
+        {
+            foreach(KeyValuePair<int, Event> even in _events)
+            {
+                if (even.Key == id)
+                {
+                    even.Value.MaxMembers = maxMembers;
+                    even.Value.Title = title;
+                    even.Value.Description = description;
+                }
+            }
+        }
+
+        public object ReturnEventByTitle(string title)
+        {
+            foreach(KeyValuePair<int, Event> even in _events)
+            {
+                if(even.Value.Title == title.ToLower() || even.Value.Title == title.ToUpper())
+                {
+                    return even;
+                }
+            }
+            return null;
         }
     }
 }

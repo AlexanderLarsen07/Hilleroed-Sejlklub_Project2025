@@ -14,4 +14,8 @@
     <Folder Include="Controllers\Boats\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Hillerød-Sejlklub_Library\Hillerød-Sejlklub_Library.csproj" />
+  </ItemGroup>
+
 </Project>

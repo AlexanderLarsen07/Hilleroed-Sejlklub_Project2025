@@ -1,7 +1,8 @@
 ﻿using Hillerød_Sejlklub_Library.Interfaces;
-using Hillerød_Sejlklub_Library.Models.Blogs;
+using Hillerød_Sejlklub_Library.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,27 +15,54 @@ namespace Hillerød_Sejlklub_Library.Services
 
         public BlogRepo()
         {
-
+            _blogRepo = new List<Blog>();
         }
 
-        public void CreateBlog()
+        public void AddBlog(Blog blog)
         {
-
+            if (!BlogNameExist(blog.Headline))
+            {
+                _blogRepo.Add(blog);
+            }
         }
-
-        public void EditBlog()
+        public bool BlogNameExist (string headline)
         {
-
+            foreach (var b in _blogRepo)
+            {
+                if (b.Headline == headline)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
-        public void Delete() //DeleteBlog metoden skal tilføjes i user story?
+
+        public void EditBlog(Blog blog, string headline, string theText, string description)
         {
-
+            foreach(Blog b in _blogRepo)
+            {
+                if(b == blog)
+                {
+                    b.Headline = headline;
+                    b.TheText = theText;
+                    b.Description = description;
+                }
+            }
         }
-
-        public void CommentOnBlog() //Skal nok have en anden return type 
+        public void Delete(Blog blog) //DeleteBlog metoden skal tilføjes i user story?
         {
-
+            _blogRepo.Remove(blog);
         }
 
+        
+        public void PrintAllComments()
+        {
+            foreach(Blog c in _blogRepo)
+            {
+                Console.WriteLine(c.CommentsOnBlog);
+            }
+        }
+
+        //en metode for tjekke administrator eller formand?
     }
 }

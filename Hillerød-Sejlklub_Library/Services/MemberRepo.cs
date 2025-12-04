@@ -1,4 +1,5 @@
-﻿using Hillerød_Sejlklub_Library.Models.Members;
+﻿using Hillerød_Sejlklub_Library.Interfaces;
+using Hillerød_Sejlklub_Library.Models.Members;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,17 +8,83 @@ using System.Threading.Tasks;
 
 namespace Hillerød_Sejlklub_Library.Services
 {
-    public class MemberRepo
+    public class MemberRepo : IMemberRepo
     {
-        Dictionary<int, Member> _memberDictionary;
+        private Dictionary<int, Member> _memberDictionary;
         public MemberRepo()
         {
             _memberDictionary = new Dictionary<int, Member>();
         }
-
-        public void AddMember()
+        //adds Member
+        public void AddMember(Member member)
         {
+            if (!_memberDictionary.ContainsKey(member.MemberID))
+            {
+                _memberDictionary.Add(member.MemberID, member);
+            }
+        }
+        public List<Member> GetAll()
+        {
+            return _memberDictionary.Values.ToList();
+        }
 
+        //removes a member by the entering id that matches member id
+        public void RemoveMember(int id)
+        {
+            foreach(KeyValuePair<int, Member> member in _memberDictionary)
+            {
+                if(member.Key == id)
+                {
+                    _memberDictionary.Remove(member.Key);
+                    return;
+                }
+            }
+        }
+        //return customer that contains the id
+        public Member GetCustomerById(int id)
+        {
+            if (_memberDictionary.ContainsKey(id))
+            {
+                return _memberDictionary[id];
+            }
+            return null;
+        }
+
+        public void Print(Dictionary<int, Member> dictionary)
+        {
+            foreach (KeyValuePair<int, Member> member in dictionary)
+            {
+                Console.WriteLine(member);
+            }
+        }
+        public void PrintAllMembers()
+        {
+            foreach (KeyValuePair<int, Member> members in _memberDictionary)
+            {
+                Console.WriteLine(members);
+            }
+        }
+
+        //only administrator and chairmand can use this method
+        public Member EditMembersMembership(int id, MembershipEnum membershipEnum) // - not done
+        {
+            return null;
+        }
+
+        public Member EditMember(int id, string name, int age, string mail, string password, int phoneNumber)
+        {
+            foreach (KeyValuePair<int, Member> member in _memberDictionary)
+            {
+                if (_memberDictionary.ContainsKey(id))
+                {
+                    member.Value.PhoneNumber = phoneNumber;
+                    member.Value.Name = name;
+                    member.Value.Age = age;
+                    member.Value.Mail = mail;
+                    member.Value.Password = password;
+                }
+            }
+            return null;
         }
     }
 }

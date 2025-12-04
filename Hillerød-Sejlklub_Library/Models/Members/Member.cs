@@ -10,22 +10,22 @@ namespace Hillerød_Sejlklub_Library.Models.Members
     public class Member
     {
         private static int _memberID;
-        public string Name { get; }
-        public int Age { get; }
+        public string Name { get; set; }
+        public int Age { get; set; }
         public int SubscriptionFee { get; set; }
-        public RoleEnum Role { get; }
-        public int MemberID { get; }
+        public RoleEnum Role { get; set; }
+        public int MemberID { get; set; }
         public List<BoatLot> _boatLotsRented;
-        public bool IsFamily { get; }
-        public string Mail { get; }
-        public string Password { get; }
-        public int PhoneNumber { get; }
-        public bool PassiveMedlem { get; set; }
+        public string Mail { get; set; }
+        public string Password { get; set; }
+        public int PhoneNumber { get; set; }
         public string Type { get; set; }
+        public MembershipEnum Membership { get; set; }
+        Dictionary<int, MemberRepo> _members;
 
-        public Member(string name, int age, bool isFamily, string mail, string password, int phoneNumber) {
+        public Member(string name, int age, MembershipEnum membershipEnum, string mail, string password, int phoneNumber) {
             Name = name;
-            IsFamily = isFamily;
+            Membership = membershipEnum;
             Mail = mail;
             Password = password;
             PhoneNumber = phoneNumber;
@@ -39,64 +39,56 @@ namespace Hillerød_Sejlklub_Library.Models.Members
             MembershipType();
         }
 
-        Dictionary<int, MemberRepo> _members;
-
         public int CalculateInitialMembershipFee()
         {
             SubscriptionFee = 0;
-                if(PassiveMedlem == false)
+            if(Membership == MembershipEnum.PassiveMedlem)
+            {
+                SubscriptionFee = 250;
+            }
+            else if (Membership == MembershipEnum.FamilieMedlem)
+            {
+                SubscriptionFee = 1500;
+                SubscriptionFee = SubscriptionFee + _boatLotsRented.Count * 400;
+            }
+            else if(Membership == MembershipEnum.Medlem)
+            {
+                if (Age >= 19)
                 {
-                    if (IsFamily == true)
-                    {
-                        SubscriptionFee = 1500;
-                        SubscriptionFee = SubscriptionFee + _boatLotsRented.Count * 400;
-                    }
-                    else if (IsFamily == false)
-                    {
-                        if (Age >= 19)
-                        {
-                                SubscriptionFee = 1100;
-                                SubscriptionFee = SubscriptionFee + _boatLotsRented.Count * 400;
+                    SubscriptionFee = 1100;
+                    SubscriptionFee = SubscriptionFee + _boatLotsRented.Count * 400;
 
-                        }
-                        else if (Age <= 18)
-                        {
-                                SubscriptionFee = 750;
-                        SubscriptionFee = SubscriptionFee + _boatLotsRented.Count * 200;
-                        }
-                    }
                 }
-                else if(PassiveMedlem == true)
+                else if (Age <= 18)
                 {
-                    SubscriptionFee = 250;
+                    SubscriptionFee = 750;
+                    SubscriptionFee = SubscriptionFee + _boatLotsRented.Count * 200;
                 }
+            }
             return SubscriptionFee = SubscriptionFee + 150;
         }
 
         public string MembershipType()
         {
-            if (PassiveMedlem == false)
-            {
-                if (IsFamily == true)
-                {
-                    Type = "Familie (hele husstanden)";
-                }
-                else if (IsFamily == false)
-                {
-                    if (Age >= 19)
-                    {
-
-                        Type = "Senior medlem";
-                    }
-                    else if (Age <= 18)
-                    {
-                        Type = "Junior medlem";
-                        }
-                }
-            }
-            else if (PassiveMedlem == true)
+            if (Membership == MembershipEnum.PassiveMedlem)
             {
                 Type = "Passiv medlem";
+            }
+            else if (Membership == MembershipEnum.FamilieMedlem)
+            {
+                Type = "Familie (hele husstanden)";
+            }
+            else if (Membership == MembershipEnum.Medlem)
+            {
+                if (Age >= 19)
+                {
+                    Type = "Senior medlem";
+
+                }
+                else if (Age <= 18)
+                {
+                    Type = "Junior medlem";
+                }
             }
             return Type;
         }
@@ -107,9 +99,8 @@ namespace Hillerød_Sejlklub_Library.Models.Members
             return $"{MemberID}" +
                 $"Navn: {Name}\n" +
                 $"Alder: {Age}\n" +
-                $"Type: {Type}\n" +
+                $"Membership: {Type}\n" +
                 $"Price: {SubscriptionFee}\n" +
-                $"Familie Abonnoment: {IsFamily}\n" +
                 $"Telefon Nummer: {PhoneNumber}\n";
         }
     }
