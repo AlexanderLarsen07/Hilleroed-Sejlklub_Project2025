@@ -14,7 +14,8 @@ namespace Hillerød_Sejlklub_Library.Models.Members
         public int Width { get; }
         public BoatLot(int length, int width)
         {
-
+            Length = length;
+            Width = width;
         }
         public override string ToString()
         {
