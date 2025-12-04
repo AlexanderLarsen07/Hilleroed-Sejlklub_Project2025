@@ -37,9 +37,8 @@ namespace Hillerød_Sejlklub_Library.Models
 
         public List<string> RepairLog;
         
-        public Boat(int sejlNummer, string name, string description, BoatTypeEnum bådTypen, ModelEnum theModel, int maxPassengers, 
-            int lenght, int width, int dybgang, int byggeår, MotorInfo motor, bool canSail)
-        public Boat(int sailNumber, string name, string description, BådTypeEnum badTypen, ModelEnum theModel, int maxPassengers, 
+      
+        public Boat(int sailNumber, string name, string description, BoatTypeEnum badTypen, ModelEnum theModel, int maxPassengers, 
             int lenght, int width, int draft, int yearBuilt, MotorInfo motor, bool canSail)
         {
             SailNumber = sailNumber;
