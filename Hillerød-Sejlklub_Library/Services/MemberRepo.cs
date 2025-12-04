@@ -15,18 +15,17 @@ namespace Hillerød_Sejlklub_Library.Services
         {
             _memberDictionary = new Dictionary<int, Member>();
         }
-
-        public void AddMember()
+        //adds Member
+        public void AddMember(Member member)
         {
-            foreach(KeyValuePair<int, Member> member in _memberDictionary)
+            if (!_memberDictionary.ContainsKey(member.MemberID))
             {
-                _memberDictionary.Add(member.Key, member.Value);
+                _memberDictionary.Add(member.MemberID, member);
             }
         }
-        public Dictionary<int, Member> GetAll()
+        public List<Member> GetAll()
         {
-            //return _memberDictionary.Values.ToDictionary();
-            return null;
+            return _memberDictionary.Values.ToList();
         }
 
         //removes a member by the entering id that matches member id
@@ -51,6 +50,13 @@ namespace Hillerød_Sejlklub_Library.Services
             return null;
         }
 
+        public void Print(Dictionary<int, Member> dictionary)
+        {
+            foreach (KeyValuePair<int, Member> member in dictionary)
+            {
+                Console.WriteLine(member);
+            }
+        }
         public void PrintAllMembers()
         {
             foreach (KeyValuePair<int, Member> members in _memberDictionary)
@@ -59,9 +65,26 @@ namespace Hillerød_Sejlklub_Library.Services
             }
         }
 
-        public void EditMember()
+        //only administrator and chairmand can use this method
+        public Member EditMembersMembership(int id, MembershipEnum membershipEnum) // - not done
         {
+            return null;
+        }
 
+        public Member EditMember(int id, string name, int age, string mail, string password, int phoneNumber)
+        {
+            foreach (KeyValuePair<int, Member> member in _memberDictionary)
+            {
+                if (_memberDictionary.ContainsKey(id))
+                {
+                    member.Value.PhoneNumber = phoneNumber;
+                    member.Value.Name = name;
+                    member.Value.Age = age;
+                    member.Value.Mail = mail;
+                    member.Value.Password = password;
+                }
+            }
+            return null;
         }
     }
 }
