@@ -38,7 +38,7 @@ namespace Hillerød_Sejlklub_Library.Services
             _events.Remove(eventID);
         }
 
-        public void AddEvent(Event even)
+        public void AddEvent(Event even)// Tilføj check på members role enum
         {
             if (!_events.ContainsKey(even.EventID))
             {
