@@ -1,8 +1,10 @@
-﻿using System.Runtime.CompilerServices;
-using Hillerød_Sejlklub_Library.Exceptions;
+﻿using Hillerød_Sejlklub_Library.Exceptions;
+using Hillerød_Sejlklub_Library.Models.Boats;
 using Hillerød_Sejlklub_Library.Models.Events;
 using Hillerød_Sejlklub_Library.Models.Members;
 using Hillerød_Sejlklub_Library.Services;
+using System.Runtime.CompilerServices;
+using static System.Net.Mime.MediaTypeNames;
 DateTime d1 = new(2025, 12, 3, 6, 0, 0);
 Event eve1 = new(1, "title", d1, "description");
 Console.WriteLine(eve1);
@@ -51,3 +53,6 @@ Console.WriteLine("---------------------------Test overdue true 6 hours---------
 
 //Member m1 = new Member("Justin", 22, true, "ddkwajld@gmail.com", "jidajip", 839139);
 Console.WriteLine(m1);
+
+
+

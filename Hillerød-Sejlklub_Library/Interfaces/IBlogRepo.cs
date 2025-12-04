@@ -13,12 +13,12 @@ namespace Hillerød_Sejlklub_Library.Interfaces
         void AddBlog(Blog blog);
         bool BlogNameExist(string headline);
 
-        void EditBlog();
-        void Delete();
+        void EditBlog(Blog blog, string headline, string theText, string description);
+        void Delete(Blog blog);
 
-        void CommentOnBlog(); //Skal nok have en anden return type 
+        void PrintAllComments();
 
 
-        //en metode for tjekke administrator eller formand
+        //en metode for tjekke administrator eller formand?
     }
 }
