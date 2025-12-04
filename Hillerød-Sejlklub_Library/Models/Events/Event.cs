@@ -19,10 +19,10 @@ namespace Hillerød_Sejlklub_Library.Models.Events
             get { return _eventID; }
             private set { _eventID = value; }
         }
-        public int MaxMembers { get; private set; }
-        public string Title { get; private set; }
+        public int MaxMembers { get; set; }
+        public string Title { get; set; }
         public DateTime Date { get; private set; }
-        public string Description { get; private set; }
+        public string Description { get; set; }
         #endregion
         #region Constructor
         public Event(int maxMembers, string title, DateTime date, string description)
@@ -30,9 +30,9 @@ namespace Hillerød_Sejlklub_Library.Models.Events
             _signups = new List<Signup>();
             EventID = _eventID++;
             MaxMembers = maxMembers;
-            Title = title;
+            Title = title.Trim();
             Date = date;
-            Description = description;
+            Description = description.Trim();
         }
         #endregion
         #region Methods
