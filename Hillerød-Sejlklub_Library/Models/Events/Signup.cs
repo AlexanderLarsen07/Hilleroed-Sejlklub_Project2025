@@ -25,7 +25,7 @@ namespace Hillerød_Sejlklub_Library.Models.Events
             _dateOfSignup = DateTime.Now;
             Event = ev;
             Member = member;
-            Comment = comment;
+            Comment = comment.Trim();
                 if (Event._signups.Count < Event.MaxMembers)
                 {
                     Event._signups.Add(this);

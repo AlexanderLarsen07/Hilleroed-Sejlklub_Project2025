@@ -49,6 +49,5 @@ Console.WriteLine("---------------------------Test overdue true 6 hours---------
 //Booking booking2 = new Booking("Roskilde", 2, start2, end2);
 //Console.WriteLine(booking2);
 
-Console.WriteLine("---------------------------Switch Case-----------------------------");
-Member m100 = new Member("Justin", 22, MembershipEnum.PassiveMedlem, "ddkwajld@gmail.com", "jidajip", 1313);
-Console.WriteLine(m100);
+//Member m1 = new Member("Justin", 22, true, "ddkwajld@gmail.com", "jidajip", 839139);
+Console.WriteLine(m1);
