@@ -13,7 +13,7 @@ namespace Hillerød_Sejlklub_Library.Models
         public string Name { get; }
         public int Age { get; }
         public int SubscriptionFee { get; set; }
-        public enum Role { get }
+        public enum Role { get, }
         public int MemberID { get; }
         public List<BoatLot> _boatLotsRented;
         public bool IsFamily { get; }
@@ -22,10 +22,11 @@ namespace Hillerød_Sejlklub_Library.Models
         public int PhoneNumber { get; }
         public bool PassiveMedlem { get; set; }
         public string Type { get; set; }
+        public MembershipEnum MembershipEnum { get; set; }
 
-        public Member(string name, int age, bool isFamily, string mail, string password, int phoneNumber) {
+        public Member(string name, int age, MembershipEnum membershipEnum, string mail, string password, int phoneNumber) {
             Name = name;
-            IsFamily = isFamily;
+            MembershipEnum = membershipEnum;
             Mail = mail;
             Password = password;
             PhoneNumber = phoneNumber;
@@ -44,7 +45,7 @@ namespace Hillerød_Sejlklub_Library.Models
         public int CalculateInitialMembershipFee()
         {
             SubscriptionFee = 0;
-                if(PassiveMedlem == false)
+                if(MembershipEnum.PassiveMedlem = MembershipEnum)
                 {
                     if (IsFamily == true)
                     {
@@ -109,7 +110,6 @@ namespace Hillerød_Sejlklub_Library.Models
                 $"Alder: {Age}\n" +
                 $"Type: {Type}\n" +
                 $"Price: {SubscriptionFee}\n" +
-                $"Familie Abonnoment: {IsFamily}\n" +
                 $"Telefon Nummer: {PhoneNumber}\n";
         }
     }
