@@ -38,7 +38,7 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
         public List<string> RepairLog;
         
       
-        public Boat(int sailNumber, string name, string description, BoatTypeEnum badTypen, ModelEnum theModel, int maxPassengers, 
+        public Boat(int sailNumber, string name, string description, BoatTypeEnum boatType, ModelEnum theModel, int maxPassengers, 
             int lenght, int width, int draft, int yearBuilt, MotorInfo motor, bool canSail)
         {
             SailNumber = sailNumber;
@@ -60,7 +60,7 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
 
         public override string ToString()
         {
-            return $"SejlNummer: {SailNumber}\n Name: {Name}\n Description: {Description}\n BådTypen: {BadTypen}\n TheModel: {TheModel} \n " +
+            return $"SejlNummer: {SailNumber}\n Name: {Name}\n Description: {Description}\n BådTypen: {BoatType}\n TheModel: {TheModel} \n " +
                 $"MaxPassengers : {MaxPassengers}\n Motor: {Motor}\n Lenght {Lenght}\n Width: {Width}\n Dybgang: {Draft}\n ByggeÅr: {YearBuilt}\n" +
                 $"Motor: {Motor}\n" +
                 $"CanSail: {CanSail}" +
