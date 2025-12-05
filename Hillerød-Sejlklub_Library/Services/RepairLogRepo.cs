@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Hillerød_Sejlklub_Library.Services
 {
-    internal class RepairLogRepo
+    public class RepairLogRepo
     {
+
     }
 }
