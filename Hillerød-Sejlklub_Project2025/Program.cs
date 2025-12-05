@@ -57,7 +57,10 @@ Boat boat2 = new Boat("555555555", "TheBoat", "description", BoatTypeEnum.To_man
 Booking booking2 = new Booking("Roskilde", start2, end2, member2, boat2);
 booking2.AddMember(member1);
 Console.WriteLine(booking2);
-Console.WriteLine("Test boat methods:");
+Console.WriteLine();
+Console.WriteLine("---------------------------Booking Test End-----------------------------");
+Console.WriteLine();
+Console.WriteLine("-----------------------------Test boat methods start:---------------------------------------------");
 BoatRepo boatRepo = new BoatRepo();
 boatRepo.AddBoat(boat1);
 boatRepo.AddBoat(boat2);
@@ -73,13 +76,33 @@ boatRepo.PrintAllBoats();
 Console.WriteLine("------------------------------------------------CanSailSet-----------------------------------------------");
 boatRepo.CanSailSet(false, "123456789");
 Console.WriteLine(boat1);
+boatRepo.RemoveBySailNumber("555555555");
+Console.WriteLine(boatRepo);
+boatRepo.AddBoat(boat2);
+Console.WriteLine("-----------------------------Test boat methods end---------------------------------------------");
+Console.WriteLine();
+Console.WriteLine("-----------------------------RepairLog start---------------------------------------------");
+RepairLogRepo repairLogRepo = new RepairLogRepo();
+RepairLog repairLog1 = new RepairLog(1, "masten er ødelagt", boat1, false, false);
+repairLogRepo.AddRepair(repairLog1);
+//Console.WriteLine(repairLogRepo);
+List<RepairLog> repairList = repairLogRepo.GetAll();
+foreach(RepairLog repairOnList in repairList)
+{
+    Console.WriteLine(repairOnList);
+}
+repairList[0].IsFixed = true;
+repairList[0].CanSail = true;
 
-Console.WriteLine("---------------------------Booking Test End-----------------------------");
+Console.WriteLine("----------------------------------------------Masten er fixed----------------------------------------------------");
 
-//Console.WriteLine(booking2);
-
+List<RepairLog> repairList2 = repairLogRepo.GetAll();
+foreach (RepairLog repairOnList in repairList2)
+{
+    Console.WriteLine(repairOnList);
+}
 //Member m1 = new Member("Justin", 22, true, "ddkwajld@gmail.com", "jidajip", 839139);
-Console.WriteLine(m1);
+//Console.WriteLine(m1);
 
 
 

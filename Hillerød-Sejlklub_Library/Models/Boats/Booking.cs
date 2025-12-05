@@ -61,9 +61,9 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
 
         public void AddMember(Member member)
         {
-            foreach(Member membersOnList in ListOfMembers)
+            foreach(Member memberOnList in ListOfMembers)
             {
-                if (member.PhoneNumber == membersOnList.PhoneNumber)
+                if (member.PhoneNumber == memberOnList.PhoneNumber)
                 {
                     throw new Exception("Member already exist");
                 }

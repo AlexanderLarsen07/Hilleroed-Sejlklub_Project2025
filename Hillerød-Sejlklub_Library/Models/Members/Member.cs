@@ -29,16 +29,16 @@ namespace Hillerød_Sejlklub_Library.Models.Members
             Membership = membershipEnum;
             //new string that will be used to check if there is an existing mail
             string? existedMail = mail;
-            if (existedMail = _member[mail].ReturnMemberByMail())
-            {
-                Mail = existedMail;
-            }
-            else
-            {
-                existedMail = null;
-                Console.WriteLine("The typed mail is already in use");
-            }
-                Password = password;
+            //if (existedMail = _member[mail].ReturnMemberByMail())
+            //{
+            //    Mail = existedMail;
+            //}
+            //else
+            //{
+            //    existedMail = null;
+            //    Console.WriteLine("The typed mail is already in use");
+            //}
+            Password = password;
             PhoneNumber = phoneNumber;
             Age = age;
             //Increment ID
