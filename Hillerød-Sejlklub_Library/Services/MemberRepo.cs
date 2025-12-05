@@ -80,8 +80,11 @@ namespace Hillerød_Sejlklub_Library.Services
                     member.Value.PhoneNumber = phoneNumber;
                     member.Value.Name = name;
                     member.Value.Age = age;
-                    member.Value.Mail = mail;
                     member.Value.Password = password;
+                    if ()
+                    {
+                        member.Value.Mail = mail;
+                    }
                 }
             }
             return null;

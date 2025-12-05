@@ -16,7 +16,7 @@ namespace Hillerød_Sejlklub_Library.Models.Members
         public RoleEnum Role { get; set; }
         public int MemberID { get; set; }
         public List<BoatLot> _boatLotsRented;
-        public string Mail { get; set; }
+        public string Mail { get; set; } //needs to be unique
         public string Password { get; set; }
         public int PhoneNumber { get; set; }
         public string Type { get; set; }
