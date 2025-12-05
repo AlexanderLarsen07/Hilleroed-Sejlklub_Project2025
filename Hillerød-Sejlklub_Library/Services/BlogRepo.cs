@@ -1,5 +1,5 @@
 ﻿using Hillerød_Sejlklub_Library.Interfaces;
-using Hillerød_Sejlklub_Library.Models;
+using Hillerød_Sejlklub_Library.Models.Blogs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
