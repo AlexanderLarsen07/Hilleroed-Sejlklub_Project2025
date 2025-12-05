@@ -57,8 +57,8 @@ namespace ConsoleMenu.Menu
             string theChoice = ReadChoice(LoginChoices);
             while (theChoice != "q")
             {
-                switch (theChoice)
-                }
+                switch (theChoice) 
+                {
                     case "1":
                     Console.WriteLine("Valg 1");
                     //_menuItemRepository.PrintMenu();
@@ -66,9 +66,40 @@ namespace ConsoleMenu.Menu
                     break;
                 case "2":
                     Console.WriteLine("Valg 2");
-                    //_customerRepository.PrintAllCustomers();
-                    Console.ReadLine();
-                    break;
+                        Console.WriteLine("Enter Mail : ");
+                        bool validMail = false;
+                        while (!validMail)
+                        {
+                            string mail = Console.ReadLine();
+                            if (_memberRepo.ReturnMemberByMail(mail) == null)
+                            {
+                                Console.WriteLine("Mail does not exist.");
+                            }
+                            else if (_memberRepo.ReturnMemberByMail(mail).Mail == mail)
+                            {
+                                validMail = true;
+                                Console.WriteLine("Enter Password : ");
+                                bool validPassword = false;
+                                while (!validPassword)
+                                {
+                                    string password = Console.ReadLine();
+                                    if (_memberRepo.ReturnMemberByMail(mail).Password != password)
+                                    {
+                                        Console.WriteLine("Wrong password.");
+                                    }
+                                    else if(_memberRepo.ReturnMemberByMail(mail).Password == password)
+                                    {
+                                        Member member = _memberRepo.ReturnMemberByMail(mail);
+                                        Console.WriteLine($"Welcome {member.Name}");
+                                    }
+                                }
+                            }
+                        }
+
+                        break;
+                    default:
+                        Console.WriteLine("Angiv et tal fra 1..4 eller q for afslut");
+                        break;
                 }
                 theChoice = ReadChoice(LoginChoices);
             }
