@@ -1,21 +1,44 @@
-﻿using Hillerød_Sejlklub_Library.Models.Members;
-using Hillerød_Sejlklub_Library.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
-using System.Runtime.CompilerServices;
-using System.Diagnostics;
+using Hillerød_Sejlklub_Library;
+using Hillerød_Sejlklub_Library.Models.Events;
+using Hillerød_Sejlklub_Library.Models.Members;
+using Hillerød_Sejlklub_Library.Services;
 
 namespace ConsoleMenu.Menu
 {
     public class Menu
     {
         // static strings for choices
+        static string LoginChoices = "\t 1. Sign in as guest.\t\n 2. Sign in as Member. \t\n q. Exit.";
+
+        //Gæst - basal adgang til systemet, kan se blogindlæg,
+        //både og generel info om klubben og oprette sig som medlem, kan ikke leje både og melde sig til events.
+
+        //Medlem - har samme adgang til systemet som en gæst,
+        //men kan melde sig til events, leje både og indberette skader/fejl.
+
+        //Administrator - har samme adgang til systemet som et medlem,
+        //men kan lave blogindlæg, se, redigere, slette og tilføje både, events og indberetninger om skader/fejl.
+
+        //Formand - har samme adgang som en administrator,
+        //men kan fjerne og tilføje administratorer og give formandskabet til en anden.
+
 
         // lav repos
+        private MemberRepo _memberRepo = new MemberRepo();
+        private BlogRepo _blogRepo = new BlogRepo();
+        private BoatLotRepo _boatLotRepo = new BoatLotRepo();
+        private BoatRepo _boatRepo = new BoatRepo();
+        private EventRepo _eventRepo = new EventRepo();
+        private SignupRepo _signupRepo = new SignupRepo();
+        private BookingRepo _bookingRepo = new BookingRepo();
 
         private static string ReadChoice(string choices)
         {
@@ -29,13 +52,26 @@ namespace ConsoleMenu.Menu
         }
 
         // lav switch case
-        //    public void ShowMemberMenu()
-        //    {
-        //        string theChoice = ReadChoice();
-        //        while (theChoice != "q")
-        //        {
-        //            switch (theChoice)
-        //        }
-        //     }
-    }
+        public void ShowLoginPage()
+        {
+            string theChoice = ReadChoice(LoginChoices);
+            while (theChoice != "q")
+            {
+                switch (theChoice)
+                }
+                    case "1":
+                    Console.WriteLine("Valg 1");
+                    //_menuItemRepository.PrintMenu();
+                    Console.ReadLine();
+                    break;
+                case "2":
+                    Console.WriteLine("Valg 2");
+                    //_customerRepository.PrintAllCustomers();
+                    Console.ReadLine();
+                    break;
+                }
+                theChoice = ReadChoice(LoginChoices);
+            }
+        }
+    } 
 }
