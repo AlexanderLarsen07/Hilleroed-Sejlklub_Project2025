@@ -33,6 +33,7 @@ namespace Hillerød_Sejlklub_Library.Models.Members
             //Increment ID
             MemberID = _memberID;
             //tilføj til MemberRepo
+            _members = new Dictionary<int, MemberRepo>();
             //make new List of BoatLotsRented
             _boatLotsRented = new List<BoatLot>();
             CalculateInitialMembershipFee();
