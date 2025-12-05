@@ -20,8 +20,28 @@ namespace Hillerød_Sejlklub_Library.Services
         {
             if (!_memberDictionary.ContainsKey(member.MemberID))
             {
-                _memberDictionary.Add(member.MemberID, member);
+                //checks if email exists or not
+                if (!EmailCheckExist(member.Mail))
+                {
+                    _memberDictionary.Add(member.MemberID, member);
+                }
+                else
+                {
+                    Console.WriteLine("Email already in use!");
+                }
             }
+        }
+
+        public bool EmailCheckExist(string email)
+        {
+            foreach (Member member in _memberDictionary.Values)
+            {
+                if (member.Mail == email)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
         public List<Member> GetAll()
         {
