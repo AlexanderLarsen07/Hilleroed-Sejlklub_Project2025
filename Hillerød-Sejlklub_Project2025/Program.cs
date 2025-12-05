@@ -46,14 +46,14 @@ DateTime end1 = new DateTime(2025, 12, 3, 12, 0, 0);
 Member member1 = new Member("Peter", 20, MembershipEnum.Medlem, "Peter@gmail", "password123", 12345678);
 MotorInfo motorInfo1 = new MotorInfo(FuelTypeEnum.Benzin, BrandEnum.Yamaha, 132, 50);
 Boat boat1 = new Boat("123456789", "name", "description", BoatTypeEnum.Voksenjolle, ModelEnum.Lynaes, 5, 123, 123, 123, 2010, motorInfo1, true);
-Booking booking1 = new Booking("Roskilde", 1, start1, end1, member1, boat1);
+Booking booking1 = new Booking("Roskilde", start1, end1, member1, boat1);
 Console.WriteLine(booking1);
 Console.WriteLine("---------------------Test overdue false 3 hours, no motor, AddMember------------------------");
 DateTime start2 = new DateTime(2025, 12, 3, 9, 0, 0);
 DateTime end2 = new DateTime(2025, 12, 3, 12, 0, 0);
 Member member2 = new Member("Thomas", 40, MembershipEnum.Medlem, "Thomas@gmail", "password12345", 22222222);
 Boat boat2 = new Boat("555555555", "TheBoat", "description", BoatTypeEnum.To_mandsjolle, ModelEnum.Optimistjolle, 2, 200, 50, 60, 2007, null, true);
-Booking booking2 = new Booking("Roskilde", 2, start2, end2, member2, boat2);
+Booking booking2 = new Booking("Roskilde", start2, end2, member2, boat2);
 booking2.AddMember(member1);
 Console.WriteLine(booking2);
 

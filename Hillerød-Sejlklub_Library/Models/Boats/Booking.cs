@@ -16,8 +16,6 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
         public int BookingID { get; private set; }
         public string Destination { get; private set; }
 
-        public int NumberOfMembers { get; private set; }
-
         public DateTime Start { get; private set; }
 
         public DateTime End { get; private set; }
@@ -33,18 +31,18 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
 
         public List<Member> ListOfMembers;
 
-        public Booking(string destination, int numberOfMembers, DateTime start, DateTime end, Member theMember, Boat theBoat)
+        public Booking(string destination, DateTime start, DateTime end, Member theMember, Boat theBoat)
         {
             if (theBoat.CanSail == true)
             {
                 BookingID = _bookingID++;
-                NumberOfMembers = numberOfMembers;
                 Destination = destination;
                 Start = start;
                 End = end;
                 TheMember = theMember;
                 TheBoat = theBoat;
                 ListOfMembers = new List<Member>();
+                ListOfMembers.Add(theMember);
             }
             else
             {
@@ -55,8 +53,7 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
 
         public override string ToString()
         {
-            return $"BookingID: {BookingID}\nNumberOfMembers: {NumberOfMembers}\nDestination: {Destination}\nStart: {Start}\nEnd: {End}\nOverdue: {Overdue}" +
-                $"\nNumber of added members to the booking: {ListOfMembers.Count}"+
+            return $"BookingID: {BookingID}\nNumberOfMembers: {ListOfMembers.Count}\nDestination: {Destination}\nStart: {Start}\nEnd: {End}\nOverdue: {Overdue}" +
                 $"\nMember: {TheMember}"+
                 $"\nBoat {TheBoat}";
 
