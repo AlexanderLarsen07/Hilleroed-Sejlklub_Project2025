@@ -20,7 +20,7 @@ namespace Hillerød_Sejlklub_Library.Models
         }
         public string Headline
         {
-            get; private set;
+            get; set;
         }
 
         public List<Comment> CommentsOnBlog
@@ -33,11 +33,11 @@ namespace Hillerød_Sejlklub_Library.Models
         }
         public string TheText
         {
-            get; private set;
+            get;  set;
         }
         public string Description
         {
-            get; private set;
+            get;  set;
         }
         public Blog(string headline, Member member, string theText, string description)
         {
@@ -48,7 +48,7 @@ namespace Hillerød_Sejlklub_Library.Models
         }
         public override string ToString()
         {
-            return $"Member: {Member}   Headline: {Headline}    the Text: {TheText}    Description: {Description}   Date: {Date}";
+            return $"Member: {Member}   Headline: {Headline}    the Text: {TheText}    Description: {Description}   Date: {Date}    Comment Section: {CommentsOnBlog}";
         }
     }
 }

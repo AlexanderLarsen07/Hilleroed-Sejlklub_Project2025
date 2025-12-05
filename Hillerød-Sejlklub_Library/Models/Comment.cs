@@ -9,6 +9,7 @@ namespace Hillerød_Sejlklub_Library.Models
 {
     public class Comment
     {
+        private DateTime _dateOfPost;
         public string MakeComment
         {
             get; set;
@@ -17,8 +18,7 @@ namespace Hillerød_Sejlklub_Library.Models
         {
             get; private set;
         }
-        DateTime DateOfPost { get; set; }
-
+        
         public Member Member { get; set; }
 
 
@@ -26,12 +26,13 @@ namespace Hillerød_Sejlklub_Library.Models
         {
             MakeComment = comment;
             Member = member;
-            Blog = blog;
+            Blog.CommentsOnBlog.Add(this);
+            _dateOfPost = DateTime.Now;
         }
 
         public override string ToString()
         {
-            return $"Member: {Member}   Comment: {MakeComment}   Blog: {Blog}";
+            return $"Member: {Member}   Comment: {MakeComment}   Blog: {Blog}   Date of Post: {_dateOfPost}";
         }
     }
 }

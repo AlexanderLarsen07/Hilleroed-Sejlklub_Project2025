@@ -11,7 +11,7 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
 {
     public class Booking
     {
-        private static int _bookingID = 0;
+        private static int _bookingID = 1;
 
         public int BookingID { get; private set; }
         public string Destination { get; private set; }
@@ -45,7 +45,7 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
                 TheMember = theMember;
                 TheBoat = theBoat;
                 ListOfMembers = new List<Member>();
-        }
+            }
             else
             {
                 throw new Exception("You booked a boat that cannot sail.");
@@ -55,24 +55,24 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
 
         public override string ToString()
         {
-            return $"BookingID: {BookingID}\n NumberOfMembers: {NumberOfMembers}\n Destination: {Destination}\n Start: {Start}\n End: {End}\n Overdue: {Overdue}" +
-                $"ListOfMembers: {ListOfMembers.Count}"+
-                $"\nMember: {TheMember}" +
+            return $"BookingID: {BookingID}\nNumberOfMembers: {NumberOfMembers}\nDestination: {Destination}\nStart: {Start}\nEnd: {End}\nOverdue: {Overdue}" +
+                $"\nNumber of added members to the booking: {ListOfMembers.Count}"+
+                $"\nMember: {TheMember}"+
                 $"\nBoat {TheBoat}";
 
         }
 
         public void AddMember(Member member)
         {
-            foreach(Member members in ListOfMembers)
+            foreach(Member membersOnList in ListOfMembers)
             {
-                if (members.MemberID == member.MemberID)
+                if (member.PhoneNumber == membersOnList.PhoneNumber)
                 {
-                    throw new Exception("Member ID already exist");
+                    throw new Exception("Member already exist");
                 }
-                ListOfMembers.Add(member);
+                
             }
-            
+            ListOfMembers.Add(member);
         }
     }
 }
