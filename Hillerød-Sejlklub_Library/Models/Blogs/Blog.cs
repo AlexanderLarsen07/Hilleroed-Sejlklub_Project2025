@@ -1,11 +1,11 @@
-﻿using System;
+﻿using Hillerød_Sejlklub_Library.Models.Members;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Hillerød_Sejlklub_Library.Interfaces;
-using Hillerød_Sejlklub_Library.Models.Members;
+using System.Xml.Linq;
 
 namespace Hillerød_Sejlklub_Library.Models.Blogs
 {
@@ -20,7 +20,7 @@ namespace Hillerød_Sejlklub_Library.Models.Blogs
         }
         public string Headline
         {
-            get; private set;
+            get; set;
         }
 
         public List<Comment> CommentsOnBlog
@@ -33,11 +33,11 @@ namespace Hillerød_Sejlklub_Library.Models.Blogs
         }
         public string TheText
         {
-            get; private set;
+            get;  set;
         }
         public string Description
         {
-            get; private set;
+            get;  set;
         }
         public Blog(string headline, Member member, string theText, string description)
         {
@@ -48,7 +48,7 @@ namespace Hillerød_Sejlklub_Library.Models.Blogs
         }
         public override string ToString()
         {
-            return $"Member: {Member}   Headline: {Headline}    the Text: {TheText}    Description: {Description}   Date: {Date}";
+            return $"Member: {Member}   Headline: {Headline}    the Text: {TheText}    Description: {Description}   Date: {Date}    Comment Section: {CommentsOnBlog}";
         }
     }
 }

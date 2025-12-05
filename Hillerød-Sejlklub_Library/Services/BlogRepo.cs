@@ -1,5 +1,5 @@
 ﻿using Hillerød_Sejlklub_Library.Interfaces;
-using Hillerød_Sejlklub_Library.Models;
+using Hillerød_Sejlklub_Library.Models.Blogs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,7 +18,7 @@ namespace Hillerød_Sejlklub_Library.Services
             _blogRepo = new List<Blog>();
         }
 
-        public void AddBlog(Blog blog)
+        public void AddBlog(Blog blog) //tilføj blog object ind til listen
         {
             if (!BlogNameExist(blog.Headline))
             {
@@ -37,7 +37,8 @@ namespace Hillerød_Sejlklub_Library.Services
             return false;
         }
 
-        public void EditBlog(Blog blog, string headline, string theText, string description)
+        public void EditBlog(Blog blog, string headline, string theText, string description) 
+            //return type Blog? fordi når man har ændret en bestemt blog så returner man den?
         {
             foreach(Blog b in _blogRepo)
             {
