@@ -10,7 +10,10 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
 {
     public class RepairLog
     {
-        
+        private static int _number = 1;
+
+        public int Number { get; private set; }
+
         private DateTime _dateOfSignup;
 
         public string Comment { get; private set; }
@@ -24,6 +27,7 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
         public RepairLog(string comment, Boat theBoat, bool isFixed, bool canSail)
         {
             _dateOfSignup = DateTime.Now;
+            Number = _number++;
             Comment = comment;
             TheBoat = theBoat;
             IsFixed = isFixed;
@@ -34,6 +38,7 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
         public override string ToString()
         {
          return $"Made: {_dateOfSignup}" +
+                $"Number: {Number}" +
                 $"Comment: {Comment}\n" +
                 $"TheBoat: {TheBoat}\n" +
                 $"IsFixed: {IsFixed}\n" +

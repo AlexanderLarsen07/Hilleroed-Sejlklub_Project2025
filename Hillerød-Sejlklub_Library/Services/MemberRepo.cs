@@ -99,6 +99,14 @@ namespace Hillerød_Sejlklub_Library.Services
             {
                 if (member.Value.Mail == mail)
                 {
+                    member.Value.PhoneNumber = phoneNumber;
+                    member.Value.Name = name;
+                    member.Value.Age = age;
+                    member.Value.Password = password;
+                    if ()
+                    {
+                        member.Value.Mail = mail;
+                    }
                     return member.Value;
                 }
             }
