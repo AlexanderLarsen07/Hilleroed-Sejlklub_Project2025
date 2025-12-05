@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Hillerød_Sejlklub_Library.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hillerød_Sejlklub_Library.Models.Members
 {
-    public class BoatLot //Oplysninger om båden
+    public class BoatLot//Oplysninger om båden
     {
         private static int _lotID = 1;
         public int LotID { get { return _lotID; } private set { value = _lotID; } }
