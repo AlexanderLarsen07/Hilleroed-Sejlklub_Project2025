@@ -60,13 +60,14 @@ namespace Hillerød_Sejlklub_Library.Services
                 }
                 i++;
             }
+            throw new Exception("SailNumber doesn’t exist");
         }
 
         public void PrintAllBoats()
         {
             foreach (Boat boatOnList in _boat)
             {
-                Console.WriteLine(boatOnList);
+                Console.WriteLine($"{boatOnList}\n");
             }
         }
 

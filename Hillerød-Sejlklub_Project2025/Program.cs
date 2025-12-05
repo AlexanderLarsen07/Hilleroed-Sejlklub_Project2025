@@ -4,6 +4,7 @@ using Hillerød_Sejlklub_Library.Models.Events;
 using Hillerød_Sejlklub_Library.Models.Members;
 using Hillerød_Sejlklub_Library.Services;
 using System.Runtime.CompilerServices;
+using System.Xml;
 using static System.Net.Mime.MediaTypeNames;
 DateTime d1 = new(2025, 12, 3, 6, 0, 0);
 Event eve1 = new(1, "title", d1, "description");
@@ -40,7 +41,7 @@ Console.WriteLine(eve1.ToString());
 
 Console.WriteLine("---------------------------Booking Test Start-----------------------------");
 
-Console.WriteLine("---------------------------Test overdue true 6 hours, with motor-----------------------------");
+Console.WriteLine("---------------------------Test overdue true 6 hours, with motor, NoMemberAdded-----------------------------");
 DateTime start1 = new DateTime(2025, 12, 3, 6, 0, 0);
 DateTime end1 = new DateTime(2025, 12, 3, 12, 0, 0);
 Member member1 = new Member("Peter", 20, MembershipEnum.Medlem, "Peter@gmail", "password123", 12345678);
@@ -56,6 +57,22 @@ Boat boat2 = new Boat("555555555", "TheBoat", "description", BoatTypeEnum.To_man
 Booking booking2 = new Booking("Roskilde", 2, start2, end2, member2, boat2);
 booking2.AddMember(member1);
 Console.WriteLine(booking2);
+Console.WriteLine("Test boat methods:");
+BoatRepo boatRepo = new BoatRepo();
+boatRepo.AddBoat(boat1);
+boatRepo.AddBoat(boat2);
+Console.WriteLine("---------------------------------------getAll-(name)-------------------------------------");
+List<Boat> getAllBoatsName = boatRepo.GetAll();
+foreach (Boat boatOnList in getAllBoatsName)
+Console.WriteLine(boatOnList.Name);
+Console.WriteLine("------------------------------------------Get by sailnumber test:----------------------------------------");
+Boat getByNumber = boatRepo.GetBoatByID("555555555");
+Console.WriteLine(getByNumber);
+Console.WriteLine("------------------------------------------------PrintAllBoats-----------------------------------------------");
+boatRepo.PrintAllBoats();
+Console.WriteLine("------------------------------------------------CanSailSet-----------------------------------------------");
+boatRepo.CanSailSet(false, "123456789");
+Console.WriteLine(boat1);
 
 Console.WriteLine("---------------------------Booking Test End-----------------------------");
 
