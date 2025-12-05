@@ -1,14 +1,15 @@
-﻿using System;
+﻿using Hillerød_Sejlklub_Library.Models.Members;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Hillerød_Sejlklub_Library.Models.Members;
 
 namespace Hillerød_Sejlklub_Library.Models.Blogs
 {
     public class Comment
     {
+        private DateTime _dateOfPost;
         public string MakeComment
         {
             get; set;
@@ -17,8 +18,7 @@ namespace Hillerød_Sejlklub_Library.Models.Blogs
         {
             get; private set;
         }
-        DateTime DateOfPost { get; set; }
-
+        
         public Member Member { get; set; }
 
 
@@ -26,12 +26,13 @@ namespace Hillerød_Sejlklub_Library.Models.Blogs
         {
             MakeComment = comment;
             Member = member;
-            Blog = blog;
+            Blog.CommentsOnBlog.Add(this);
+            _dateOfPost = DateTime.Now;
         }
 
         public override string ToString()
         {
-            return $"Member: {Member}   Comment: {MakeComment}   Blog: {Blog}";
+            return $"Member: {Member}   Comment: {MakeComment}   Blog: {Blog}   Date of Post: {_dateOfPost}";
         }
     }
 }

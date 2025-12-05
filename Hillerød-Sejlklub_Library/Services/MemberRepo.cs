@@ -98,7 +98,7 @@ namespace Hillerød_Sejlklub_Library.Services
         }
 
         //Added for funktionalitet i MenuLogin
-        public Member ReturnMemberByMail(string mail) //lav eventuelt om
+        public Member ReturnMemberByMail(string mail)
         {
             foreach (KeyValuePair<int, Member> member in _memberDictionary)
             {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
@@ -61,44 +62,64 @@ namespace ConsoleMenu.Menu
                 {
                     case "1":
                     Console.WriteLine("Valg 1");
-                    //_menuItemRepository.PrintMenu();
+                    //print guestMenu
+                    void GuestMenu()
+                        {
+
+                        }
                     Console.ReadLine();
                     break;
                 case "2":
                     Console.WriteLine("Valg 2");
-                        Console.WriteLine("Enter Mail : ");
+                        string mail = "";
+                        string password = "";
                         bool validMail = false;
                         while (!validMail)
                         {
-                            string mail = Console.ReadLine();
-                            if (_memberRepo.ReturnMemberByMail(mail) == null)
+                            Console.WriteLine($"Enter Mail : ");
+                            mail = Console.ReadLine();
+                            Member? member = _memberRepo.ReturnMemberByMail(mail);
+                            if (member == null)
                             {
+                                Console.Clear();
                                 Console.WriteLine("Mail does not exist.");
                             }
-                            else if (_memberRepo.ReturnMemberByMail(mail).Mail == mail)
+                            else if (member.Mail == mail)
                             {
                                 validMail = true;
-                                Console.WriteLine("Enter Password : ");
                                 bool validPassword = false;
                                 while (!validPassword)
                                 {
-                                    string password = Console.ReadLine();
-                                    if (_memberRepo.ReturnMemberByMail(mail).Password != password)
+                                    Console.WriteLine($"Mail : {mail}");
+                                    Console.WriteLine($"Enter Password : ");
+                                    password = Console.ReadLine();
+                                    if (member.Password != password)
                                     {
+                                        Console.Clear();
                                         Console.WriteLine("Wrong password.");
                                     }
-                                    else if(_memberRepo.ReturnMemberByMail(mail).Password == password)
+                                    else if(member.Password == password)
                                     {
-                                        Member member = _memberRepo.ReturnMemberByMail(mail);
                                         Console.WriteLine($"Welcome {member.Name}");
+                                        if(member.Role == RoleEnum.Member)
+                                        {
+                                            //print memberMenu
+                                        }
+                                        else if(member.Role == RoleEnum.Administrator)
+                                        {
+                                            //print adminMenu
+                                        }
+                                        else if(member.Role == RoleEnum.Chairman)
+                                        {
+                                            //print chairmanMenu
+                                        }
                                     }
                                 }
                             }
                         }
-
                         break;
                     default:
-                        Console.WriteLine("Angiv et tal fra 1..4 eller q for afslut");
+                        Console.WriteLine("Angiv et tal fra 1-2 eller q for afslut");
                         break;
                 }
                 theChoice = ReadChoice(LoginChoices);
