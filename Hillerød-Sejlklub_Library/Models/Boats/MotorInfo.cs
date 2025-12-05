@@ -10,25 +10,30 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
     {
         public FuelTypeEnum FuelType {get; private set;}
 
-        public BrandEnum Mærke { get; private set; }
+        public BrandEnum Brand { get; private set; }
 
         public int HP {get; private set;}
 
         public int Weight {get; private set;}
 
-        public MotorInfo(FuelTypeEnum fuelType, BrandEnum mærke, int hp, int weight)
+        public MotorInfo(FuelTypeEnum fuelType, BrandEnum brand, int hp, int weight)
         {
+            
             FuelType = fuelType;
-            Mærke = mærke;
+            Brand = brand;
             HP = hp;
             Weight = weight;
-            
+           
         }
 
-
         public override string ToString()
+            
         {
-            return $"FuelType: {FuelType} \nMærke: {Mærke}\nHousePower: {HP}\n Weight: {Weight}";
+           
+            {
+                return $"FuelType: {FuelType}\nBrand: {Brand}\nHousePower: {HP}\n Weight: {Weight}";
+            }
+            
         }
     }
 }
