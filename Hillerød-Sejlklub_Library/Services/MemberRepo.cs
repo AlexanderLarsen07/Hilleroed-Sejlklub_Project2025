@@ -71,21 +71,26 @@ namespace Hillerød_Sejlklub_Library.Services
             return null;
         }
 
-        public Member EditMember(int id, string name, int age, string mail, string password, int phoneNumber)
+        public Member? EditMember(int id, string name, int age, string mail, string password, int phoneNumber)
         {
-            //foreach (KeyValuePair<int, Member> member in _memberDictionary)
-            //{
-
             if (_memberDictionary.ContainsKey(id))
             {
                 _memberDictionary[id].PhoneNumber = phoneNumber;
                 _memberDictionary[id].Name = name;
                 _memberDictionary[id].Age = age;
-                _memberDictionary[id].Mail = mail;
-                _memberDictionary[id].Password = password;
+                //mail needs to be unique it can only be edited if the new mail
+                //is NOT already in use
+                if (_memberDictionary[id].Mail == null)
+                {
+                    _memberDictionary[id].Mail = mail;
+                }
+                else
+                {
+                    Console.WriteLine("Mail is already in use. Please try a different Mail.");
+                }
+                    _memberDictionary[id].Password = password;
                 return _memberDictionary[id];
             }
-            //}
             else
             {
                 return null;
@@ -95,20 +100,13 @@ namespace Hillerød_Sejlklub_Library.Services
         //Added for funktionalitet i MenuLogin
         public Member ReturnMemberByMail(string mail) //lav eventuelt om
         {
-            foreach(KeyValuePair<int, Member> member in _memberDictionary)
+            foreach (KeyValuePair<int, Member> member in _memberDictionary)
             {
                 if (member.Value.Mail == mail)
                 {
-                    member.Value.PhoneNumber = phoneNumber;
-                    member.Value.Name = name;
-                    member.Value.Age = age;
-                    member.Value.Password = password;
-                    if ()
-                    {
-                        member.Value.Mail = mail;
-                    }
-                    return member.Value;
+                    member.Value.Mail = mail;
                 }
+                return member.Value;
             }
             return null;
         }
