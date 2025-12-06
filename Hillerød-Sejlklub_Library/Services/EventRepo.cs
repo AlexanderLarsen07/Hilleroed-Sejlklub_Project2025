@@ -71,16 +71,17 @@ namespace Hillerød_Sejlklub_Library.Services
             }
         }
 
-        public object ReturnEventByTitle(string title)
+        public List<Event> ReturnEventByTitle(string title)
         {
+            List<Event> events = [];
             foreach(KeyValuePair<int, Event> even in _events)
             {
                 if(even.Value.Title == title.ToLower() || even.Value.Title == title.ToUpper())
                 {
-                    return even;
+                    events.Add(even.Value);
                 }
             }
-            return null;
+            return events;
         }
     }
 }

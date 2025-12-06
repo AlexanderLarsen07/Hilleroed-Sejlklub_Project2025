@@ -18,6 +18,8 @@ namespace ConsoleMenu.Menu
     {
         // static strings for choices
         static string LoginChoices = "\t 1. Sign in as guest.\t\n 2. Sign in as Member. \t\n q. Exit.";
+        static string GuestMenuChoices = "";//Implement TODO.
+        static string GuestEventsChoices = "";//Implement TODO.
 
         //Gæst - basal adgang til systemet, kan se blogindlæg,
         //både og generel info om klubben og oprette sig som medlem, kan ikke leje både og melde sig til events.
@@ -30,7 +32,15 @@ namespace ConsoleMenu.Menu
 
         //Formand - har samme adgang som en administrator,
         //men kan fjerne og tilføje administratorer og give formandskabet til en anden.
+        public void Events(string extraChoices)// lav de forskellige menu funktioner sådanne.
+        {
+            switch (GuestEventsChoices + extraChoices)
+            {
+                case "1":
 
+                    break;
+            }
+        }
 
         // lav repos
         private MemberRepo _memberRepo = new MemberRepo();
@@ -62,10 +72,27 @@ namespace ConsoleMenu.Menu
                 {
                     case "1":
                     Console.WriteLine("Valg 1");
-                    //print guestMenu
-                    void GuestMenu()
+                        //print guestMenu
+                        string guestMenuChoices = ReadChoice(GuestMenuChoices);
+                        while (guestMenuChoices != "q")
                         {
+                            switch (guestMenuChoices)
+                            {
+                                case "1":
+                                    //void GuestSignup()
+                                    //{
+                                    //    switch ()//add choices list to these.
+                                    //    {
+                                    //        case "1":
 
+                                    //            break;
+                                    //    }
+                                    //}
+                                    break;
+                                case "2":
+                                    Events("extra");
+                                    break;
+                            }
                         }
                     Console.ReadLine();
                     break;

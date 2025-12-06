@@ -9,9 +9,14 @@ namespace Hillerød_Sejlklub_Library.Interfaces
 {
     public interface ICommentRepo
     {
+        void AddComment(Comment comment);
+
+        void EditComment(Comment comment, string editMakeComment);
+
         List<Comment> ReturnAllCommentFromMembers();
 
-        void RemoveComment();
-        
+        void RemoveComment(Comment comment);
+
+        void PrintAllCommentsOnBlog(Blog blog);
     }
 }
