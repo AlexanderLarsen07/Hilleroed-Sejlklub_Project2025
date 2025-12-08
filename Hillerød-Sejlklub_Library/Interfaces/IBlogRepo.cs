@@ -13,10 +13,16 @@ namespace Hillerød_Sejlklub_Library.Interfaces
         void AddBlog(Blog blog);
         bool BlogNameExist(string headline);
 
+        Blog ReturnByDateRange(DateTime from, DateTime to);
+
         void EditBlog(Blog blog, string headline, string theText, string description);
         void Delete(Blog blog);
 
         void PrintAllComments();
+
+        List<Blog> ReturnBlogHeadline(string title);
+
+        void PrintAllBlog();
 
         //skal jeg have en metode der printer alle blogs?                   //skal jeg have en metode der printer alle blogs?                   //skal jeg have en metode der printer alle blogs?           
         //printe alle vil være via foreach loop
