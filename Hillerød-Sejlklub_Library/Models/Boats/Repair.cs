@@ -14,9 +14,9 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
 
         public int Number { get; set; }
 
-        public string Comment { get; private set; }
+        public string Comment { get; set; }
 
-        public Boat TheBoat { get; private set; }
+        public Boat TheBoat { get; set; }
         public bool IsFixed { get; set; }
 
         public bool HaveToBeSolved { get; set; }
@@ -39,9 +39,7 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
                    $"Number: {Number}\n" +
                    $"Comment: {Comment}\n" +
                    $"IsFixed: {IsFixed}\n" +
-                   $"The problem needs to be fixed before the boat can sail: {HaveToBeSolved}"; 
-
+                   $"The problem needs to be fixed before the boat can sail: {HaveToBeSolved}\n"; 
         }
-
     }
 }

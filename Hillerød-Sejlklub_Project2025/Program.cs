@@ -61,6 +61,7 @@ Console.WriteLine();
 Console.WriteLine("---------------------------Booking Test End-----------------------------");
 Console.WriteLine();
 Console.WriteLine("-----------------------------Test boat methods start:---------------------------------------------");
+Console.WriteLine("-----------------------------AddBoat---------------------------------------------");
 BoatRepo boatRepo = new BoatRepo();
 boatRepo.AddBoat(boat1);
 boatRepo.AddBoat(boat2);
@@ -69,45 +70,36 @@ List<Boat> getAllBoats = boatRepo.GetAll();
 foreach (Boat boatOnList in getAllBoats)
 Console.WriteLine(boatOnList.Name);
 Console.WriteLine("------------------------------------------Get by sailnumber test:----------------------------------------");
-Boat getByNumber = boatRepo.GetBoatByID("555555555");
+Boat getByNumber = boatRepo.GetBoatBySailNumber("555555555");
 Console.WriteLine(getByNumber);
 Console.WriteLine("------------------------------------------------PrintAllBoats-----------------------------------------------");
 boatRepo.PrintAllBoats();
-//Console.WriteLine("------------------------------------------------CanSailSet-----------------------------------------------");
-//boatRepo.CanSailSet(false, "123456789");
-//Console.WriteLine(boat1);
-Console.WriteLine("--------------------------------------------After Remove---------------------------------------------------");
+Console.WriteLine("--------------------------------------------Remove---------------------------------------------------");
 boatRepo.RemoveBySailNumber("555555555");
 foreach (Boat boatOnList in getAllBoats)
 Console.WriteLine(boatOnList);
-Console.WriteLine("--------------------------------------------After AddBoat---------------------------------------------------");
 boatRepo.AddBoat(boat2);
-foreach(Boat boatOnList in getAllBoats)
-{
-    Console.WriteLine(boatOnList);
-}
 Console.WriteLine("-----------------------------Test boat methods end---------------------------------------------");
 Console.WriteLine();
-Console.WriteLine("--------------------------------------------RepairLog start---------------------------------------------");
-Console.WriteLine("-----------------------------------------true true test----------------------------------------------------");
-RepairRepo repairLogRepo = new RepairRepo();
-Repair repairLog1 = new Repair(1, "masten er ødelagt", boat1, true, true);
-repairLogRepo.AddRepair(repairLog1);
-Console.WriteLine(boat1);
+Console.WriteLine("--------------------------------------------Repair methods test start---------------------------------------------");
 Console.WriteLine("-----------------------------------------GetAll test----------------------------------------------------");
-//Console.WriteLine(repairLogRepo);
-List<Repair> repairList = repairLogRepo.GetAll();
-foreach(Repair repairOnList in repairList)
+RepairRepo repairRepo = new RepairRepo();
+Repair repair1 = new Repair(1, "masten er ødelagt", boat1, false, true);
+Repair repair2 = new Repair(2, "et lille problem", boat1, false, false);
+repairRepo.AddRepair(repair1);
+repairRepo.AddRepair(repair2);
+List<Repair> repairList = repairRepo.GetAll();
+foreach (Repair repairOnList in repairList)
 {
     Console.WriteLine(repairOnList);
 }
-Console.WriteLine("----------------------------------------------Masten er fixed----------------------------------------------------");
+Console.WriteLine("-----------------------------------------false true test boat 1 cannot sail----------------------------------------------------");
+Console.WriteLine($"Can boat1 sail: {boat1.CanSail}");
+Console.WriteLine($"Count List: {boat1.RepairLogList.Count}");
+Console.WriteLine("-----------------------------------------true true test with updateRepair boat 1 can sail----------------------------------------------------");
+boat1.UpdateRepair(repair1, 1, "masten var ødelagt, men nu er masten lavet", boat1, true, true);
+Console.WriteLine($"Can boat1 sail: {boat1.CanSail}");
 
-List<Repair> repairList2 = repairLogRepo.GetAll();
-foreach (Repair repairOnList in repairList2)
-{
-    Console.WriteLine(repairOnList);
-}
 //Member m1 = new Member("Justin", 22, true, "ddkwajld@gmail.com", "jidajip", 839139);
 //Console.WriteLine(m1);
 

@@ -12,7 +12,7 @@ namespace Hillerød_Sejlklub_Library.Interfaces
     {
         public List<Boat> GetAll();
         public void AddBoat(Boat boat);
-        public Boat GetBoatByID(string SailNumber);
+        public Boat GetBoatBySailNumber(string SailNumber);
         public void RemoveBySailNumber(string SailNumber);
 
         public void PrintAllBoats();

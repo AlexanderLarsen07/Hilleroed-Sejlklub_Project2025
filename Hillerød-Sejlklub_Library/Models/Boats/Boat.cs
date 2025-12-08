@@ -71,9 +71,39 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
                     return;
                 }
                 CanSail = true;
-            } 
+            }
         }
-           
+
+        public void AddRepairToBoat(Repair repair)
+        {
+            for (int i = 0; RepairLogList.Count > i; i++)
+            {
+                if (repair.Number == RepairLogList[i].Number)
+                {
+                    throw new Exception(message: "Number already exist");
+                }
+            }
+            RepairLogList.Add(repair);
+            CanSailUpdated();
+        }
+
+        public void UpdateRepair(Repair repair, int number, string comment, Boat theBoat, bool isFixed, bool haveToBeSolved)
+        {
+            for (int i = 0; RepairLogList.Count > i; i++)
+            {
+                if (number == RepairLogList[i].Number)
+                {
+                    RepairLogList[i].Comment = comment;
+                    RepairLogList[i].TheBoat = theBoat;
+                    RepairLogList[i].IsFixed = isFixed;
+                    RepairLogList[i].HaveToBeSolved = haveToBeSolved;
+                    CanSailUpdated();
+                    return;
+                }
+            }
+            throw new Exception(message: "Number not found on the list");
+        }
+
         public override string ToString()
         {
             string motorText;
