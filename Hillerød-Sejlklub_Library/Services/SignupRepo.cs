@@ -44,28 +44,41 @@ namespace Hillerød_Sejlklub_Library.Services
             _signupList.Remove(signup);
         }
 
-        public Signup ReturnAllByEvent(Event even)
+        public List<Signup> ReturnAllByEventTitle(string title)
         {
+            List<Signup> signups = [];
             foreach(Signup signup in _signupList)
             {
-                if(signup.Event == even)
+                if(signup.Event.Title.ToLower() == title || signup.Event.Title.ToUpper() == title)
                 {
-                    return signup;
+                    signups.Add(signup);
                 }
             }
-            return null;
+            return signups;
         }
 
-        public Signup ReturnAllByMember(Member member)
+        public List<Signup> ReturnAllByMember(Member member)
         {
+            List<Signup> signups = [];
             foreach(Signup signup in _signupList)
             {
                 if(signup.Member == member)
                 {
-                    return signup;
+                    signups.Add(signup);
                 }
             }
-            return null;
+            return signups;
+        }
+        public void EditComment(Member member, string comment, string title)
+        {
+            List<Signup> signups = ReturnAllByMember(member);
+            foreach(Signup s in signups)
+            {
+                if (s.Event.Title.ToLower() == title || s.Event.Title.ToUpper() == title)
+                {
+                    s.Comment = comment;
+                }
+            }
         }
     }
 }

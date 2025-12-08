@@ -12,8 +12,8 @@ namespace Hillerød_Sejlklub_Library.Interfaces
     {
         public int Count { get; }
         List<Signup> GetAll();
-        Signup ReturnAllByMember(Member member);
-        Signup ReturnAllByEvent(Event even);
+        List<Signup> ReturnAllByMember(Member member);
+        List<Signup> ReturnAllByEventTitle(string title);
         void RemoveSignup(Signup signup);
         void AddSignup(Signup signup);
         void PrintAll();

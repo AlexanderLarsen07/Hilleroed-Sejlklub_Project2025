@@ -21,7 +21,7 @@ namespace Hillerød_Sejlklub_Library.Services
             if (!_memberDictionary.ContainsKey(member.MemberID))
             {
                 //checks if email exists or not
-                if (!EmailCheckExist(member.Mail))
+                if (!EmailCheckExist(member.Mail!))
                 {
                     _memberDictionary.Add(member.MemberID, member);
                 }
@@ -67,7 +67,7 @@ namespace Hillerød_Sejlklub_Library.Services
             {
                 return _memberDictionary[id];
             }
-            return null;
+            return null!;
         }
 
         public void Print(Dictionary<int, Member> dictionary)
@@ -88,7 +88,7 @@ namespace Hillerød_Sejlklub_Library.Services
         //only administrator and chairmand can use this method
         public Member EditMembersMembership(int id, MembershipEnum membershipEnum) // - not done
         {
-            return null;
+            return null!;
         }
 
         public Member? EditMember(int id, string name, int age, string mail, string password, string phoneNumber)
@@ -128,7 +128,7 @@ namespace Hillerød_Sejlklub_Library.Services
                 }
                 return member.Value;
             }
-            return null;
+            return null!;
       
         }
 

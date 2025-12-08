@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 
-namespace ConsoleMenu.Menu
+namespace ConsoleMenu.Methods.Members
 {
     public class MemberMenu
     {
@@ -29,14 +29,14 @@ namespace ConsoleMenu.Menu
                 {
                     case "1": //SignUP
                         Console.WriteLine("Indtast Navn");
-                        string name = Console.ReadLine();
+                        string name = Console.ReadLine()!;
                         Console.WriteLine("Indtast Alder");
                         int age = Convert.ToInt32(Console.ReadLine());
                         Console.WriteLine("Indtast hvilken Membership som du ønsker");
                         Console.WriteLine("1 = Familie Medlem");
                         Console.WriteLine("2 = Medlem");
                         //Console.WriteLine("3 = Passive Medlem");
-                        string membership = Console.ReadLine();
+                        string membership = Console.ReadLine()!;
                         MembershipEnum isMembership = new();
                         if (membership == "1")
                         {
@@ -51,11 +51,11 @@ namespace ConsoleMenu.Menu
                         //    isMembership = MembershipEnum.PassiveMedlem;
                         //}
                         Console.WriteLine("Indtast din Mail");
-                        string mail = Console.ReadLine();
+                        string mail = Console.ReadLine()!;
                         Console.WriteLine("Indtast Passwordet");
-                        string password = Console.ReadLine();
+                        string password = Console.ReadLine()!;
                         Console.WriteLine("Indtast Telefon nummer");
-                        string phoneNumber = Console.ReadLine();
+                        string phoneNumber = Console.ReadLine()!;
                         AddMembersController newMember = new AddMembersController(name, age, isMembership, mail, password, phoneNumber);
                         newMember.AddMember();
                         break;
