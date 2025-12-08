@@ -32,15 +32,35 @@ namespace ConsoleMenu.Menu
 
         //Formand - har samme adgang som en administrator,
         //men kan fjerne og tilføje administratorer og give formandskabet til en anden.
-        public void Events(string extraChoices)// lav de forskellige menu funktioner sådanne.
-        {
-            switch (GuestEventsChoices + extraChoices)
-            {
-                case "1":
+        //static string MemberEventChoices = "";
+        //public void Events(string extraChoices)// lav de forskellige menu funktioner sådanne.
+        //{
+        //    if(member)
+        //    switch (MemberEventsChoices + extraChoices)
+        //    {
+        //        case "1":
 
-                    break;
-            }
-        }
+        //            break;
+        //    }
+        //    else if (admin)
+        //    {
+        //        switch (MemberEventsChoices + extraChoices)
+        //        {
+        //            case "1":
+
+        //                break;
+        //        }
+        //    }
+        //    else if (chairman)
+        //    {
+        //        switch (MemberEventChoices + extraChoices)
+        //        {
+        //            case "1":
+
+        //                break;
+        //        }
+        //    }
+        //}
 
         // lav repos
         private MemberRepo _memberRepo = new MemberRepo();
@@ -79,18 +99,10 @@ namespace ConsoleMenu.Menu
                             switch (guestMenuChoices)
                             {
                                 case "1":
-                                    //void GuestSignup()
-                                    //{
-                                    //    switch ()//add choices list to these.
-                                    //    {
-                                    //        case "1":
-
-                                    //            break;
-                                    //    }
-                                    //}
+                            
                                     break;
                                 case "2":
-                                    Events("extra");
+                                  
                                     break;
                             }
                         }
@@ -130,16 +142,20 @@ namespace ConsoleMenu.Menu
                                         Console.WriteLine($"Welcome {member.Name}");
                                         if(member.Role == RoleEnum.Member)
                                         {
-                                            //print memberMenu
+                                            string extra = "";
+                                            //selcet memberMenu string
                                         }
                                         else if(member.Role == RoleEnum.Administrator)
                                         {
-                                            //print adminMenu
+                                            //select adminMenu string
                                         }
                                         else if(member.Role == RoleEnum.Chairman)
                                         {
-                                            //print chairmanMenu
+                                            //string extra = MemberEventChoices;
+                                            //select chairmanMenu string
                                         }
+                                        //menu // switch case
+                                        //method(member , extra)
                                     }
                                 }
                             }
