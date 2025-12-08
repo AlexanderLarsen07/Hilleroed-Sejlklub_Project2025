@@ -85,7 +85,7 @@ namespace ConsoleMenu.Menu
                         break;
                 }
             }
-            if (memberRole.Role == RoleEnum.Administrator) //skal kunne alt membersne kan, skal kunne view alle members og en bestemt valgt member, sortere boatlots (sorterings algoritmer), simple statistikker
+            if (memberRole.Role == RoleEnum.Administrator) //skal kunne alt membersne kan, skal kunne view alle members og en bestemt valgt member, sortere boatlots (sorterings algoritmer), simple statistikker, kan delete users og lave user
             {
                 switch (member)
                 {
@@ -94,7 +94,7 @@ namespace ConsoleMenu.Menu
                         break;
                 }
             }
-            if (memberRole.Role == RoleEnum.Chairman)
+            if (memberRole.Role == RoleEnum.Chairman) //skal alt admins kan, CRUD admins, ændre formandskab
             {
                 switch (member)
                 {
