@@ -26,14 +26,11 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
            
         }
 
-        public override string ToString()
-            
+        public override string ToString()   
         {
-           
             {
                 return $"FuelType: {FuelType}\nBrand: {Brand}\nHousePower: {HP}\nWeight: {Weight}";
             }
-            
         }
     }
 }

@@ -8,13 +8,11 @@ using System.Threading.Tasks;
 
 namespace Hillerød_Sejlklub_Library.Models.Boats
 {
-    public class RepairLog
+    public class Repair
     {
-        
+        private DateTime _dateOfRepair;
 
-        public int Number { get; private set; }
-
-        private DateTime _dateOfSignup;
+        public int Number { get; set; }
 
         public string Comment { get; private set; }
 
@@ -24,9 +22,9 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
         public bool HaveToBeSolved { get; set; }
 
 
-        public RepairLog(int number, string comment, Boat theBoat, bool isFixed, bool haveToBeSolved)
+        public Repair(int number, string comment, Boat theBoat, bool isFixed, bool haveToBeSolved)
         {
-            _dateOfSignup = DateTime.Now; 
+            _dateOfRepair = DateTime.Now; 
             Number = number;
             Comment = comment;
             TheBoat = theBoat;
@@ -37,7 +35,7 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
 
         public override string ToString()
         {
-            return $"Made: {_dateOfSignup}\n" +
+            return $"Made: {_dateOfRepair}\n" +
                    $"Number: {Number}\n" +
                    $"Comment: {Comment}\n" +
                    $"IsFixed: {IsFixed}\n" +
