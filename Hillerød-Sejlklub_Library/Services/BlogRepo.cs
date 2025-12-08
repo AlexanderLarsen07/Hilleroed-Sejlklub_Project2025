@@ -1,5 +1,6 @@
 ﻿using Hillerød_Sejlklub_Library.Interfaces;
 using Hillerød_Sejlklub_Library.Models.Blogs;
+using Hillerød_Sejlklub_Library.Models.Events;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,6 +38,18 @@ namespace Hillerød_Sejlklub_Library.Services
             return false;
         }
 
+        public Blog ReturnByDateRange(DateTime from, DateTime to)
+        {
+            foreach (Blog b in _blogRepo)
+            {
+                if (b.Date >= from && b.Date <= to)
+                {
+                    return b;
+                }
+            }
+            return null;
+        }
+
         public void EditBlog(Blog blog, string headline, string theText, string description) 
             //return type Blog? fordi når man har ændret en bestemt blog så returner man den?
         {
@@ -65,5 +78,27 @@ namespace Hillerød_Sejlklub_Library.Services
         }
 
         //en metode for tjekke administrator eller formand?
+
+        public List<Blog> ReturnBlogHeadline(string title)
+        {
+            List<Blog> blogTitle = new List<Blog>();
+
+            for(int i = 0; i < _blogRepo.Count; i++)
+            {
+                if (_blogRepo[i].Headline == title.ToLower() || _blogRepo[i].Headline == title.ToUpper())
+                {
+                    blogTitle.Add(_blogRepo[i]);
+                }
+                return blogTitle;
+            }
+            return null;
+        }
+        public void PrintAllBlog()
+        {
+            foreach(Blog b in _blogRepo)
+            {
+                Console.WriteLine(b.Headline + b.Description);
+            }
+        }
     }
 }

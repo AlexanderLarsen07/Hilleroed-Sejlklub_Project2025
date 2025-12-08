@@ -90,21 +90,21 @@ Console.WriteLine("-----------------------------Test boat methods end-----------
 Console.WriteLine();
 Console.WriteLine("--------------------------------------------RepairLog start---------------------------------------------");
 Console.WriteLine("-----------------------------------------true true test----------------------------------------------------");
-RepairLogRepo repairLogRepo = new RepairLogRepo();
-RepairLog repairLog1 = new RepairLog(1, "masten er ødelagt", boat1, true, true);
+RepairRepo repairLogRepo = new RepairRepo();
+Repair repairLog1 = new Repair(1, "masten er ødelagt", boat1, true, true);
 repairLogRepo.AddRepair(repairLog1);
 Console.WriteLine(boat1);
 Console.WriteLine("-----------------------------------------GetAll test----------------------------------------------------");
 //Console.WriteLine(repairLogRepo);
-List<RepairLog> repairList = repairLogRepo.GetAll();
-foreach(RepairLog repairOnList in repairList)
+List<Repair> repairList = repairLogRepo.GetAll();
+foreach(Repair repairOnList in repairList)
 {
     Console.WriteLine(repairOnList);
 }
 Console.WriteLine("----------------------------------------------Masten er fixed----------------------------------------------------");
 
-List<RepairLog> repairList2 = repairLogRepo.GetAll();
-foreach (RepairLog repairOnList in repairList2)
+List<Repair> repairList2 = repairLogRepo.GetAll();
+foreach (Repair repairOnList in repairList2)
 {
     Console.WriteLine(repairOnList);
 }

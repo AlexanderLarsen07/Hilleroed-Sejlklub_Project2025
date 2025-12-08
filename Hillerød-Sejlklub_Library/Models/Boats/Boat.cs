@@ -22,8 +22,6 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
         public ModelEnum TheModel {get; private set; }
 
         public int MaxPassengers { get; private set; }
-        
-        public MotorInfo Motor { get; private set; }
 
         public int Lenght { get; private set; }
         
@@ -33,9 +31,11 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
 
         public int YearBuilt { get; private set; }
 
+        public MotorInfo Motor { get; private set; }
+
         public bool CanSail { get; private set;}
 
-        public List<RepairLog> RepairLogList;
+        public List<Repair> RepairLogList;
 
 
         public Boat(string sailNumber, string name, string description, BoatTypeEnum boatType, ModelEnum theModel, int maxPassengers,
@@ -52,7 +52,7 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
             Draft = draft;
             YearBuilt = yearBuilt;
             Motor = motor;
-            RepairLogList = new List<RepairLog>();
+            RepairLogList = new List<Repair>();
             CanSailUpdated();
         }
         public void CanSailUpdated()
