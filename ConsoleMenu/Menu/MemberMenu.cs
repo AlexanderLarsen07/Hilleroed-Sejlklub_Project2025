@@ -59,12 +59,12 @@ namespace ConsoleMenu.Menu
                         AddMembersController newMember = new AddMembersController(name, age, isMembership, mail, password, phoneNumber);
                         newMember.AddMember();
                         break;
-                    case "2": //View bestyrelsesmedlemmer (print en liste af administratoren og Chairman)
-                        if (memberRole.Role == RoleEnum.Chairman || memberRole.Role == RoleEnum.Administrator)
-                        {
-                            Console.WriteLine(member);
-                        }
-                        break;
+                    //case "2": //View bestyrelsesmedlemmer (print en liste af administratoren og Chairman)
+                    //    if (memberRole.Role == RoleEnum.Chairman || memberRole.Role == RoleEnum.Administrator)
+                    //    {
+                    //        Console.WriteLine(member);
+                    //    }
+                    //    break;
                         //case "2": //View Events (Alexander)
 
                         //    break;
@@ -76,7 +76,7 @@ namespace ConsoleMenu.Menu
                         //    break;
                 }
             }
-            if (memberRole.Role == RoleEnum.Member)
+            if (memberRole.Role == RoleEnum.Member) //skal kunne kigge på Membership oplysninger, redigere deres konto, tilføje boatlots
             {
                 switch (member)
                 {
