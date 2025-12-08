@@ -24,16 +24,17 @@ namespace Hillerød_Sejlklub_Library.Services
             return _events.Values.ToList();
         }
 
-        public Event ReturnByDateRange(DateTime from, DateTime to)
+        public List<Event> ReturnByDateRange(DateTime from, DateTime to)
         {
+            List<Event> events = [];
             foreach(KeyValuePair<int, Event> even in _events)
             {
-                if (even.Value.Date > from && even.Value.Date < to)
+                if (even.Value.Date >= from && even.Value.Date <= to)
                 {
-                    return even.Value;
+                    events.Add(even.Value);
                 }
             }
-            return null;
+            return events;
         }
 
         public void RemoveEvent(int eventID) //member gemmes i menu efter login, hvor Member.Role Enum checkes

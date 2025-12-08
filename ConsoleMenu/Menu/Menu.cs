@@ -90,10 +90,10 @@ namespace ConsoleMenu.Menu
             string theChoice = ReadChoice(LoginChoices);
             while (theChoice != "q")
             {
-                switch (theChoice) 
+                switch (theChoice)
                 {
                     case "1":
-                    Console.WriteLine("Valg 1");
+                        Console.WriteLine("Valg 1");
                         //print guestMenu
                         string guestMenuChoices = ReadChoice(GuestMenuChoices);
                         while (guestMenuChoices != "q")
@@ -101,17 +101,17 @@ namespace ConsoleMenu.Menu
                             switch (guestMenuChoices)
                             {
                                 case "1":
-                            
+
                                     break;
                                 case "2":
-                                  
+
                                     break;
                             }
                         }
-                    Console.ReadLine();
-                    break;
-                case "2":
-                    Console.WriteLine("Valg 2");
+                        Console.ReadLine();
+                        break;
+                    case "2":
+                        Console.WriteLine("Valg 2");
                         string mail = "";
                         string password = "";
                         bool validMail = false;
@@ -139,19 +139,19 @@ namespace ConsoleMenu.Menu
                                         Console.Clear();
                                         Console.WriteLine("Wrong password.");
                                     }
-                                    else if(member.Password == password)
+                                    else if (member.Password == password)
                                     {
                                         Console.WriteLine($"Welcome {member.Name}");
-                                        if(member.Role == RoleEnum.Member)
+                                        if (member.Role == RoleEnum.Member)
                                         {
                                             string extra = "";
                                             //selcet memberMenu string
                                         }
-                                        else if(member.Role == RoleEnum.Administrator)
+                                        else if (member.Role == RoleEnum.Administrator)
                                         {
                                             //select adminMenu string
                                         }
-                                        else if(member.Role == RoleEnum.Chairman)
+                                        else if (member.Role == RoleEnum.Chairman)
                                         {
                                             //string extra = MemberEventChoices;
                                             //select chairmanMenu string
@@ -170,83 +170,85 @@ namespace ConsoleMenu.Menu
                 theChoice = ReadChoice(LoginChoices);
             }
         }
-        public void MenuBlog(Member memberType, string member)
-        {
-           
-            bool input = true;
-            while (input)
-            {
-                string? userChoice = Console.ReadLine();
-                Member memer = new Member("name", 2, MembershipEnum.Medlem, "mail", "password", 007); //for at teste - normal skal man kunne logge ind først inden man når hertil korrekt?
-                if (memberType.Role == RoleEnum.Member)
-                {
-                    Console.WriteLine($"1. Add a blog\n2. Edit a blog\n3. Delete a blog\n\"q\"to quit");
-                    
-                    switch (userChoice)
-                    {
-                        case "1": //se blogs / printe dem alle
-                            {
-                              
-                            }
-                            break;
-                        case "2":
-                            {
-                               //søge efter blogs 
-                               //tjek eventRepository klassen på søg metoden
-                            }
-                            break;
-                        case "3":
-                            {
-                                //kommenter
-                            }
-                            break;
-                        //case 4 for opdater listen a blog?
-                        case "q":
-                            {
-                                input = false;
-                            }
-                            break;
-                        default:
-                            {
-                                Console.WriteLine("invalid input try these options:");
-                            }
-                            break;
-                    }
-                }
-
-                else if(memberType.Role == RoleEnum.Administrator)
-                {
-                    //ny userchoice for Admin
-                    switch (userChoice + member)
-                    {
-                        case "1":
-                            Console.WriteLine("haifaf");
-                            break;
-                    }
-                }
-                else if(memberType.Role == RoleEnum.Chairman)
-                {
-                    //ny userchoice for chairman
-                    switch (userChoice + member)
-                    {
-                        case "1":
-
-                            break;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Sign in or sign up to see what's going on in the blog!");
-                }
-
-                
-                
-            }
-            
-        }
-        //comment metode her
-    } 
+    }
 }
+//        public void MenuBlog(Member memberType, string member)
+//        {
+
+//            bool input = true;
+//            while (input)
+//            {
+//                string? userChoice = Console.ReadLine();
+//                Member memer = new Member("name", 2, MembershipEnum.Medlem, "mail", "password", 007); //for at teste - normal skal man kunne logge ind først inden man når hertil korrekt?
+//                if (memberType.Role == RoleEnum.Member)
+//                {
+//                    Console.WriteLine($"1. Add a blog\n2. Edit a blog\n3. Delete a blog\n\"q\"to quit");
+
+//                    switch (userChoice)
+//                    {
+//                        case "1": //se blogs / printe dem alle
+//                            {
+
+//                            }
+//                            break;
+//                        case "2":
+//                            {
+//                               //søge efter blogs 
+//                               //tjek eventRepository klassen på søg metoden
+//                            }
+//                            break;
+//                        case "3":
+//                            {
+//                                //kommenter
+//                            }
+//                            break;
+//                        //case 4 for opdater listen a blog?
+//                        case "q":
+//                            {
+//                                input = false;
+//                            }
+//                            break;
+//                        default:
+//                            {
+//                                Console.WriteLine("invalid input try these options:");
+//                            }
+//                            break;
+//                    }
+//                }
+
+//                else if(memberType.Role == RoleEnum.Administrator)
+//                {
+//                    //ny userchoice for Admin
+//                    switch (userChoice + member)
+//                    {
+//                        case "1":
+//                            Console.WriteLine("haifaf");
+//                            break;
+//                    }
+//                }
+//                else if(memberType.Role == RoleEnum.Chairman)
+//                {
+//                    //ny userchoice for chairman
+//                    switch (userChoice + member)
+//                    {
+//                        case "1":
+
+//                            break;
+//                    }
+//                }
+//                else
+//                {
+//                    Console.WriteLine("Sign in or sign up to see what's going on in the blog!");
+//                }
+
+
+
+//            }
+
+//        }
+//        //comment metode her
+//    } 
+//}
 
 //til Admin og chairman
 //case "1":
