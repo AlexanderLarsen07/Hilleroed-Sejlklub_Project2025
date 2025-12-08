@@ -94,7 +94,7 @@ namespace ConsoleMenu.Menu
                         break;
                 }
             }
-            if (memberRole.Role == RoleEnum.Chairman) //skal alt admins kan, CRUD admins, ændre formandskab
+            if (memberRole.Role == RoleEnum.Chairman) //skal alt admins kan, CRUD admins, ændre formandskab (confirmation button)
             {
                 switch (member)
                 {
