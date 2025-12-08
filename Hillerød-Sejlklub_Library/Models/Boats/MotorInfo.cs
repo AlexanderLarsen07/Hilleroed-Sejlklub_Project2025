@@ -31,7 +31,7 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
         {
            
             {
-                return $"FuelType: {FuelType}\nBrand: {Brand}\nHousePower: {HP}\n Weight: {Weight}";
+                return $"FuelType: {FuelType}\nBrand: {Brand}\nHousePower: {HP}\nWeight: {Weight}";
             }
             
         }

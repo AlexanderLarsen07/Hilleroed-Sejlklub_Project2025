@@ -9,12 +9,12 @@ namespace Hillerød_Sejlklub_Library.Interfaces
 {
     public interface IRepairLogRepo
     {
-        List<RepairLog> GetAll();
-        void AddRepair(RepairLog repairLog);
-        RepairLog GetRepairLog(int number);
-        void RemoveRepairLog(RepairLog repairLog);
-        void PrintAllRepairs();
+        public List<RepairLog> GetAll();
+        public void AddRepair(RepairLog repairLog);
+        public RepairLog GetRepairLog(int number);
+        public void RemoveRepairLog(RepairLog repairLog);
+        public void PrintAllRepairs();
 
-        void PrintAllTheRepairsToEachBoat();
+        public void PrintAllTheRepairsToEachBoat();
     }
 }

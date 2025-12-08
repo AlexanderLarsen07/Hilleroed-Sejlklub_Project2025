@@ -17,6 +17,11 @@ namespace Hillerød_Sejlklub_Library.Services
             _repairLogList = new List<RepairLog>();
         }
 
+        public List<RepairLog> GetAll()
+        {
+            return _repairLogList;
+        }
+
         public void AddRepair(RepairLog repairLog)
         {
             for (int i = 0; _repairLogList.Count > i; i++)
@@ -29,10 +34,7 @@ namespace Hillerød_Sejlklub_Library.Services
                 _repairLogList.Add(repairLog);
         }
 
-        public List<RepairLog> GetAll()
-        {
-            return _repairLogList;
-        }
+        
 
         public RepairLog GetRepairLog(int number)
         {

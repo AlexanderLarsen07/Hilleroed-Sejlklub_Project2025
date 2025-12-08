@@ -33,13 +33,13 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
 
         public int YearBuilt { get; private set; }
 
-        public bool CanSail { get; set;}
+        public bool CanSail { get; private set;}
 
         public List<RepairLog> RepairLogList;
 
 
         public Boat(string sailNumber, string name, string description, BoatTypeEnum boatType, ModelEnum theModel, int maxPassengers,
-            int lenght, int width, int draft, int yearBuilt, MotorInfo motor, bool canSail)
+            int lenght, int width, int draft, int yearBuilt, MotorInfo motor)
         {
             SailNumber = sailNumber;
             Name = name;
@@ -52,11 +52,28 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
             Draft = draft;
             YearBuilt = yearBuilt;
             Motor = motor;
-            CanSail = canSail;
-            RepairLogList = new List<RepairLog>(); //liste af repairlog
+            RepairLogList = new List<RepairLog>();
+            CanSailUpdated();
         }
-            
-
+        public void CanSailUpdated()
+        {
+            if (RepairLogList.Count == 0)
+            {
+                CanSail = true;
+                return;
+            }
+            for (int i = 0; RepairLogList.Count > i; i++)
+            {
+                
+                if (RepairLogList[i].IsFixed == false && RepairLogList[i].HaveToBeSolved == true)
+                {
+                    CanSail = false;
+                    return;
+                }
+                CanSail = true;
+            } 
+        }
+           
         public override string ToString()
         {
             string motorText;
@@ -69,16 +86,11 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
                 motorText = Motor.ToString();
                 }
                 
-            return $"SejlNummer: {SailNumber}\nName: {Name}\nDescription: {Description}\nBådTypen: {BoatType}\nTheModel: {TheModel} \n" +
+            return $"SejlNummer: {SailNumber}\nName: {Name}\nDescription: {Description}\nBådTypen: {BoatType}\nTheModel: {TheModel}\n" +
                 $"MaxPassengers : {MaxPassengers}\nLenght {Lenght}\nWidth: {Width}\nDybgang: {Draft}\nByggeÅr: {YearBuilt}\n"+
                 $"Motor: {motorText}\n" +
-                $"CanSail: {CanSail}"
-                ;
-               
+                $"CanSail: {CanSail}\n"
+                ; 
         }
-
-        
-        
-
     }
 }

@@ -68,22 +68,22 @@ namespace Hillerød_Sejlklub_Library.Services
         {
             foreach (Boat boatOnList in _boat)
             {
-                Console.WriteLine($"{boatOnList}\n");
+                Console.WriteLine($"{boatOnList}");
             }
         }
 
-        public void CanSailSet(bool trueOrFalse, string SailNumber)
-        {
-            foreach (Boat boatOnList in _boat)
-            {
-                if(SailNumber == boatOnList.SailNumber)
-                {
-                    boatOnList.CanSail = trueOrFalse;
-                    return;
-                }
-            }
+        //public void CanSailSet(bool trueOrFalse, string SailNumber)
+        //{
+        //    foreach (Boat boatOnList in _boat)
+        //    {
+        //        if(SailNumber == boatOnList.SailNumber)
+        //        {
+        //            boatOnList.CanSail = trueOrFalse;
+        //            return;
+        //        }
+        //    }
 
-                throw new Exception(message: "SailNumber does not exist.");
-        }
+        //        throw new Exception(message: "SailNumber does not exist.");
+        //}
     }
 }

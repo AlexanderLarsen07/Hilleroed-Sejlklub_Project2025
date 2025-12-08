@@ -46,14 +46,14 @@ DateTime start1 = new DateTime(2025, 12, 3, 6, 0, 0);
 DateTime end1 = new DateTime(2025, 12, 3, 12, 0, 0);
 Member member1 = new Member("Peter", 20, MembershipEnum.Medlem, "Peter@gmail", "password123", 12345678);
 MotorInfo motorInfo1 = new MotorInfo(FuelTypeEnum.Benzin, BrandEnum.Yamaha, 132, 50);
-Boat boat1 = new Boat("123456789", "name", "description", BoatTypeEnum.Voksenjolle, ModelEnum.Lynaes, 5, 123, 123, 123, 2010, motorInfo1, true);
+Boat boat1 = new Boat("123456789", "name", "description", BoatTypeEnum.Voksenjolle, ModelEnum.Lynaes, 5, 123, 123, 123, 2010, motorInfo1);
 Booking booking1 = new Booking("Roskilde", start1, end1, member1, boat1);
 Console.WriteLine(booking1);
 Console.WriteLine("---------------------Test overdue false 3 hours, no motor, AddMember------------------------");
 DateTime start2 = new DateTime(2025, 12, 3, 9, 0, 0);
 DateTime end2 = new DateTime(2025, 12, 3, 12, 0, 0);
 Member member2 = new Member("Thomas", 40, MembershipEnum.Medlem, "Thomas@gmail", "password12345", 22222222);
-Boat boat2 = new Boat("555555555", "TheBoat", "description", BoatTypeEnum.To_mandsjolle, ModelEnum.Optimistjolle, 2, 200, 50, 60, 2007, null, true);
+Boat boat2 = new Boat("555555555", "TheBoat", "description", BoatTypeEnum.To_mandsjolle, ModelEnum.Optimistjolle, 2, 200, 50, 60, 2007, null);
 Booking booking2 = new Booking("Roskilde", start2, end2, member2, boat2);
 booking2.AddMember(member1);
 Console.WriteLine(booking2);
@@ -65,35 +65,42 @@ BoatRepo boatRepo = new BoatRepo();
 boatRepo.AddBoat(boat1);
 boatRepo.AddBoat(boat2);
 Console.WriteLine("---------------------------------------getAll-(name)-------------------------------------");
-List<Boat> getAllBoatsName = boatRepo.GetAll();
-foreach (Boat boatOnList in getAllBoatsName)
+List<Boat> getAllBoats = boatRepo.GetAll();
+foreach (Boat boatOnList in getAllBoats)
 Console.WriteLine(boatOnList.Name);
 Console.WriteLine("------------------------------------------Get by sailnumber test:----------------------------------------");
 Boat getByNumber = boatRepo.GetBoatByID("555555555");
 Console.WriteLine(getByNumber);
 Console.WriteLine("------------------------------------------------PrintAllBoats-----------------------------------------------");
 boatRepo.PrintAllBoats();
-Console.WriteLine("------------------------------------------------CanSailSet-----------------------------------------------");
-boatRepo.CanSailSet(false, "123456789");
-Console.WriteLine(boat1);
+//Console.WriteLine("------------------------------------------------CanSailSet-----------------------------------------------");
+//boatRepo.CanSailSet(false, "123456789");
+//Console.WriteLine(boat1);
+Console.WriteLine("--------------------------------------------After Remove---------------------------------------------------");
 boatRepo.RemoveBySailNumber("555555555");
-Console.WriteLine(boatRepo);
+foreach (Boat boatOnList in getAllBoats)
+Console.WriteLine(boatOnList);
+Console.WriteLine("--------------------------------------------After AddBoat---------------------------------------------------");
 boatRepo.AddBoat(boat2);
+foreach(Boat boatOnList in getAllBoats)
+{
+    Console.WriteLine(boatOnList);
+}
 Console.WriteLine("-----------------------------Test boat methods end---------------------------------------------");
 Console.WriteLine();
-Console.WriteLine("-----------------------------RepairLog start---------------------------------------------");
+Console.WriteLine("--------------------------------------------RepairLog start---------------------------------------------");
+Console.WriteLine("-----------------------------------------true true test----------------------------------------------------");
 RepairLogRepo repairLogRepo = new RepairLogRepo();
-RepairLog repairLog1 = new RepairLog(1, "masten er ødelagt", boat1, false, false);
+RepairLog repairLog1 = new RepairLog(1, "masten er ødelagt", boat1, true, true);
 repairLogRepo.AddRepair(repairLog1);
+Console.WriteLine(boat1);
+Console.WriteLine("-----------------------------------------GetAll test----------------------------------------------------");
 //Console.WriteLine(repairLogRepo);
 List<RepairLog> repairList = repairLogRepo.GetAll();
 foreach(RepairLog repairOnList in repairList)
 {
     Console.WriteLine(repairOnList);
 }
-repairList[0].IsFixed = true;
-repairList[0].CanSail = true;
-
 Console.WriteLine("----------------------------------------------Masten er fixed----------------------------------------------------");
 
 List<RepairLog> repairList2 = repairLogRepo.GetAll();
