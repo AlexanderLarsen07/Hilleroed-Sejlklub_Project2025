@@ -12,7 +12,7 @@ namespace Hillerød_Sejlklub_Library.Interfaces
     {
         public int Count { get; }
         List<Event> GetAll();
-        Event ReturnByDateRange(DateTime start, DateTime end);
+        List<Event> ReturnByDateRange(DateTime start, DateTime end);
         void RemoveEvent(int eventID);
         void AddEvent(Event even);
         void PrintAllEvents();

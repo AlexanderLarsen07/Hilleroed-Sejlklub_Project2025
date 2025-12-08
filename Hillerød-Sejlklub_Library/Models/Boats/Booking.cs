@@ -51,13 +51,7 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
 
         }
 
-        public override string ToString()
-        {
-            return $"BookingID: {BookingID}\nNumberOfMembers: {ListOfMembers.Count}\nDestination: {Destination}\nStart: {Start}\nEnd: {End}\nOverdue: {Overdue}" +
-                $"\nMember: {TheMember}"+
-                $"\nBoat {TheBoat}";
-
-        }
+        
 
         public void AddMember(Member member)
         {
@@ -70,6 +64,14 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
                 
             }
             ListOfMembers.Add(member);
+        }
+
+        public override string ToString()
+        {
+            return $"BookingID: {BookingID}\nNumberOfMembers: {ListOfMembers.Count}\nDestination: {Destination}\nStart: {Start}\nEnd: {End}\nOverdue: {Overdue}" +
+                $"\nMember: {TheMember}" +
+                $"\nBoat {TheBoat}";
+
         }
     }
 }

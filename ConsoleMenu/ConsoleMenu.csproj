@@ -8,10 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\Members\" />
-    <Folder Include="Controllers\Events\" />
-    <Folder Include="Controllers\Blogs\" />
-    <Folder Include="Controllers\Boats\" />
+    <Folder Include="Methods\Members\" />
+    <Folder Include="Methods\Blogs\" />
+    <Folder Include="Methods\Boats\" />
   </ItemGroup>
 
   <ItemGroup>

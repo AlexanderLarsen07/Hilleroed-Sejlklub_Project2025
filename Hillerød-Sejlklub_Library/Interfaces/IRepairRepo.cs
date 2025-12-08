@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace Hillerød_Sejlklub_Library.Interfaces
 {
-    public interface IRepairLogRepo
+    public interface IRepairRepo
     {
-        public List<RepairLog> GetAll();
-        public void AddRepair(RepairLog repairLog);
-        public RepairLog GetRepairLog(int number);
-        public void RemoveRepairLog(RepairLog repairLog);
+        public List<Repair> GetAll();
+        public void AddRepair(Repair repair);
+        public Repair GetRepair(int number);
+        public void RemoveRepair(Repair repair);
         public void PrintAllRepairs();
 
         public void PrintAllTheRepairsToEachBoat();

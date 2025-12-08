@@ -8,35 +8,35 @@ using System.Threading.Tasks;
 
 namespace Hillerød_Sejlklub_Library.Services
 {
-    public class RepairLogRepo : IRepairLogRepo
+    public class RepairRepo : IRepairRepo
     {
-        private List<RepairLog> _repairLogList;
+        private List<Repair> _repairLogList;
 
-        public RepairLogRepo()
+        public RepairRepo()
         {
-            _repairLogList = new List<RepairLog>();
+            _repairLogList = new List<Repair>();
         }
 
-        public List<RepairLog> GetAll()
+        public List<Repair> GetAll()
         {
             return _repairLogList;
         }
 
-        public void AddRepair(RepairLog repairLog)
+        public void AddRepair(Repair repair)
         {
             for (int i = 0; _repairLogList.Count > i; i++)
             {
-                if(repairLog.Number == _repairLogList[i].Number)
+                if(repair.Number == _repairLogList[i].Number)
                 {
                     throw new Exception(message: "Number already exist");
                 }
             }
-                _repairLogList.Add(repairLog);
+                _repairLogList.Add(repair);
         }
 
         
 
-        public RepairLog GetRepairLog(int number)
+        public Repair GetRepair(int number)
         {
             for(int i = 0; _repairLogList.Count > i; i++)
             {
@@ -48,11 +48,11 @@ namespace Hillerød_Sejlklub_Library.Services
             throw new Exception(message: "Number does not exist");
         }
 
-        public void RemoveRepairLog(RepairLog repairLog)
+        public void RemoveRepair(Repair repair)
         { 
             for(int i = 0; _repairLogList.Count > i; i++)
             {
-                if (repairLog.Number == _repairLogList[i].Number)
+                if (repair.Number == _repairLogList[i].Number)
                 {
                     _repairLogList.RemoveAt(i);
                 }
