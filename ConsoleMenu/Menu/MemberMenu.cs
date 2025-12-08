@@ -85,7 +85,7 @@ namespace ConsoleMenu.Menu
                         break;
                 }
             }
-            if (memberRole.Role == RoleEnum.Administrator) //skal kunne alt membersne kan, skal kunne view alle members og en bestemt valgt member, sortere boatlots (sorterings algoritmer)
+            if (memberRole.Role == RoleEnum.Administrator) //skal kunne alt membersne kan, skal kunne view alle members og en bestemt valgt member, sortere boatlots (sorterings algoritmer), simple statistikker
             {
                 switch (member)
                 {
