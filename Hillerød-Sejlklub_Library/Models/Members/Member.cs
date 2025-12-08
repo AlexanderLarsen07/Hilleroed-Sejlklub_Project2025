@@ -39,6 +39,7 @@ namespace Hillerød_Sejlklub_Library.Models.Members
             _boatLotsRented = new List<BoatLot>();
             CalculateInitialMembershipFee();
             MembershipType();
+            Role = RoleEnum.Member;
         }
 
         
@@ -100,7 +101,7 @@ namespace Hillerød_Sejlklub_Library.Models.Members
 
         public override string ToString()
         {
-            return $"{MemberID}" +
+            return $"{Role}. ID : {MemberID}" +
                 $"Navn: {Name}\n" +
                 $"Alder: {Age}\n" +
                 $"Membership: {Type}\n" +

@@ -9,12 +9,14 @@ namespace Hillerød_Sejlklub_Library.Models.Members
 {
     public class BoatLot//Oplysninger om båden
     {
+        public Dictionary<int, BoatLotRepo> _boatLots;
         private static int _lotID = 1;
         public int LotID { get { return _lotID; } private set { value = _lotID; } }
         public int Length { get; }
         public int Width { get; }
         public BoatLot(int length, int width)
         {
+            _boatLots = new Dictionary<int, BoatLotRepo>();
             Length = length;
             Width = width;
             LotID = _lotID++;

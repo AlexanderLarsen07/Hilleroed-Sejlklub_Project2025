@@ -35,7 +35,7 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
 
         public bool CanSail { get; set;}
 
-        public List<string> RepairLogList;
+        public List<RepairLog> RepairLogList;
 
 
         public Boat(string sailNumber, string name, string description, BoatTypeEnum boatType, ModelEnum theModel, int maxPassengers,
@@ -53,7 +53,7 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
             YearBuilt = yearBuilt;
             Motor = motor;
             CanSail = canSail;
-            RepairLogList = new List<string>();
+            RepairLogList = new List<RepairLog>(); //liste af repairlog
         }
             
 

@@ -12,8 +12,7 @@ namespace Hillerød_Sejlklub_Library.Interfaces
         List<RepairLog> GetAll();
         void AddRepair(RepairLog repairLog);
         RepairLog GetRepairLog(int number);
-        void RemoveRepairLog(RepairLog SailNumber);
-
+        void RemoveRepairLog(RepairLog repairLog);
         void PrintAllRepairs();
 
         void PrintAllTheRepairsToEachBoat();

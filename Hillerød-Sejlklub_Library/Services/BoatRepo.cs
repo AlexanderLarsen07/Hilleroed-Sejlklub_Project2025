@@ -11,13 +11,13 @@ namespace Hillerød_Sejlklub_Library.Services
 {
     public class BoatRepo : IBoat
     {
+        
         private List<Boat> _boat;
-
         public BoatRepo()
         {
             _boat = new List<Boat>();
         }
-
+        
         public List<Boat> GetAll()
         {
             return _boat;
@@ -29,7 +29,7 @@ namespace Hillerød_Sejlklub_Library.Services
             {
                 if (boat.SailNumber == boatOnList.SailNumber)
                 {
-                    throw new Exception("SailNumber already exist");
+                    throw new Exception(message: "SailNumber already exist");
                 }
 
             }
@@ -45,7 +45,7 @@ namespace Hillerød_Sejlklub_Library.Services
                     return _boat[i];
                 }
             }
-            throw new Exception("SailNumber doesn’t exist");
+            throw new Exception(message: "SailNumber doesn’t exist");
         }
 
 
@@ -57,10 +57,11 @@ namespace Hillerød_Sejlklub_Library.Services
                 if (SailNumber == _boat[i].SailNumber)
                 {
                     _boat.RemoveAt(i);
+                    return;
                 }
                 i++;
             }
-            throw new Exception("SailNumber doesn’t exist");
+            throw new Exception(message: "SailNumber doesn’t exist");
         }
 
         public void PrintAllBoats()
@@ -82,7 +83,7 @@ namespace Hillerød_Sejlklub_Library.Services
                 }
             }
 
-                throw new Exception("SailNumber does not exist.");
+                throw new Exception(message: "SailNumber does not exist.");
         }
     }
 }

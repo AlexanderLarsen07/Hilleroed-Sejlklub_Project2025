@@ -1,5 +1,6 @@
 ﻿using Hillerød_Sejlklub_Library.Interfaces;
 using Hillerød_Sejlklub_Library.Models.Boats;
+using Hillerød_Sejlklub_Library.Services;
 
 namespace Hillerød_Sejlklub_Library
 {
@@ -23,7 +24,7 @@ namespace Hillerød_Sejlklub_Library
             {
                 if (booking.BookingID == bookingOnList.BookingID)
                 {
-                    throw new Exception("BookingID already exist");
+                    throw new Exception(message: "BookingID already exist");
                 }
                 
             }
@@ -41,7 +42,7 @@ namespace Hillerød_Sejlklub_Library
                     return _bookings[i];
                 }
             }
-            throw new Exception("BookingID doesn’t exist");
+            throw new Exception(message: "BookingID doesn’t exist");
         }
 
         public void PrintAllBookings()
@@ -61,10 +62,12 @@ namespace Hillerød_Sejlklub_Library
                 if(BookingID == _bookings[i].BookingID)
                 {
                     _bookings.RemoveAt(i);
+                    return;
                 }
-
+                i++;
             }
-            i++;
+            
+            throw new Exception(message: "BookingID doesn’t exist");
         }
 
        

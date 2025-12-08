@@ -23,7 +23,7 @@ namespace Hillerød_Sejlklub_Library.Services
             {
                 if(repairLog.Number == _repairLogList[i].Number)
                 {
-                    throw new Exception("Number already exist");
+                    throw new Exception(message: "Number already exist");
                 }
             }
                 _repairLogList.Add(repairLog);
@@ -43,7 +43,7 @@ namespace Hillerød_Sejlklub_Library.Services
                     return _repairLogList[i];
                 }
             }
-            throw new Exception("Number does not exist");
+            throw new Exception(message: "Number does not exist");
         }
 
         public void RemoveRepairLog(RepairLog repairLog)
@@ -55,7 +55,7 @@ namespace Hillerød_Sejlklub_Library.Services
                     _repairLogList.RemoveAt(i);
                 }
             }
-            throw new Exception("The number does not exist");
+            throw new Exception(message: "The number does not exist");
         }
 
         public void PrintAllRepairs()
@@ -68,18 +68,19 @@ namespace Hillerød_Sejlklub_Library.Services
 
         public void PrintAllTheRepairsToEachBoat()
         {
-            //for (int i = 0; _boat.Count > i; i++)
-            //{
-            //    Console.WriteLine(_boat[i]);
-            //    for (int j = 0; _repairLogList.Count > j; j++)
-            //    {
-            //        if (_repairLogList[j].TheBoat == _boat[i])
-            //        {
-            //            Console.WriteLine(_repairLogList[j]);
-            //        }
-            //    }
-            //}
-           
+            BoatRepo boatRepo = new BoatRepo();
+            List<Boat> _boat = boatRepo.GetAll();
+            for (int i = 0; _boat.Count > i; i++)
+            {
+                Console.WriteLine(_boat[i].Name);
+                for (int j = 0; _repairLogList.Count > j; j++)
+                {
+                    if (_repairLogList[j].TheBoat.Name == _boat[i].Name)
+                    {
+                        Console.WriteLine(_repairLogList[j]);
+                    }
+                }
+            }
         }
     }
 }
