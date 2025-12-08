@@ -36,7 +36,7 @@ namespace Hillerød_Sejlklub_Library.Services
             _boat.Add(boat);
         }
 
-        public Boat GetBoatByID(string SailNumber)
+        public Boat GetBoatBySailNumber(string SailNumber)
         {
             for (int i = 0; _boat.Count > i; i++)
             {
@@ -70,8 +70,6 @@ namespace Hillerød_Sejlklub_Library.Services
             {
                 Console.WriteLine($"{boatOnList}");
             }
-        }
-
-        
+        } 
     }
 }

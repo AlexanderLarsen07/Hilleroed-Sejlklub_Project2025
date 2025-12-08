@@ -32,9 +32,8 @@ namespace Hillerød_Sejlklub_Library.Services
                 }
             }
                 _repairLogList.Add(repair);
+                repair.TheBoat.AddRepairToBoat(repair);    
         }
-
-        
 
         public Repair GetRepair(int number)
         {
