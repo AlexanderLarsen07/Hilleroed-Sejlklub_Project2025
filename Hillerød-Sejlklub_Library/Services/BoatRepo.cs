@@ -72,18 +72,6 @@ namespace Hillerød_Sejlklub_Library.Services
             }
         }
 
-        //public void CanSailSet(bool trueOrFalse, string SailNumber)
-        //{
-        //    foreach (Boat boatOnList in _boat)
-        //    {
-        //        if(SailNumber == boatOnList.SailNumber)
-        //        {
-        //            boatOnList.CanSail = trueOrFalse;
-        //            return;
-        //        }
-        //    }
-
-        //        throw new Exception(message: "SailNumber does not exist.");
-        //}
+        
     }
 }
