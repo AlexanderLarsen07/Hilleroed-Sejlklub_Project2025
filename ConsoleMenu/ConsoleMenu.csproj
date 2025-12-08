@@ -8,9 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Methods\Members\" />
-    <Folder Include="Methods\Blogs\" />
-    <Folder Include="Methods\Boats\" />
+    <Folder Include="Methods--Controllers\Boats\" />
   </ItemGroup>
 
   <ItemGroup>

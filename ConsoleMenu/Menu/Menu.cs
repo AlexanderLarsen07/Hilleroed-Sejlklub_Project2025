@@ -23,7 +23,8 @@ namespace ConsoleMenu.Menu
         static string LoginChoices = "\t 1. Sign in as guest.\t\n 2. Sign in as Member. \t\n q. Exit.";
         static string GuestMenuChoices = "";//Implement TODO.
         static string MemberMenuChoices = ""; //Implement TODO.
-        static string GuestEventsChoices = "";//Implement TODO.
+        static string AdminMenuChoices = "";//Implement TODO.
+        static string ChairmanMenuChoices = "";//Implement TODO.
 
         //Gæst - basal adgang til systemet, kan se blogindlæg,
         //både og generel info om klubben og oprette sig som medlem, kan ikke leje både og melde sig til events.
@@ -36,37 +37,6 @@ namespace ConsoleMenu.Menu
 
         //Formand - har samme adgang som en administrator,
         //men kan fjerne og tilføje administratorer og give formandskabet til en anden.
-        //static string MemberEventChoices = "";
-        //public void Events(string extraChoices)// lav de forskellige menu funktioner sådanne.
-        //{
-        //    if(member)
-        //    switch (MemberEventsChoices + extraChoices)
-        //    {
-        //        case "1":
-
-        //            break;
-        //    }
-        //    else if (admin)
-        //    {
-        //        switch (MemberEventsChoices + extraChoices)
-        //        {
-        //            case "1":
-
-        //                break;
-        //        }
-        //    }
-        //    else if (chairman)
-        //    {
-        //        switch (MemberEventChoices + extraChoices)
-        //        {
-        //            case "1":
-
-        //                break;
-        //        }
-        //    }
-        //}
-
-        // lav repos
         private MemberRepo _memberRepo = new MemberRepo();
         private BlogRepo _blogRepo = new BlogRepo();
         private BoatLotRepo _boatLotRepo = new BoatLotRepo();
@@ -82,7 +52,7 @@ namespace ConsoleMenu.Menu
             Console.Write("\x1b[3J"); // Clear scrollback
             Console.Write("\x1b[H");  // Set cursor to home
             Console.Write(choices);
-            string choice = Console.ReadLine();
+            string choice = Console.ReadLine()!;
             Console.Clear();
             return choice.ToLower();
         }
@@ -121,7 +91,7 @@ namespace ConsoleMenu.Menu
                         while (!validMail)
                         {
                             Console.WriteLine($"Enter Mail : ");
-                            mail = Console.ReadLine();
+                            mail = Console.ReadLine()!;
                             Member? member = _memberRepo.ReturnMemberByMail(mail);
                             if (member == null)
                             {
@@ -136,7 +106,7 @@ namespace ConsoleMenu.Menu
                                 {
                                     Console.WriteLine($"Mail : {mail}");
                                     Console.WriteLine($"Enter Password : ");
-                                    password = Console.ReadLine();
+                                    password = Console.ReadLine()!;
                                     if (member.Password != password)
                                     {
                                         Console.Clear();
@@ -147,7 +117,6 @@ namespace ConsoleMenu.Menu
                                         Console.WriteLine($"Welcome {member.Name}");
                                         if (member.Role == RoleEnum.Member)
                                         {
-                                            string extra = "";
                                             //selcet memberMenu string
                                         }
                                         else if (member.Role == RoleEnum.Administrator)
@@ -156,7 +125,6 @@ namespace ConsoleMenu.Menu
                                         }
                                         else if (member.Role == RoleEnum.Chairman)
                                         {
-                                            //string extra = MemberEventChoices;
                                             //select chairmanMenu string
                                         }
                                         //menu // switch case
@@ -173,171 +141,5 @@ namespace ConsoleMenu.Menu
                 theChoice = ReadChoice(LoginChoices);
             }
         }
-        public void BlogMenu(Member memberType, string member)
-        {
-
-            bool input = true;
-            while (input)
-            {
-                string? userChoice = Console.ReadLine();
-                //Member memer = new Member("name", 2, MembershipEnum.Medlem, "mail", "password", 007); //for at teste - normal skal man kunne logge ind først inden man når hertil korrekt?
-                if (memberType.Role == RoleEnum.Member)
-                {
-                    Console.WriteLine($"1. Add a blog\n2. Edit a blog\n3. Delete a blog\n\"q\"to quit");
-
-                    switch (userChoice)
-                    {
-
-                        case "1":
-                            {
-                                _blogRepo.PrintAllBlog();
-                                Console.WriteLine("1. search for blog by title, \"q\" to quit ");
-                                string headLine = Console.ReadLine();
-                                List<Blog> blog = _blogRepo.ReturnBlogHeadline(headLine);
-
-                                bool isFalse = true;
-                                while (isFalse)
-                                {
-                                    Console.WriteLine(blog);
-
-                                    Console.WriteLine("press any key to comment. Press \"q\" to exit");
-
-                                    string choice = Console.ReadLine();
-
-                                    if (choice == "q".ToLower() || choice == "q".ToUpper())
-                                    {
-                                        isFalse = false;
-                                    }
-                                    Console.WriteLine("Make your comment");
-                                    string comment = Console.ReadLine();
-                                    Comment theComment = new Comment(comment, memberType, blog[0]);
-                                    Console.WriteLine($"Comment made to the blog {blog[0].Headline}");
-                                }
-                            }
-                            break;
-                        case "2":
-                            {
-
-                                Console.WriteLine("Look up start date and end date");//skriv format så user kan indsætte en valid datetime
-                                Console.WriteLine("write start date");
-                                DateTime startDate = DateTime.Parse(Console.ReadLine());
-                                Console.WriteLine("write end date");
-                                DateTime endDate = DateTime.Parse(Console.ReadLine());
-                                Console.WriteLine(_blogRepo.ReturnByDateRange(startDate, endDate).Headline);
-                                Console.WriteLine("enter title of the blog you wish to see.");
-                                string headLine = Console.ReadLine();
-                                List<Blog> blog = _blogRepo.ReturnBlogHeadline(headLine);
-
-                                bool isFalse = true;
-                                while (isFalse)
-                                {
-                                    Console.WriteLine(blog);
-
-                                    Console.WriteLine("press any key to comment. Press \"q\" to exit");
-
-                                    string choice = Console.ReadLine();
-
-                                    if (choice == "q".ToLower() || choice == "q".ToUpper())
-                                    {
-                                        isFalse = false;
-                                    }
-                                    Console.WriteLine("Make your comment");
-                                    string comment = Console.ReadLine();
-                                    Comment theComment = new Comment(comment, memberType, blog[0]);
-                                    Console.WriteLine($"Comment made to the blog {blog[0].Headline}");
-                                } 
-                            }
-                            break;
-                        case "q":
-                            {
-                                input = false;
-                            }
-                            break;
-                        default:
-                            {
-                                Console.WriteLine("invalid input try these options:");
-                            }
-                            break;
-                    }
-                }
-
-                else if (memberType.Role == RoleEnum.Administrator)
-                {
-                    //ny userchoice for Admin
-                    switch (userChoice + member)
-                    {
-                        case "1":
-                            Console.WriteLine("haifaf");
-                            break;
-                    }
-                }
-                else if (memberType.Role == RoleEnum.Chairman)
-                {
-                    //ny userchoice for chairman
-                    switch (userChoice + member)
-                    {
-                        case "1":
-
-                            break;
-                    }
-                }
-                else if (memberType.Role == null)
-                {
-                    //guests menu
-                    switch (userChoice)
-                    {
-                        case "1":
-                            //..
-                            break;
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("Sign in or sign up to see what's going on in the blog!");
-                }
-            }
-
-        }
-
-
     }
 }
-
-//til Admin og chairman
-//case "1":
-//    {
-//        Console.WriteLine("Add a headline");
-//        string? headline = Console.ReadLine(); //exception for intet input? det kan i hvertfald null
-
-//        Console.WriteLine("Add a text");
-//        string? text = Console.ReadLine(); //exception for intet input? det kan i hvertfald null
-
-//        Console.WriteLine("Add a description");
-//        string? description = Console.ReadLine(); //exception for intet input? det kan i hvertfald null
-
-//        _blogRepo.AddBlog(new Blog(headline, memer, text, description));
-
-//        Console.WriteLine("Added the blog");
-//    }
-//    break;
-//case "2":
-//    {
-//        //rediger blog og implementer at man faktisk kan det
-//    }
-//    break;
-//case "3":
-//    {
-//        //slet en blog
-//    }
-//    break;
-////case 4 for opdater listen a blog? og case 5 for at printe dem alle? case 5 for medlem
-//case "q":
-//    {
-//        input = false;
-//    }
-//    break;
-//default:
-//    {
-//        Console.WriteLine("invalid input try these options:");
-//    }
-//    break;
