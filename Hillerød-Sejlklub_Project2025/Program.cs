@@ -53,7 +53,7 @@ Console.WriteLine("---------------------Test overdue false 3 hours, no motor, Ad
 DateTime start2 = new DateTime(2025, 12, 3, 9, 0, 0);
 DateTime end2 = new DateTime(2025, 12, 3, 12, 0, 0);
 Member member2 = new Member("Thomas", 40, MembershipEnum.Medlem, "Thomas@gmail", "password12345", "22222222");
-Boat boat2 = new Boat("555555555", "TheBoat", "description", BoatTypeEnum.To_mandsjolle, ModelEnum.Optimistjolle, 2, 200, 50, 60, 2007, null!);
+Boat boat2 = new Boat("555555555", "TheBoat", "description", BoatTypeEnum.To_mandsjolle, ModelEnum.Optimistjolle, 2, 200, 50, 60, 2007, null);
 Booking booking2 = new Booking("Roskilde", start2, end2, member2, boat2);
 booking2.AddMember(member1);
 Console.WriteLine(booking2);

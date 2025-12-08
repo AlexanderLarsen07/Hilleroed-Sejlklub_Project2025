@@ -11,13 +11,13 @@ namespace ConsoleMenu.Methods__Controllers.Blogs
 {
     public class BlogMenuMethod
     {
-        public void BlogMenu(Member memberType, BlogRepo blogRepo, CommentRepo commentRepo, string member)
+        public void BlogMenu(Member? memberType, BlogRepo blogRepo, CommentRepo commentRepo, string member)
         {
 
             bool input = true;
             while (input)
             {
-                string? userChoice = Console.ReadLine();
+                string userChoice = Console.ReadLine();
                 //Member memer = new Member("name", 2, MembershipEnum.Medlem, "mail", "password", 007); //for at teste - normal skal man kunne logge ind først inden man når hertil korrekt?
                 if (memberType.Role == RoleEnum.Member)
                 {
@@ -30,7 +30,7 @@ namespace ConsoleMenu.Methods__Controllers.Blogs
                             {
                                 blogRepo.PrintAllBlog();
                                 Console.WriteLine("1. search for blog by title, \"q\" to quit ");
-                                string headLine = Console.ReadLine()!;
+                                string headLine = Console.ReadLine();
                                 List<Blog> blog = blogRepo.ReturnBlogHeadline(headLine);
 
                                 bool isFalse = true;
@@ -40,14 +40,14 @@ namespace ConsoleMenu.Methods__Controllers.Blogs
 
                                     Console.WriteLine("press any key to comment. Press \"q\" to exit");
 
-                                    string choice = Console.ReadLine()!;
+                                    string choice = Console.ReadLine();
 
                                     if (choice == "q".ToLower() || choice == "q".ToUpper())
                                     {
                                         isFalse = false;
                                     }
                                     Console.WriteLine("Make your comment");
-                                    string comment = Console.ReadLine()!;
+                                    string comment = Console.ReadLine();
                                     Comment theComment = new Comment(comment, memberType, blog[0]);
                                     Console.WriteLine($"Comment made to the blog {blog[0].Headline}");
                                 }
@@ -58,12 +58,12 @@ namespace ConsoleMenu.Methods__Controllers.Blogs
 
                                 Console.WriteLine("Look up start date and end date");//skriv format så user kan indsætte en valid datetime
                                 Console.WriteLine("write start date");
-                                DateTime startDate = DateTime.Parse(Console.ReadLine()!);
+                                DateTime startDate = DateTime.Parse(Console.ReadLine());
                                 Console.WriteLine("write end date");
-                                DateTime endDate = DateTime.Parse(Console.ReadLine()!);
+                                DateTime endDate = DateTime.Parse(Console.ReadLine());
                                 Console.WriteLine(blogRepo.ReturnByDateRange(startDate, endDate).Headline);
                                 Console.WriteLine("enter title of the blog you wish to see.");
-                                string headLine = Console.ReadLine()!;
+                                string headLine = Console.ReadLine();
                                 List<Blog> blog = blogRepo.ReturnBlogHeadline(headLine);
 
                                 bool isFalse = true;
@@ -73,14 +73,14 @@ namespace ConsoleMenu.Methods__Controllers.Blogs
 
                                     Console.WriteLine("press any key to comment. Press \"q\" to exit");
 
-                                    string choice = Console.ReadLine()!;
+                                    string choice = Console.ReadLine();
 
                                     if (choice == "q".ToLower() || choice == "q".ToUpper())
                                     {
                                         isFalse = false;
                                     }
                                     Console.WriteLine("Make your comment");
-                                    string comment = Console.ReadLine()!;
+                                    string comment = Console.ReadLine();
                                     Comment theComment = new Comment(comment, memberType, blog[0]);
                                     Console.WriteLine($"Comment made to the blog {blog[0].Headline}");
                                 }
@@ -119,7 +119,7 @@ namespace ConsoleMenu.Methods__Controllers.Blogs
                             break;
                     }
                 }
-                else if (memberType.Role == null)
+                else if (memberType?.Role == null)
                 {
                     //guests menu
                     switch (userChoice)

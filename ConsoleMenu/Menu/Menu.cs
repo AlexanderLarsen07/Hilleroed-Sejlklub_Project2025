@@ -1,4 +1,6 @@
-﻿using Hillerød_Sejlklub_Library;
+﻿using ConsoleMenu.Controllers.Events;
+using ConsoleMenu.Methods.Members;
+using Hillerød_Sejlklub_Library;
 using Hillerød_Sejlklub_Library.Interfaces;
 using Hillerød_Sejlklub_Library.Models.Blogs;
 using Hillerød_Sejlklub_Library.Models.Events;
@@ -20,11 +22,14 @@ namespace ConsoleMenu.Menu
     public class Menu
     {
         // static strings for choices
-        static string LoginChoices = "\t 1. Sign in as guest.\t\n 2. Sign in as Member. \t\n q. Exit.";
-        static string GuestMenuChoices = "";//Implement TODO.
-        static string MemberMenuChoices = ""; //Implement TODO.
+        static string LoginChoices = " 1. Sign in as guest.\t\n 2. Sign in as Member. \t\n q. Exit.";
+        static string GuestMenuChoices = " 1. Events.\t\n 2. Signup.\t\n q. Exit.";//Implement TODO.
+        static string MemberMenuChoices = " 1. Events. \t\n q. Exits."; //Implement TODO.
         static string AdminMenuChoices = "";//Implement TODO.
         static string ChairmanMenuChoices = "";//Implement TODO.
+        static string GuestEventChoices = " 1. View all events. \t\n 2. Search for events by date. \t\n q. Exit.";
+        static string MemberEventChoices = " 1. Signup to event. \t\n 2. Edit a Comment on a signup. \t\n 3. Delete a signup. \t\n q. quit.";
+        static string GuestMemberChoices = " 1. Signup. \t\n q. Quit.";
 
         //Gæst - basal adgang til systemet, kan se blogindlæg,
         //både og generel info om klubben og oprette sig som medlem, kan ikke leje både og melde sig til events.
@@ -46,13 +51,16 @@ namespace ConsoleMenu.Menu
         private SignupRepo _signupRepo = new SignupRepo();
         private BookingRepo _bookingRepo = new BookingRepo();
 
+        private EventMenuMethod eventMenu = new EventMenuMethod();
+        private MemberMenu memberMenu = new MemberMenu();
+
         private static string ReadChoice(string choices)
         {
             Console.Write("\x1b[2J"); // Clear screen
             Console.Write("\x1b[3J"); // Clear scrollback
             Console.Write("\x1b[H");  // Set cursor to home
             Console.Write(choices);
-            string choice = Console.ReadLine()!;
+            string choice = Console.ReadLine();
             Console.Clear();
             return choice.ToLower();
         }
@@ -74,14 +82,30 @@ namespace ConsoleMenu.Menu
                             switch (guestMenuChoices)
                             {
                                 case "1":
-
+                                    {
+                                        string guestEventChoices = ReadChoice(GuestEventChoices);
+                                        //while (guestEventChoices != "q")
+                                        //{
+                                            eventMenu.EventMenu(guestEventChoices, null, _eventRepo, _signupRepo);
+                                            guestMenuChoices = ReadChoice(GuestMenuChoices);
+                                        //}
+                                    }
+                                    theChoice = ReadChoice(GuestEventChoices);
                                     break;
                                 case "2":
-
+                                    {
+                                        string guestMemberChoices = ReadChoice(GuestMemberChoices);
+                                        //while (guestMemberChoices != "q")
+                                        //{
+                                            memberMenu.Roles(null, guestMemberChoices, _memberRepo);
+                                            guestMemberChoices = ReadChoice(GuestMemberChoices);
+                                        //}
+                                    }
+                                    //guestMenuChoices = ReadChoice(guestMenuChoices);
                                     break;
                             }
                         }
-                        Console.ReadLine();
+                        //Console.ReadLine();
                         break;
                     case "2":
                         Console.WriteLine("Valg 2");
@@ -91,7 +115,7 @@ namespace ConsoleMenu.Menu
                         while (!validMail)
                         {
                             Console.WriteLine($"Enter Mail : ");
-                            mail = Console.ReadLine()!;
+                            mail = Console.ReadLine();
                             Member? member = _memberRepo.ReturnMemberByMail(mail);
                             if (member == null)
                             {
@@ -106,7 +130,7 @@ namespace ConsoleMenu.Menu
                                 {
                                     Console.WriteLine($"Mail : {mail}");
                                     Console.WriteLine($"Enter Password : ");
-                                    password = Console.ReadLine()!;
+                                    password = Console.ReadLine();
                                     if (member.Password != password)
                                     {
                                         Console.Clear();
@@ -117,18 +141,35 @@ namespace ConsoleMenu.Menu
                                         Console.WriteLine($"Welcome {member.Name}");
                                         if (member.Role == RoleEnum.Member)
                                         {
-                                            //selcet memberMenu string
+                                            Console.WriteLine($"Signed in as : {member.Role}");
+                                            string memberMenuChoices = ReadChoice(MemberMenuChoices);
+                                            while (memberMenuChoices != "q")
+                                            {
+                                                switch (memberMenuChoices)
+                                                {
+                                                    case "1":
+                                                        {
+                                                            string memberEventChoices = ReadChoice(MemberEventChoices);
+                                                            while (memberEventChoices != "q")
+                                                            {
+                                                                eventMenu.EventMenu(memberEventChoices, member, _eventRepo, _signupRepo);
+                                                                memberEventChoices = ReadChoice(memberEventChoices);
+                                                            }
+                                                        }
+                                                        break;
+                                                }
+                                            }
                                         }
                                         else if (member.Role == RoleEnum.Administrator)
                                         {
+                                            Console.WriteLine($"Signed in as : {member.Role}");
                                             //select adminMenu string
                                         }
                                         else if (member.Role == RoleEnum.Chairman)
                                         {
+                                            Console.WriteLine($"Signed in as : {member.Role}");
                                             //select chairmanMenu string
                                         }
-                                        //menu // switch case
-                                        //method(member , extra)
                                     }
                                 }
                             }

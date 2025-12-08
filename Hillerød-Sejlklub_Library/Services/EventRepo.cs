@@ -72,7 +72,7 @@ namespace Hillerød_Sejlklub_Library.Services
             }
         }
 
-        public List<Event> ReturnEventByTitle(string title)
+        public List<Event> ReturnAllEventsByTitle(string title)
         {
             List<Event> events = [];
             foreach(KeyValuePair<int, Event> even in _events)

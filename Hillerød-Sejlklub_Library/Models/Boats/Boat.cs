@@ -31,7 +31,7 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
 
         public int YearBuilt { get; private set; }
 
-        public MotorInfo Motor { get; private set; }
+        public MotorInfo? Motor { get; private set; }
 
         public bool CanSail { get; private set;}
 
@@ -39,7 +39,7 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
 
 
         public Boat(string sailNumber, string name, string description, BoatTypeEnum boatType, ModelEnum theModel, int maxPassengers,
-            int lenght, int width, int draft, int yearBuilt, MotorInfo motor)
+            int lenght, int width, int draft, int yearBuilt, MotorInfo? motor)
         {
             SailNumber = sailNumber;
             Name = name;

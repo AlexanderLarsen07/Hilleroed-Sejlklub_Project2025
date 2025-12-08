@@ -14,10 +14,10 @@ namespace ConsoleMenu.Methods.Events
         IEventRepo _eventRepo;
         public Event Event { get; set; }
 
-        public AddEventController(int maxMembers, string title, DateTime date, string description)
+        public AddEventController(int maxMembers, string title, DateTime date, string description, IEventRepo eventRepo)
         {
             Event = new Event(maxMembers, title, date, description);
-
+            _eventRepo = eventRepo;
         }
         public void AddMember()
         {

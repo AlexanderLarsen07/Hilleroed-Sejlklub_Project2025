@@ -17,6 +17,6 @@ namespace Hillerød_Sejlklub_Library.Interfaces
         void AddEvent(Event even);
         void PrintAllEvents();
         void EditEvent(int id, string title, int maxMembers, string description);
-        List<Event> ReturnEventByTitle(string title);
+        List<Event> ReturnAllEventsByTitle(string title);
     }
 }
