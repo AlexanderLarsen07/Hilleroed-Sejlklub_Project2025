@@ -91,7 +91,7 @@ namespace Hillerød_Sejlklub_Library.Services
             return null;
         }
 
-        public Member? EditMember(int id, string name, int age, string mail, string password, int phoneNumber)
+        public Member? EditMember(int id, string name, int age, string mail, string password, string phoneNumber)
         {
             if (_memberDictionary.ContainsKey(id))
             {

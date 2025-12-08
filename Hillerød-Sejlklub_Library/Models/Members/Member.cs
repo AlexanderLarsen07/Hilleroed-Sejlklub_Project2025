@@ -1,4 +1,5 @@
-﻿using Hillerød_Sejlklub_Library.Services;
+﻿using Hillerød_Sejlklub_Library.Interfaces;
+using Hillerød_Sejlklub_Library.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,12 +19,12 @@ namespace Hillerød_Sejlklub_Library.Models.Members
         public List<BoatLot> _boatLotsRented;
         public string? Mail { get; set; } //needs to be unique
         public string Password { get; set; }
-        public int PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }
         public string? Type { get; set; }
         public MembershipEnum Membership { get; set; }
         public Dictionary<int, MemberRepo> _members;
 
-        public Member(string name, int age, MembershipEnum membershipEnum, string mail, string password, int phoneNumber) {
+        public Member(string name, int age, MembershipEnum membershipEnum, string mail, string password, string phoneNumber) {
             Name = name;
             Membership = membershipEnum;
             //new string that will be used to check if there is an existing mail
@@ -41,8 +42,6 @@ namespace Hillerød_Sejlklub_Library.Models.Members
             MembershipType();
             Role = RoleEnum.Member;
         }
-
-        
 
         public int CalculateInitialMembershipFee()
         {

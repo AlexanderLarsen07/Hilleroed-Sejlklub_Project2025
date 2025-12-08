@@ -21,6 +21,7 @@ namespace ConsoleMenu.Menu
         // static strings for choices
         static string LoginChoices = "\t 1. Sign in as guest.\t\n 2. Sign in as Member. \t\n q. Exit.";
         static string GuestMenuChoices = "";//Implement TODO.
+        static string MemberMenuChoices = ""; //Implement TODO.
         static string GuestEventsChoices = "";//Implement TODO.
 
         //Gæst - basal adgang til systemet, kan se blogindlæg,
@@ -177,7 +178,7 @@ namespace ConsoleMenu.Menu
             while (input)
             {
                 string? userChoice = Console.ReadLine();
-                Member memer = new Member("name", 2, MembershipEnum.Medlem, "mail", "password", 007); //for at teste - normal skal man kunne logge ind først inden man når hertil korrekt?
+                //Member memer = new Member("name", 2, MembershipEnum.Medlem, "mail", "password", 007); //for at teste - normal skal man kunne logge ind først inden man når hertil korrekt?
                 if (memberType.Role == RoleEnum.Member)
                 {
                     Console.WriteLine($"1. Add a blog\n2. Edit a blog\n3. Delete a blog\n\"q\"to quit");

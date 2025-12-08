@@ -1,4 +1,5 @@
 ﻿using Hillerød_Sejlklub_Library.Models.Members;
+using Hillerød_Sejlklub_Library.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace Hillerød_Sejlklub_Library.Interfaces
         Member GetCustomerById(int id);
         void RemoveMember(int id);
         void PrintAllMembers();
+        
     }
 }
