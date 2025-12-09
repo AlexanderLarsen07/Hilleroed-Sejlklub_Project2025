@@ -242,15 +242,23 @@ namespace ConsoleMenu.Methods.Members
                             {
                                 foreach (Member m1 in memberRepo.GetAll()) //Maybe it works?
                                 {
-                                    if (false)
+                                    if (m1._boatLotsRented != null)
                                     {
+                                        Console.WriteLine(m1.MemberID);
+                                        Console.WriteLine(m1.Name);
+                                        Console.WriteLine(m1._boatLotsRented);
 
                                     }
                                 }
                             }
                             break;
                         case "4": //simple statistikker     -   not done
-
+                            Console.WriteLine("User Counts in total:");
+                            Console.WriteLine("------------------------------------------");
+                            Console.WriteLine($"there are {member._members.Count} Members in total");
+                            Console.WriteLine($"There are {member._members.Count.CompareTo(RoleEnum.Member)} users in total that has the Member Role ");
+                            Console.WriteLine($"There are {member._members.Count.CompareTo(RoleEnum.Administrator)} users in total that has the Admin Role ");
+                            Console.WriteLine($"There are {member._members.Count.CompareTo(RoleEnum.Chairman)} users in total that has the Chairman Role ");
                             break;
                         case "5": //kan delete users og lave user
                             string firstChoice = Console.ReadLine();
