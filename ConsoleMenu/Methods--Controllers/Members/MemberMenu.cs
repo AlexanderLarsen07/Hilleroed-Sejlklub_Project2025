@@ -200,7 +200,12 @@ namespace ConsoleMenu.Methods.Members
                             int boatLotsRented = Convert.ToInt32(Console.ReadLine());
                             if (boatLotsRented < 0)
                             {
-                                //member._boatLotsRented = boatLotsRented; //not done
+                                for (int i=0; i<boatLotsRented; i++)
+                                {
+                                    BoatLot bl = new BoatLot(20, 20);
+                                    member._boatLotsRented.Add(bl);
+                                    //member._boatLotsRented.Add() = boatLotsRented;
+                                }
                             }
                             break;
                     }
