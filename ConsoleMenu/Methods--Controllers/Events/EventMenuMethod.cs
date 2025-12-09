@@ -18,22 +18,28 @@ namespace ConsoleMenu.Controllers.Events
     {
         private static string ReadChoice(string choices)
         {
+            Console.Write("\x1b[2J"); // Clear screen
+            Console.Write("\x1b[3J"); // Clear scrollback
+            Console.Write("\x1b[H");  // Set cursor to home
             Console.Write(choices);
-            string choice = Console.ReadLine();;
+            string choice = Console.ReadLine();
+            Console.Clear();
             return choice.ToLower();
         }
-        public void EventMenu(string theChoice, Member? member, EventRepo eventRepo, SignupRepo signupRepo)
+        public void EventMenu(string theChoices, Member? member, EventRepo eventRepo, SignupRepo signupRepo)
         {
+            string theChoice = ReadChoice(theChoices);
             while (theChoice != "q")
             {
-                if (member?.Role == null)
+                if (member == null)
                 {
                     switch (theChoice)
                     {
                         case "1":
                             {
                                 eventRepo.PrintAllEvents();
-                                theChoice = ReadChoice("Press q to exit.");
+                                Console.WriteLine("Press q to exit.");
+                                Console.ReadLine();
                             }
                             break;
                         case "2":
@@ -44,10 +50,11 @@ namespace ConsoleMenu.Controllers.Events
                                 Console.WriteLine("write end date:");
                                 DateTime endDate = DateTime.Parse(Console.ReadLine());
                                 Console.WriteLine(eventRepo.ReturnByDateRange(startDate, endDate));
-                                //Console.ReadLine();
+                                Console.ReadLine();
                             }
                             break;
                     }
+                    theChoice = ReadChoice(theChoices);
                     //break;
                 }
 
@@ -173,6 +180,7 @@ namespace ConsoleMenu.Controllers.Events
                             }
                             break;
                     }
+                    theChoice = ReadChoice(theChoice);
                 }
 
                 else if (member.Role == RoleEnum.Administrator)
@@ -184,6 +192,7 @@ namespace ConsoleMenu.Controllers.Events
                             
                             break;
                     }
+                    theChoice = ReadChoice(theChoice);
                 }
 
                 else if (member.Role == RoleEnum.Chairman)
@@ -195,6 +204,7 @@ namespace ConsoleMenu.Controllers.Events
 
                             break;
                     }
+                    theChoice = ReadChoice(theChoice);
                 }
             }
         }

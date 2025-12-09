@@ -83,14 +83,14 @@ namespace ConsoleMenu.Menu
                             {
                                 case "1":
                                     {
-                                        string guestEventChoices = ReadChoice(GuestEventChoices);
+                                        //string guestEventChoices = ReadChoice(GuestEventChoices);
                                         //while (guestEventChoices != "q")
                                         //{
-                                            eventMenu.EventMenu(guestEventChoices, null, _eventRepo, _signupRepo);
-                                            guestMenuChoices = ReadChoice(GuestMenuChoices);
+                                            eventMenu.EventMenu(GuestEventChoices, null, _eventRepo, _signupRepo);
+                                        //guestMenuChoices = ReadChoice(GuestEventChoices);
                                         //}
                                     }
-                                    theChoice = ReadChoice(GuestEventChoices);
+                                    //theChoice = ReadChoice(GuestEventChoices); //slet 99%
                                     break;
                                 case "2":
                                     {
@@ -98,12 +98,12 @@ namespace ConsoleMenu.Menu
                                         //while (guestMemberChoices != "q")
                                         //{
                                             memberMenu.Roles(null, guestMemberChoices, _memberRepo);
-                                            guestMemberChoices = ReadChoice(GuestMemberChoices);
+                                            //guestMemberChoices = ReadChoice(GuestMemberChoices);
                                         //}
                                     }
-                                    //guestMenuChoices = ReadChoice(guestMenuChoices);
                                     break;
                             }
+                            guestMenuChoices = ReadChoice(GuestMenuChoices);
                         }
                         //Console.ReadLine();
                         break;
