@@ -21,88 +21,114 @@ namespace ConsoleMenu.Methods.Members
         //3. Exit
         //
         //Mulighed2.
-        public void Roles(Member? memberRole, string member, IMemberRepo memberRepo)
+
+        private static string ReadChoice(string choices)
         {
-            if (memberRole?.Role == null)
+            Console.Write("\x1b[2J"); // Clear screen
+            Console.Write("\x1b[3J"); // Clear scrollback
+            Console.Write("\x1b[H");  // Set cursor to home
+            Console.Write(choices);
+            string choice = Console.ReadLine();
+            Console.Clear();
+            return choice.ToLower();
+        }
+
+        public void Roles(string readChoices, Member? member, MemberRepo memberRepo, BoatLotRepo boatLotRepo, IMemberRepo iMemberRepo)
+        {
+            string theChoice = ReadChoice(readChoices);
+            while (theChoice != "q")
             {
-                switch (member)
+                if (member == null)
                 {
-                    case "1": //SignUP
-                        {
-                            Console.WriteLine("Indtast Navn");
-                            string name = Console.ReadLine();
-                            Console.WriteLine("Indtast Alder");
-                            int age = Convert.ToInt32(Console.ReadLine());
-                            Console.WriteLine("Indtast hvilken Membership som du ønsker");
-                            Console.WriteLine("1 = Familie Medlem");
-                            Console.WriteLine("2 = Medlem");
-                            //Console.WriteLine("3 = Passive Medlem");
-                            string membership = Console.ReadLine();
-                            MembershipEnum isMembership = new();
-                            if (membership == "1")
+                    switch (theChoice)
+                    {
+                        case "1": //SignUP
                             {
-                                isMembership = MembershipEnum.FamilieMedlem;
+                                Console.WriteLine("Indtast Navn");
+                                string name = Console.ReadLine();
+                                Console.WriteLine("Indtast Alder");
+                                int age = Convert.ToInt32(Console.ReadLine());
+                                Console.WriteLine("Indtast hvilken Membership som du ønsker");
+                                Console.WriteLine("1 = Familie Medlem");
+                                Console.WriteLine("2 = Medlem");
+                                //Console.WriteLine("3 = Passive Medlem");
+                                string membership = Console.ReadLine();
+                                MembershipEnum isMembership = new();
+                                if (membership == "1")
+                                {
+                                    isMembership = MembershipEnum.FamilieMedlem;
+                                }
+                                else if (membership == "2")
+                                {
+                                    isMembership = MembershipEnum.Medlem;
+                                }
+                                //else if (membership == "3")
+                                //{
+                                //    isMembership = MembershipEnum.PassiveMedlem;
+                                //}
+                                Console.WriteLine("Indtast din Mail");
+                                string mail = Console.ReadLine();
+                                Console.WriteLine("Indtast Passwordet");
+                                string password = Console.ReadLine();
+                                Console.WriteLine("Indtast Telefon nummer");
+                                string phoneNumber = Console.ReadLine();
+                                AddMembersController newMember = new AddMembersController(name, age, isMembership, mail, password, phoneNumber, memberRepo);
+                                newMember.AddMember();
+                                //case "2": //View bestyrelsesmedlemmer (print en liste af administratoren og Chairman)
+                                //    if (memberRole.Role == RoleEnum.Chairman || memberRole.Role == RoleEnum.Administrator)
+                                //    {
+                                //        Console.WriteLine(member);
+                                //    }
+                                //    break;
+                                //case "2": //View Events (Alexander)
+
+                                //    break;
+                                //case "3": //View blogs/comments (Sinan)
+
+                                //    break;
+                                //case "4": //View Boat (Aksel)
+
+                                //    break;
                             }
-                            else if (membership == "2")
-                            {
-                                isMembership = MembershipEnum.Medlem;
-                            }
-                            //else if (membership == "3")
-                            //{
-                            //    isMembership = MembershipEnum.PassiveMedlem;
-                            //}
-                            Console.WriteLine("Indtast din Mail");
-                            string mail = Console.ReadLine();
-                            Console.WriteLine("Indtast Passwordet");
-                            string password = Console.ReadLine();
-                            Console.WriteLine("Indtast Telefon nummer");
-                            string phoneNumber = Console.ReadLine();
-                            AddMembersController newMember = new AddMembersController(name, age, isMembership, mail, password, phoneNumber, memberRepo);
-                            newMember.AddMember();
-                            //case "2": //View bestyrelsesmedlemmer (print en liste af administratoren og Chairman)
-                            //    if (memberRole.Role == RoleEnum.Chairman || memberRole.Role == RoleEnum.Administrator)
-                            //    {
-                            //        Console.WriteLine(member);
-                            //    }
-                            //    break;
-                            //case "2": //View Events (Alexander)
-
-                            //    break;
-                            //case "3": //View blogs/comments (Sinan)
-
-                            //    break;
-                            //case "4": //View Boat (Aksel)
-
-                            //    break;
-                        }
-                        break;
+                            break;
+                    }
+                    theChoice = ReadChoice(readChoices);
                 }
-            }
-            else if (memberRole.Role == RoleEnum.Member) //skal kunne kigge på Membership oplysninger, redigere deres konto, tilføje boatlots
-            {
-                switch (member)
+                else if (member.Role == RoleEnum.Member) //skal kunne kigge på Membership oplysninger, redigere deres konto, tilføje boatlots
                 {
-                    case "1":
+                    switch (theChoice)
+                    {
+                        case "1"://skal kunne kigge på Membership oplysninger
 
-                        break;
+                            break;
+                        case "2": //redigere deres konto
+
+                            break;
+                        case "3"://tilføje boatlots
+
+                            break;
+                    }
+                    theChoice = ReadChoice(readChoices);
                 }
-            }
-            else if (memberRole.Role == RoleEnum.Administrator) //skal kunne alt membersne kan, skal kunne view alle members og en bestemt valgt member, sortere boatlots (sorterings algoritmer), simple statistikker, kan delete users og lave user
-            {
-                switch (member)
+                else if (member.Role == RoleEnum.Administrator) //skal kunne alt membersne kan, skal kunne view alle members og en bestemt valgt member, sortere boatlots (sorterings algoritmer), simple statistikker, kan delete users og lave user
                 {
-                    case "1":
+                    switch (theChoice)
+                    {
+                        case "1":
 
-                        break;
+                            break;
+                    }
+                    theChoice = ReadChoice(readChoices);
                 }
-            }
-            else if (memberRole.Role == RoleEnum.Chairman) //skal alt admins kan, CRUD admins, ændre formandskab (confirmation button)
-            {
-                switch (member)
+                else if (member.Role == RoleEnum.Chairman) //skal alt admins kan, CRUD admins, ændre formandskab (confirmation button)
                 {
-                    case "1":
+                    switch (theChoice)
+                    {
+                        case "1":
 
-                        break;
+                            break;
+                    }
+                    theChoice = ReadChoice(readChoices);
                 }
             }
         }
