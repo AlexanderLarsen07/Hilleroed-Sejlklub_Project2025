@@ -238,7 +238,16 @@ namespace ConsoleMenu.Methods.Members
                             }
                             break;
                         case "3": //sortere boatlots (sorterings algoritmer)    -   not done
+                            foreach(BoatLot boatLot in boatLotRepo.GetAll())
+                            {
+                                foreach (Member m1 in memberRepo.GetAll()) //Maybe it works?
+                                {
+                                    if (false)
+                                    {
 
+                                    }
+                                }
+                            }
                             break;
                         case "4": //simple statistikker     -   not done
 
