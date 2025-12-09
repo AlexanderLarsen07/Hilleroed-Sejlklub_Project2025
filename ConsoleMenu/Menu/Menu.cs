@@ -54,6 +54,8 @@ namespace ConsoleMenu.Menu
         private EventMenuMethod eventMenu = new EventMenuMethod();
         private MemberMenu memberMenu = new MemberMenu();
 
+        private IMemberRepo iMemberRepo;
+
         private static string ReadChoice(string choices)
         {
             Console.Write("\x1b[2J"); // Clear screen
@@ -88,7 +90,7 @@ namespace ConsoleMenu.Menu
                                     break;
                                 case "2":
                                     {
-                                            memberMenu.Roles(null, GuestMemberChoices, _memberRepo);
+                                            memberMenu.Roles(GuestMemberChoices, null, _memberRepo, _boatLotRepo, iMemberRepo);
                                     }
                                     break;
                             }
