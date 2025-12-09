@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Hillerød_Sejlklub_Library.Interfaces
 {
-    public interface IBoat
+    public interface IBoatRepo
     {
         public List<Boat> GetAll();
         public void AddBoat(Boat boat);
@@ -17,5 +17,6 @@ namespace Hillerød_Sejlklub_Library.Interfaces
 
         public void PrintAllBoats();
 
+        public void PrintBoatInfoToGuest();
     }
 }

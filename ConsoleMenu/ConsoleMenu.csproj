@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Methods--Controllers\Boats\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Hillerød-Sejlklub_Library\Hillerød-Sejlklub_Library.csproj" />
   </ItemGroup>
 
