@@ -215,9 +215,85 @@ namespace ConsoleMenu.Methods.Members
                 {
                     switch (theChoice)
                     {
-                        case "1":
-                            
+                        case "1": //skal kunne view alle members
+                            foreach(Member m1 in memberRepo.GetAll()) //Maybe it works?
+                            {
+                                if(m1.Role == RoleEnum.Member)
+                                {
+                                    Console.WriteLine(member.ToString() + $"\n{member.Mail}");
+                                }
+                            }
                             break;
+                        case "2"://skal kunne vælge en bestemt valgt member (findes member ud fra deres id)
+                            foreach (Member m1 in memberRepo.GetAll()) //Maybe it works?
+                            {
+                                if (m1.Role == RoleEnum.Member)
+                                {
+                                    int enteredNumber = Convert.ToInt32(Console.ReadLine());
+                                    if (enteredNumber == m1.MemberID)
+                                    {
+                                        Console.WriteLine(member.ToString() + $"\n{member.Mail}");
+                                    }
+                                }
+                            }
+                            break;
+                        case "3": //sortere boatlots (sorterings algoritmer)
+                            break;
+                        case "4": //simple statistikker
+                            break;
+                        case "5": //kan delete users og lave user
+                            string firstChoice = Console.ReadLine();
+                            if(firstChoice == "1") //Adds a new user
+                            {
+                                Console.WriteLine("Indtast Informationerne om den nye member:");
+                                Console.WriteLine("------------------------------------------");
+                                Console.WriteLine("Indtast Navn");
+                                string name = Console.ReadLine();
+                                Console.WriteLine("Indtast Alder");
+                                int age = Convert.ToInt32(Console.ReadLine());
+                                Console.WriteLine("Indtast hvilken Membership som Memberen skal have");
+                                Console.WriteLine("1 = Familie Medlem");
+                                Console.WriteLine("2 = Medlem");
+                                //Console.WriteLine("3 = Passive Medlem");
+                                string membership = Console.ReadLine();
+                                MembershipEnum isMembership = new();
+                                if (membership == "1")
+                                {
+                                    isMembership = MembershipEnum.FamilieMedlem;
+                                }
+                                else if (membership == "2")
+                                {
+                                    isMembership = MembershipEnum.Medlem;
+                                }
+                                //else if (membership == "3")
+                                //{
+                                //    isMembership = MembershipEnum.PassiveMedlem;
+                                //}
+                                Console.WriteLine("Indtast din Mail");
+                                string mail = Console.ReadLine();
+                                Console.WriteLine("Indtast Passwordet");
+                                string password = Console.ReadLine();
+                                Console.WriteLine("Indtast Telefon nummer");
+                                string phoneNumber = Console.ReadLine();
+                                AddMembersController newMember = new AddMembersController(name, age, isMembership, mail, password, phoneNumber, memberRepo);
+                                newMember.AddMember();
+                            } else if(firstChoice == "2") //deletes an existing user
+                            {
+                                foreach (Member m1 in memberRepo.GetAll()) //Maybe it works?
+                                {
+                                    if (m1.Role == RoleEnum.Member)
+                                    {
+                                        Console.WriteLine("Indtast ID'et af memberen som der ønskes at slette:");
+                                        Console.WriteLine("---------------------------------------------------");
+                                        int secondChoice = Convert.ToInt32(Console.ReadLine());
+                                        if (secondChoice == m1.MemberID)
+                                        {
+                                            m1._members.Remove(m1.MemberID);
+                                        }
+                                    }
+                                }
+                            }
+                                break;
                     }
                     theChoice = ReadChoice(readChoices);
                 }
