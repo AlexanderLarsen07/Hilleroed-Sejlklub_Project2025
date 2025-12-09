@@ -1,6 +1,5 @@
 ﻿using ConsoleMenu.Controllers.Events;
 using ConsoleMenu.Methods.Members;
-using Hillerød_Sejlklub_Library;
 using Hillerød_Sejlklub_Library.Interfaces;
 using Hillerød_Sejlklub_Library.Models.Blogs;
 using Hillerød_Sejlklub_Library.Models.Events;
@@ -127,7 +126,7 @@ namespace ConsoleMenu.Menu
                                         Console.Clear();
                                         Console.WriteLine("Wrong password.");
                                     }
-                                    else if (member.Password == password)
+                                    else
                                     {
                                         Console.WriteLine($"Welcome {member.Name}");
                                         if (member.Role == RoleEnum.Member)

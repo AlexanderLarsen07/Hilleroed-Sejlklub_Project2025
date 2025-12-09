@@ -1,8 +1,7 @@
 ﻿using Hillerød_Sejlklub_Library.Interfaces;
 using Hillerød_Sejlklub_Library.Models.Boats;
-using Hillerød_Sejlklub_Library.Services;
 
-namespace Hillerød_Sejlklub_Library
+namespace Hillerød_Sejlklub_Library.Services
 {
     public class BookingRepo : IBookingRepo
     {
