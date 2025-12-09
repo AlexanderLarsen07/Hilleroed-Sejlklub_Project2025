@@ -3,11 +3,13 @@ using Hillerød_Sejlklub_Library.Models.Members;
 using Hillerød_Sejlklub_Library.Services;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace ConsoleMenu.Methods.Members
 {
@@ -99,13 +101,107 @@ namespace ConsoleMenu.Methods.Members
                     switch (theChoice)
                     {
                         case "1"://skal kunne kigge på Membership oplysninger
-
+                            {
+                                Console.WriteLine(member.ToString()+$"\n{member.Mail}");
+                            }
                             break;
                         case "2": //redigere deres konto
+                            {
+                                Console.WriteLine("Dine Nuværende Informationer:");
+                                member.ToString();
+                                Console.WriteLine("Valg hvilke informationer du ville ændres ud fra tallet:" +
+                                    "\n1: Navn" +
+                                    "\n2: Alder" +
+                                    "\n3: Telefon Nummer"+
+                                    "\n4: Mail" +
+                                    "\n5: Password");
 
+                                string choice = Console.ReadLine();
+                                if (choice == "1") //navn
+                                {
+                                    Console.WriteLine("Indtast nyt navn:");
+                                    string nameTyped = Console.ReadLine();
+                                    if (nameTyped != member.Name || nameTyped.Length < 0)
+                                    {
+                                        member.Name = nameTyped!;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Navnet kan ikke være det samme som den tidligere og skal være større end 0 tegn" +
+                                            ",\nStart over.");
+                                    }
+                                     //member.Name = Console.ReadLine();
+                                    
+                                }else if (choice == "2") //alder
+                                {
+                                    Console.WriteLine("Indtast nyt alder:");
+                                    int age = Convert.ToInt32(Console.ReadLine());
+                                    if (age != member.Age|| age < 100 || age > 0)
+                                    {
+                                        member.Age = age;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Alderen må ikke være under 0 eller over 100 eller det samme som den tidligere alder, Start over.");
+                                    }
+                                    //member.Age = Convert.ToInt32(Console.ReadLine());
+                                }
+                                else if (choice == "3") //Telefon nummer
+                                {
+                                    Console.WriteLine("Indtast nyt Telefon nummer:");
+                                    string phoneNumber = Console.ReadLine();
+                                    if ( phoneNumber != member.PhoneNumber || phoneNumber.Length == 8)
+                                    {
+                                        member.PhoneNumber = phoneNumber!;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Telefon Nummeret skal have 8 cifre, start over.");
+                                    }
+                                    //member.PhoneNumber = Console.ReadLine();
+                                }
+                                else if (choice == "4") // Mail
+                                {
+                                    Console.WriteLine("Indtast nyt Mail:");
+                                    string mail = Console.ReadLine();
+                                    if (mail != member.Mail || mail.Contains("@gmail") || mail.Contains("@yahoo") || mail.Contains("@hotmail") || mail.Contains("@outlook") || mail.Contains("@office365"))
+                                    {
+                                        member.Mail = mail;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Den indtastede Mail er ikke korrekt, start over.");
+                                    }
+                                    //member.Mail = Console.ReadLine();
+                                }
+                                else if (choice == "5") //Password
+                                {
+                                    Console.WriteLine("Indtast nyt password:");
+                                    string password = Console.ReadLine();
+                                    if (password != member.Password || password.Length < 5)
+                                    {
+                                        member.Password = password;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("Passwordet må ikke være det samme som den gamle password og skal være større end 5 karakterer");
+                                    }
+                                    //member.Password = Console.ReadLine();
+                                }
+                            }
                             break;
                         case "3"://tilføje boatlots
-
+                            Console.WriteLine($"Du har lige nu: {member._boatLotsRented.Count} boat lots som er lejet.");
+                            Console.WriteLine($"-----------------------------------------------");
+                            Console.WriteLine("Indtast mængde af boat lots som du ønsker: ");
+                            Console.WriteLine("Familie member: 400 kr. = 1 boat lot");
+                            Console.WriteLine("Senior  member: 400 kr. = 1 boat lot");
+                            Console.WriteLine("Junior  member: 200 kr. = 1 boat lot");
+                            int boatLotsRented = Convert.ToInt32(Console.ReadLine());
+                            if (boatLotsRented < 0)
+                            {
+                                //member._boatLotsRented = boatLotsRented; //not done
+                            }
                             break;
                     }
                     theChoice = ReadChoice(readChoices);
@@ -115,7 +211,7 @@ namespace ConsoleMenu.Methods.Members
                     switch (theChoice)
                     {
                         case "1":
-
+                            
                             break;
                     }
                     theChoice = ReadChoice(readChoices);

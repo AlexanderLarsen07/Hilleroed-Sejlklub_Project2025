@@ -84,12 +84,12 @@ namespace ConsoleMenu.Menu
                             {
                                 case "1":
                                     {
-                                            eventMenu.EventMenu(GuestEventChoices, null, _eventRepo, _signupRepo);
+                                        eventMenu.EventMenu(GuestEventChoices, null, _eventRepo, _signupRepo);
                                     }
                                     break;
                                 case "2":
                                     {
-                                            memberMenu.Roles(GuestMemberChoices, null, _memberRepo, _boatLotRepo, iMemberRepo);
+                                        memberMenu.Roles(GuestMemberChoices, null, _memberRepo, _boatLotRepo, iMemberRepo);
                                     }
                                     break;
                             }
@@ -139,7 +139,7 @@ namespace ConsoleMenu.Menu
                                                 {
                                                     case "1":
                                                         {
-                                                                eventMenu.EventMenu(MemberEventChoices, member, _eventRepo, _signupRepo);
+                                                            eventMenu.EventMenu(MemberEventChoices, member, _eventRepo, _signupRepo);
                                                         }
                                                         break;
                                                 }
