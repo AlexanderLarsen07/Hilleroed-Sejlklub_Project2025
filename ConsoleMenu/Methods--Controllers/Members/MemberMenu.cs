@@ -253,15 +253,23 @@ namespace ConsoleMenu.Methods.Members
                             }
                             break;
                         case "4": //simple statistikker     -   not done
-                            Console.WriteLine("User Counts in total:");
+                            Console.WriteLine("Brugere i alt:");
                             Console.WriteLine("------------------------------------------");
-                            Console.WriteLine($"there are {member._members.Count} Members in total");
-                            Console.WriteLine($"There are {member._members.Count.CompareTo(RoleEnum.Member)} users in total that has the Member Role ");
-                            Console.WriteLine($"There are {member._members.Count.CompareTo(RoleEnum.Administrator)} users in total that has the Admin Role ");
-                            Console.WriteLine($"There are {member._members.Count.CompareTo(RoleEnum.Chairman)} users in total that has the Chairman Role ");
+                            Console.WriteLine($"Der er {member._members.Count} brugere i alt.");
+                            Console.WriteLine($"Der er {member._members.Count.CompareTo(RoleEnum.Member)} brugere i alt der er member.");
+                            Console.WriteLine($"Der er {member._members.Count.CompareTo(RoleEnum.Administrator)} brugere i alt der administrator.");
+                            Console.WriteLine($"Der er {member._members.Count.CompareTo(RoleEnum.Chairman)} brugere i alt der er formand ");
                             Console.WriteLine("------------------------------------------");
-                            Console.WriteLine("Amount of BoatLots left:");
+                            Console.WriteLine("Mængde af båd pladser tilbage:");
                             Console.WriteLine($"{member._boatLotsRented.Capacity}");
+                            Console.WriteLine("\nBrugere der har bådpladser og mængden::");
+                            foreach (Member memb in memberRepo.GetAll()) 
+                            {
+                                if (memb._boatLotsRented != null)
+                                {
+                                    Console.WriteLine($"ID: {memb.MemberID}, Navn: {memb.Name} har {memb._boatLotsRented} båd pladser.");
+                                }
+                            }
                             break;
                         case "5": //kan delete users og lave user
                             string firstChoice = Console.ReadLine();
@@ -323,9 +331,37 @@ namespace ConsoleMenu.Methods.Members
                 {
                     switch (theChoice)
                     {
-                        case "1":
+                        case "1": //CRUD admins - not done
 
                             break;
+                        case "2": //ændre formandskab - not done //brug id
+                            Console.WriteLine("Indtast den brugers id for at ændre formandskab:");
+                            int id = Convert.ToInt32(Console.ReadLine());
+                            if (id == member.MemberID)
+                            {
+                                Console.WriteLine("Er du sikker på at du ville skifte formandskab?");
+                                string confirmation = Console.ReadLine();
+                                if(confirmation == "ja")
+                                {
+                                    if(member.Role == RoleEnum.Chairman) //rollen formandskab bliver fjernet for den nuværende formand
+                                    {
+                                        member.Role = RoleEnum.Member;
+                                    }
+                                    if (id == member.MemberID) //rollen bliver tildelt til en ny formand ud fra id
+                                    {
+                                        member.Role = RoleEnum.Chairman;
+                                    }
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                Console.WriteLine("Brugeren findes ikke, prøv igen.");
+                            }
+                                break;
                     }
                     theChoice = ReadChoice(readChoices);
                 }
