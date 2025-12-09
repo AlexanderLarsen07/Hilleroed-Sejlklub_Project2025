@@ -83,23 +83,12 @@ namespace ConsoleMenu.Menu
                             {
                                 case "1":
                                     {
-                                        //string guestEventChoices = ReadChoice(GuestEventChoices);
-                                        //while (guestEventChoices != "q")
-                                        //{
                                             eventMenu.EventMenu(GuestEventChoices, null, _eventRepo, _signupRepo);
-                                        //guestMenuChoices = ReadChoice(GuestEventChoices);
-                                        //}
                                     }
-                                    //theChoice = ReadChoice(GuestEventChoices); //slet 99%
                                     break;
                                 case "2":
                                     {
-                                        string guestMemberChoices = ReadChoice(GuestMemberChoices);
-                                        //while (guestMemberChoices != "q")
-                                        //{
-                                            memberMenu.Roles(null, guestMemberChoices, _memberRepo);
-                                            //guestMemberChoices = ReadChoice(GuestMemberChoices);
-                                        //}
+                                            memberMenu.Roles(null, GuestMemberChoices, _memberRepo);
                                     }
                                     break;
                             }
@@ -149,15 +138,11 @@ namespace ConsoleMenu.Menu
                                                 {
                                                     case "1":
                                                         {
-                                                            string memberEventChoices = ReadChoice(MemberEventChoices);
-                                                            while (memberEventChoices != "q")
-                                                            {
-                                                                eventMenu.EventMenu(memberEventChoices, member, _eventRepo, _signupRepo);
-                                                                memberEventChoices = ReadChoice(memberEventChoices);
-                                                            }
+                                                                eventMenu.EventMenu(MemberEventChoices, member, _eventRepo, _signupRepo);
                                                         }
                                                         break;
                                                 }
+                                                memberMenuChoices = ReadChoice(MemberMenuChoices);
                                             }
                                         }
                                         else if (member.Role == RoleEnum.Administrator)

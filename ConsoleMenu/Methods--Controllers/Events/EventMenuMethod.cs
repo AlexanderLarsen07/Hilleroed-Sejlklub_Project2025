@@ -55,7 +55,6 @@ namespace ConsoleMenu.Controllers.Events
                             break;
                     }
                     theChoice = ReadChoice(theChoices);
-                    //break;
                 }
 
                 else if (member.Role == RoleEnum.Member)
@@ -180,31 +179,31 @@ namespace ConsoleMenu.Controllers.Events
                             }
                             break;
                     }
-                    theChoice = ReadChoice(theChoice);
+                    theChoice = ReadChoice(theChoices);
                 }
 
                 else if (member.Role == RoleEnum.Administrator)
                 {
                     //ny userchoice for Admin
-                    switch (theChoice + member)
+                    switch (theChoice)
                     {
                         case "1":
                             
                             break;
                     }
-                    theChoice = ReadChoice(theChoice);
+                    theChoice = ReadChoice(theChoices);
                 }
 
                 else if (member.Role == RoleEnum.Chairman)
                 {
                     //ny userchoice for chairman
-                    switch (theChoice + member)
+                    switch (theChoice)
                     {
                         case "1":
 
                             break;
                     }
-                    theChoice = ReadChoice(theChoice);
+                    theChoice = ReadChoice(theChoices);
                 }
             }
         }
