@@ -259,6 +259,9 @@ namespace ConsoleMenu.Methods.Members
                             Console.WriteLine($"There are {member._members.Count.CompareTo(RoleEnum.Member)} users in total that has the Member Role ");
                             Console.WriteLine($"There are {member._members.Count.CompareTo(RoleEnum.Administrator)} users in total that has the Admin Role ");
                             Console.WriteLine($"There are {member._members.Count.CompareTo(RoleEnum.Chairman)} users in total that has the Chairman Role ");
+                            Console.WriteLine("------------------------------------------");
+                            Console.WriteLine("Amount of BoatLots left:");
+                            Console.WriteLine($"{member._boatLotsRented.Capacity}");
                             break;
                         case "5": //kan delete users og lave user
                             string firstChoice = Console.ReadLine();
