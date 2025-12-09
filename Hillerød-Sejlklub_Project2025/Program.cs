@@ -55,7 +55,28 @@ DateTime end2 = new DateTime(2025, 12, 3, 12, 0, 0);
 Member member2 = new Member("Thomas", 40, MembershipEnum.Medlem, "Thomas@gmail", "password12345", "22222222");
 Boat boat2 = new Boat("555555555", "TheBoat", "description", BoatTypeEnum.To_mandsjolle, ModelEnum.Optimistjolle, 2, 200, 50, 60, 2007, null);
 Booking booking2 = new Booking("Roskilde", start2, end2, member2, boat2);
-booking2.AddMember(member1);
+Member member3 = new Member("peter", 20, MembershipEnum.Medlem, "Peter@gmail.com", "password123", "12345678");
+Console.WriteLine("----------------------------------------exception test start----------------------------------------------------");
+try
+{
+    booking2.AddMember(member1);
+    Console.WriteLine(booking1);
+} 
+catch (Exception ex)
+{
+    Console.WriteLine(ex.Message);
+}
+Console.WriteLine("----------------------------------------expection (already exist)----------------------------------------------------");
+try
+{
+    booking2.AddMember(member3);
+    Console.WriteLine(booking1);
+}
+catch (Exception ex)
+{
+    Console.WriteLine(ex.Message);
+}
+Console.WriteLine("----------------------------------------expection end----------------------------------------------------");
 Console.WriteLine(booking2);
 Console.WriteLine();
 Console.WriteLine("---------------------------Booking Test End-----------------------------");
@@ -81,7 +102,9 @@ Console.WriteLine(boatOnList);
 boatRepo.AddBoat(boat2);
 Console.WriteLine("-----------------------------Test boat methods end---------------------------------------------");
 Console.WriteLine();
+
 Console.WriteLine("--------------------------------------------Repair methods test start---------------------------------------------");
+
 Console.WriteLine("-----------------------------------------GetAll test----------------------------------------------------");
 RepairRepo repairRepo = new RepairRepo();
 Repair repair1 = new Repair(1, "masten er ødelagt", boat1, false, true);
