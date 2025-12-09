@@ -237,9 +237,11 @@ namespace ConsoleMenu.Methods.Members
                                 }
                             }
                             break;
-                        case "3": //sortere boatlots (sorterings algoritmer)
+                        case "3": //sortere boatlots (sorterings algoritmer)    -   not done
+
                             break;
-                        case "4": //simple statistikker
+                        case "4": //simple statistikker     -   not done
+
                             break;
                         case "5": //kan delete users og lave user
                             string firstChoice = Console.ReadLine();
@@ -297,7 +299,7 @@ namespace ConsoleMenu.Methods.Members
                     }
                     theChoice = ReadChoice(readChoices);
                 }
-                else if (member.Role == RoleEnum.Chairman) //skal alt admins kan, CRUD admins, ændre formandskab (confirmation button)
+                else if (member.Role == RoleEnum.Chairman) //skal alt admins kan, CRUD admins, ændre formandskab (confirmation button) - not done
                 {
                     switch (theChoice)
                     {
