@@ -72,29 +72,36 @@ namespace ConsoleMenu.Controllers.Events
                                 bool isFalse = true;
                                 while (isFalse)
                                 {
-                                    for (int i = 0; i <= events.Count; i++)
+                                    if (events.Count <= 0)
                                     {
-                                        Console.WriteLine(events[i]);
-
-                                        Console.WriteLine("press \"y\" to signup to event. Press \"n\" if Wrong event. Press \"q\" to cancel signing up.");
-
-                                        string choice = Console.ReadLine();
-
-                                        if (choice == "q".ToLower() || choice == "q".ToUpper())
+                                        Console.WriteLine("No event with the given name was found.");
+                                    }
+                                    else
+                                    {
+                                        for (int i = 0; i <= events.Count; i++)
                                         {
-                                            isFalse = false;
-                                        }
-                                        else if (choice == "y".ToLower() || choice == "y".ToUpper())
-                                        {
-                                            Console.WriteLine("Make your comment");
-                                            string comment = Console.ReadLine();
-                                            Signup theSignup = new Signup(events[i], member, comment);
-                                            Console.WriteLine($"Succesfully signed up to {events[i].Title}");
-                                            Console.ReadLine();
-                                        }
-                                        else if (choice == "n".ToLower() || choice == "n".ToUpper())
-                                        {
-                                            continue;
+                                            Console.WriteLine(events[i]);
+
+                                            Console.WriteLine("press \"y\" to signup to event. Press \"n\" if Wrong event. Press \"q\" to cancel signing up.");
+
+                                            string choice = Console.ReadLine();
+
+                                            if (choice == "q".ToLower() || choice == "q".ToUpper())
+                                            {
+                                                isFalse = false;
+                                            }
+                                            else if (choice == "y".ToLower() || choice == "y".ToUpper())
+                                            {
+                                                Console.WriteLine("Make your comment");
+                                                string comment = Console.ReadLine();
+                                                Signup theSignup = new Signup(events[i], member, comment);
+                                                Console.WriteLine($"Succesfully signed up to {events[i].Title}");
+                                                Console.ReadLine();
+                                            }
+                                            else if (choice == "n".ToLower() || choice == "n".ToUpper())
+                                            {
+                                                continue;
+                                            }
                                         }
                                     }
                                     isFalse = true;
