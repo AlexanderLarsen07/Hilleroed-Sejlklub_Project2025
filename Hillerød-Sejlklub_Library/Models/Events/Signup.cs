@@ -39,7 +39,7 @@ namespace Hillerød_Sejlklub_Library.Models.Events
         #region Methods
         public override string ToString()
         {
-            return $"\tMember : {Member.Name}" +
+            return $"\tMember : {Member.Name} : MemberID : {Member.MemberID} " +
                 $"\n\tEvent : {Event.Title}\n\t" +
                 $"Signed up : {_dateOfSignup}\n\t" +
                 $"Comment : {Comment}";

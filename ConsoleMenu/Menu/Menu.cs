@@ -53,7 +53,6 @@ namespace ConsoleMenu.Menu
         private EventMenuMethod eventMenu = new EventMenuMethod();
         private MemberMenu memberMenu = new MemberMenu();
 
-        private IMemberRepo iMemberRepo;
 
         private static string ReadChoice(string choices)
         {
@@ -89,7 +88,7 @@ namespace ConsoleMenu.Menu
                                     break;
                                 case "2":
                                     {
-                                        memberMenu.Roles(GuestMemberChoices, null, _memberRepo, _boatLotRepo, iMemberRepo);
+                                        memberMenu.Roles(GuestMemberChoices, null, _memberRepo, _boatLotRepo);
                                     }
                                     break;
                             }
