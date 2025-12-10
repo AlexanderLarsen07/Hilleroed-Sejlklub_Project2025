@@ -15,12 +15,12 @@ namespace ConsoleMenu.Methods__Controllers.Boats
         IBoatRepo _boat;
         public Boat TheBoat { get; set; }
 
-        public AddBoatController(string sailNumber, string name, string description, BoatTypeEnum boatType, ModelEnum theModel, int maxPassengers, int lenght, int width, int draft, int yearBuilt, MotorInfo motor, IBoatRepo theBoat)
+        public AddBoatController(string sailNumber, string name, string description, BoatTypeEnum boatType, ModelEnum theModel, int maxPassengers, int lenght, int width, int draft, int yearBuilt, MotorInfo? motor, IBoatRepo boatRepo)
         {
             TheBoat = new Boat(sailNumber, name, description, boatType, theModel, maxPassengers, lenght, width, draft, yearBuilt, motor);
-            _boat = theBoat;
+            _boat = boatRepo;
         }
-        public void Add()
+        public void AddTheCreatedBoat()
         {
             _boat.AddBoat(TheBoat);
         }
