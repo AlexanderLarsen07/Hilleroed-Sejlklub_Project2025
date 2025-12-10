@@ -35,7 +35,7 @@ namespace ConsoleMenu.Methods.Members
             return choice.ToLower();
         }
 
-        public void Roles(string readChoices, Member? member, MemberRepo memberRepo, BoatLotRepo boatLotRepo, IMemberRepo iMemberRepo)
+        public void Roles(string readChoices, Member? member, MemberRepo memberRepo, BoatLotRepo boatLotRepo)
         {
             string theChoice = ReadChoice(readChoices);
             while (theChoice != "q")
