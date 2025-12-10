@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Hillerød_Sejlklub_Library.Models.Boats
 {
     public class InheritanceMotorExample : Boat
-    {
+    {                 // hvis man bruger den her kunne MotorInfo klassen slettes.
         public FuelTypeEnum FuelType { get; private set; }
 
         public BrandEnum Brand { get; private set; }
@@ -15,7 +15,6 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
         public int HP { get; private set; }
 
         public int Weight { get; private set; }
-
 
         public InheritanceMotorExample(string sailNumber, string name, string description, BoatTypeEnum boatType, ModelEnum theModel, int maxPassengers,
             int lenght, int width, int draft, int yearBuilt, MotorInfo motorInfo, FuelTypeEnum fuelType, BrandEnum brand, int hp, int weight) : base

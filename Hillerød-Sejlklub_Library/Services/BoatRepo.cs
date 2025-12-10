@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Hillerød_Sejlklub_Library.Services
 {
-    public class BoatRepo : IBoat
+    public class BoatRepo : IBoatRepo
     {
         
         private List<Boat> _boat;
@@ -70,6 +70,16 @@ namespace Hillerød_Sejlklub_Library.Services
             {
                 Console.WriteLine($"{boatOnList}");
             }
-        } 
+        }
+        public void PrintBoatInfoToGuest()
+        {
+            foreach(Boat boatOnList in _boat)
+            {
+                Console.WriteLine($"Name: {boatOnList.Name}\n" +
+                    $"The model: {boatOnList.TheModel}" +
+                    $"Boat type: {boatOnList.BoatType}\n" +
+                    $"Description: {boatOnList.Description}");
+            }
+        }
     }
 }
