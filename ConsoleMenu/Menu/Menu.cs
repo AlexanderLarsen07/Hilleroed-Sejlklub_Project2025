@@ -1,6 +1,5 @@
 ﻿using ConsoleMenu.Controllers.Events;
 using ConsoleMenu.Methods.Members;
-using Hillerød_Sejlklub_Library;
 using Hillerød_Sejlklub_Library.Interfaces;
 using Hillerød_Sejlklub_Library.Models.Blogs;
 using Hillerød_Sejlklub_Library.Models.Events;
@@ -54,7 +53,6 @@ namespace ConsoleMenu.Menu
         private EventMenuMethod eventMenu = new EventMenuMethod();
         private MemberMenu memberMenu = new MemberMenu();
 
-        private IMemberRepo iMemberRepo;
 
         private static string ReadChoice(string choices)
         {
@@ -90,7 +88,7 @@ namespace ConsoleMenu.Menu
                                     break;
                                 case "2":
                                     {
-                                        memberMenu.Roles(GuestMemberChoices, null, _memberRepo, _boatLotRepo, iMemberRepo);
+                                        memberMenu.Roles(GuestMemberChoices, null, _memberRepo, _boatLotRepo);
                                     }
                                     break;
                             }
@@ -127,7 +125,7 @@ namespace ConsoleMenu.Menu
                                         Console.Clear();
                                         Console.WriteLine("Wrong password.");
                                     }
-                                    else if (member.Password == password)
+                                    else
                                     {
                                         Console.WriteLine($"Welcome {member.Name}");
                                         if (member.Role == RoleEnum.Member)

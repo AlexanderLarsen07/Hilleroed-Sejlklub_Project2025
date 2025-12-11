@@ -19,7 +19,7 @@ namespace ConsoleMenu.Methods.Events
             Event = new Event(maxMembers, title, date, description);
             _eventRepo = eventRepo;
         }
-        public void AddMember()
+        public void AddEvent()
         {
             _eventRepo.AddEvent(Event);
         }
