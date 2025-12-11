@@ -198,10 +198,10 @@ namespace ConsoleMenu.Methods.Members
                             Console.WriteLine("Familie member: 400 kr. = 1 boat lot");
                             Console.WriteLine("Senior  member: 400 kr. = 1 boat lot");
                             Console.WriteLine("Junior  member: 200 kr. = 1 boat lot");
-                            int nummerOfBoatLotsRented = Convert.ToInt32(Console.ReadLine());
-                            if (nummerOfBoatLotsRented > 0)
+                            int numberOfBoatLotsRented = Convert.ToInt32(Console.ReadLine());
+                            if (numberOfBoatLotsRented > 0)
                             {
-                                for (int i = 0; i < boatLotsRented; i++)
+                                for (int i = 0; i < numberOfBoatLotsRented; i++)
                                 {
                                     BoatLot bl = new BoatLot(20, 20);
                                     member._boatLotsRented.Add(bl);
@@ -209,10 +209,9 @@ namespace ConsoleMenu.Methods.Members
                                 }
                             }
                         break;
-                                member._boatLotsRented = nummerOfBoatLotsRented; //not done
+                                
                             }
-                            break;
-                    }
+                    break;
                     theChoice = ReadChoice(readChoices);
                 }
                 else if (member.Role == RoleEnum.Administrator) //skal kunne alt membersne kan, skal kunne view alle members og en bestemt valgt member, sortere boatlots (sorterings algoritmer), simple statistikker, kan delete users og lave user
