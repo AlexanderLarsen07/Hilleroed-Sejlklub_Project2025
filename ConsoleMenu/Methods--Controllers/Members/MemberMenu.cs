@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
@@ -38,8 +39,9 @@ namespace ConsoleMenu.Methods.Members
         public void Roles(string readChoices, Member? member, MemberRepo memberRepo, BoatLotRepo boatLotRepo)
         {
             string theChoice = ReadChoice(readChoices);
-            while (theChoice != "q")
+            while (theChoice != "q") 
             {
+                #region extra
                 //if (member == null)
                 //{
                 //    switch (theChoice)
@@ -97,6 +99,7 @@ namespace ConsoleMenu.Methods.Members
                 //    }
                 //    theChoice = ReadChoice(readChoices);
                 //}
+                #endregion
                 #region Members with role Member
                 if (member.Role == RoleEnum.Member) //skal kunne kigge på Membership oplysninger, redigere deres konto, tilføje boatlots
                 {
