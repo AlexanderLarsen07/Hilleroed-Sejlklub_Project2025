@@ -406,46 +406,48 @@ namespace ConsoleMenu.Methods__Controllers.Blogs
                             {
                                 blogRepo.PrintAllBlog(); //have alt det her i en metode i blogRepo og kald på den her, return type kan være Blog?
                                 Console.WriteLine("1. search for blog by title, \"q\" to quit ");
-                                string headLine = Console.ReadLine(); //herfra og til cw("1. "); skal det være i en metode for sig selv i BlogRepo? søg efter blog via headline?
-                                List<Blog> blog = blogRepo.ReturnBlogHeadline(headLine);
-                                Console.WriteLine(blog[0]);
-                                Console.WriteLine("1. ");
-                               
-                              //  while (isFalse)
-                              //  {
-                                
-                                string choice = Console.ReadLine(); //hvad man kan gøre med en objekt af blog eller comment //have en while loop? quit måske?
-                                if (choice == "1")
-                                {
-                                    //søg efter en blog
-                                }
-                                else if(choice == "2")
-                                {
-                                    //kommenter
-                                }
-                                else if(choice == "3")
-                                {
-                                    //rediger kommenter
-                                    commentRepo.EditComment(, choice); //comment reference til at finde den comment man vil rediger?
-                                }
-                                else if (choice == "4")
-                                {
-                                    //slet kommentar
-                                }
+                              
 
+                                
+
+                                     string choice = Console.ReadLine(); //hvad man kan gøre med en objekt af blog eller comment //have en while loop? quit måske?
+                                if (choice == "1") //søg efter en blog
+                                {
+                                    Console.WriteLine("Search for headline");
+                                    string headLine = Console.ReadLine(); //herfra og til cw("1. "); skal det være i en metode for sig selv i BlogRepo? søg efter blog via headline?
+                                    List<Blog> blog = blogRepo.ReturnBlogHeadline(headLine);
+                                    Console.WriteLine(blog[0]);
+
+                                    bool isFalse = true;
+                                    while (isFalse)
+                                    {
+                                        if (blog.Count == 1) //kommenter
+                                        {
+                                            Console.WriteLine("Make your comment");
+                                            string comment = Console.ReadLine();
+                                            Comment theComment = new Comment(comment, memberType, blog[0]);
+                                            Console.WriteLine($"Comment made to the blog {blog[0].Headline}");
+                                        }
+                                        else if (blog.Count == 2)
+                                        {
+                                            //rediger kommenter
+                                            //commentRepo.EditComment(); //comment reference til at finde den comment man vil rediger?
+                                        }
+                                        else if (choice == "3")
+                                        {
+                                            //slet kommentar
+                                        }
+                                    }
                                     Console.WriteLine("press any key to comment.");
 
-                                    
+
 
                                     //if (choice == "q".ToLower() || choice == "q".ToUpper())
                                     //{
                                     //    isFalse = false;
                                     //}
-                                    Console.WriteLine("Make your comment");
-                                    string comment = Console.ReadLine();
-                                    Comment theComment = new Comment(comment, memberType, blog[0]);
-                                    Console.WriteLine($"Comment made to the blog {blog[0].Headline}");
-                               // }
+                                    
+                                }
                             }
                             break;
 
