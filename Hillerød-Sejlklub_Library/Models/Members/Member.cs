@@ -39,6 +39,7 @@ namespace Hillerød_Sejlklub_Library.Models.Members
             _members = new Dictionary<int, MemberRepo>();
             //make new List of BoatLotsRented
             boatLotsRented = new List<BoatLot>();
+            boatLotsRented.Capacity = 20;
             CalculateInitialMembershipFee();
             MembershipType();
             Role = RoleEnum.Member;

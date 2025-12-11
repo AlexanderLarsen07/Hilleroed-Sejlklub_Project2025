@@ -2,6 +2,7 @@
 using Hillerød_Sejlklub_Library.Models.Members;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -60,6 +61,17 @@ namespace Hillerød_Sejlklub_Library.Services
                 }
             }
         }
+
+        //adds a BoatLot to the member
+        public void addBoatLotToMember(BoatLot b, Member member)
+        {
+            if(b.IsRented == false)
+            {
+                member._boatLotsRented.Add(b);
+                b.IsRented = true;
+            }
+        }
+
         //return customer that contains the id
         public Member GetCustomerById(int id)
         {

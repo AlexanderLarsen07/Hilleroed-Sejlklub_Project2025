@@ -3,9 +3,11 @@ using Hillerød_Sejlklub_Library.Models.Members;
 using Hillerød_Sejlklub_Library.Services;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.Linq;
 using System.Reflection;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
@@ -38,8 +40,9 @@ namespace ConsoleMenu.Methods.Members
         public void Roles(string readChoices, Member? member, MemberRepo memberRepo, BoatLotRepo boatLotRepo)
         {
             string theChoice = ReadChoice(readChoices);
-            while (theChoice != "q")
+            while (theChoice != "q") 
             {
+                #region extra
                 if (member == null)
                 {
                     switch (theChoice)
@@ -93,11 +96,13 @@ namespace ConsoleMenu.Methods.Members
 
                                 //    break;
                             }
-                        break;
+                            break;
                     }
                     theChoice = ReadChoice(readChoices);
                 }
-                else if (member.Role == RoleEnum.Member) //skal kunne kigge på Membership oplysninger, redigere deres konto, tilføje boatlots
+                #endregion
+                #region Members with role Member
+                if (member.Role == RoleEnum.Member) //skal kunne kigge på Membership oplysninger, redigere deres konto, tilføje boatlots
                 {
                     switch (theChoice)
                     {
@@ -164,8 +169,8 @@ namespace ConsoleMenu.Methods.Members
                                 else if (choice == "4") // Mail
                                 {
                                     Console.WriteLine("Indtast nyt Mail:");
-                                    string mail = Console.ReadLine();
-                                    if (mail != member.Mail || mail.Contains("@gmail") || mail.Contains("@yahoo") || mail.Contains("@hotmail") || mail.Contains("@outlook") || mail.Contains("@office365"))
+                                    string mail = Console.ReadLine().Trim();
+                                    if (!memberRepo.EmailCheckExist(mail) &&  mail != member.Mail && mail.Contains("@"+".") && !mail.Contains("@.") && !mail.Contains(".@"))
                                     {
                                         member.Mail = mail;
                                     }
@@ -203,7 +208,7 @@ namespace ConsoleMenu.Methods.Members
                             {
                                 for (int i = 0; i < numberOfBoatLotsRented; i++)
                                 {
-                                    BoatLot bl = new BoatLot(20, 20);
+                                    BoatLot bl = new BoatLot(20, 20); //ændre dette senere til at man selv kan tilføje 
                                     member._boatLotsRented.Add(bl);
                                     //member._boatLotsRented.Add() = boatLotsRented;
                                 }
@@ -211,8 +216,9 @@ namespace ConsoleMenu.Methods.Members
                         break;    
                         }
                     theChoice = ReadChoice(readChoices);
-                    
                 }
+                #endregion
+                #region Members with role Admin
                 else if (member.Role == RoleEnum.Administrator) //skal kunne alt membersne kan, skal kunne view alle members og en bestemt valgt member, sortere boatlots (sorterings algoritmer), simple statistikker, kan delete users og lave user
                 {
                     switch (theChoice)
@@ -257,7 +263,7 @@ namespace ConsoleMenu.Methods.Members
                         case "4": //simple statistikker     -   not done
                             Console.WriteLine("Brugere i alt:");
                             Console.WriteLine("------------------------------------------");
-                            Console.WriteLine($"Der er {member._members.Count} brugere i alt.");
+                            Console.WriteLine($"Der er {memberRepo.GetAll().Count} brugere i alt.");
                             Console.WriteLine($"Der er {member._members.Count.CompareTo(RoleEnum.Member)} brugere i alt der er member.");
                             Console.WriteLine($"Der er {member._members.Count.CompareTo(RoleEnum.Administrator)} brugere i alt der administrator.");
                             Console.WriteLine($"Der er {member._members.Count.CompareTo(RoleEnum.Chairman)} brugere i alt der er formand ");
@@ -267,7 +273,7 @@ namespace ConsoleMenu.Methods.Members
                             Console.WriteLine("\nBrugere der har bådpladser og mængden::");
                             foreach (Member memb in memberRepo.GetAll())
                             {
-                                if (memb._boatLotsRented != null)
+                                if (memberRepo.addBoatLotToMember != null)
                                 {
                                     Console.WriteLine($"ID: {memb.MemberID}, Navn: {memb.Name} har {memb._boatLotsRented} båd pladser.");
                                 }
@@ -430,7 +436,7 @@ namespace ConsoleMenu.Methods.Members
                             {
                                 for (int i = 0; i < boatLotsRented; i++)
                                 {
-                                    BoatLot bl = new BoatLot(20, 20);
+                                    BoatLot bl = new BoatLot(100, 100);
                                     member._boatLotsRented.Add(bl);
                                     //member._boatLotsRented.Add() = boatLotsRented;
                                 }
@@ -439,6 +445,8 @@ namespace ConsoleMenu.Methods.Members
                     }
                     theChoice = ReadChoice(readChoices);
                 }
+                #endregion
+                #region Members with role chairman
                 else if (member.Role == RoleEnum.Chairman) //skal alt admins kan, CRUD admins, ændre formandskab (confirmation button) - not done
                 {
                     switch (theChoice)
@@ -890,6 +898,7 @@ namespace ConsoleMenu.Methods.Members
                     }
                     theChoice = ReadChoice(readChoices);
                 }
+                #endregion
             }
         }
     }
