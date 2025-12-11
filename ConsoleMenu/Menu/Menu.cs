@@ -23,9 +23,9 @@ namespace ConsoleMenu.Menu
         // static strings for choices
         static string LoginChoices = " 1. Sign in as guest.\t\n 2. Sign in as Member. \t\n q. Exit.";
         static string GuestMenuChoices = " 1. Events.\t\n 2. Signup.\t\n q. Exit.";//Implement TODO.
-        static string MemberMenuChoices = " 1. Events. \t\n q. Exits."; //Implement TODO.
-        static string AdminMenuChoices = "";//Implement TODO.
-        static string ChairmanMenuChoices = "";//Implement TODO.
+        static string MemberMenuChoices = " 1. Events.\t\n 2. View your details\t\n 3. Edit your account\t\n 4. Add boat lots\t\n q. Exits.";
+        static string AdminMenuChoices = "1. View all members\t\n 2. Search for a specific member of their id\t\n 3. Boat lots\t\n 4.simple statistics\t\n 5. Delete a user or make a custom user\t\n 6. View your account\t\n 7. Edit details of your account\t\n 8. Add boat lots\t\n 9. Events. \t\n q. Exits.";
+        static string ChairmanMenuChoices = "1. Crud Admins\t\n 2. Change chairman\t\n 3. View all members\t\n 4. Search for a specific member of their id\t\n 5. Boat lots\t\n 6.simple statistics\t\n 7. Delete a user or make a custom user\t\n 8. View your account\t\n 9. Edit details of your account\t\n 10. Add boat lots\t\n 11. Events. \t\n q. Exits.";
         static string GuestEventChoices = " 1. View all events. \t\n 2. Search for events by date. \t\n q. Exit.";
         static string MemberEventChoices = " 1. Signup to event. \t\n 2. Edit a Comment on a signup. \t\n 3. Delete a signup. \t\n q. quit.";
         static string GuestMemberChoices = " 1. Signup. \t\n q. Quit.";
@@ -125,6 +125,7 @@ namespace ConsoleMenu.Menu
                                         Console.Clear();
                                         Console.WriteLine("Wrong password.");
                                     }
+
                                     else
                                     {
                                         Console.WriteLine($"Welcome {member.Name}");

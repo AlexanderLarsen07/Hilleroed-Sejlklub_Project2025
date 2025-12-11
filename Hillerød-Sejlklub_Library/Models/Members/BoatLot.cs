@@ -14,12 +14,14 @@ namespace Hillerød_Sejlklub_Library.Models.Members
         public int LotID { get { return _lotID; } private set { value = _lotID; } }
         public int Length { get; }
         public int Width { get; }
+        public bool IsRented { get; set; }
         public BoatLot(int length, int width)
         {
             _boatLots = new Dictionary<int, BoatLotRepo>();
             Length = length;
             Width = width;
             LotID = _lotID++;
+            IsRented = false;
         }
         public override string ToString() //implement those above
         {
