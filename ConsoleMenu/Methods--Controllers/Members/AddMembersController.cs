@@ -15,7 +15,7 @@ namespace Hillerød_Sejlklub_Library.Models.Members
         public Member Member { get; set; }
         public Member Administrator { get; set; }
 
-        public AddMembersController(string name, int age, MembershipEnum membershipEnum, string mail, string password, string phoneNumber, IMemberRepo memberRepo)
+        public AddMembersController(string name, int age, MembershipEnum membershipEnum, string mail, string password, string phoneNumber, MemberRepo memberRepo)
         {
             Member = new Member(name, age, membershipEnum, mail, password, phoneNumber);
             _memberRepo = memberRepo;

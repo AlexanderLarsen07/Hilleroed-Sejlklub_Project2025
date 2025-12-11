@@ -31,6 +31,7 @@ namespace ConsoleMenu.Controllers.Events
             string theChoice = ReadChoice(theChoices);
             while (theChoice != "q")
             {
+                #region GuestMenu
                 if (member == null)
                 {
                     switch (theChoice)
@@ -56,7 +57,8 @@ namespace ConsoleMenu.Controllers.Events
                     }
                     theChoice = ReadChoice(theChoices);
                 }
-
+                #endregion
+                #region MemberMenu
                 else if (member.Role == RoleEnum.Member)
                 {
                     switch (theChoice)
@@ -65,7 +67,7 @@ namespace ConsoleMenu.Controllers.Events
                         case "1":
                             {
                                 eventRepo.PrintAllEvents();
-                                Console.WriteLine("Choose event by writing its title. Press \"q\" to quit.");
+                                Console.WriteLine("Choose event by writing its title to sign up. Press \"q\" to quit.");
                                 string title = Console.ReadLine();
                                 List<Event> events = eventRepo.ReturnAllEventsByTitle(title);
                                 
@@ -188,7 +190,7 @@ namespace ConsoleMenu.Controllers.Events
                                 break;
                             }
                         case "3":
-                            {
+                            {//edit
                                 Console.WriteLine(signupRepo.ReturnAllByMember(member));
                                 Console.WriteLine("Choose the signup to edit by writing the events title");
                                 string title = Console.ReadLine();
@@ -203,7 +205,7 @@ namespace ConsoleMenu.Controllers.Events
                                 break;
                             }
                         case "4":
-                            {
+                            {//remove signup
                                 Console.WriteLine(signupRepo.ReturnAllByMember(member));
                                 Console.WriteLine("Choose signup to delete by writing the events title");
                                 string title = Console.ReadLine();
@@ -227,7 +229,8 @@ namespace ConsoleMenu.Controllers.Events
                     }
                     theChoice = ReadChoice(theChoices);
                 }
-
+                #endregion
+                #region AdminMenu
                 else if (member.Role == RoleEnum.Administrator ||member.Role == RoleEnum.Chairman)
                 {
                     //ny userchoice for Admin
@@ -523,6 +526,7 @@ namespace ConsoleMenu.Controllers.Events
                     }
                     theChoice = ReadChoice(theChoices);
                 }
+                #endregion
             }
         }
     }

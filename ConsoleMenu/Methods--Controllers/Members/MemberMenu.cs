@@ -75,7 +75,7 @@ namespace ConsoleMenu.Methods.Members
                                 Console.WriteLine("Indtast Telefon nummer");
                                 string phoneNumber = Console.ReadLine();
                                 AddMembersController newMember = new AddMembersController(name, age, isMembership, mail, password, phoneNumber, memberRepo);
-                                newMember.Member.Role = RoleEnum.Member;
+                                newMember.Member.Role = RoleEnum.Member;//bliver alleredee sat i constructor.
                                 newMember.AddMember();
                                 //case "2": //View bestyrelsesmedlemmer (print en liste af administratoren og Chairman)
                                 //    if (memberRole.Role == RoleEnum.Chairman || memberRole.Role == RoleEnum.Administrator)
@@ -894,3 +894,4 @@ namespace ConsoleMenu.Methods.Members
         }
     }
 }
+

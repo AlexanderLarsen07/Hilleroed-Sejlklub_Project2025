@@ -10,13 +10,14 @@ namespace Hillerød_Sejlklub_Library.Models.Members
 {
     public class Member
     {
+        private List<BoatLot> boatLotsRented;
         private static int _memberID;
         public string Name { get; set; }
         public int Age { get; set; }
         public int SubscriptionFee { get; set; }
         public RoleEnum Role { get; set; }
         public int MemberID { get; set; }
-        public List<BoatLot> _boatLotsRented { get { return _boatLotsRented; } private set { _boatLotsRented.Capacity = 20; } } //laves til en full property
+        public List<BoatLot> _boatLotsRented { get { return boatLotsRented; } private set { _boatLotsRented = boatLotsRented; } } //laves til en full property
         public string? Mail { get; set; } //needs to be unique
         public string Password { get; set; }
         public string PhoneNumber { get; set; }
@@ -37,7 +38,7 @@ namespace Hillerød_Sejlklub_Library.Models.Members
             //tilføj til MemberRepo
             _members = new Dictionary<int, MemberRepo>();
             //make new List of BoatLotsRented
-            _boatLotsRented = new List<BoatLot>();
+            boatLotsRented = new List<BoatLot>();
             CalculateInitialMembershipFee();
             MembershipType();
             Role = RoleEnum.Member;

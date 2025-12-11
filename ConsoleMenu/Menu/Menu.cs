@@ -1,5 +1,6 @@
 ﻿using ConsoleMenu.Controllers.Events;
 using ConsoleMenu.Methods.Members;
+using Hillerød_Sejlklub_Library.Data;
 using Hillerød_Sejlklub_Library.Interfaces;
 using Hillerød_Sejlklub_Library.Models.Blogs;
 using Hillerød_Sejlklub_Library.Models.Events;
@@ -22,13 +23,20 @@ namespace ConsoleMenu.Menu
     {
         // static strings for choices
         static string LoginChoices = " 1. Sign in as guest.\t\n 2. Sign in as Member. \t\n q. Exit.";
+        
         static string GuestMenuChoices = " 1. Events.\t\n 2. Signup.\t\n q. Exit.";//Implement TODO.
         static string MemberMenuChoices = " 1. Events. \t\n q. Exits."; //Implement TODO.
         static string AdminMenuChoices = "";//Implement TODO.
         static string ChairmanMenuChoices = "";//Implement TODO.
-        static string GuestEventChoices = " 1. View all events. \t\n 2. Search for events by date. \t\n q. Exit.";
-        static string MemberEventChoices = " 1. Signup to event. \t\n 2. Edit a Comment on a signup. \t\n 3. Delete a signup. \t\n q. quit.";
+
+        static string GuestEventChoices = " 1. View all events. \t\n 2. Search for events by date. \t\n q. Exit.";//DONE
+        static string MemberEventChoices = " 1. View all event. \t\n 2. Search for events by date. \t\n 3. Edit a Comment on a signup. \t\n 4. Delete a signup. \t\n q. quit.";//DONE
+        static string AdminEventChoices = " 1. View all event. \t\n 2. Search for events by date. \t\n 3. Edit a Comment on a signup. \t\n 4. Delete a signup. \t\n 5. Create new event. \t\n q. quit.";//Just use MemberEventChoices
+
         static string GuestMemberChoices = " 1. Signup. \t\n q. Quit.";
+        static string MemberMemberChoices = "";//TODO
+        static string AdminMemberChoices = "";//TODO
+        static string ChairmanMemberChoices = "";//TODO
 
         //Gæst - basal adgang til systemet, kan se blogindlæg,
         //både og generel info om klubben og oprette sig som medlem, kan ikke leje både og melde sig til events.
@@ -53,6 +61,11 @@ namespace ConsoleMenu.Menu
         private EventMenuMethod eventMenu = new EventMenuMethod();
         private MemberMenu memberMenu = new MemberMenu();
 
+
+        public void SetChairman(Member member) //slet
+        {
+            _memberRepo.AddMember(member);
+        }
 
         private static string ReadChoice(string choices)
         {
@@ -101,7 +114,7 @@ namespace ConsoleMenu.Menu
                         string mail = "";
                         string password = "";
                         bool validMail = false;
-                        while (!validMail)
+                        while (!validMail && mail != "q")
                         {
                             Console.WriteLine($"Enter Mail : ");
                             mail = Console.ReadLine();
@@ -115,7 +128,7 @@ namespace ConsoleMenu.Menu
                             {
                                 validMail = true;
                                 bool validPassword = false;
-                                while (!validPassword)
+                                while (!validPassword && password != "q")
                                 {
                                     Console.WriteLine($"Mail : {mail}");
                                     Console.WriteLine($"Enter Password : ");
@@ -132,6 +145,12 @@ namespace ConsoleMenu.Menu
                                         {
                                             Console.WriteLine($"Signed in as : {member.Role}");
                                             string memberMenuChoices = ReadChoice(MemberMenuChoices);
+                                            if(memberMenuChoices == "q")
+                                            {
+                                                mail = "q";
+                                                password = "q";
+                                                break;
+                                            }
                                             while (memberMenuChoices != "q")
                                             {
                                                 switch (memberMenuChoices)
@@ -148,12 +167,48 @@ namespace ConsoleMenu.Menu
                                         else if (member.Role == RoleEnum.Administrator)
                                         {
                                             Console.WriteLine($"Signed in as : {member.Role}");
-                                            //select adminMenu string
+                                            string memberMenuChoices = ReadChoice(MemberMenuChoices);
+                                            if (memberMenuChoices == "q")
+                                            {
+                                                mail = "q";
+                                                password = "q";
+                                                break;
+                                            }
+                                            while (memberMenuChoices != "q")
+                                            {
+                                                switch (memberMenuChoices)
+                                                {
+                                                    case "1":
+                                                        {
+                                                            eventMenu.EventMenu(MemberEventChoices, member, _eventRepo, _signupRepo);
+                                                        }
+                                                        break;
+                                                }
+                                                memberMenuChoices = ReadChoice(MemberMenuChoices);
+                                            }
                                         }
                                         else if (member.Role == RoleEnum.Chairman)
                                         {
                                             Console.WriteLine($"Signed in as : {member.Role}");
-                                            //select chairmanMenu string
+                                            string memberMenuChoices = ReadChoice(AdminEventChoices);
+                                            if (memberMenuChoices == "q")
+                                            {
+                                                mail = "q";
+                                                password = "q";
+                                                break;
+                                            }
+                                            while (memberMenuChoices != "q")
+                                            {
+                                                switch (memberMenuChoices)
+                                                {
+                                                    case "1":
+                                                        {
+                                                            eventMenu.EventMenu(AdminEventChoices, member, _eventRepo, _signupRepo);
+                                                        }
+                                                        break;
+                                                }
+                                                memberMenuChoices = ReadChoice(AdminEventChoices);
+                                            }
                                         }
                                     }
                                 }
