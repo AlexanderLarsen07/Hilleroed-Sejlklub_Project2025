@@ -197,10 +197,10 @@ namespace ConsoleMenu.Methods.Members
                             Console.WriteLine("Familie member: 400 kr. = 1 boat lot");
                             Console.WriteLine("Senior  member: 400 kr. = 1 boat lot");
                             Console.WriteLine("Junior  member: 200 kr. = 1 boat lot");
-                            int boatLotsRented = Convert.ToInt32(Console.ReadLine());
-                            if (boatLotsRented < 0)
+                            int nummerOfBoatLotsRented = Convert.ToInt32(Console.ReadLine());
+                            if (nummerOfBoatLotsRented > 0)
                             {
-                                //member._boatLotsRented = boatLotsRented; //not done
+                                member._boatLotsRented = nummerOfBoatLotsRented; //not done
                             }
                             break;
                     }
