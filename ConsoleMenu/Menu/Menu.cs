@@ -88,7 +88,7 @@ namespace ConsoleMenu.Menu
                                     break;
                                 case "2":
                                     {
-                                        memberMenu.Roles(GuestMemberChoices, null, _memberRepo, _boatLotRepo);
+                                        memberMenu.Roles(GuestMemberChoices, null, _memberRepo, _boatLotRepo); //MemberMenu
                                     }
                                     break;
                             }
