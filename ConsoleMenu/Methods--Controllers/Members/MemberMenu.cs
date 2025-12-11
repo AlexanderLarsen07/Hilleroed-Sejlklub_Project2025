@@ -208,11 +208,10 @@ namespace ConsoleMenu.Methods.Members
                                     //member._boatLotsRented.Add() = boatLotsRented;
                                 }
                             }
-                        break;
-                                
-                            }
-                    break;
+                        break;    
+                        }
                     theChoice = ReadChoice(readChoices);
+                    
                 }
                 else if (member.Role == RoleEnum.Administrator) //skal kunne alt membersne kan, skal kunne view alle members og en bestemt valgt member, sortere boatlots (sorterings algoritmer), simple statistikker, kan delete users og lave user
                 {
