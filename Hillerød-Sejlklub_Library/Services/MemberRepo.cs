@@ -1,4 +1,5 @@
-﻿using Hillerød_Sejlklub_Library.Interfaces;
+﻿using Hillerød_Sejlklub_Library.Data;
+using Hillerød_Sejlklub_Library.Interfaces;
 using Hillerød_Sejlklub_Library.Models.Members;
 using System;
 using System.Collections.Generic;
