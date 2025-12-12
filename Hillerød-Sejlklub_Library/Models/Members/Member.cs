@@ -34,7 +34,7 @@ namespace Hillerød_Sejlklub_Library.Models.Members
             PhoneNumber = phoneNumber;
             Age = age;
             //Increment ID
-            MemberID = _memberID;
+            MemberID = _memberID++;
             //tilføj til MemberRepo
             _members = new Dictionary<int, MemberRepo>();
             //make new List of BoatLotsRented
