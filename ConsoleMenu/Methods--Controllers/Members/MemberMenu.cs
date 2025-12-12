@@ -17,15 +17,6 @@ namespace ConsoleMenu.Methods.Members
 {
     public class MemberMenu
     {
-        //switch case af valgmuligheder
-        //Mulighed 1:
-        //
-        //1. Sign up as Member
-        //2. Sign in as Member
-        //3. Exit
-        //
-        //Mulighed2.
-
         private static string ReadChoice(string choices)
         {
             Console.Write("\x1b[2J"); // Clear screen
@@ -42,65 +33,6 @@ namespace ConsoleMenu.Methods.Members
             string theChoice = ReadChoice(readChoices);
             while (theChoice != "q") 
             {
-                #region extra
-                //if (member == null)
-                //{
-                //    switch (theChoice)
-                //    {
-                //        case "1": //SignUP
-                //            {
-                //                Console.WriteLine("Indtast Navn");
-                //                string name = Console.ReadLine();
-                //                Console.WriteLine("Indtast Alder");
-                //                int age = Convert.ToInt32(Console.ReadLine());
-                //                Console.WriteLine("Indtast hvilken Membership som du ønsker");
-                //                Console.WriteLine("1 = Familie Medlem");
-                //                Console.WriteLine("2 = Medlem");
-                //                //Console.WriteLine("3 = Passive Medlem");
-                //                string membership = Console.ReadLine();
-                //                MembershipEnum isMembership = new();
-                //                if (membership == "1")
-                //                {
-                //                    isMembership = MembershipEnum.FamilieMedlem;
-                //                }
-                //                else if (membership == "2")
-                //                {
-                //                    isMembership = MembershipEnum.Medlem;
-                //                }
-                //                //else if (membership == "3")
-                //                //{
-                //                //    isMembership = MembershipEnum.PassiveMedlem;
-                //                //}
-                //                Console.WriteLine("Indtast din Mail");
-                //                string mail = Console.ReadLine();
-                //                Console.WriteLine("Indtast Passwordet");
-                //                string password = Console.ReadLine();
-                //                Console.WriteLine("Indtast Telefon nummer");
-                //                string phoneNumber = Console.ReadLine();
-                //                AddMembersController newMember = new AddMembersController(name, age, isMembership, mail, password, phoneNumber, memberRepo);
-                //                newMember.Member.Role = RoleEnum.Member;//bliver alleredee sat i constructor.
-                //                newMember.AddMember();
-                //                //case "2": //View bestyrelsesmedlemmer (print en liste af administratoren og Chairman)
-                //                //    if (memberRole.Role == RoleEnum.Chairman || memberRole.Role == RoleEnum.Administrator)
-                //                //    {
-                //                //        Console.WriteLine(member);
-                //                //    }
-                //                //    break;
-                //                //case "2": //View Events (Alexander)
-
-                //                //    break;
-                //                //case "3": //View blogs/comments (Sinan)
-
-                //                //    break;
-                //                //case "4": //View Boat (Aksel)
-
-                //                //    break;
-                //            }
-                //            break;
-                //    }
-                //    theChoice = ReadChoice(readChoices);
-                //}
-                #endregion
                 #region Members with role Member
                 if (member.Role == RoleEnum.Member) //skal kunne kigge på Membership oplysninger, redigere deres konto, tilføje boatlots
                 {
@@ -456,6 +388,11 @@ namespace ConsoleMenu.Methods.Members
                     switch (theChoice)
                     {
                         case "1": //CRUD admins - not done
+                            Console.WriteLine("Input Which Crud method u want to do:");
+                            Console.WriteLine("1. (C) Create admin");
+                            Console.WriteLine("2. (R) Read   admin");
+                            Console.WriteLine("3. (U) Update admin");
+                            Console.WriteLine("4. (D) Delete admin");
                             string theFirstChoice = Console.ReadLine();
                             if (theFirstChoice == "1") //Create admin
                             {

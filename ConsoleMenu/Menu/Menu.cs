@@ -1,5 +1,6 @@
 ﻿using ConsoleMenu.Controllers.Events;
 using ConsoleMenu.Methods.Members;
+using Hillerød_Sejlklub_Library.Interfaces;
 using Hillerød_Sejlklub_Library.Models.Events;
 using Hillerød_Sejlklub_Library.Models.Members;
 using Hillerød_Sejlklub_Library.Services;
@@ -190,7 +191,7 @@ namespace ConsoleMenu.Menu
                                         else if (member.Role == RoleEnum.Chairman)
                                         {
                                             Console.WriteLine($"Signed in as : {member.Role}");
-                                            string memberMenuChoices = ReadChoice(MemberEventChoices);
+                                            string memberMenuChoices = ReadChoice(MemberMenuChoices);
                                             if (memberMenuChoices == "q")
                                             {
                                                 mail = "q";
@@ -204,6 +205,11 @@ namespace ConsoleMenu.Menu
                                                     case "1":
                                                         {
                                                             eventMenu.EventMenu(AdminEventChoices, member, _eventRepo, _signupRepo);
+                                                        }
+                                                        break;
+                                                    case "2":
+                                                        {
+                                                            memberMenu.Roles(ChairmanMemberChoices, member, _memberRepo, _boatLotRepo);
                                                         }
                                                         break;
                                                 }
