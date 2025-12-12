@@ -117,7 +117,7 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
                 }
                 
             return $"SejlNummer: {SailNumber}\nName: {Name}\nDescription: {Description}\nBådTypen: {BoatType}\nTheModel: {TheModel}\n" +
-                $"MaxPassengers : {MaxPassengers}\nLenght {Lenght}\nWidth: {Width}\nDybgang: {Draft}\nByggeÅr: {YearBuilt}\n"+
+                $"MaxPassengers : {MaxPassengers}\nLenght {Lenght}cm. \nWidth: {Width}cm.\nDybgang: {Draft}cm.\nByggeÅr: {YearBuilt}\n"+
                 $"Motor: {motorText}\n" +
                 $"CanSail: {CanSail}\n"
                 ; 

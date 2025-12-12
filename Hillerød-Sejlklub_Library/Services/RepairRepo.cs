@@ -47,11 +47,11 @@ namespace Hillerød_Sejlklub_Library.Services
             throw new Exception(message: "Number does not exist");
         }
 
-        public void RemoveRepair(Repair repair)
+        public void RemoveRepair(int repairNumber)
         { 
             for(int i = 0; _repairLogList.Count > i; i++)
             {
-                if (repair.Number == _repairLogList[i].Number)
+                if (repairNumber == _repairLogList[i].Number)
                 {
                     _repairLogList.RemoveAt(i);
                 }

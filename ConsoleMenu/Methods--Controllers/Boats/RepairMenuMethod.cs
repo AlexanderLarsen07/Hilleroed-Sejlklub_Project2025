@@ -1,6 +1,5 @@
 ﻿using Hillerød_Sejlklub_Library.Interfaces;
 using Hillerød_Sejlklub_Library.Models.Boats;
-using Hillerød_Sejlklub_Library.Models.Events;
 using Hillerød_Sejlklub_Library.Models.Members;
 using Hillerød_Sejlklub_Library.Services;
 using System;
@@ -11,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleMenu.Methods__Controllers.Boats
 {
-    public class BookingMenuMethod
+    public class RepairMenuMethod
     {
         //private static string ReadChoice(string choices)
         //{
@@ -23,7 +22,7 @@ namespace ConsoleMenu.Methods__Controllers.Boats
         //    Console.Clear();
         //    return choice.ToLower();
         //}
-        //public void BookingMenu(string theChoices, Member? member, BookingRepo bookingRepo, BoatRepo boatRepo)
+        //public void BoatMenu(string theChoices, Member? member, RepairRepo repairRepo)
         //{
         //    string theChoice = ReadChoice(theChoices);
         //    while (theChoice != "q")
@@ -35,7 +34,7 @@ namespace ConsoleMenu.Methods__Controllers.Boats
         //                case "1":
         //                    {
         //                        Console.WriteLine("Press q to exit.");
-        //                        Console.WriteLine("bookings not available to guests, you need to become a member.");
+        //                        Console.WriteLine("Repairs not available to guests, you need to become a member.");
         //                        Console.ReadLine();
         //                    }
         //                    break;
@@ -49,9 +48,19 @@ namespace ConsoleMenu.Methods__Controllers.Boats
         //            {
 
         //                case "1":
+        //                {
+        //                        Console.WriteLine("Press \"q\" to quit.");
+        //                        Console.WriteLine("All the Repairs to each boat:");
+        //                        repairRepo.PrintAllTheRepairsToEachBoat();
+        //                        Console.ReadLine();
+        //                        break;
+        //                }
+                        
+        //                case "2":
         //                    {
         //                        Console.WriteLine("Press \"q\" to quit.");
-        //                        CreateAddBooking(bookingRepo);
+        //                        Console.WriteLine("Create and add a repair:");
+        //                        repairRepo.CreateAddRepair();
         //                        break;
         //                    }
         //            }
@@ -66,31 +75,35 @@ namespace ConsoleMenu.Methods__Controllers.Boats
         //                case "1":
         //                    {
         //                        Console.WriteLine("Press \"q\" to quit.");
-        //                        CreateAddBooking(bookingRepo);
+        //                        Console.WriteLine("All the Repairs to each boat:");
+        //                        repairRepo.PrintAllTheRepairsToEachBoat();
         //                        Console.ReadLine();
         //                        break;
         //                    }
         //                case "2":
         //                    {
         //                        Console.WriteLine("Press \"q\" to quit.");
-        //                        Console.WriteLine("delete a booking by BookingID:");
-        //                        int BookingID = int.Parse(Console.ReadLine());
-        //                        bookingRepo.RemoveBookingByID(BookingID);
-        //                        Console.ReadLine();
+        //                        Console.WriteLine("Create and add a repair:");
+        //                        repairRepo.CreateAddRepair();
         //                        break;
         //                    }
         //                case "3":
         //                    {
         //                        Console.WriteLine("Press \"q\" to quit.");
-        //                        Console.WriteLine("All bookings:");
-        //                        bookingRepo.PrintAllBookings();
-        //                        Console.ReadLine();
+        //                        Console.WriteLine("delete a repair:");
+        //                        int repairNumber = int.Parse(Console.ReadLine());
+        //                        repairRepo.RemoveRepair(repairNumber);
         //                        break;
         //                    }
-
+        //                default:
+        //                    {
+        //                        Console.WriteLine("invalid input try these options:");
+        //                    }
+        //                    break;
         //            }
         //            theChoice = ReadChoice(theChoices);
         //        }
+
 
         //        else if (member.Role == RoleEnum.Chairman)
         //        {
@@ -100,55 +113,54 @@ namespace ConsoleMenu.Methods__Controllers.Boats
         //                case "1":
         //                    {
         //                        Console.WriteLine("Press \"q\" to quit.");
-        //                        CreateAddBooking(bookingRepo);
-        //                        break;
-
+        //                        Console.WriteLine("All the Repairs to each boat:");
+        //                        repairRepo.PrintAllTheRepairsToEachBoat();
+        //                        Console.ReadLine();
         //                    }
+        //                    break;
         //                case "2":
         //                    {
         //                        Console.WriteLine("Press \"q\" to quit.");
-        //                        Console.WriteLine("delete a booking by BookingID:");
-        //                        int BookingID = int.Parse(Console.ReadLine());
-        //                        bookingRepo.RemoveBookingByID(BookingID);
-        //                        Console.ReadLine();
+        //                        Console.WriteLine("Create and add a repair:");
+        //                        repairRepo.CreateAddRepair();
         //                        break;
+
         //                    }
         //                case "3":
         //                    {
         //                        Console.WriteLine("Press \"q\" to quit.");
-        //                        Console.WriteLine("All bookings:");
-        //                        bookingRepo.PrintAllBookings();
-        //                        Console.ReadLine();
+        //                        Console.WriteLine("delete a repair:");
+        //                        int repairNumber = int.Parse(Console.ReadLine());
+        //                        repairRepo.RemoveRepair(repairNumber);
         //                        break;
         //                    }
+        //                default:
+        //                    {
+        //                        Console.WriteLine("invalid input try these options:");
+        //                    }
+        //                    break;
         //            }
         //            theChoice = ReadChoice(theChoices);
         //        }
         //    }
         //}
-        //public void CreateAddBooking(BookingRepo bookingRepo)
+
+
+        //public void CreateAddRepair()
         //{
-        //    Console.WriteLine("Make a new booking");
 
-        //    Console.WriteLine("Enter destination");
-        //    string destination = Console.ReadLine();
-
-        //    Console.WriteLine("Enter start date (example: 2025 12 03 06 00 00)");
-        //    DateTime start = DateTime.Parse(Console.ReadLine());
-
-        //    Console.WriteLine("Enter end date (example: 2025 12 05 06 00 00)");
-        //    DateTime end = DateTime.Parse(Console.ReadLine());
-
-        //    Console.WriteLine("Enter member");
-        //    int memberID = int.Parse(Console.ReadLine());
-        //    Member member = memberRepo.GetMemberByID(memberID);
-        //    Console.WriteLine("Enter boat");
-        //    string sailNumber = (Console.ReadLine());
-        //    Boat boat = boatRepo.GetBoatBySailnumber(sailNumber);
-        //    AddBookingController makeBooking =
-        //        new AddBookingController(destination, start, end, member, boat, bookingRepo, boatRepo);
-
-        //    makeBooking.AddTheCreatedBooking();
+        //    Console.WriteLine("Enter number");
+        //    int number = int.Parse(Console.ReadLine());
+        //    Console.WriteLine("Enter comment");
+        //    string comment = Console.ReadLine();
+        //    Console.WriteLine("Enter the boat sail number");
+        //    string sailNumber = Console.ReadLine();
+        //    Boat boat = boatRepo.GetBoatBySailNumber(sailNumber);
+        //    bool isFixed = false;
+        //    Console.WriteLine("Enter 'true' or 'false' depending on if the repair you will add to this boat will have to be solved before the boat can sail or not");
+        //    bool haveToBeSolved = bool.Parse(Console.ReadLine());
+        //    AddRepairController createdRepair = new AddRepairController(number, comment, theBoat, isFixed, haveToBeSolved);
+        //    createdRepair.AddTheCreatedRepair();
         //    Console.ReadLine();
         //}
     }
