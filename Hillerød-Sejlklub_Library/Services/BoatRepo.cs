@@ -76,7 +76,7 @@ namespace Hillerød_Sejlklub_Library.Services
             foreach(Boat boatOnList in _boat)
             {
                 Console.WriteLine($"Name: {boatOnList.Name}\n" +
-                    $"The model: {boatOnList.TheModel}" +
+                    $"The model: {boatOnList.TheModel}\n" +
                     $"Boat type: {boatOnList.BoatType}\n" +
                     $"Description: {boatOnList.Description}");
             }

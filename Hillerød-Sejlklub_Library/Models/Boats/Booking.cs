@@ -68,7 +68,7 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
 
         public override string ToString()
         {
-            return $"BookingID: {BookingID}\nNumberOfMembers: {ListOfMembers.Count}\nDestination: {Destination}\nStart: {Start}\nEnd: {End}\nOverdue: {Overdue}" +
+            return $"BookingID: {BookingID}\nNumberOfMembers: {ListOfMembers.Count}\nDestination: {Destination}\nStart: {Start.ToShortDateString()}\nEnd: {End.ToShortDateString()}\nOverdue: {Overdue}" +
                 $"\nMember: {TheMember}" +
                 $"\nBoat {TheBoat}";
 
