@@ -11,7 +11,7 @@ namespace Hillerød_Sejlklub_Library.Models.Members
     public class Member
     {
         private List<BoatLot> boatLotsRented;
-        private static int _memberID = 0;
+        private static int _memberID = 1;
         public string Name { get; set; }
         public int Age { get; set; }
         public int SubscriptionFee { get; set; }
