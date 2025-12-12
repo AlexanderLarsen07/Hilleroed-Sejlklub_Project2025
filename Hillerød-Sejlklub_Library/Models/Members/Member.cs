@@ -106,7 +106,7 @@ namespace Hillerød_Sejlklub_Library.Models.Members
 
         public override string ToString()
         {
-            return $"{Role}. ID : {MemberID}" +
+            return $"{Role}. ID : {MemberID}\n" +
                 $"Navn: {Name}\n" +
                 $"Alder: {Age}\n" +
                 $"Membership: {Type}\n" +
