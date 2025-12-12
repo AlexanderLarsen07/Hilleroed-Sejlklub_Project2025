@@ -1,21 +1,9 @@
 ﻿using ConsoleMenu.Controllers.Events;
 using ConsoleMenu.Methods.Members;
-using Hillerød_Sejlklub_Library.Data;
 using Hillerød_Sejlklub_Library.Interfaces;
-using Hillerød_Sejlklub_Library.Models.Blogs;
 using Hillerød_Sejlklub_Library.Models.Events;
 using Hillerød_Sejlklub_Library.Models.Members;
 using Hillerød_Sejlklub_Library.Services;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Channels;
-using System.Threading.Tasks;
 
 namespace ConsoleMenu.Menu
 {
@@ -25,18 +13,18 @@ namespace ConsoleMenu.Menu
         static string LoginChoices = " 1. Sign in as guest.\t\n 2. Sign in as Member. \t\n q. Exit.";
         
         static string GuestMenuChoices = " 1. Events.\t\n 2. Signup.\t\n q. Exit.";//Implement TODO.
-        static string MemberMenuChoices = " 1. Events.\t\n 2. View your details\t\n 3. Edit your account\t\n 4. Add boat lots\t\n q. Exits.";
-        static string AdminMenuChoices = "1. View all members\t\n 2. Search for a specific member of their id\t\n 3. Boat lots\t\n 4.simple statistics\t\n 5. Delete a user or make a custom user\t\n 6. View your account\t\n 7. Edit details of your account\t\n 8. Add boat lots\t\n 9. Events. \t\n q. Exits.";
-        static string ChairmanMenuChoices = "1. Crud Admins\t\n 2. Change chairman\t\n 3. View all members\t\n 4. Search for a specific member of their id\t\n 5. Boat lots\t\n 6.simple statistics\t\n 7. Delete a user or make a custom user\t\n 8. View your account\t\n 9. Edit details of your account\t\n 10. Add boat lots\t\n 11. Events. \t\n q. Exits.";
+        static string MemberMenuChoices = " 1. Events.\t\n 2. Members \t\n q. Exits.";
+        static string AdminMenuChoices = "";
+        static string ChairmanMenuChoices = "";
 
         static string GuestEventChoices = " 1. View all events. \t\n 2. Search for events by date. \t\n q. Exit.";//DONE
-        static string MemberEventChoices = " 1. View all event. \t\n 2. Search for events by date. \t\n 3. Edit a Comment on a signup. \t\n 4. Delete a signup. \t\n q. quit.";//DONE
+        static string MemberEventChoices = " 1. View all event/signup. \t\n 2. Search for events by date/signup. \t\n 3. Edit a Comment on a signup. \t\n 4. Delete a signup. \t\n q. quit.";//DONE
         static string AdminEventChoices = " 1. View all event. \t\n 2. Search for events by date. \t\n 3. Edit a Comment on a signup. \t\n 4. Delete a signup. \t\n 5. Create new event. \t\n q. quit.";
 
-        static string GuestMemberChoices = " 1. Signup. \t\n q. Quit.";
-        static string MemberMemberChoices = "";//TODO
-        static string AdminMemberChoices = "";//TODO
-        static string ChairmanMemberChoices = "";//TODO
+
+        static string MemberMemberChoices = "1. View your details\t\n 2. Edit your account\t\n 3. View boat lots\t\n q. Exits.";
+        static string AdminMemberChoices = "1. View all members\t\n 2. Search for a specific member of their id\t\n 3. Boat lots\t\n 4.simple statistics\t\n 5. Delete a user or make a custom user\t\n 6. View your account\t\n 7. Edit details of your account\t\n 8. Add boat lots\t\n 9. Events. \t\n q. Exits.";
+        static string ChairmanMemberChoices = "1.  Crud Admins\t\n2.  Change chairman\t\n3.  View all members\t\n4.  Search for a specific member of their id\t\n5.  Boat lots\t\n6.  Simple statistics\t\n7.  Delete a user or make a custom user\t\n8.  View your account\t\n9.  Edit details of your account\t\n10. Add boat lots\t\n11. Events.\t\n q. Exits.\t\n\t\nIndtast Nummer:\t\n";
 
         //Gæst - basal adgang til systemet, kan se blogindlæg,
         //både og generel info om klubben og oprette sig som medlem, kan ikke leje både og melde sig til events.
@@ -61,10 +49,21 @@ namespace ConsoleMenu.Menu
         private EventMenuMethod eventMenu = new EventMenuMethod();
         private MemberMenu memberMenu = new MemberMenu();
 
-
         public void SetChairman(Member member) //slet
         {
             _memberRepo.AddMember(member);
+        }
+        public void AddEvent(Event even)
+        {
+            _eventRepo.AddEvent(even);
+        }
+        public void AddBoatLot(BoatLot boatlot)
+        {
+            _boatLotRepo.AddBoatLot(boatlot);
+        }
+        public void AddSignup(Signup signup)
+        {
+            _signupRepo.AddSignup(signup);
         }
 
         private static string ReadChoice(string choices)
@@ -101,7 +100,8 @@ namespace ConsoleMenu.Menu
                                     break;
                                 case "2":
                                     {
-                                        memberMenu.Roles(GuestMemberChoices, null, _memberRepo, _boatLotRepo); //MemberMenu
+                                        memberMenu.GuestMemberMenu(_memberRepo);
+                                        /*memberMenu.Roles(GuestMemberChoices, null, _memberRepo, _boatLotRepo);*/ //MemberMenu
                                     }
                                     break;
                             }
@@ -191,7 +191,7 @@ namespace ConsoleMenu.Menu
                                         else if (member.Role == RoleEnum.Chairman)
                                         {
                                             Console.WriteLine($"Signed in as : {member.Role}");
-                                            string memberMenuChoices = ReadChoice(AdminEventChoices);
+                                            string memberMenuChoices = ReadChoice(MemberMenuChoices);
                                             if (memberMenuChoices == "q")
                                             {
                                                 mail = "q";
@@ -207,8 +207,13 @@ namespace ConsoleMenu.Menu
                                                             eventMenu.EventMenu(AdminEventChoices, member, _eventRepo, _signupRepo);
                                                         }
                                                         break;
+                                                    case "2":
+                                                        {
+                                                            memberMenu.Roles(ChairmanMemberChoices, member, _memberRepo, _boatLotRepo);
+                                                        }
+                                                        break;
                                                 }
-                                                memberMenuChoices = ReadChoice(AdminEventChoices);
+                                                memberMenuChoices = ReadChoice(MemberMenuChoices);
                                             }
                                         }
                                     }

@@ -2,6 +2,7 @@
 using Hillerød_Sejlklub_Library.Models.Boats;
 using Hillerød_Sejlklub_Library.Models.Events;
 using Hillerød_Sejlklub_Library.Models.Members;
+using Hillerød_Sejlklub_Library.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,16 +15,20 @@ namespace ConsoleMenu.Methods__Controllers.Boats
     {
 
         IBookingRepo _bookings;
+
+        IBoatRepo _boat;
         public Booking TheBooking { get; set; }
 
-        public AddBookingController(string destination, DateTime start, DateTime end, Member member, Boat boat, IBookingRepo theBooking)
+        public AddBookingController(string destination, DateTime start, DateTime end, Member member, Boat boat, IBookingRepo listBooking, IBoatRepo boatRepo)
         {
             TheBooking = new Booking(destination, start, end, member, boat);
-            _bookings = theBooking;
+            _bookings = listBooking;
+            _boat = boatRepo;
         }
-        public void AddTheBooking()
+        public void AddTheCreatedBooking()
         {
             _bookings.AddBooking(TheBooking);
+       
         }
     }
 }

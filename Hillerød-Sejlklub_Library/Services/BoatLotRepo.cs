@@ -1,10 +1,5 @@
 ﻿using Hillerød_Sejlklub_Library.Interfaces;
 using Hillerød_Sejlklub_Library.Models.Members;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hillerød_Sejlklub_Library.Services
 {
@@ -22,7 +17,10 @@ namespace Hillerød_Sejlklub_Library.Services
         }
         public void AddBoatLot(BoatLot boatLot)
         {
-            _boatLotDictionary.Add(boatLot.LotID, boatLot);
+            if(!_boatLotDictionary.ContainsKey(boatLot.LotID))
+            {
+                _boatLotDictionary.Add(boatLot.LotID, boatLot);
+            }
         }
         public BoatLot? GetBoatLotById(int id)
         {

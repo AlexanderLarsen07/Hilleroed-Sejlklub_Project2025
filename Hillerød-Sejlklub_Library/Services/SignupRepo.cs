@@ -12,7 +12,7 @@ namespace Hillerød_Sejlklub_Library.Services
     public class SignupRepo : ISignupRepo
     {
         private List<Signup> _signupList;
-        public int Count { get { return _signupList.Count; } }
+        //public int Count { get { return _signupList.Count; } }
         public SignupRepo()
         {
             _signupList = new List<Signup>();

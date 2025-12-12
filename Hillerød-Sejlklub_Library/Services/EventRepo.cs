@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Hillerød_Sejlklub_Library.Data;
 using Hillerød_Sejlklub_Library.Interfaces;
 using Hillerød_Sejlklub_Library.Models.Events;
-using Hillerød_Sejlklub_Library.Models.Members;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Hillerød_Sejlklub_Library.Services
 {
@@ -18,6 +11,7 @@ namespace Hillerød_Sejlklub_Library.Services
         public EventRepo()
         {
             _events = new Dictionary<int, Event>();
+            _events = MockData.EventData;
         }
         public List<Event> GetAll()
         {

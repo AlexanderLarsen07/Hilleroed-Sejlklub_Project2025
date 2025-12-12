@@ -17,15 +17,6 @@ namespace ConsoleMenu.Methods.Members
 {
     public class MemberMenu
     {
-        //switch case af valgmuligheder
-        //Mulighed 1:
-        //
-        //1. Sign up as Member
-        //2. Sign in as Member
-        //3. Exit
-        //
-        //Mulighed2.
-
         private static string ReadChoice(string choices)
         {
             Console.Write("\x1b[2J"); // Clear screen
@@ -42,65 +33,6 @@ namespace ConsoleMenu.Methods.Members
             string theChoice = ReadChoice(readChoices);
             while (theChoice != "q") 
             {
-                #region extra
-                if (member == null)
-                {
-                    switch (theChoice)
-                    {
-                        case "1": //SignUP
-                            {
-                                Console.WriteLine("Indtast Navn");
-                                string name = Console.ReadLine();
-                                Console.WriteLine("Indtast Alder");
-                                int age = Convert.ToInt32(Console.ReadLine());
-                                Console.WriteLine("Indtast hvilken Membership som du ønsker");
-                                Console.WriteLine("1 = Familie Medlem");
-                                Console.WriteLine("2 = Medlem");
-                                //Console.WriteLine("3 = Passive Medlem");
-                                string membership = Console.ReadLine();
-                                MembershipEnum isMembership = new();
-                                if (membership == "1")
-                                {
-                                    isMembership = MembershipEnum.FamilieMedlem;
-                                }
-                                else if (membership == "2")
-                                {
-                                    isMembership = MembershipEnum.Medlem;
-                                }
-                                //else if (membership == "3")
-                                //{
-                                //    isMembership = MembershipEnum.PassiveMedlem;
-                                //}
-                                Console.WriteLine("Indtast din Mail");
-                                string mail = Console.ReadLine();
-                                Console.WriteLine("Indtast Passwordet");
-                                string password = Console.ReadLine();
-                                Console.WriteLine("Indtast Telefon nummer");
-                                string phoneNumber = Console.ReadLine();
-                                AddMembersController newMember = new AddMembersController(name, age, isMembership, mail, password, phoneNumber, memberRepo);
-                                newMember.Member.Role = RoleEnum.Member;//bliver alleredee sat i constructor.
-                                newMember.AddMember();
-                                //case "2": //View bestyrelsesmedlemmer (print en liste af administratoren og Chairman)
-                                //    if (memberRole.Role == RoleEnum.Chairman || memberRole.Role == RoleEnum.Administrator)
-                                //    {
-                                //        Console.WriteLine(member);
-                                //    }
-                                //    break;
-                                //case "2": //View Events (Alexander)
-
-                                //    break;
-                                //case "3": //View blogs/comments (Sinan)
-
-                                //    break;
-                                //case "4": //View Boat (Aksel)
-
-                                //    break;
-                            }
-                            break;
-                    }
-                    theChoice = ReadChoice(readChoices);
-                }
-                #endregion
                 #region Members with role Member
                 if (member.Role == RoleEnum.Member) //skal kunne kigge på Membership oplysninger, redigere deres konto, tilføje boatlots
                 {
@@ -114,85 +46,89 @@ namespace ConsoleMenu.Methods.Members
                         case "2": //redigere deres konto
                             {
                                 Console.WriteLine("Dine Nuværende Informationer:");
-                                member.ToString();
-                                Console.WriteLine("Valg hvilke informationer du ville ændres ud fra tallet:" +
+                                Console.WriteLine(member.ToString());
+                                Console.WriteLine("Choose an option from a number to edit, or q to quit:" +
                                     "\n1: Navn" +
                                     "\n2: Alder" +
                                     "\n3: Telefon Nummer" +
                                     "\n4: Mail" +
                                     "\n5: Password");
+                                bool ChoiceQuit = false;
+                                while(!ChoiceQuit)
+                                {
                                 string choice = Console.ReadLine();
-                                if (choice == "1") //navn
-                                {
-                                    Console.WriteLine("Indtast nyt navn:");
-                                    string nameTyped = Console.ReadLine();
-                                    if (nameTyped != member.Name || nameTyped.Length < 0)
+                                    if (choice == "1") //navn
                                     {
-                                        member.Name = nameTyped!;
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("Navnet kan ikke være det samme som den tidligere og skal være større end 0 tegn" +
-                                            ",\nStart over.");
-                                    }
-                                    //member.Name = Console.ReadLine();
+                                        Console.WriteLine("Indtast nyt navn:");
+                                        string nameTyped = Console.ReadLine();
+                                        if (nameTyped != member.Name || nameTyped.Length < 0)
+                                        {
+                                            member.Name = nameTyped!;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Navnet kan ikke være det samme som den tidligere og skal være større end 0 tegn" +
+                                                ",\nStart over.");
+                                        }
+                                        //member.Name = Console.ReadLine();
 
-                                }
-                                else if (choice == "2") //alder
-                                {
-                                    Console.WriteLine("Indtast nyt alder:");
-                                    int age = Convert.ToInt32(Console.ReadLine());
-                                    if (age != member.Age || age < 100 || age > 0)
-                                    {
-                                        member.Age = age;
                                     }
-                                    else
+                                    else if (choice == "2") //alder
                                     {
-                                        Console.WriteLine("Alderen må ikke være under 0 eller over 100 eller det samme som den tidligere alder, Start over.");
+                                        Console.WriteLine("Indtast nyt alder:");
+                                        int age = Convert.ToInt32(Console.ReadLine());
+                                        if (age != member.Age || age < 100 || age > 0)
+                                        {
+                                            member.Age = age;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Alderen må ikke være under 0 eller over 100 eller det samme som den tidligere alder, Start over.");
+                                        }
+                                        //member.Age = Convert.ToInt32(Console.ReadLine());
                                     }
-                                    //member.Age = Convert.ToInt32(Console.ReadLine());
-                                }
-                                else if (choice == "3") //Telefon nummer
-                                {
-                                    Console.WriteLine("Indtast nyt Telefon nummer:");
-                                    string phoneNumber = Console.ReadLine();
-                                    if (phoneNumber != member.PhoneNumber || phoneNumber.Length == 8)
+                                    else if (choice == "3") //Telefon nummer
                                     {
-                                        member.PhoneNumber = phoneNumber!;
+                                        Console.WriteLine("Indtast nyt Telefon nummer:");
+                                        string phoneNumber = Console.ReadLine();
+                                        if (phoneNumber != member.PhoneNumber || phoneNumber.Length == 8)
+                                        {
+                                            member.PhoneNumber = phoneNumber!;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Telefon Nummeret skal have 8 cifre, start over.");
+                                        }
+                                        //member.PhoneNumber = Console.ReadLine();
                                     }
-                                    else
+                                    else if (choice == "4") // Mail
                                     {
-                                        Console.WriteLine("Telefon Nummeret skal have 8 cifre, start over.");
+                                        Console.WriteLine("Indtast nyt Mail:");
+                                        string mail = Console.ReadLine().Trim();
+                                        if (!memberRepo.EmailCheckExist(mail) && mail != member.Mail && mail.Contains("@" + ".") && !mail.Contains("@.") && !mail.Contains(".@"))
+                                        {
+                                            member.Mail = mail;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Den indtastede Mail er ikke korrekt, start over.");
+                                        }
+                                        //member.Mail = Console.ReadLine();
                                     }
-                                    //member.PhoneNumber = Console.ReadLine();
-                                }
-                                else if (choice == "4") // Mail
-                                {
-                                    Console.WriteLine("Indtast nyt Mail:");
-                                    string mail = Console.ReadLine().Trim();
-                                    if (!memberRepo.EmailCheckExist(mail) &&  mail != member.Mail && mail.Contains("@"+".") && !mail.Contains("@.") && !mail.Contains(".@"))
+                                    else if (choice == "5") //Password
                                     {
-                                        member.Mail = mail;
+                                        Console.WriteLine("Indtast nyt password:");
+                                        string password = Console.ReadLine();
+                                        if (password != member.Password || password.Length < 5)
+                                        {
+                                            member.Password = password;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Passwordet må ikke være det samme som den gamle password og skal være større end 5 karakterer");
+                                        }
+                                        //member.Password = Console.ReadLine();
                                     }
-                                    else
-                                    {
-                                        Console.WriteLine("Den indtastede Mail er ikke korrekt, start over.");
-                                    }
-                                    //member.Mail = Console.ReadLine();
-                                }
-                                else if (choice == "5") //Password
-                                {
-                                    Console.WriteLine("Indtast nyt password:");
-                                    string password = Console.ReadLine();
-                                    if (password != member.Password || password.Length < 5)
-                                    {
-                                        member.Password = password;
-                                    }
-                                    else
-                                    {
-                                        Console.WriteLine("Passwordet må ikke være det samme som den gamle password og skal være større end 5 karakterer");
-                                    }
-                                    //member.Password = Console.ReadLine();
                                 }
                             }
                         break;
@@ -451,7 +387,13 @@ namespace ConsoleMenu.Methods.Members
                 {
                     switch (theChoice)
                     {
+                        #region 1. CRUD Admins
                         case "1": //CRUD admins - not done
+                            Console.WriteLine("Input Which Crud method u want to do:");
+                            Console.WriteLine("1. (C) Create admin");
+                            Console.WriteLine("2. (R) Read   admin");
+                            Console.WriteLine("3. (U) Update admin");
+                            Console.WriteLine("4. (D) Delete admin");
                             string theFirstChoice = Console.ReadLine();
                             if (theFirstChoice == "1") //Create admin
                             {
@@ -648,6 +590,8 @@ namespace ConsoleMenu.Methods.Members
                                 }
                             }
                         break;
+                        #endregion
+                        #region 2. Ændre formandskab
                         case "2": //ændre formandskab - not done //brug id
                             Console.WriteLine("Indtast den brugers id for at ændre formandskab:");
                             int id = Convert.ToInt32(Console.ReadLine());
@@ -676,6 +620,8 @@ namespace ConsoleMenu.Methods.Members
                                 Console.WriteLine("Brugeren findes ikke, prøv igen.");
                             }
                         break;
+                        #endregion
+                        #region 3. View alle members
                         case "3"://skal kunne view alle members
                             foreach (Member m1 in memberRepo.GetAll()) //Maybe it works?
                             {
@@ -685,6 +631,8 @@ namespace ConsoleMenu.Methods.Members
                                 }
                             }
                         break;
+                        #endregion
+                        #region 4. Vælge en bestemt member
                         case "4"://skal kunne vælge en bestemt valgt member (findes member ud fra deres id)
                             foreach (Member m1 in memberRepo.GetAll()) //Maybe it works?
                             {
@@ -698,6 +646,8 @@ namespace ConsoleMenu.Methods.Members
                                 }
                             }
                         break;
+                        #endregion
+                        #region 5. Sortering af både pladser
                         case "5"://sortere boatlots (sorterings algoritmer)    -   not done
                             foreach (BoatLot boatLot in boatLotRepo.GetAll())
                             {
@@ -713,6 +663,8 @@ namespace ConsoleMenu.Methods.Members
                                 }
                             }
                         break;
+                        #endregion
+                        #region 6. Simple statistikker
                         case "6"://simple statistikker     -   not done
                             Console.WriteLine("Brugere i alt:");
                             Console.WriteLine("------------------------------------------");
@@ -732,6 +684,8 @@ namespace ConsoleMenu.Methods.Members
                                 }
                             }
                         break;
+                        #endregion
+                        #region 7. Slette og lave users
                         case "7": //kan delete users og lave user
                             string firstChoice = Console.ReadLine();
                             if (firstChoice == "1") //Adds a new user
@@ -787,11 +741,15 @@ namespace ConsoleMenu.Methods.Members
                                 }
                             }
                         break;
+                        #endregion
+                        #region 8. View ens oplysninger
                         case "8"://skal kunne kigge på ens oplysninger
                             {
                                 Console.WriteLine(member.ToString() + $"\n{member.Mail}");
                             }
                         break;
+                        #endregion
+                        #region 9. Edit ens konto
                         case "9": //redigere deres konto
                             {
                                 Console.WriteLine("Dine Nuværende Informationer:");
@@ -877,6 +835,8 @@ namespace ConsoleMenu.Methods.Members
                                 }
                             }
                         break;
+                        #endregion
+                        #region 10. tilføje boatlots til en selv
                         case "10"://tilføje boatlots
                             Console.WriteLine($"Du har lige nu: {member._boatLotsRented.Count} boat lots som er lejet.");
                             Console.WriteLine($"-----------------------------------------------");
@@ -895,11 +855,46 @@ namespace ConsoleMenu.Methods.Members
                                 }
                             }
                         break;
+                        #endregion
                     }
                     theChoice = ReadChoice(readChoices);
                 }
                 #endregion
             }
+        }
+        public void GuestMemberMenu(MemberRepo memberRepo)
+        {
+            Console.WriteLine("Indtast Navn");
+            string name = Console.ReadLine();
+            Console.WriteLine("Indtast Alder");
+            int age = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Indtast hvilken Membership som du ønsker");
+            Console.WriteLine("1 = Familie Medlem");
+            Console.WriteLine("2 = Medlem");
+            //Console.WriteLine("3 = Passive Medlem");
+            string membership = Console.ReadLine();
+            MembershipEnum isMembership = new();
+            if (membership == "1")
+            {
+                isMembership = MembershipEnum.FamilieMedlem;
+            }
+            else if (membership == "2")
+            {
+                isMembership = MembershipEnum.Medlem;
+            }
+            //else if (membership == "3")
+            //{
+            //    isMembership = MembershipEnum.PassiveMedlem;
+            //}
+            Console.WriteLine("Indtast din Mail");
+            string mail = Console.ReadLine();
+            Console.WriteLine("Indtast Passwordet");
+            string password = Console.ReadLine();
+            Console.WriteLine("Indtast Telefon nummer");
+            string phoneNumber = Console.ReadLine();
+            AddMembersController newMember = new AddMembersController(name, age, isMembership, mail, password, phoneNumber, memberRepo);
+            newMember.Member.Role = RoleEnum.Member;//bliver alleredee sat i constructor.
+            newMember.AddMember();
         }
     }
 }

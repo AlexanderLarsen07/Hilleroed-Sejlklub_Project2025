@@ -11,12 +11,16 @@ namespace Hillerød_Sejlklub_Library.Models.Members
     public class Member
     {
         private List<BoatLot> boatLotsRented;
-        private static int _memberID;
+        private static int _memberID = 1;
         public string Name { get; set; }
         public int Age { get; set; }
         public int SubscriptionFee { get; set; }
         public RoleEnum Role { get; set; }
-        public int MemberID { get; set; }
+        public int MemberID
+        {
+            get { return _memberID; }
+            set { _memberID = value; }
+        }
         public List<BoatLot> _boatLotsRented { get { return boatLotsRented; } private set { _boatLotsRented = boatLotsRented; } } //laves til en full property
         public string? Mail { get; set; } //needs to be unique
         public string Password { get; set; }
@@ -34,7 +38,7 @@ namespace Hillerød_Sejlklub_Library.Models.Members
             PhoneNumber = phoneNumber;
             Age = age;
             //Increment ID
-            MemberID = _memberID;
+            MemberID = _memberID++;
             //tilføj til MemberRepo
             _members = new Dictionary<int, MemberRepo>();
             //make new List of BoatLotsRented
@@ -102,7 +106,7 @@ namespace Hillerød_Sejlklub_Library.Models.Members
 
         public override string ToString()
         {
-            return $"{Role}. ID : {MemberID}" +
+            return $"{Role}. ID : {MemberID}\n" +
                 $"Navn: {Name}\n" +
                 $"Alder: {Age}\n" +
                 $"Membership: {Type}\n" +

@@ -10,6 +10,7 @@ namespace Hillerød_Sejlklub_Library.Exceptions
     {
         public EventFullException(string message) : base(message)
         {
+            message = "\tCouldn't sign up to event : Event full";
         }
     }
 }

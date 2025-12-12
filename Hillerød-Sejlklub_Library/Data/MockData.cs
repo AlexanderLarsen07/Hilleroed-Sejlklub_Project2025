@@ -9,16 +9,16 @@ using Hillerød_Sejlklub_Library.Models.Members;
 
 namespace Hillerød_Sejlklub_Library.Data
 {
-    public class MockData
+    public static class MockData
     {
         #region Instancefields
         private static Dictionary<int, Member> _memberData = new Dictionary<int, Member>()
         {
-            {1 ,new Member("name", 17, MembershipEnum.Medlem, "mail@yes.efs", "password", "12121212") },
+            {1, new Member("name", 17, MembershipEnum.Medlem, "mail@yes.efs", "password", "12121212") },
             {2, new Member("gustaf", 19, MembershipEnum.Medlem, "gustaf@mail.com", "password", "13131313") },
             {3, new Member("steve", 64, MembershipEnum.PassiveMedlem, "steve@gmail.com", "password", "14141414") }
         };
-        
+
         private static List<DateTime> _dateTimeData = new List<DateTime>()
         {
             { new DateTime(2004, 04, 12, 13, 30, 0) },
@@ -42,12 +42,12 @@ namespace Hillerød_Sejlklub_Library.Data
 
         private static List<Signup> _signupData = new List<Signup>()
         {
-            {new Signup(_eventData[0], _memberData[1], "Comment-1") },
-            {new Signup(_eventData[0], _memberData[2], "Comment-1") },
+            {new Signup(_eventData[1], _memberData[1], "Comment-1") },
+            {new Signup(_eventData[3], _memberData[2], "Comment-1") },
             {new Signup(_eventData[2], _memberData[3], "Coment-3") }
         };
         #endregion
-        
+
         #region Properties
         public static Dictionary<int, BoatLot> BoatLotData
         {
@@ -56,20 +56,23 @@ namespace Hillerød_Sejlklub_Library.Data
 
         public static Dictionary<int, Member> MemberData
         {
-            get { return _memberData; }
+            get
+            {
+                return _memberData;
+            }
         }
-        
+
         private static List<DateTime> DateTimes
         {
             get { return _dateTimeData; }
         }
 
-        private static Dictionary<int, Event> EventData
+        public static Dictionary<int, Event> EventData
         {
             get { return _eventData; }
         }
 
-        private static List<Signup> SignupData
+        public static List<Signup> SignupData
         {
             get { return _signupData; }
         }
