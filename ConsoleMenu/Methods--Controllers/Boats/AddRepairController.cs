@@ -1,0 +1,29 @@
+﻿using Hillerød_Sejlklub_Library.Interfaces;
+using Hillerød_Sejlklub_Library.Models.Boats;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleMenu.Methods__Controllers.Boats
+{
+    public class AddRepairController
+    {
+        IRepairRepo _repairLogList;
+
+        public Repair TheRepair { get; set; }
+        
+        public AddRepairController(int number, string comment, Boat theBoat, bool isFixed, bool haveToBeSolved, IRepairRepo repairLogList)
+        {
+            TheRepair = new Repair(number, comment, theBoat, isFixed, haveToBeSolved);
+            _repairLogList = repairLogList;
+        }
+
+        public void AddTheCreatedRepair()
+        {
+            _repairLogList.AddRepair(TheRepair);
+        }
+
+    }
+}

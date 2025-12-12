@@ -40,7 +40,9 @@ Console.WriteLine(eve1.ToString());
 
 
 Console.WriteLine("---------------------------Booking Test Start-----------------------------");
-
+Console.WriteLine();
+Console.WriteLine();
+Console.WriteLine();
 Console.WriteLine("---------------------------Test overdue true 6 hours, with motor, NoMemberAdded-----------------------------");
 DateTime start1 = new DateTime(2025, 12, 3, 6, 0, 0);
 DateTime end1 = new DateTime(2025, 12, 3, 12, 0, 0);
@@ -49,39 +51,58 @@ MotorInfo motorInfo1 = new MotorInfo(FuelTypeEnum.Benzin, BrandEnum.Yamaha, 132,
 Boat boat1 = new Boat("123456789", "name", "description", BoatTypeEnum.Voksenjolle, ModelEnum.Lynaes, 5, 123, 123, 123, 2010, motorInfo1);
 Booking booking1 = new Booking("Roskilde", start1, end1, member1, boat1);
 Console.WriteLine(booking1);
-Console.WriteLine("---------------------Test overdue false 3 hours, no motor, AddMember------------------------");
+Console.WriteLine("---------------------Test overdue false 3 hours, no motor, with AddMember------------------------");
 DateTime start2 = new DateTime(2025, 12, 3, 9, 0, 0);
 DateTime end2 = new DateTime(2025, 12, 3, 12, 0, 0);
 Member member2 = new Member("Thomas", 40, MembershipEnum.Medlem, "Thomas@gmail", "password12345", "22222222");
 Boat boat2 = new Boat("555555555", "TheBoat", "description", BoatTypeEnum.To_mandsjolle, ModelEnum.Optimistjolle, 2, 200, 50, 60, 2007, null);
 Booking booking2 = new Booking("Roskilde", start2, end2, member2, boat2);
-Member member3 = new Member("peter", 20, MembershipEnum.Medlem, "Peter@gmail.com", "password123", "12345678");
-Console.WriteLine("----------------------------------------exception test start----------------------------------------------------");
+booking2.AddMember(member1); // add member 1 to booking2 
+Console.WriteLine(booking2);
+
+Console.WriteLine("---------------------create booking3------------------------");
+DateTime start3 = new DateTime(2025, 12, 3, 10, 0, 0);
+DateTime end3 = new DateTime(2025, 12, 3, 12, 0, 0);
+Booking booking3 = new Booking("Roskilde", start3, end3, member2, boat2);
+Console.WriteLine("----------------------------------GetAll + add booking1-----------------------------------");
+BookingRepo bookingRepo = new BookingRepo();
+List<Booking> bookingList = bookingRepo.GetAll();
+bookingRepo.AddBooking(booking1);
+foreach (Booking bookingOnList in bookingList)
+{
+    Console.WriteLine(bookingOnList);
+}
+Console.WriteLine("----------------------------------------exception test and addbooking  start----------------------------------------------------");
 try
 {
-    booking2.AddMember(member1);
-    Console.WriteLine(booking1);
+    bookingRepo.AddBooking(booking3);
+    Console.WriteLine(booking3);
 } 
 catch (Exception ex)
 {
     Console.WriteLine(ex.Message);
 }
-Console.WriteLine("----------------------------------------expection (already exist)----------------------------------------------------");
-try
-{
-    booking2.AddMember(member3);
-    Console.WriteLine(booking1);
-}
-catch (Exception ex)
-{
-    Console.WriteLine(ex.Message);
-}
+Console.WriteLine("----------------------------------------exception test and addbooking  end----------------------------------------------------");
+//Console.WriteLine("----------------------------------------expection (already exist)----------------------------------------------------");
+//try
+//{
+//    booking2.AddMember(member3);
+//    Console.WriteLine(booking1);
+//}
+//catch (Exception ex)
+//{
+//    Console.WriteLine(ex.Message);
+//}
 Console.WriteLine("----------------------------------------expection end----------------------------------------------------");
-Console.WriteLine(booking2);
-Console.WriteLine();
+Console.WriteLine("");
 Console.WriteLine("---------------------------Booking Test End-----------------------------");
 Console.WriteLine();
+Console.WriteLine();
+Console.WriteLine();
 Console.WriteLine("-----------------------------Test boat methods start:---------------------------------------------");
+Console.WriteLine();
+Console.WriteLine();
+Console.WriteLine();
 Console.WriteLine("-----------------------------AddBoat---------------------------------------------");
 BoatRepo boatRepo = new BoatRepo();
 boatRepo.AddBoat(boat1);
@@ -95,16 +116,23 @@ Boat getByNumber = boatRepo.GetBoatBySailNumber("555555555");
 Console.WriteLine(getByNumber);
 Console.WriteLine("------------------------------------------------PrintAllBoats-----------------------------------------------");
 boatRepo.PrintAllBoats();
-Console.WriteLine("--------------------------------------------Remove---------------------------------------------------");
+Console.WriteLine("------------------------------------------------PrintBoatInfoToGuest-----------------------------------------------");
+boatRepo.PrintBoatInfoToGuest();
+Console.WriteLine("--------------------------------------------Remove then print all boatOnList---------------------------------------------------");
 boatRepo.RemoveBySailNumber("555555555");
 foreach (Boat boatOnList in getAllBoats)
-Console.WriteLine(boatOnList);
-boatRepo.AddBoat(boat2);
+{
+    Console.WriteLine(boatOnList);
+}
 Console.WriteLine("-----------------------------Test boat methods end---------------------------------------------");
 Console.WriteLine();
-
+Console.WriteLine();
+Console.WriteLine();
+Console.WriteLine();
 Console.WriteLine("--------------------------------------------Repair methods test start---------------------------------------------");
-
+Console.WriteLine();
+Console.WriteLine();
+Console.WriteLine();
 Console.WriteLine("-----------------------------------------GetAll test----------------------------------------------------");
 RepairRepo repairRepo = new RepairRepo();
 Repair repair1 = new Repair(1, "masten er ødelagt", boat1, false, true);
