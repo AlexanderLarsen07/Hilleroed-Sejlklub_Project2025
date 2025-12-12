@@ -26,8 +26,8 @@ namespace ConsoleMenu.Menu
         
         static string GuestMenuChoices = " 1. Events.\t\n 2. Signup.\t\n q. Exit.";//Implement TODO.
         static string MemberMenuChoices = " 1. Events.\t\n 2. Members \t\n q. Exits.";
-        static string AdminMenuChoices = "1. View all members\t\n 2. Search for a specific member of their id\t\n 3. Boat lots\t\n 4.simple statistics\t\n 5. Delete a user or make a custom user\t\n 6. View your account\t\n 7. Edit details of your account\t\n 8. Add boat lots\t\n 9. Events. \t\n q. Exits.";
-        static string ChairmanMenuChoices = "1. Change Admins\t\n 2. Change chairman\t\n 3. View all members\t\n 4. Search for a specific member of their id\t\n 5. Boat lots\t\n 6.simple statistics\t\n 7. Delete a user or make a custom user\t\n 8. View your account\t\n 9. Edit details of your account\t\n 10. Add boat lots\t\n 11. Events. \t\n q. Exits.";
+        static string AdminMenuChoices = "";
+        static string ChairmanMenuChoices = "";
 
         static string GuestEventChoices = " 1. View all events. \t\n 2. Search for events by date. \t\n q. Exit.";//DONE
         static string MemberEventChoices = " 1. View all event/signup. \t\n 2. Search for events by date/signup. \t\n 3. Edit a Comment on a signup. \t\n 4. Delete a signup. \t\n q. quit.";//DONE
@@ -190,7 +190,7 @@ namespace ConsoleMenu.Menu
                                         else if (member.Role == RoleEnum.Chairman)
                                         {
                                             Console.WriteLine($"Signed in as : {member.Role}");
-                                            string memberMenuChoices = ReadChoice(MemberMenuChoices);
+                                            string memberMenuChoices = ReadChoice(MemberEventChoices);
                                             if (memberMenuChoices == "q")
                                             {
                                                 mail = "q";
