@@ -387,6 +387,7 @@ namespace ConsoleMenu.Methods.Members
                 {
                     switch (theChoice)
                     {
+                        #region 1. CRUD Admins
                         case "1": //CRUD admins - not done
                             Console.WriteLine("Input Which Crud method u want to do:");
                             Console.WriteLine("1. (C) Create admin");
@@ -589,6 +590,8 @@ namespace ConsoleMenu.Methods.Members
                                 }
                             }
                         break;
+                        #endregion
+                        #region 2. Ændre formandskab
                         case "2": //ændre formandskab - not done //brug id
                             Console.WriteLine("Indtast den brugers id for at ændre formandskab:");
                             int id = Convert.ToInt32(Console.ReadLine());
@@ -617,6 +620,8 @@ namespace ConsoleMenu.Methods.Members
                                 Console.WriteLine("Brugeren findes ikke, prøv igen.");
                             }
                         break;
+                        #endregion
+                        #region 3. View alle members
                         case "3"://skal kunne view alle members
                             foreach (Member m1 in memberRepo.GetAll()) //Maybe it works?
                             {
@@ -626,6 +631,8 @@ namespace ConsoleMenu.Methods.Members
                                 }
                             }
                         break;
+                        #endregion
+                        #region 4. Vælge en bestemt member
                         case "4"://skal kunne vælge en bestemt valgt member (findes member ud fra deres id)
                             foreach (Member m1 in memberRepo.GetAll()) //Maybe it works?
                             {
@@ -639,6 +646,8 @@ namespace ConsoleMenu.Methods.Members
                                 }
                             }
                         break;
+                        #endregion
+                        #region 5. Sortering af både pladser
                         case "5"://sortere boatlots (sorterings algoritmer)    -   not done
                             foreach (BoatLot boatLot in boatLotRepo.GetAll())
                             {
@@ -654,6 +663,8 @@ namespace ConsoleMenu.Methods.Members
                                 }
                             }
                         break;
+                        #endregion
+                        #region 6. Simple statistikker
                         case "6"://simple statistikker     -   not done
                             Console.WriteLine("Brugere i alt:");
                             Console.WriteLine("------------------------------------------");
@@ -673,6 +684,8 @@ namespace ConsoleMenu.Methods.Members
                                 }
                             }
                         break;
+                        #endregion
+                        #region 7. Slette og lave users
                         case "7": //kan delete users og lave user
                             string firstChoice = Console.ReadLine();
                             if (firstChoice == "1") //Adds a new user
@@ -728,11 +741,15 @@ namespace ConsoleMenu.Methods.Members
                                 }
                             }
                         break;
+                        #endregion
+                        #region 8. View ens oplysninger
                         case "8"://skal kunne kigge på ens oplysninger
                             {
                                 Console.WriteLine(member.ToString() + $"\n{member.Mail}");
                             }
                         break;
+                        #endregion
+                        #region 9. Edit ens konto
                         case "9": //redigere deres konto
                             {
                                 Console.WriteLine("Dine Nuværende Informationer:");
@@ -818,6 +835,8 @@ namespace ConsoleMenu.Methods.Members
                                 }
                             }
                         break;
+                        #endregion
+                        #region 10. tilføje boatlots til en selv
                         case "10"://tilføje boatlots
                             Console.WriteLine($"Du har lige nu: {member._boatLotsRented.Count} boat lots som er lejet.");
                             Console.WriteLine($"-----------------------------------------------");
@@ -836,6 +855,7 @@ namespace ConsoleMenu.Methods.Members
                                 }
                             }
                         break;
+                        #endregion
                     }
                     theChoice = ReadChoice(readChoices);
                 }
