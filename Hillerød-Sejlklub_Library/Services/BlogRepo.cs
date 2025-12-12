@@ -1,6 +1,7 @@
 ﻿using Hillerød_Sejlklub_Library.Interfaces;
 using Hillerød_Sejlklub_Library.Models.Blogs;
 using Hillerød_Sejlklub_Library.Models.Events;
+using Hillerød_Sejlklub_Library.Models.Members;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,7 @@ namespace Hillerød_Sejlklub_Library.Services
     {
         private List<Blog> _blogRepo;
 
+
         public BlogRepo()
         {
             _blogRepo = new List<Blog>();
@@ -26,7 +28,7 @@ namespace Hillerød_Sejlklub_Library.Services
                 _blogRepo.Add(blog);
             }
         }
-        public bool BlogNameExist (string headline)
+        public bool BlogNameExist(string headline)
         {
             foreach (var b in _blogRepo)
             {
@@ -38,7 +40,7 @@ namespace Hillerød_Sejlklub_Library.Services
             return false;
         }
 
-        public Blog ReturnByDateRange(DateTime from, DateTime to)
+        public Blog ReturnByDateRange(DateTime from, DateTime to) //return en liste af blog og vise det
         {
             foreach (Blog b in _blogRepo)
             {
@@ -50,12 +52,12 @@ namespace Hillerød_Sejlklub_Library.Services
             return null;
         }
 
-        public void EditBlog(Blog blog, string headline, string theText, string description) 
-            //return type Blog? fordi når man har ændret en bestemt blog så returner man den?
+        public void EditBlog(Blog blog, string headline, string theText, string description)
+        //return type Blog? fordi når man har ændret en bestemt blog så returner man den?
         {
-            foreach(Blog b in _blogRepo)
+            foreach (Blog b in _blogRepo)
             {
-                if(b == blog)
+                if (b.Headline == blog.Headline) //headline (og) the text osv
                 {
                     b.Headline = headline;
                     b.TheText = theText;
@@ -68,10 +70,10 @@ namespace Hillerød_Sejlklub_Library.Services
             _blogRepo.Remove(blog);
         }
 
-        
+
         public void PrintAllComments()
         {
-            foreach(Blog c in _blogRepo)
+            foreach (Blog c in _blogRepo)
             {
                 Console.WriteLine(c.CommentsOnBlog);
             }
@@ -83,7 +85,7 @@ namespace Hillerød_Sejlklub_Library.Services
         {
             List<Blog> blogTitle = new List<Blog>();
 
-            for(int i = 0; i < _blogRepo.Count; i++)
+            for (int i = 0; i < _blogRepo.Count; i++)
             {
                 if (_blogRepo[i].Headline == title.ToLower() || _blogRepo[i].Headline == title.ToUpper())
                 {
@@ -95,10 +97,26 @@ namespace Hillerød_Sejlklub_Library.Services
         }
         public void PrintAllBlog()
         {
-            foreach(Blog b in _blogRepo)
+            foreach (Blog b in _blogRepo)
             {
                 Console.WriteLine(b.Headline + b.Description);
             }
         }
+        //public List<Comment> GetAllCommentsWithThisMember(Member member)
+        //{
+
+        //    List<Comment> blogList = new List<Comment>();
+        //    //foreach (Blog b in _blogRepo)
+        //    //{
+        //        //foreach (Comment comment in _blogRepo.Contains(this.CommentsOnBlog))
+        //        //{
+        //        //    if (comment.Member == member)
+        //        //    {
+        //        //        blogList.Add(comment);
+        //        //    }
+        //        //}
+        //    }
+        //    return blogList;
+        //}
     }
 }
