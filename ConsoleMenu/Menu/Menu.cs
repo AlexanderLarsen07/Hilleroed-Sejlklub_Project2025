@@ -1,21 +1,8 @@
 ﻿using ConsoleMenu.Controllers.Events;
 using ConsoleMenu.Methods.Members;
-using Hillerød_Sejlklub_Library.Data;
-using Hillerød_Sejlklub_Library.Interfaces;
-using Hillerød_Sejlklub_Library.Models.Blogs;
 using Hillerød_Sejlklub_Library.Models.Events;
 using Hillerød_Sejlklub_Library.Models.Members;
 using Hillerød_Sejlklub_Library.Services;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Channels;
-using System.Threading.Tasks;
 
 namespace ConsoleMenu.Menu
 {
@@ -65,6 +52,18 @@ namespace ConsoleMenu.Menu
         public void SetChairman(Member member) //slet
         {
             _memberRepo.AddMember(member);
+        }
+        public void AddEvent(Event even)
+        {
+            _eventRepo.AddEvent(even);
+        }
+        public void AddBoatLot(BoatLot boatlot)
+        {
+            _boatLotRepo.AddBoatLot(boatlot);
+        }
+        public void AddSignup(Signup signup)
+        {
+            _signupRepo.AddSignup(signup);
         }
 
         private static string ReadChoice(string choices)

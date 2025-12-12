@@ -26,14 +26,18 @@ namespace Hillerød_Sejlklub_Library.Models.Events
             Event = ev;
             Member = member;
             Comment = comment.Trim();
+            try
+            {
+
                 if (Event._signups.Count < Event.MaxMembers)
                 {
                     Event._signups.Add(this);
                 }
-                else
-                {
-                    throw new EventFullException("\tCouldn't sign up to event : Event full");
-                }
+            }
+            catch (EventFullException efv)
+            {
+                new EventFullException(efv.Message);
+            }
         }
         #endregion
         #region Methods
