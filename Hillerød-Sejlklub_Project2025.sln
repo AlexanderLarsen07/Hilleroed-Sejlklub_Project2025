@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hillerød-Sejlklub_Library"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleMenu", "ConsoleMenu\ConsoleMenu.csproj", "{B7388BE3-3FAC-40F5-A00E-D1BA11029674}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SinanConsoleAppTest", "SinanConsoleAppTest\SinanConsoleAppTest.csproj", "{6AE277F4-4AF1-4D19-976F-9B5E6D7CCFD8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{B7388BE3-3FAC-40F5-A00E-D1BA11029674}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7388BE3-3FAC-40F5-A00E-D1BA11029674}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7388BE3-3FAC-40F5-A00E-D1BA11029674}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AE277F4-4AF1-4D19-976F-9B5E6D7CCFD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AE277F4-4AF1-4D19-976F-9B5E6D7CCFD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AE277F4-4AF1-4D19-976F-9B5E6D7CCFD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AE277F4-4AF1-4D19-976F-9B5E6D7CCFD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
