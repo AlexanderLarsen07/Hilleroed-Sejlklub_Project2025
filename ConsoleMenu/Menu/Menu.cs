@@ -1,5 +1,6 @@
 ﻿using ConsoleMenu.Controllers.Events;
 using ConsoleMenu.Methods.Members;
+using Hillerød_Sejlklub_Library.Data;
 using Hillerød_Sejlklub_Library.Interfaces;
 using Hillerød_Sejlklub_Library.Models.Events;
 using Hillerød_Sejlklub_Library.Models.Members;
@@ -37,6 +38,7 @@ namespace ConsoleMenu.Menu
 
         //Formand - har samme adgang som en administrator,
         //men kan fjerne og tilføje administratorer og give formandskabet til en anden.
+
         private MemberRepo _memberRepo = new MemberRepo();
         private BlogRepo _blogRepo = new BlogRepo();
         private BoatLotRepo _boatLotRepo = new BoatLotRepo();
@@ -48,23 +50,6 @@ namespace ConsoleMenu.Menu
 
         private EventMenuMethod eventMenu = new EventMenuMethod();
         private MemberMenu memberMenu = new MemberMenu();
-
-        public void SetChairman(Member member) //slet
-        {
-            _memberRepo.AddMember(member);
-        }
-        public void AddEvent(Event even)
-        {
-            _eventRepo.AddEvent(even);
-        }
-        public void AddBoatLot(BoatLot boatlot)
-        {
-            _boatLotRepo.AddBoatLot(boatlot);
-        }
-        public void AddSignup(Signup signup)
-        {
-            _signupRepo.AddSignup(signup);
-        }
 
         private static string ReadChoice(string choices)
         {
@@ -124,7 +109,7 @@ namespace ConsoleMenu.Menu
                                 Console.Clear();
                                 Console.WriteLine("Mail does not exist.");
                             }
-                            else if (member.Mail == mail)
+                            else
                             {
                                 validMail = true;
                                 bool validPassword = false;

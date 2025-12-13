@@ -1,4 +1,5 @@
-﻿using Hillerød_Sejlklub_Library.Interfaces;
+﻿using Hillerød_Sejlklub_Library.Data;
+using Hillerød_Sejlklub_Library.Interfaces;
 using Hillerød_Sejlklub_Library.Models.Members;
 
 namespace Hillerød_Sejlklub_Library.Services
@@ -9,6 +10,7 @@ namespace Hillerød_Sejlklub_Library.Services
         public MemberRepo()
         {
             _memberDictionary = new Dictionary<int, Member>();
+            _memberDictionary = MockData.MemberData;
         }
         //adds Member
         public void AddMember(Member member)
@@ -131,10 +133,10 @@ namespace Hillerød_Sejlklub_Library.Services
                 if (member.Value.Mail == mail)
                 {
                     member.Value.Mail = mail;
+                    return member.Value;
                 }
-                return member.Value;
             }
-            return null!;
+            return null;
       
         }
 

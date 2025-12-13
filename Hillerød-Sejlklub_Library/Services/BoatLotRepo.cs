@@ -1,4 +1,5 @@
-﻿using Hillerød_Sejlklub_Library.Interfaces;
+﻿using Hillerød_Sejlklub_Library.Data;
+using Hillerød_Sejlklub_Library.Interfaces;
 using Hillerød_Sejlklub_Library.Models.Members;
 
 namespace Hillerød_Sejlklub_Library.Services
@@ -9,6 +10,7 @@ namespace Hillerød_Sejlklub_Library.Services
         public BoatLotRepo()
         {
             _boatLotDictionary = new Dictionary<int, BoatLot>();
+            _boatLotDictionary = MockData.BoatLotData;
         }
     
         public List<BoatLot> GetAll()

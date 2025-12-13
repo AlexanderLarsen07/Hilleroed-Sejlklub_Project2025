@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Hillerød_Sejlklub_Library.Data;
 using Hillerød_Sejlklub_Library.Interfaces;
 using Hillerød_Sejlklub_Library.Models.Events;
 using Hillerød_Sejlklub_Library.Models.Members;
@@ -16,6 +17,7 @@ namespace Hillerød_Sejlklub_Library.Services
         public SignupRepo()
         {
             _signupList = new List<Signup>();
+            _signupList = MockData.SignupData;
         }
 
         public void AddSignup(Signup signup)
@@ -49,7 +51,7 @@ namespace Hillerød_Sejlklub_Library.Services
             List<Signup> signups = [];
             foreach(Signup signup in _signupList)
             {
-                if(signup.Event.Title.ToLower() == title || signup.Event.Title.ToUpper() == title)
+                if(signup.Event.Title.Trim().ToLower() == title.Trim().ToLower())
                 {
                     signups.Add(signup);
                 }
@@ -74,7 +76,7 @@ namespace Hillerød_Sejlklub_Library.Services
             List<Signup> signups = ReturnAllByMember(member);
             foreach(Signup s in signups)
             {
-                if (s.Event.Title.ToLower() == title || s.Event.Title.ToUpper() == title)
+                if (s.Event.Title.Trim().ToLower() == title.Trim().ToLower())
                 {
                     s.Comment = comment;
                 }
