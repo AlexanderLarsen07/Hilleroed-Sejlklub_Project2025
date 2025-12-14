@@ -17,7 +17,9 @@ namespace Hillerød_Sejlklub_Library.Data
             {1, new Member("name", 17, MembershipEnum.Medlem, "mail@yes.efs", "password", "12121212") },
             {2, new Member("gustaf", 19, MembershipEnum.Medlem, "gustaf@mail.com", "password", "13131313") },
             {3, new Member("steve", 64, MembershipEnum.PassiveMedlem, "steve@gmail.com", "password", "14141414") },
-            {4, new Member("Chairman", 700, MembershipEnum.Medlem, "Chairman@Mail.yeet", "password", "17171717") {Role = RoleEnum.Chairman} }
+            {4, new Member("Chairman", 700, MembershipEnum.Medlem, "Chairman@Mail.yeet", "password", "17171717") {Role = RoleEnum.Chairman} },
+            {5, new Member("Frederik", 50, MembershipEnum.FamilieMedlem, "Hotmail@gyahoo.com", "password", "3892921") {Role = RoleEnum.Administrator} },
+            {6, new Member("Gaming", 50, MembershipEnum.FamilieMedlem, "Hotmail@gyahoo.com", "password", "3892921") {Role = RoleEnum.Administrator} }
         };
         
         private static List<DateTime> _dateTimeData = new List<DateTime>()

@@ -69,7 +69,7 @@ namespace Hillerød_Sejlklub_Library.Services
         }
 
         //return customer that contains the id
-        public Member GetCustomerById(int id)
+        public Member GetMemberById(int id)
         {
             if (_memberDictionary.ContainsKey(id))
             {
@@ -77,6 +77,61 @@ namespace Hillerød_Sejlklub_Library.Services
             }
             return null!;
         }
+
+        public Member GetAdministratorByRole()
+        {
+            RoleEnum role = RoleEnum.Administrator;
+            foreach (KeyValuePair<int, Member> member in _memberDictionary)
+            {
+                if (member.Value.Role == RoleEnum.Administrator)
+                {
+                    member.Value.Role = role;
+                    return member.Value;
+                }
+                else if(_memberDictionary.Count == 0)
+                {
+                    Console.WriteLine("No Admins Found");
+                }
+            }
+            return null!;
+        }
+
+        public Member GetMemberByRole()
+        {
+            RoleEnum role = RoleEnum.Member;
+            foreach (KeyValuePair<int, Member> member in _memberDictionary)
+            {
+                if (member.Value.Role == RoleEnum.Member)
+                {
+                    member.Value.Role = role;
+                    return member.Value;
+                }
+                else
+                {
+                    Console.WriteLine("No Member Found");
+                }
+            }
+            return null!;
+        }
+
+        public Member GetChairmanByRole()
+        {
+            RoleEnum role = RoleEnum.Chairman;
+            foreach (KeyValuePair<int, Member> member in _memberDictionary)
+            {
+                if (member.Value.Role == RoleEnum.Chairman)
+                {
+                    member.Value.Role = role;
+                    return member.Value;
+                }
+                else
+                {
+                    Console.WriteLine("No Chairman Found");
+                }
+            }
+            return null!;
+        }
+
 
         public void Print(Dictionary<int, Member> dictionary)
         {

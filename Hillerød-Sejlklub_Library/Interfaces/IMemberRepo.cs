@@ -12,7 +12,7 @@ namespace Hillerød_Sejlklub_Library.Interfaces
     {
         List<Member> GetAll();
         void AddMember(Member member);
-        Member GetCustomerById(int id);
+        Member GetMemberById(int id);
         void RemoveMember(int id);
         void PrintAllMembers();
         
