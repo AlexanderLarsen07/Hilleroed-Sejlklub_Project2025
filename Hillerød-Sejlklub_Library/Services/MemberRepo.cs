@@ -86,11 +86,7 @@ namespace Hillerød_Sejlklub_Library.Services
                 if (member.Value.Role == RoleEnum.Administrator)
                 {
                     member.Value.Role = role;
-                    return member.Value;
-                }
-                else if(_memberDictionary.Count == 0)
-                {
-                    Console.WriteLine("No Admins Found");
+                    Console.WriteLine(member);
                 }
             }
             return null!;
@@ -104,11 +100,7 @@ namespace Hillerød_Sejlklub_Library.Services
                 if (member.Value.Role == RoleEnum.Member)
                 {
                     member.Value.Role = role;
-                    return member.Value;
-                }
-                else
-                {
-                    Console.WriteLine("No Member Found");
+                    Console.WriteLine(member);
                 }
             }
             return null!;
@@ -122,11 +114,7 @@ namespace Hillerød_Sejlklub_Library.Services
                 if (member.Value.Role == RoleEnum.Chairman)
                 {
                     member.Value.Role = role;
-                    return member.Value;
-                }
-                else
-                {
-                    Console.WriteLine("No Chairman Found");
+                    Console.WriteLine(member);
                 }
             }
             return null!;

@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Channels;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ConsoleMenu.Methods.Members
 {
@@ -386,7 +387,7 @@ namespace ConsoleMenu.Methods.Members
                 {
                     switch (theChoice)
                     {
-                        #region 1. CRUD Admins
+                        #region 1. CRUD Admins      -       (look into the create admin) - not finished
                         case "1": //CRUD admins - not done
                             Console.WriteLine("Input Which Crud method u want to do:");
                             Console.WriteLine("1. (C) Create admin");
@@ -395,7 +396,7 @@ namespace ConsoleMenu.Methods.Members
                             Console.WriteLine("4. (D) Delete admin");
                             Console.WriteLine();
                             string decision = Console.ReadLine();
-                            if (decision == "1")  //Create admin
+                            if (decision == "1")  //Create admin - not done
                             {
                                 bool determination = true;
                                 while(determination == true)
@@ -439,7 +440,8 @@ namespace ConsoleMenu.Methods.Members
                                         Console.WriteLine("Indtast Telefon nummer");
                                         string phoneNumber = Console.ReadLine();
                                         AddMembersController newMember = new AddMembersController(name, age, isMembership, mail, password, phoneNumber, memberRepo);
-                                        newMember.Member.Role = RoleEnum.Administrator;
+                                        RoleEnum role = RoleEnum.Administrator;
+                                        newMember.Member.Role = role;
                                         newMember.AddMember();
                                     }
                                     if (newDecision == "2") //ændrer en eksisterende member til administrator
@@ -453,8 +455,8 @@ namespace ConsoleMenu.Methods.Members
                                         int number = Convert.ToInt32(Console.ReadLine());
                                         if (number == member.MemberID)
                                         {
-                                            while (number == memberRepo.GetMemberByRole().MemberID)
-                                            {
+                                            if (number == memberRepo.GetMemberByRole().MemberID)
+                                            { 
                                                 memberRepo.GetMemberById(number).Role = RoleEnum.Administrator;
                                                 break;
                                             }
@@ -476,105 +478,98 @@ namespace ConsoleMenu.Methods.Members
                             }
                             else if (decision == "3")//Update admin - not done
                             {
-                                foreach (Member memberExist in memberRepo.GetAll())
+                                Console.WriteLine(memberRepo.GetAdministratorByRole());
+                                Console.WriteLine("Indtast en Admins id:");
+                                int idNumber = Convert.ToInt32(Console.ReadLine());
+                                if (idNumber == memberRepo.GetAdministratorByRole().MemberID)
                                 {
-                                    if (memberExist.Role == RoleEnum.Administrator)
+                                    Console.WriteLine("Admindens nuværende informationer:");
+                                    if (idNumber == memberRepo.GetMemberByRole().MemberID)
                                     {
-                                        Console.WriteLine("Indtast en Admins id:");
-                                        int idNumber = Convert.ToInt32(Console.ReadLine());
-                                        if (idNumber == memberExist.MemberID)
+                                        Console.WriteLine(memberRepo.GetAdministratorByRole().ToString());
+                                    }
+                                    Console.WriteLine("Vælg hvilke informationer om adminden du ville ændres ud fra tallet:" +
+                                            "\n1: Navn" +
+                                            "\n2: Alder" +
+                                            "\n3: Telefon Nummer" +
+                                            "\n4: Mail" +
+                                            "\n5: Password");
+                                    string choice = Console.ReadLine();
+                                    if (choice == "1") //navn
+                                    {
+                                        Console.WriteLine("Indtast nyt navn:");
+                                        string nameTyped = Console.ReadLine();
+                                        if (nameTyped != memberRepo.GetAdministratorByRole().Name || nameTyped.Length < 0)
                                         {
-                                            Console.WriteLine("Admindens nuværende informationer:");
-                                            memberExist.ToString();
-                                            Console.WriteLine("Vælg hvilke informationer om adminden du ville ændres ud fra tallet:" +
-                                                    "\n1: Navn" +
-                                                    "\n2: Alder" +
-                                                    "\n3: Telefon Nummer" +
-                                                    "\n4: Mail" +
-                                                    "\n5: Password");
-                                            string choice = Console.ReadLine();
-                                            if (choice == "1") //navn
-                                            {
-                                                Console.WriteLine("Indtast nyt navn:");
-                                                string nameTyped = Console.ReadLine();
-                                                if (nameTyped != memberExist.Name || nameTyped.Length < 0)
-                                                {
-                                                    memberExist.Name = nameTyped!;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Navnet kan ikke være det samme som den tidligere og skal være større end 0 tegn" +
-                                                        ",\nStart over.");
-                                                }
-                                                //member.Name = Console.ReadLine();
-
-                                            }
-                                            else if (choice == "2") //alder
-                                            {
-                                                Console.WriteLine("Indtast nyt alder:");
-                                                int age = Convert.ToInt32(Console.ReadLine());
-                                                if (age != memberExist.Age || age < 100 || age > 0)
-                                                {
-                                                    memberExist.Age = age;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Alderen må ikke være under 0 eller over 100 eller det samme som den tidligere alder, Start over.");
-                                                }
-                                                //member.Age = Convert.ToInt32(Console.ReadLine());
-                                            }
-                                            else if (choice == "3") //Telefon nummer
-                                            {
-                                                Console.WriteLine("Indtast nyt Telefon nummer:");
-                                                string phoneNumber = Console.ReadLine();
-                                                if (phoneNumber != memberExist.PhoneNumber || phoneNumber.Length == 8)
-                                                {
-                                                    memberExist.PhoneNumber = phoneNumber!;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Telefon Nummeret skal have 8 cifre, start over.");
-                                                }
-                                                //member.PhoneNumber = Console.ReadLine();
-                                            }
-                                            else if (choice == "4") // Mail
-                                            {
-                                                Console.WriteLine("Indtast nyt Mail:");
-                                                string mail = Console.ReadLine();
-                                                if (mail != memberExist.Mail || mail.Contains("@gmail") || mail.Contains("@yahoo") || mail.Contains("@hotmail") || mail.Contains("@outlook") || mail.Contains("@office365"))
-                                                {
-                                                    memberExist.Mail = mail;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Den indtastede Mail er ikke korrekt, start over.");
-                                                }
-                                                //member.Mail = Console.ReadLine();
-                                            }
-                                            else if (choice == "5") //Password
-                                            {
-                                                Console.WriteLine("Indtast nyt password:");
-                                                string password = Console.ReadLine();
-                                                if (password != memberExist.Password || password.Length < 5)
-                                                {
-                                                    memberExist.Password = password;
-                                                }
-                                                else
-                                                {
-                                                    Console.WriteLine("Passwordet må ikke være det samme som den gamle password og skal være større end 5 karakterer");
-                                                }
-                                                //member.Password = Console.ReadLine();
-                                            }
+                                            memberRepo.GetAdministratorByRole().Name = nameTyped!;
                                         }
                                         else
                                         {
-                                            Console.WriteLine("Brugeren med dette id findes ikke, prøv igen.");
+                                            Console.WriteLine("Navnet kan ikke være det samme som den tidligere og skal være større end 0 tegn" +
+                                                ",\nStart over.");
                                         }
+
                                     }
-                                    else
+                                    else if (choice == "2") //alder
                                     {
-                                        Console.WriteLine("Der er ingen Admins med dette id, prøv igen.");
+                                        Console.WriteLine("Indtast nyt alder:");
+                                        int age = Convert.ToInt32(Console.ReadLine());
+                                        if (age != memberRepo.GetAdministratorByRole().Age || age < 100 || age > 0)
+                                        {
+                                            memberRepo.GetAdministratorByRole().Age = age;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Alderen må ikke være under 0 eller over 100 eller det samme som den tidligere alder, Start over.");
+                                        }
+                                        //member.Age = Convert.ToInt32(Console.ReadLine());
                                     }
+                                    else if (choice == "3") //Telefon nummer
+                                    {
+                                        Console.WriteLine("Indtast nyt Telefon nummer:");
+                                        string phoneNumber = Console.ReadLine();
+                                        if (phoneNumber != memberRepo.GetAdministratorByRole().PhoneNumber || phoneNumber.Length == 8)
+                                        {
+                                            memberRepo.GetAdministratorByRole().PhoneNumber = phoneNumber!;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Telefon Nummeret skal have 8 cifre, start over.");
+                                        }
+                                        //member.PhoneNumber = Console.ReadLine();
+                                    }
+                                    else if (choice == "4") // Mail
+                                    {
+                                        Console.WriteLine("Indtast nyt Mail:");
+                                        string mail = Console.ReadLine();
+                                        if (mail != memberRepo.GetAdministratorByRole().Mail || mail.Contains("@gmail") || mail.Contains("@yahoo") || mail.Contains("@hotmail") || mail.Contains("@outlook") || mail.Contains("@office365"))
+                                        {
+                                            memberRepo.GetAdministratorByRole().Mail = mail;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Den indtastede Mail er ikke korrekt, start over.");
+                                        }
+                                        //member.Mail = Console.ReadLine();
+                                    }
+                                    else if (choice == "5") //Password
+                                    {
+                                        Console.WriteLine("Indtast nyt password:");
+                                        string password = Console.ReadLine();
+                                        if (password != memberRepo.GetAdministratorByRole().Password || password.Length < 5)
+                                        {
+                                            memberRepo.GetAdministratorByRole().Password = password;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Passwordet må ikke være det samme som den gamle password og skal være større end 5 karakterer");
+                                        }
+                                        //member.Password = Console.ReadLine();
+                                    }
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Brugeren med dette id findes ikke, prøv igen.");
                                 }
                             }
                             else if (decision == "4")//Delete admin
