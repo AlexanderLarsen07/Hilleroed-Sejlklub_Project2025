@@ -42,7 +42,7 @@ namespace Hillerød_Sejlklub_Library.Services
         }
         public List<Member> GetAll()
         {
-            return _memberDictionary.Values.ToList();
+           return _memberDictionary.Values.ToList();
         }
 
         //removes a member by the entering id that matches member id

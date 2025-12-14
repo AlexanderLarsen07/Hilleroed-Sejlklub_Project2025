@@ -383,9 +383,9 @@ namespace ConsoleMenu.Methods.Members
                 }
                 #endregion
                 #region Members with role chairman
-                else if (member.Role == RoleEnum.Chairman) //skal alt admins kan, CRUD admins, ændre formandskab (confirmation button) - not done
+                else if (member.Role == RoleEnum.Chairman) //skal alt admins kan, CRUD admins, ændre formandskab
                 {
-                    switch (theChoice)
+                    switch (theChoice) //(1, 2, 5, 6, 7 and 10) not finished
                     {
                         #region 1. CRUD Admins      -       (look into the create admin) - not finished
                         case "1": //CRUD admins - not done
@@ -399,7 +399,7 @@ namespace ConsoleMenu.Methods.Members
                             if (decision == "1")  //Create admin - not done
                             {
                                 bool determination = true;
-                                while(determination == true)
+                                while (determination == true)
                                 {
                                     Console.WriteLine("");
                                     Console.WriteLine("Input number associated with the decision:");
@@ -453,18 +453,15 @@ namespace ConsoleMenu.Methods.Members
                                         Console.WriteLine("--------------------------");
                                         Console.WriteLine("");
                                         int number = Convert.ToInt32(Console.ReadLine());
-                                        if (number == member.MemberID)
+                                        if (number == memberRepo.GetMemberByRole().MemberID)
                                         {
-                                            if (number == memberRepo.GetMemberByRole().MemberID)
-                                            { 
-                                                memberRepo.GetMemberById(number).Role = RoleEnum.Administrator;
-                                                break;
-                                            }
+                                            memberRepo.GetMemberById(number).Role = RoleEnum.Administrator;
+                                            break;
                                         }
                                     }
                                     determination = false;
                                 }
-                                
+
                             }
                             else if (decision == "2") //Read admin
                             {
@@ -579,7 +576,7 @@ namespace ConsoleMenu.Methods.Members
                                 {
                                     Console.WriteLine("Indtast en eksisterendes admins id for at give dem member rollen:");
                                     int newNumber = Convert.ToInt32(Console.ReadLine());
-                                    if (newNumber == member.MemberID)
+                                    if (newNumber == memberRepo.GetMemberByRole().MemberID)
                                     {
                                         member.Role = RoleEnum.Member;
                                     }
@@ -590,7 +587,7 @@ namespace ConsoleMenu.Methods.Members
                                     int enteredNumber = Convert.ToInt32(Console.ReadLine());
                                     if (member.Role == RoleEnum.Administrator)
                                     {
-                                        if (enteredNumber == member.MemberID)
+                                        if (enteredNumber == memberRepo.GetMemberByRole().MemberID)
                                         {
                                             memberRepo.RemoveMember(enteredNumber);
                                         }
@@ -603,101 +600,119 @@ namespace ConsoleMenu.Methods.Members
                             }
                             break;
                         #endregion
-                        #region 2. Ændre formandskab
-                        case "2": //ændre formandskab - not done //brug id
-                            Console.WriteLine("Indtast den brugers id for at ændre formandskab:");
+                        #region 2. Change Chairman - (exception and roles not working) - not finished
+                        case "2": //ændre formandskab
+                            Console.WriteLine("Input the users id to change Chairman:");
                             int id = Convert.ToInt32(Console.ReadLine());
-                            if (id == member.MemberID)
+                            if (id == memberRepo.GetMemberById(id).MemberID) //exception makes me unable to output else
                             {
-                                Console.WriteLine("Er du sikker på at du ville skifte formandskab?");
+                                Console.WriteLine("\nAre you sure that you want to change the users role to chairman and change your role to Administrator?");
+                                Console.WriteLine(memberRepo.GetMemberById(id).ToString());
+                                Console.WriteLine("");
                                 string confirmation = Console.ReadLine();
-                                if (confirmation == "ja")
+                                if (confirmation == "Ja" || confirmation == "Yes")
                                 {
                                     if (member.Role == RoleEnum.Chairman) //rollen formandskab bliver fjernet for den nuværende formand
                                     {
-                                        member.Role = RoleEnum.Member;
+                                        member.Role = RoleEnum.Administrator; //not done
                                     }
-                                    if (id == member.MemberID) //rollen bliver tildelt til en ny formand ud fra id
+                                    while (id == memberRepo.GetMemberById(id).MemberID) //rollen bliver tildelt til en ny formand ud fra id
                                     {
-                                        member.Role = RoleEnum.Chairman;
+                                        memberRepo.GetMemberById(id).Role = RoleEnum.Chairman; //not done
                                     }
-                                }
-                                else
-                                {
-                                    break;
                                 }
                             }
                             else
                             {
                                 Console.WriteLine("Brugeren findes ikke, prøv igen.");
+                                Console.ReadLine();
                             }
                             break;
-                        #endregion
-                        #region 3. View alle members
+                        #endregion 
+                        #region 3. View alle user - done
                         case "3"://skal kunne view alle members
-                            foreach (Member m1 in memberRepo.GetAll()) //Maybe it works?
+                            foreach (Member members in memberRepo.GetAll())
                             {
-                                if (m1.Role == RoleEnum.Member)
-                                {
-                                    Console.WriteLine(member.ToString() + $"\n{member.Mail}");
-                                }
+                                Console.WriteLine(members.ToString());
                             }
+                            Console.ReadLine();
                             break;
                         #endregion
-                        #region 4. Vælge en bestemt member
+                        #region 4. Vælge en bestemt member - done
                         case "4"://skal kunne vælge en bestemt valgt member (findes member ud fra deres id)
                             foreach (Member m1 in memberRepo.GetAll()) //Maybe it works?
                             {
-                                if (m1.Role == RoleEnum.Member)
+                                Console.WriteLine("Enter a members id number:");
+                                int enteredNumber = Convert.ToInt32(Console.ReadLine());
+                                if (enteredNumber == m1.MemberID)
                                 {
-                                    int enteredNumber = Convert.ToInt32(Console.ReadLine());
-                                    if (enteredNumber == m1.MemberID)
-                                    {
-                                        Console.WriteLine(member.ToString() + $"\n{member.Mail}");
-                                    }
+                                    Console.WriteLine(m1.ToString() + $"{m1.Mail}");
+                                    Console.ReadLine();
+                                    break;
+                                } 
+                                if (enteredNumber != m1.MemberID)
+                                {
+                                    Console.WriteLine("No member has the entered id");
+                                    Console.ReadLine();
+                                    break;
                                 }
                             }
                             break;
                         #endregion
-                        #region 5. Sortering af både pladser
+                        #region 5. Sortering af både pladser - (confused? how to do) - not finished
                         case "5"://sortere boatlots (sorterings algoritmer)    -   not done
                             foreach (BoatLot boatLot in boatLotRepo.GetAll())
                             {
                                 foreach (Member m1 in memberRepo.GetAll()) //Maybe it works?
                                 {
-                                    if (m1._boatLotsRented != null)
+                                    if (m1._boatLotsRented.Contains(boatLot))
                                     {
-                                        Console.WriteLine(m1.MemberID);
-                                        Console.WriteLine(m1.Name);
-                                        Console.WriteLine(m1._boatLotsRented);
-
+                                        Console.WriteLine(m1.ToString().Count());
+                                        Console.WriteLine(m1.MemberID.ToString());
+                                        Console.WriteLine(m1.Mail!.ToString());
+                                        Console.WriteLine(m1._boatLotsRented.ToString());
+                                        Console.ReadLine();
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("You have no boatlot's");
+                                        Console.ReadLine();
+                                        break;
                                     }
                                 }
                             }
                             break;
                         #endregion
-                        #region 6. Simple statistikker
-                        case "6"://simple statistikker     -   not done
-                            Console.WriteLine("Brugere i alt:");
+                        #region 6. Simple statistikker  -  (nulreference) - not finished
+                        case "6"://simple statistikker
+                            Console.WriteLine("Members in total:");
                             Console.WriteLine("------------------------------------------");
-                            Console.WriteLine($"Der er {member._members.Count} brugere i alt.");
-                            Console.WriteLine($"Der er {member._members.Count.CompareTo(RoleEnum.Member)} brugere i alt der er member.");
-                            Console.WriteLine($"Der er {member._members.Count.CompareTo(RoleEnum.Administrator)} brugere i alt der administrator.");
-                            Console.WriteLine($"Der er {member._members.Count.CompareTo(RoleEnum.Chairman)} brugere i alt der er formand ");
-                            Console.WriteLine("------------------------------------------");
-                            Console.WriteLine("Mængde af båd pladser tilbage:");
-                            Console.WriteLine($"{member._boatLotsRented.Capacity}");
-                            Console.WriteLine("\nBrugere der har bådpladser og mængden::");
-                            foreach (Member memb in memberRepo.GetAll())
+                            foreach (Member members in memberRepo.GetAll())
                             {
-                                if (memb._boatLotsRented != null)
+                                Console.WriteLine($"There are {member.ToString().Count()} members in total.");
+                                
+                            }
+                            Console.WriteLine($"There are {memberRepo.GetMemberByRole()._members.Count} members in total with the role member.");
+                            Console.WriteLine($"There are {memberRepo.GetAdministratorByRole()._members.Count} members in total with the role administrator.");
+                            Console.WriteLine($"There are {memberRepo.GetChairmanByRole()._members.Count} members in total with the role chairman ");
+                            Console.WriteLine("------------------------------------------");
+                            Console.WriteLine($"Remaining boat lots left in total: {member._boatLotsRented.Capacity}");
+                            Console.WriteLine("\nMembers that have a boat lot and how many boat lots:");
+                            foreach (BoatLot boatLot in boatLotRepo.GetAll())
+                            {
+                                foreach (Member memb in memberRepo.GetAll())
                                 {
-                                    Console.WriteLine($"ID: {memb.MemberID}, Navn: {memb.Name} har {memb._boatLotsRented} båd pladser.");
+                                    if (memb._boatLotsRented.Contains(boatLot))
+                                    {
+                                        Console.WriteLine($"ID: {memb.MemberID.ToString()}, Navn: {memb.Name.ToString()} har {memb._boatLotsRented.Count} båd pladser.");
+                                    }
                                 }
                             }
+                            Console.ReadLine();
                             break;
                         #endregion
-                        #region 7. Slette og lave users
+                        #region 7. Slette og lave users - (have not gone through) - not finished
                         case "7": //kan delete users og lave user
                             string firstChoice = Console.ReadLine();
                             if (firstChoice == "1") //Adds a new user
@@ -754,14 +769,15 @@ namespace ConsoleMenu.Methods.Members
                             }
                             break;
                         #endregion
-                        #region 8. View ens oplysninger
+                        #region 8. View ens oplysninger - done
                         case "8"://skal kunne kigge på ens oplysninger
                             {
-                                Console.WriteLine(member.ToString() + $"\n{member.Mail}");
+                                Console.WriteLine(member.ToString() + $"Mail: {member.Mail}");
+                                Console.ReadLine();
                             }
                             break;
                         #endregion
-                        #region 9. Edit ens konto
+                        #region 9. Edit ens konto - done
                         case "9": //redigere deres konto
                             {
                                 Console.WriteLine("Dine Nuværende Informationer:");
@@ -848,7 +864,7 @@ namespace ConsoleMenu.Methods.Members
                             }
                             break;
                         #endregion
-                        #region 10. tilføje boatlots til en selv
+                        #region 10. tilføje boatlots til en selv - (doesnt seem to update boatlots) - not finished
                         case "10"://tilføje boatlots
                             Console.WriteLine($"Du har lige nu: {member._boatLotsRented.Count} boat lots som er lejet.");
                             Console.WriteLine($"-----------------------------------------------");
@@ -866,7 +882,11 @@ namespace ConsoleMenu.Methods.Members
                                     //member._boatLotsRented.Add() = boatLotsRented;
                                 }
                             }
-                            break;
+                            else
+                            {
+                                Console.WriteLine("The amount of boatLots inserted must be 1 or above");
+                            }
+                                break;
                             #endregion
                     }
                     theChoice = ReadChoice(readChoices);
