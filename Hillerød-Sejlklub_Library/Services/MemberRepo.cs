@@ -88,7 +88,7 @@ namespace Hillerød_Sejlklub_Library.Services
                     member.Value.Role = role;
                     return member.Value;
                 }
-                else
+                else if(_memberDictionary.Count == 0)
                 {
                     Console.WriteLine("No Admins Found");
                 }
