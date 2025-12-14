@@ -475,14 +475,6 @@ namespace ConsoleMenu.Methods.Members
                                     Console.WriteLine(memberRepo.GetAdministratorByRole());
                                     Console.ReadLine();
                                     determination = false;
-                                    foreach (Member memberExist in memberRepo.GetAll())
-                                    {
-                                        if (memberExist.Role == RoleEnum.Administrator)
-                                        {
-                                            Console.WriteLine(memberExist.ToString());
-                                        }
-                                    }
-                                    Console.ReadLine();
                                 }
                             }
                             else if (decision == "3")//Update admin - not done
