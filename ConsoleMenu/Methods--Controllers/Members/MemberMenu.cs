@@ -446,14 +446,21 @@ namespace ConsoleMenu.Methods.Members
                                     {
                                         Console.WriteLine("");
                                         Console.WriteLine("--------------------------");
-                                        Console.WriteLine("Indtast en eksisterendes members id for at give dem administrator rollen:");
+                                        Console.WriteLine("Input an existing members id to give them the role admin:");
                                         Console.WriteLine(memberRepo.GetMemberByRole());
                                         Console.WriteLine("--------------------------");
                                         Console.WriteLine("");
                                         int number = Convert.ToInt32(Console.ReadLine());
                                         if (number == member.MemberID)
                                         {
-                                            member.Role = RoleEnum.Administrator;
+                                            while (memberRepo.GetMemberById(member.MemberID).Role == RoleEnum.Member)
+                                            {
+                                                member.Role = RoleEnum.Administrator;
+                                            }
+                                            if (memberRepo.GetMemberById(member.MemberID).Role != RoleEnum.Member)
+                                            {
+                                                Console.WriteLine("This existing member is not a member");
+                                            }
                                         }
                                     }
                                     determination = false;
