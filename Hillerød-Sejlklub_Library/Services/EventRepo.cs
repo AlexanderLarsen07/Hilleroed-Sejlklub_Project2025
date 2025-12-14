@@ -1,6 +1,7 @@
 ﻿using Hillerød_Sejlklub_Library.Data;
 using Hillerød_Sejlklub_Library.Interfaces;
 using Hillerød_Sejlklub_Library.Models.Events;
+using Hillerød_Sejlklub_Library.Models.Members;
 
 namespace Hillerød_Sejlklub_Library.Services
 {
@@ -16,6 +17,18 @@ namespace Hillerød_Sejlklub_Library.Services
         public List<Event> GetAll()
         {
             return _events.Values.ToList();
+        }
+
+        public bool SignupExistsCheck(Member member, Event even) //use to ensure no double signups
+        {
+            for (int i = 0; i <= even._signups.Count; i++)
+            {
+                if (even._signups[i].Member.MemberID == member.MemberID)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         public List<Event> ReturnByDateRange(DateTime from, DateTime to)
@@ -71,7 +84,7 @@ namespace Hillerød_Sejlklub_Library.Services
             List<Event> events = [];
             foreach(KeyValuePair<int, Event> even in _events)
             {
-                if(even.Value.Title == title.ToLower() || even.Value.Title == title.ToUpper())
+                if(even.Value.Title.Trim().ToLower() == title.Trim().ToLower())
                 {
                     events.Add(even.Value);
                 }

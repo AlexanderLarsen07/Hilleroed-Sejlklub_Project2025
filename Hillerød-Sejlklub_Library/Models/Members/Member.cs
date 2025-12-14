@@ -19,7 +19,7 @@ namespace Hillerød_Sejlklub_Library.Models.Members
         public int MemberID
         {
             get { return _memberID; }
-            set { _memberID = value; }
+            private set { _memberID = value; }
         }
         public List<BoatLot> _boatLotsRented { get { return boatLotsRented; } private set { _boatLotsRented = boatLotsRented; } } //laves til en full property
         public string? Mail { get; set; } //needs to be unique
