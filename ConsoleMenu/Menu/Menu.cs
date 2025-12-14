@@ -53,6 +53,10 @@ namespace ConsoleMenu.Menu
         {
             _memberRepo.AddMember(member);
         }
+        public void SetAdministrator(Member member) //slet
+        {
+            _memberRepo.AddMember(member);
+        }
         public void AddEvent(Event even)
         {
             _eventRepo.AddEvent(even);

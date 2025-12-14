@@ -191,7 +191,6 @@ namespace ConsoleMenu.Methods.Members
                                         Console.WriteLine(m1.MemberID);
                                         Console.WriteLine(m1.Name);
                                         Console.WriteLine(m1._boatLotsRented);
-
                                     }
                                 }
                             }
@@ -398,68 +397,77 @@ namespace ConsoleMenu.Methods.Members
                             string decision = Console.ReadLine();
                             if (decision == "1")  //Create admin
                             {
-                                Console.WriteLine("");
-                                Console.WriteLine("Input number associated with the decision:");
-                                Console.WriteLine("1. Create a new admin");
-                                Console.WriteLine("2. Give an Already existing member the admin Role");
-                                string newDecision = Console.ReadLine();
-                                if (newDecision == "1")
+                                bool determination = true;
+                                while(determination == true)
                                 {
                                     Console.WriteLine("");
-                                    Console.WriteLine("Indtast Informationerne om den nye administrator:");
-                                    Console.WriteLine("------------------------------------------");
-                                    Console.WriteLine("Indtast Navnet");
-                                    string name = Console.ReadLine();
-                                    Console.WriteLine("Indtast Alderen");
-                                    int age = Convert.ToInt32(Console.ReadLine());
-                                    Console.WriteLine("Indtast hvilken Membership som administratoren skal have");
-                                    Console.WriteLine("1 = Familie Medlem");
-                                    Console.WriteLine("2 = Medlem");
-                                    //Console.WriteLine("3 = Passive Medlem");
-                                    string membership = Console.ReadLine();
-                                    MembershipEnum isMembership = new();
-                                    if (membership == "1")
+                                    Console.WriteLine("Input number associated with the decision:");
+                                    Console.WriteLine("1. Create a new admin");
+                                    Console.WriteLine("2. Give an Already existing member the admin Role");
+                                    string newDecision = Console.ReadLine();
+                                    if (newDecision == "1")
                                     {
-                                        isMembership = MembershipEnum.FamilieMedlem;
+                                        Console.WriteLine("");
+                                        Console.WriteLine("Indtast Informationerne om den nye administrator:");
+                                        Console.WriteLine("------------------------------------------");
+                                        Console.WriteLine("Indtast Navnet");
+                                        string name = Console.ReadLine();
+                                        Console.WriteLine("Indtast Alderen");
+                                        int age = Convert.ToInt32(Console.ReadLine());
+                                        Console.WriteLine("Indtast hvilken Membership som administratoren skal have");
+                                        Console.WriteLine("1 = Familie Medlem");
+                                        Console.WriteLine("2 = Medlem");
+                                        Console.WriteLine("3 = Passive Medlem");
+                                        string membership = Console.ReadLine();
+                                        MembershipEnum isMembership = new();
+                                        if (membership == "1")
+                                        {
+                                            isMembership = MembershipEnum.FamilieMedlem;
+                                        }
+                                        else if (membership == "2")
+                                        {
+                                            isMembership = MembershipEnum.Medlem;
+                                        }
+                                        else if (membership == "3")
+                                        {
+                                            isMembership = MembershipEnum.PassiveMedlem;
+                                        }
+                                        Console.WriteLine("Indtast Mailen");
+                                        string mail = Console.ReadLine();
+                                        Console.WriteLine("Indtast Passwordet");
+                                        string password = Console.ReadLine();
+                                        Console.WriteLine("Indtast Telefon nummer");
+                                        string phoneNumber = Console.ReadLine();
+                                        AddMembersController newMember = new AddMembersController(name, age, isMembership, mail, password, phoneNumber, memberRepo);
+                                        newMember.Member.Role = RoleEnum.Administrator;
+                                        newMember.AddMember();
                                     }
-                                    else if (membership == "2")
+                                    if (newDecision == "2") //ændrer en eksisterende member til administrator
                                     {
-                                        isMembership = MembershipEnum.Medlem;
+                                        Console.WriteLine("");
+                                        Console.WriteLine("--------------------------");
+                                        Console.WriteLine("Indtast en eksisterendes members id for at give dem administrator rollen:");
+                                        Console.WriteLine(memberRepo.GetMemberByRole());
+                                        Console.WriteLine("--------------------------");
+                                        Console.WriteLine("");
+                                        int number = Convert.ToInt32(Console.ReadLine());
+                                        if (number == member.MemberID)
+                                        {
+                                            member.Role = RoleEnum.Administrator;
+                                        }
                                     }
-                                    //else if (membership == "3")
-                                    //{
-                                    //    isMembership = MembershipEnum.PassiveMedlem;
-                                    //}
-                                    Console.WriteLine("Indtast Mailen");
-                                    string mail = Console.ReadLine();
-                                    Console.WriteLine("Indtast Passwordet");
-                                    string password = Console.ReadLine();
-                                    Console.WriteLine("Indtast Telefon nummer");
-                                    string phoneNumber = Console.ReadLine();
-                                    AddMembersController newMember = new AddMembersController(name, age, isMembership, mail, password, phoneNumber, memberRepo);
-                                    newMember.Member.Role = RoleEnum.Administrator;
-                                    newMember.AddMember();
+                                    determination = false;
                                 }
-                                if (newDecision == "2") //ændrer en eksisterende member til administrator
-                                {
-                                    Console.WriteLine("");
-                                    Console.WriteLine("Indtast en eksisterendes members id for at give dem administrator rollen:");
-                                    Console.WriteLine("");
-                                    int number = Convert.ToInt32(Console.ReadLine());
-                                    if (number == member.MemberID)
-                                    {
-                                        member.Role = RoleEnum.Administrator;
-                                    }
-                                }
+                                
                             }
                             else if (decision == "2") //Read admin
                             {
-                                foreach (Member memberExist in memberRepo.GetAll())
+                                bool determination = true;
+                                while (determination == true)
                                 {
-                                    if (memberExist.Role == RoleEnum.Administrator)
-                                    {
-                                        Console.WriteLine(memberExist.ToString());
-                                    }
+                                    Console.WriteLine(memberRepo.GetAdministratorByRole());
+                                    Console.ReadLine();
+                                    determination = false;
                                 }
                             }
                             else if (decision == "3")//Update admin - not done
