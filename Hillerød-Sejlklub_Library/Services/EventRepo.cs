@@ -21,7 +21,7 @@ namespace Hillerød_Sejlklub_Library.Services
 
         public bool SignupExistsCheck(Member member, Event even) //use to ensure no double signups
         {
-            for (int i = 0; i <= even._signups.Count; i++)
+            for (int i = 0; i < even._signups.Count; i++)
             {
                 if (even._signups[i].Member.MemberID == member.MemberID)
                 {
@@ -34,7 +34,7 @@ namespace Hillerød_Sejlklub_Library.Services
         public List<Event> ReturnByDateRange(DateTime from, DateTime to)
         {
             List<Event> events = [];
-            foreach(KeyValuePair<int, Event> even in _events)
+            foreach (KeyValuePair<int, Event> even in _events)
             {
                 if (even.Value.Date >= from && even.Value.Date <= to)
                 {
@@ -46,7 +46,7 @@ namespace Hillerød_Sejlklub_Library.Services
 
         public void RemoveEvent(int eventID) //member gemmes i menu efter login, hvor Member.Role Enum checkes
         {
-                _events.Remove(eventID);
+            _events.Remove(eventID);
         }
 
         public void AddEvent(Event even)
@@ -55,12 +55,12 @@ namespace Hillerød_Sejlklub_Library.Services
             {
                 _events.Add(even.EventID, even);
             }
-            
+
         }
 
         public void PrintAllEvents()
         {
-            foreach(KeyValuePair<int, Event> even in _events)
+            foreach (KeyValuePair<int, Event> even in _events)
             {
                 Console.WriteLine(even.Value);
             }
@@ -68,7 +68,7 @@ namespace Hillerød_Sejlklub_Library.Services
 
         public void EditEvent(int id, string title, int maxMembers, string description)
         {
-            foreach(KeyValuePair<int, Event> even in _events)
+            foreach (KeyValuePair<int, Event> even in _events)
             {
                 if (even.Key == id)
                 {
@@ -82,9 +82,9 @@ namespace Hillerød_Sejlklub_Library.Services
         public List<Event> ReturnAllEventsByTitle(string title)
         {
             List<Event> events = [];
-            foreach(KeyValuePair<int, Event> even in _events)
+            foreach (KeyValuePair<int, Event> even in _events)
             {
-                if(even.Value.Title.Trim().ToLower() == title.Trim().ToLower())
+                if (even.Value.Title.Trim().ToLower() == title.Trim().ToLower())
                 {
                     events.Add(even.Value);
                 }
@@ -92,5 +92,31 @@ namespace Hillerød_Sejlklub_Library.Services
             return events;
         }
 
+        public List<Event> BubbleSortBySignups()
+        {
+            List<Event> events = _events.Values.ToList();
+            int unsortedEvents = events.Count;
+            bool sorted = false;
+            while (!sorted)
+            {
+                int timesSwapped = 0;
+                for (int i = 1; i < unsortedEvents; i++)
+                {
+                    if (events[i]._signups.Count < events[i - 1]._signups.Count)
+                    {
+                        Event tempEvent = events[i];
+                        events[i] = events[i - 1];
+                        events[i - 1] = tempEvent;
+                        timesSwapped++;
+                    }
+                }
+                if (timesSwapped == 0)
+                {
+                    sorted = true;
+                }
+                unsortedEvents--;
+            }
+            return events;
+        }
     }
 }

@@ -11,17 +11,14 @@ namespace Hillerød_Sejlklub_Library.Models.Members
     public class Member
     {
         private List<BoatLot> boatLotsRented;
-        private static int _memberID = 1;
+        private int _memberID;
+        private static int _counter = 1;
         public string Name { get; set; }
         public int Age { get; set; }
         public int SubscriptionFee { get; set; }
         public RoleEnum Role { get; set; }
-        public int MemberID
-        {
-            get { return _memberID; }
-            private set { _memberID = value; }
-        }
-        public List<BoatLot> _boatLotsRented { get { return boatLotsRented; } private set { _boatLotsRented = boatLotsRented; } } //laves til en full property
+        public int MemberID { get { return _memberID; } }
+        public List<BoatLot> _boatLotsRented { get { return boatLotsRented; } private set { _boatLotsRented = value; } } //laves til en full property
         public string? Mail { get; set; } //needs to be unique
         public string Password { get; set; }
         public string PhoneNumber { get; set; }
@@ -38,7 +35,7 @@ namespace Hillerød_Sejlklub_Library.Models.Members
             PhoneNumber = phoneNumber;
             Age = age;
             //Increment ID
-            MemberID = _memberID++;
+            _memberID = _counter++;
             //tilføj til MemberRepo
             _members = new Dictionary<int, MemberRepo>();
             //make new List of BoatLotsRented

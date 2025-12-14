@@ -83,7 +83,7 @@ namespace ConsoleMenu.Controllers.Events
                                             Console.WriteLine("No event with the given title could be found.");
                                             isFalse = false;
                                         }
-                                        else if (events.Count == 1 && !events[0]._signups.Count.Equals(events[0].MaxMembers))
+                                        else if (events.Count == 1 && !events[0]._signups.Count.Equals(events[0].MaxMembers) && !eventRepo.SignupExistsCheck(member, events[0]))
                                         {
                                             Console.WriteLine("Write your comment:");
                                             string comment = Console.ReadLine();
@@ -97,7 +97,7 @@ namespace ConsoleMenu.Controllers.Events
                                         {
                                             for (int i = 0; i < events.Count; i++)
                                             {
-                                                if (!events[i]._signups.Count.Equals(events[i].MaxMembers))
+                                                if (!events[i]._signups.Count.Equals(events[i].MaxMembers) && !eventRepo.SignupExistsCheck(member, events[i]))
                                                 {
                                                     Console.WriteLine(events[i]);
 
@@ -159,7 +159,7 @@ namespace ConsoleMenu.Controllers.Events
                                             isFalse = false;
                                             Console.ReadLine();
                                         }
-                                        else if (events.Count == 1 && !events[0]._signups.Count.Equals(events[0].MaxMembers))
+                                        else if (events.Count == 1 && !events[0]._signups.Count.Equals(events[0].MaxMembers) && !eventRepo.SignupExistsCheck(member, events[0]))
                                         {
                                             Console.WriteLine("Write your comment:");
                                             string comment = Console.ReadLine();
@@ -174,7 +174,7 @@ namespace ConsoleMenu.Controllers.Events
                                         {
                                             for (int i = 0; i < events.Count; i++)
                                             {
-                                                if (!events[i]._signups.Count.Equals(events[i].MaxMembers))
+                                                if (!events[i]._signups.Count.Equals(events[i].MaxMembers) && !eventRepo.SignupExistsCheck(member, events[i]))
                                                 {
                                                     Console.WriteLine(events[i]);
 
@@ -283,7 +283,7 @@ namespace ConsoleMenu.Controllers.Events
                                                 Console.ReadLine();
                                                 isFalse = false;
                                             }
-                                            else if (events.Count == 1 && !events[0]._signups.Count.Equals(events[0].MaxMembers))
+                                            else if (events.Count == 1 && !events[0]._signups.Count.Equals(events[0].MaxMembers) && !eventRepo.SignupExistsCheck(member, events[0]))
                                             {
                                                 Console.WriteLine("Write your comment:");
                                                 string comment = Console.ReadLine();
@@ -297,7 +297,7 @@ namespace ConsoleMenu.Controllers.Events
                                             {
                                                 for (int i = 0; i < events.Count; i++)
                                                 {
-                                                    if (!events[i]._signups.Count.Equals(events[i].MaxMembers))
+                                                    if (!events[i]._signups.Count.Equals(events[i].MaxMembers) && !eventRepo.SignupExistsCheck(member, events[i]))
                                                     {
                                                         Console.Clear();
                                                         Console.WriteLine(events[i].ToString());
@@ -368,7 +368,7 @@ namespace ConsoleMenu.Controllers.Events
                                                 }
                                                 else
                                                 {
-                                                    for (int i = 0; i <= signups.Count; i++)
+                                                    for (int i = 0; i < signups.Count; i++)
                                                     {
                                                         if (signups[i].Member.MemberID.ToString() == removeAction)
                                                         {
@@ -418,7 +418,7 @@ namespace ConsoleMenu.Controllers.Events
                                             }
                                             else
                                             {
-                                                for (int i = 0; i <= events.Count; i++) //choose event to edit
+                                                for (int i = 0; i < events.Count; i++) //choose event to edit
                                                 {
                                                     Console.WriteLine(events[i].EventID);
                                                     Console.WriteLine(events[i]);
@@ -479,7 +479,7 @@ namespace ConsoleMenu.Controllers.Events
                                             Console.WriteLine("No event with the given title could be found.");
                                             isFalse = false;
                                         }
-                                        else if (events.Count == 1 && !events[0]._signups.Count.Equals(events[0].MaxMembers))
+                                        else if (events.Count == 1 && !events[0]._signups.Count.Equals(events[0].MaxMembers) && !eventRepo.SignupExistsCheck(member, events[0]))
                                         {
                                             Console.WriteLine("Write your comment:");
                                             string comment = Console.ReadLine();
@@ -493,7 +493,7 @@ namespace ConsoleMenu.Controllers.Events
                                         {
                                             for (int i = 0; i < events.Count; i++)
                                             {
-                                                if (!events[i]._signups.Count.Equals(events[i].MaxMembers))
+                                                if (!events[i]._signups.Count.Equals(events[i].MaxMembers) && !eventRepo.SignupExistsCheck(member, events[i]))
                                                 {
                                                     Console.WriteLine(events[i]);
 
@@ -571,7 +571,7 @@ namespace ConsoleMenu.Controllers.Events
                                         break;
                                     }
                                     List<Signup> signups = signupRepo.ReturnAllByEventTitle(title);
-                                    for (int i = 0; i <= signups.Count; i++)
+                                    for (int i = 0; i < signups.Count; i++)
                                     {
                                         if (signups[i].Member == member)
                                         {
@@ -609,9 +609,10 @@ namespace ConsoleMenu.Controllers.Events
                     #endregion
                 }
             }
-            catch (Exception) //prevents the system from crashing. doesn't say what went wrong
+            catch (Exception exc) //prevents the system from crashing. doesn't say what went wrong
             {
-                Console.WriteLine("Wrong input try again.");
+                Console.WriteLine(exc.Message);
+                Console.ReadLine();
             }
         }
     }
