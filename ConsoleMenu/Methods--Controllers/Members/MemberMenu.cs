@@ -447,7 +447,7 @@ namespace ConsoleMenu.Methods.Members
                                         Console.WriteLine("");
                                         Console.WriteLine("--------------------------");
                                         Console.WriteLine("Input an existing members id to give them the role admin:");
-                                        Console.WriteLine(memberRepo.GetMemberByRole());
+                                        Console.WriteLine(memberRepo.GetAll());
                                         Console.WriteLine("--------------------------");
                                         Console.WriteLine("");
                                         int number = Convert.ToInt32(Console.ReadLine());
@@ -475,11 +475,18 @@ namespace ConsoleMenu.Methods.Members
                                     Console.WriteLine(memberRepo.GetAdministratorByRole());
                                     Console.ReadLine();
                                     determination = false;
+                                    foreach (Member memberExist in memberRepo.GetAll())
+                                    {
+                                        if (memberExist.Role == RoleEnum.Administrator)
+                                        {
+                                            Console.WriteLine(memberExist.ToString());
+                                        }
+                                    }
+                                    Console.ReadLine();
                                 }
                             }
                             else if (decision == "3")//Update admin - not done
                             {
-                                //implement something her
                                 foreach (Member memberExist in memberRepo.GetAll())
                                 {
                                     if (memberExist.Role == RoleEnum.Administrator)
