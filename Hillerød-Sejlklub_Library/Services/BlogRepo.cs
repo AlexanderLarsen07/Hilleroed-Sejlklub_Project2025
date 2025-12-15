@@ -14,23 +14,30 @@ namespace Hillerød_Sejlklub_Library.Services
     public class BlogRepo : IBlogRepo
     {
         private List<Blog> _blogRepo;
-
-
+        
+        
+        public int Count
+        {
+            get { return _blogRepo.Count; }
+        }
+       
         public BlogRepo()
         {
+            
             _blogRepo = new List<Blog>();
         }
 
-        public void AddBlog(Blog blog) //tilføj blog object ind til listen
+        #region Blog methods
+        public void AddBlog(Blog blog) //tjekket
         {
             if (!BlogNameExist(blog.Headline))
             {
                 _blogRepo.Add(blog);
             }
         }
-        public bool BlogNameExist(string headline)
+        public bool BlogNameExist(string headline) //tjekket
         {
-            foreach (var b in _blogRepo)
+            foreach (Blog b in _blogRepo)
             {
                 if (b.Headline == headline)
                 {
@@ -52,7 +59,7 @@ namespace Hillerød_Sejlklub_Library.Services
             return null;
         }
 
-        public void EditBlog(Blog blog, string headline, string theText, string description)
+        public void EditBlog(Blog blog, string headline, string theText, string description) //tjekket
         //return type Blog? fordi når man har ændret en bestemt blog så returner man den?
         {
             foreach (Blog b in _blogRepo)
@@ -65,41 +72,50 @@ namespace Hillerød_Sejlklub_Library.Services
                 }
             }
         }
-        public void Delete(Blog blog) //DeleteBlog metoden skal tilføjes i user story?
+        public void Delete(Blog blog) //tjekket
         {
             _blogRepo.Remove(blog);
         }
 
 
-        public void PrintAllComments()
+        public void PrintAllComments() //tjekket
         {
-            foreach (Blog c in _blogRepo)
+            foreach (Blog b in _blogRepo) //laver en loop inde i en loop fordi...
             {
-                Console.WriteLine(c.CommentsOnBlog);
+                Console.WriteLine();
+                Console.WriteLine($"Udskriver kommentarer for blog {b.Headline}");
+                foreach (Comment c in b._commentList)
+                {
+                   
+                    Console.WriteLine(c.MakeComment);
+                }
+                
             }
         }
 
-        //en metode for tjekke administrator eller formand?
-
-        public List<Blog> ReturnBlogHeadline(string title)
+        public List<Blog> ReturnBlogHeadline(string headline) //tjekket
         {
-            List<Blog> blogTitle = new List<Blog>();
-
+            List<Blog> blogHeadline= new List<Blog>();
+            
             for (int i = 0; i < _blogRepo.Count; i++)
             {
-                if (_blogRepo[i].Headline == title.ToLower() || _blogRepo[i].Headline == title.ToUpper())
+
+                if (_blogRepo[i].Headline.ToLower() == headline.ToLower() )
                 {
-                    blogTitle.Add(_blogRepo[i]);
+                    
+                    blogHeadline.Add(_blogRepo[i]);
+                 
                 }
-                return blogTitle;
+                //return blogHeadline;
             }
-            return null;
+            return blogHeadline; 
         }
-        public void PrintAllBlog()
+
+        public void PrintAllBlog() //tjekket
         {
             foreach (Blog b in _blogRepo)
             {
-                Console.WriteLine(b.Headline + b.Description);
+                Console.WriteLine($"Headline: {b.Headline}\nDescription: {b.Description}"); //toString()?
             }
         }
         //public List<Comment> GetAllCommentsWithThisMember(Member member)
@@ -118,5 +134,19 @@ namespace Hillerød_Sejlklub_Library.Services
         //    }
         //    return blogList;
         //}
+        public Blog? GetBlog(int id)
+        {
+            foreach(Blog b in _blogRepo)
+            {
+                if(b.BlogID == id)
+                {
+                    return b;
+                }
+            }
+            return null;
+        }
+        #endregion
+
+
     }
 }
