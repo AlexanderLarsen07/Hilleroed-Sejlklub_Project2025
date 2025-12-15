@@ -17,14 +17,18 @@ namespace ConsoleMenu.Methods__Controllers.Boats
         IBookingRepo _bookings;
 
         IBoatRepo _boat;
+
+        IMemberRepo _memberDictionary;
         public Booking TheBooking { get; set; }
 
-        public AddBookingController(string destination, DateTime start, DateTime end, Member member, Boat boat, IBookingRepo listBooking, IBoatRepo boatRepo)
+        public AddBookingController(string destination, DateTime start, DateTime end, Member member, Boat boat, BookingRepo bookingRepo, MemberRepo memberRepo, BoatRepo boatRepo)
         {
             TheBooking = new Booking(destination, start, end, member, boat);
-            _bookings = listBooking;
+            _bookings = bookingRepo;
             _boat = boatRepo;
+            _memberDictionary = memberRepo;
         }
+
         public void AddTheCreatedBooking()
         {
             _bookings.AddBooking(TheBooking);

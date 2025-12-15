@@ -26,7 +26,8 @@ namespace Hillerød_Sejlklub_Library.Models.Blogs
         {
             MakeComment = comment;
             Member = member;
-            Blog.CommentsOnBlog.Add(this);
+            Blog = blog;
+            Blog._commentList.Add(this);
             _dateOfPost = DateTime.Now;
         }
 

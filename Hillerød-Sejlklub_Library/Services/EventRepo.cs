@@ -102,7 +102,7 @@ namespace Hillerød_Sejlklub_Library.Services
                 int timesSwapped = 0;
                 for (int i = 1; i < unsortedEvents; i++)
                 {
-                    if (events[i]._signups.Count < events[i - 1]._signups.Count)
+                    if (events[i]._signups.Count > events[i - 1]._signups.Count)
                     {
                         Event tempEvent = events[i];
                         events[i] = events[i - 1];

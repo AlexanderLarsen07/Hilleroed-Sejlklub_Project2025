@@ -26,20 +26,20 @@ namespace Hillerød_Sejlklub_Library.Services
         {
             for (int i = 0; _repairLogList.Count > i; i++)
             {
-                if(repair.Number == _repairLogList[i].Number)
+                if (repair.Number == _repairLogList[i].Number)
                 {
                     throw new Exception(message: "Number already exist");
                 }
             }
-                _repairLogList.Add(repair);
-                repair.TheBoat.AddRepairToBoat(repair);    
+            _repairLogList.Add(repair);
+            repair.TheBoat.AddRepairToBoat(repair);
         }
 
         public Repair GetRepair(int number)
         {
-            for(int i = 0; _repairLogList.Count > i; i++)
+            for (int i = 0; _repairLogList.Count > i; i++)
             {
-                if(number == _repairLogList[i].Number)
+                if (number == _repairLogList[i].Number)
                 {
                     return _repairLogList[i];
                 }
@@ -48,12 +48,13 @@ namespace Hillerød_Sejlklub_Library.Services
         }
 
         public void RemoveRepair(int repairNumber)
-        { 
-            for(int i = 0; _repairLogList.Count > i; i++)
+        {
+            for (int i = 0; _repairLogList.Count > i; i++)
             {
                 if (repairNumber == _repairLogList[i].Number)
                 {
                     _repairLogList.RemoveAt(i);
+                    return;
                 }
             }
             throw new Exception(message: "The number does not exist");
@@ -67,18 +68,21 @@ namespace Hillerød_Sejlklub_Library.Services
             }
         }
 
-        public void PrintAllTheRepairsToEachBoat()
+        public void PrintAllTheRepairsToEachBoat(BoatRepo boatRepo)
         {
-            BoatRepo boatRepo = new BoatRepo();
             List<Boat> _boat = boatRepo.GetAll();
-            for (int i = 0; _boat.Count > i; i++)
+            foreach (Boat boat in _boat)
             {
-                Console.WriteLine(_boat[i].Name);
-                for (int j = 0; _repairLogList.Count > j; j++)
+                Console.WriteLine(boat.Name);
+                if (boat.RepairLogList.Count == 0)
                 {
-                    if (_repairLogList[j].TheBoat.Name == _boat[i].Name)
+                    Console.WriteLine("No Repairs");
+                }
+                else
+                {
+                    foreach (Repair repair in boat.RepairLogList)
                     {
-                        Console.WriteLine(_repairLogList[j]);
+                        Console.WriteLine($"{repair}");
                     }
                 }
             }
