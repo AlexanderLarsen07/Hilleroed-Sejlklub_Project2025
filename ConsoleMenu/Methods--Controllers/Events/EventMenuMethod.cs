@@ -602,6 +602,18 @@ namespace ConsoleMenu.Controllers.Events
                                     Console.ReadLine();
                                     break;
                                 }
+                            #endregion
+                            #region Case 6
+                            case "6":
+                                {
+                                    List<Event> events = eventRepo.BubbleSortBySignups();
+                                    foreach(Event even in events)
+                                    {
+                                        Console.WriteLine(even);
+                                    }
+                                    Console.ReadLine();
+                                    break;
+                                }
                                 #endregion
                         }
                         theChoice = ReadChoice(theChoices);

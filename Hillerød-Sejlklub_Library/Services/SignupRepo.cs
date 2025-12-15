@@ -13,7 +13,6 @@ namespace Hillerød_Sejlklub_Library.Services
     public class SignupRepo : ISignupRepo
     {
         private List<Signup> _signupList;
-        //public int Count { get { return _signupList.Count; } }
         public SignupRepo()
         {
             _signupList = new List<Signup>();
@@ -81,6 +80,32 @@ namespace Hillerød_Sejlklub_Library.Services
                     s.Comment = comment;
                 }
             }
+        }
+        public List<Signup> SortByDateOfSignup()
+        {
+            List<Signup> signups = _signupList;
+            int unsortedSignups = signups.Count;
+            bool sorted = false;
+            while (!sorted)
+            {
+                int timesSwapped = 0;
+                for (int i = 1; i < unsortedSignups; i++)
+                {
+                    if (signups[i].DateOfSignup < signups[i - 1].DateOfSignup)
+                    {
+                        Signup tempSignup = signups[i];
+                        signups[i] = signups[i - 1];
+                        signups[i - 1] = tempSignup;
+                        timesSwapped++;
+                    }
+                }
+                if (timesSwapped == 0)
+                {
+                    sorted = true;
+                }
+                unsortedSignups--;
+            }
+            return signups;
         }
     }
 }

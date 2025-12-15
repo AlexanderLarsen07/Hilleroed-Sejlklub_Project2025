@@ -141,7 +141,7 @@ namespace ConsoleMenu.Methods__Controllers.Boats
 
             Console.WriteLine("Enter member");
             int memberID = int.Parse(Console.ReadLine());
-            Member member = memberRepo.GetCustomerById(memberID);
+            Member member = memberRepo.GetMemberById(memberID);
             Console.WriteLine("Enter boat");
             string sailNumber = (Console.ReadLine());
             Boat boat = boatRepo.GetBoatBySailNumber(sailNumber);

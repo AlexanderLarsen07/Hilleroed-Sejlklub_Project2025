@@ -18,6 +18,7 @@ namespace Hillerød_Sejlklub_Library.Models.Events
         public string Comment { get; set; }
         public Event Event { get; private set; }
         public Member Member { get; private set; }
+        public DateTime DateOfSignup { get { return _dateOfSignup; } }
         #endregion
         #region Constructor
         public Signup(Event ev, Member member, string comment)
