@@ -10,15 +10,12 @@ namespace Hillerød_Sejlklub_Library.Models.Events
     public class Event
     {
         #region Instance fields
-        private static int _eventID = 1;
+        private int _eventID;
+        private static int _counter = 1;
         public List<Signup> _signups;
         #endregion
         #region Properties
-        public int EventID 
-        { 
-            get { return _eventID; }
-            private set { _eventID = value; }
-        }
+        public int EventID { get { return _eventID; } }
         public int MaxMembers { get; set; }
         public string Title { get; set; }
         public DateTime Date { get; private set; }
@@ -28,7 +25,7 @@ namespace Hillerød_Sejlklub_Library.Models.Events
         public Event(int maxMembers, string title, DateTime date, string description)
         {
             _signups = new List<Signup>();
-            EventID = _eventID++;
+            _eventID = _counter++;
             MaxMembers = maxMembers;
             Title = title.Trim();
             Date = date;

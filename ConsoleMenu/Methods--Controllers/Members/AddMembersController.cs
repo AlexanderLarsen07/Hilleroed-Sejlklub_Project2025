@@ -13,9 +13,8 @@ namespace Hillerød_Sejlklub_Library.Models.Members
     {
         IMemberRepo _memberRepo;
         public Member Member { get; set; }
-        public Member Administrator { get; set; }
 
-        public AddMembersController(string name, int age, MembershipEnum membershipEnum, string mail, string password, string phoneNumber, MemberRepo memberRepo)
+        public AddMembersController(string name, int age, MembershipEnum membershipEnum, string mail, string password, string phoneNumber, IMemberRepo memberRepo)
         {
             Member = new Member(name, age, membershipEnum, mail, password, phoneNumber);
             _memberRepo = memberRepo;
@@ -23,10 +22,6 @@ namespace Hillerød_Sejlklub_Library.Models.Members
         public void AddMember()
         {
             _memberRepo.AddMember(Member);
-        }
-        public void AddAdministrator()
-        {
-            _memberRepo.AddMember(Administrator);
         }
     }
 }

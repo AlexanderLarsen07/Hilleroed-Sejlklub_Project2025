@@ -1,4 +1,5 @@
-﻿using Hillerød_Sejlklub_Library.Interfaces;
+﻿using Hillerød_Sejlklub_Library.Data;
+using Hillerød_Sejlklub_Library.Interfaces;
 using Hillerød_Sejlklub_Library.Models.Members;
 
 namespace Hillerød_Sejlklub_Library.Services
@@ -9,6 +10,7 @@ namespace Hillerød_Sejlklub_Library.Services
         public MemberRepo()
         {
             _memberDictionary = new Dictionary<int, Member>();
+            _memberDictionary = MockData.MemberData;
         }
         //adds Member
         public void AddMember(Member member)
@@ -40,7 +42,7 @@ namespace Hillerød_Sejlklub_Library.Services
         }
         public List<Member> GetAll()
         {
-            return _memberDictionary.Values.ToList();
+           return _memberDictionary.Values.ToList();
         }
 
         //removes a member by the entering id that matches member id
@@ -67,7 +69,7 @@ namespace Hillerød_Sejlklub_Library.Services
         }
 
         //return customer that contains the id
-        public Member GetCustomerById(int id)
+        public Member GetMemberById(int id)
         {
             if (_memberDictionary.ContainsKey(id))
             {
@@ -75,6 +77,49 @@ namespace Hillerød_Sejlklub_Library.Services
             }
             return null!;
         }
+
+        public Member GetAdministratorByRole()
+        {
+            RoleEnum role = RoleEnum.Administrator;
+            foreach (KeyValuePair<int, Member> member in _memberDictionary)
+            {
+                if (member.Value.Role == RoleEnum.Administrator)
+                {
+                    member.Value.Role = role;
+                    Console.WriteLine(member);
+                }
+            }
+            return null!;
+        }
+
+        public Member GetMemberByRole()
+        {
+            RoleEnum role = RoleEnum.Member;
+            foreach (KeyValuePair<int, Member> member in _memberDictionary)
+            {
+                if (member.Value.Role == RoleEnum.Member)
+                {
+                    member.Value.Role = role;
+                    Console.WriteLine(member);
+                }
+            }
+            return null!;
+        }
+
+        public Member GetChairmanByRole()
+        {
+            RoleEnum role = RoleEnum.Chairman;
+            foreach (KeyValuePair<int, Member> member in _memberDictionary)
+            {
+                if (member.Value.Role == RoleEnum.Chairman)
+                {
+                    member.Value.Role = role;
+                    Console.WriteLine(member);
+                }
+            }
+            return null!;
+        }
+
 
         public void Print(Dictionary<int, Member> dictionary)
         {
@@ -131,10 +176,10 @@ namespace Hillerød_Sejlklub_Library.Services
                 if (member.Value.Mail == mail)
                 {
                     member.Value.Mail = mail;
+                    return member.Value;
                 }
-                return member.Value;
             }
-            return null!;
+            return null;
       
         }
 

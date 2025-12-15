@@ -1,5 +1,8 @@
 ﻿using ConsoleMenu.Controllers.Events;
 using ConsoleMenu.Methods.Members;
+using ConsoleMenu.Methods__Controllers.Blogs;
+using ConsoleMenu.Methods__Controllers.Boats;
+using Hillerød_Sejlklub_Library.Data;
 using Hillerød_Sejlklub_Library.Interfaces;
 using Hillerød_Sejlklub_Library.Models.Events;
 using Hillerød_Sejlklub_Library.Models.Members;
@@ -10,21 +13,19 @@ namespace ConsoleMenu.Menu
     public class Menu
     {
         // static strings for choices
-        static string LoginChoices = " 1. Sign in as guest.\t\n 2. Sign in as Member. \t\n q. Exit.";
+        static string LoginChoices = " 1. Sign in as guest.\t\n 2. Sign in as Member. \t\n q. Exit. \t\n ";
         
-        static string GuestMenuChoices = " 1. Events.\t\n 2. Signup.\t\n q. Exit.";//Implement TODO.
-        static string MemberMenuChoices = " 1. Events.\t\n 2. Members \t\n q. Exits.";
-        static string AdminMenuChoices = "";
-        static string ChairmanMenuChoices = "";
+        static string GuestMenuChoices = " 1. Events.\t\n 2. Signup.\t\n q. Exit. \t\n ";//Implement TODO.
+        static string MemberMenuChoices = " 1. Events.\t\n 2. Members \t\n q. Exits. \t\n ";
 
-        static string GuestEventChoices = " 1. View all events. \t\n 2. Search for events by date. \t\n q. Exit.";//DONE
-        static string MemberEventChoices = " 1. View all event/signup. \t\n 2. Search for events by date/signup. \t\n 3. Edit a Comment on a signup. \t\n 4. Delete a signup. \t\n q. quit.";//DONE
-        static string AdminEventChoices = " 1. View all event. \t\n 2. Search for events by date. \t\n 3. Edit a Comment on a signup. \t\n 4. Delete a signup. \t\n 5. Create new event. \t\n q. quit.";
+        static string GuestEventChoices = " 1. View all events. \t\n 2. Search for events by date. \t\n q. Exit. \t\n ";
+        static string MemberEventChoices = " 1. View all event/signup. \t\n 2. Search for events by date/signup. \t\n 3. Edit a Comment on a signup. \t\n 4. Delete a signup. \t\n q. quit. \t\n ";
+        static string AdminEventChoices = " 1. View all event. \t\n 2. Search for events by date. \t\n 3. Edit a Comment on a signup. \t\n 4. Delete a signup. \t\n 5. Create new event. \t\n 6. Show events sorted by most signups. \t\n q. quit. \t\n ";
 
 
-        static string MemberMemberChoices = "1. View your details\t\n 2. Edit your account\t\n 3. View boat lots\t\n q. Exits.";
-        static string AdminMemberChoices = "1. View all members\t\n 2. Search for a specific member of their id\t\n 3. Boat lots\t\n 4.simple statistics\t\n 5. Delete a user or make a custom user\t\n 6. View your account\t\n 7. Edit details of your account\t\n 8. Add boat lots\t\n 9. Events. \t\n q. Exits.";
-        static string ChairmanMemberChoices = "1.  Crud Admins\t\n2.  Change chairman\t\n3.  View all members\t\n4.  Search for a specific member of their id\t\n5.  Boat lots\t\n6.  Simple statistics\t\n7.  Delete a user or make a custom user\t\n8.  View your account\t\n9.  Edit details of your account\t\n10. Add boat lots\t\n11. Events.\t\n q. Exits.\t\n\t\nIndtast Nummer:\t\n";
+        static string MemberMemberChoices = "1. View your details\t\n 2. Edit your account\t\n 3. View boat lots\t\n q. Exits. \t\n ";
+        static string AdminMemberChoices = "1. View all members\t\n 2. Search for a specific member of their id\t\n 3. Boat lots\t\n 4.simple statistics\t\n 5. Delete a user or make a custom user\t\n 6. View your account\t\n 7. Edit details of your account\t\n 8. Add boat lots\t\n 9. Events. \t\n q. Exits. \t\n ";
+        static string ChairmanMemberChoices = "1.  Crud Admins\t\n2.  Change chairman\t\n3.  View all members\t\n4.  Search for a specific member of their id\t\n5.  Boat lots\t\n6.  Simple statistics\t\n7.  Delete a user or make a custom user\t\n8.  View your account\t\n9.  Edit details of your account\t\n10. Add boat lots\t\n11. Events.\t\n q. Exits.\t\n\t\nIndtast Nummer: \t\n ";
 
         //Gæst - basal adgang til systemet, kan se blogindlæg,
         //både og generel info om klubben og oprette sig som medlem, kan ikke leje både og melde sig til events.
@@ -37,6 +38,7 @@ namespace ConsoleMenu.Menu
 
         //Formand - har samme adgang som en administrator,
         //men kan fjerne og tilføje administratorer og give formandskabet til en anden.
+
         private MemberRepo _memberRepo = new MemberRepo();
         private BlogRepo _blogRepo = new BlogRepo();
         private BoatLotRepo _boatLotRepo = new BoatLotRepo();
@@ -48,23 +50,8 @@ namespace ConsoleMenu.Menu
 
         private EventMenuMethod eventMenu = new EventMenuMethod();
         private MemberMenu memberMenu = new MemberMenu();
-
-        public void SetChairman(Member member) //slet
-        {
-            _memberRepo.AddMember(member);
-        }
-        public void AddEvent(Event even)
-        {
-            _eventRepo.AddEvent(even);
-        }
-        public void AddBoatLot(BoatLot boatlot)
-        {
-            _boatLotRepo.AddBoatLot(boatlot);
-        }
-        public void AddSignup(Signup signup)
-        {
-            _signupRepo.AddSignup(signup);
-        }
+        private BlogMenuMethod blogMenu = new BlogMenuMethod();
+        private BoatMenuMethod boatMenu = new BoatMenuMethod();
 
         private static string ReadChoice(string choices)
         {
@@ -86,9 +73,9 @@ namespace ConsoleMenu.Menu
                 switch (theChoice)
                 {
                     case "1":
-                        Console.WriteLine("Valg 1");
+                        //Console.WriteLine("Valg 1");
                         //print guestMenu
-                        string guestMenuChoices = ReadChoice(GuestMenuChoices);
+                        string guestMenuChoices = ReadChoice(GuestMenuChoices);//guestfield
                         while (guestMenuChoices != "q")
                         {
                             switch (guestMenuChoices)
@@ -101,7 +88,16 @@ namespace ConsoleMenu.Menu
                                 case "2":
                                     {
                                         memberMenu.GuestMemberMenu(_memberRepo);
-                                        /*memberMenu.Roles(GuestMemberChoices, null, _memberRepo, _boatLotRepo);*/ //MemberMenu
+                                    }
+                                    break;
+                                case "3":
+                                    {
+                                        //blogMenu.BlogMenu(null, _blogRepo, _commentRepo, /*add blogGuestMenu string*/);
+                                    }
+                                    break;
+                                case "4":
+                                    {
+                                        //boatMenu.BoatMenu(/*add boatGuestMenu*/, null, _boatRepo);
                                     }
                                     break;
                             }
@@ -110,12 +106,13 @@ namespace ConsoleMenu.Menu
                         //Console.ReadLine();
                         break;
                     case "2":
-                        Console.WriteLine("Valg 2");
+                        /*Console.WriteLine("Valg 2");*///loginfield
                         string mail = "";
                         string password = "";
                         bool validMail = false;
                         while (!validMail && mail != "q")
                         {
+                            Console.WriteLine("Press \"q\" to cancel signing in.");
                             Console.WriteLine($"Enter Mail : ");
                             mail = Console.ReadLine();
                             Member? member = _memberRepo.ReturnMemberByMail(mail);
@@ -124,12 +121,14 @@ namespace ConsoleMenu.Menu
                                 Console.Clear();
                                 Console.WriteLine("Mail does not exist.");
                             }
-                            else if (member.Mail == mail)
+                            else
                             {
                                 validMail = true;
                                 bool validPassword = false;
                                 while (!validPassword && password != "q")
                                 {
+                                    Console.Clear();
+                                    Console.WriteLine("Press \"q\" to cancel signing in.");
                                     Console.WriteLine($"Mail : {mail}");
                                     Console.WriteLine($"Enter Password : ");
                                     password = Console.ReadLine();
@@ -142,7 +141,7 @@ namespace ConsoleMenu.Menu
                                     else
                                     {
                                         Console.WriteLine($"Welcome {member.Name}");
-                                        if (member.Role == RoleEnum.Member)
+                                        if (member.Role == RoleEnum.Member)//memberfield
                                         {
                                             Console.WriteLine($"Signed in as : {member.Role}");
                                             string memberMenuChoices = ReadChoice(MemberMenuChoices);
@@ -165,7 +164,7 @@ namespace ConsoleMenu.Menu
                                                 memberMenuChoices = ReadChoice(MemberMenuChoices);
                                             }
                                         }
-                                        else if (member.Role == RoleEnum.Administrator)
+                                        else if (member.Role == RoleEnum.Administrator)//admin field
                                         {
                                             Console.WriteLine($"Signed in as : {member.Role}");
                                             string memberMenuChoices = ReadChoice(MemberMenuChoices);
@@ -188,7 +187,7 @@ namespace ConsoleMenu.Menu
                                                 memberMenuChoices = ReadChoice(MemberMenuChoices);
                                             }
                                         }
-                                        else if (member.Role == RoleEnum.Chairman)
+                                        else if (member.Role == RoleEnum.Chairman) //chairmanfield
                                         {
                                             Console.WriteLine($"Signed in as : {member.Role}");
                                             string memberMenuChoices = ReadChoice(MemberMenuChoices);

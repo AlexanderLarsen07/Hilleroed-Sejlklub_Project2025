@@ -19,14 +19,13 @@ namespace Hillerød_Sejlklub_Library.Services
 
         public void AddBooking(Booking booking)
         {
-            DateTime start = booking.Start;
             foreach (Booking bookingOnList in _bookings)
             {
                 if (booking.BookingID == bookingOnList.BookingID)
                 {
                     throw new Exception(message: "BookingID already exist");
                 }
-                else if (booking.TheBoat.SailNumber == bookingOnList.TheBoat.SailNumber && booking.Start < bookingOnList.End && (booking.End > bookingOnList.Start))
+                else if (booking.TheBoat.SailNumber == bookingOnList.TheBoat.SailNumber && booking.Start < bookingOnList.End && booking.End > bookingOnList.Start)
                 {
                     throw new Exception(message: "You booked a boat that is already booked for the time you chose.");
 

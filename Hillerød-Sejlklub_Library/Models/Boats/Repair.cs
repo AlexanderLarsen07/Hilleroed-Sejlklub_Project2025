@@ -33,6 +33,7 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
         }
 
 
+
         public override string ToString()
         {
             return $"The name of the boat: {TheBoat.Name}\n" +
