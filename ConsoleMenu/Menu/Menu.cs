@@ -1,6 +1,7 @@
 ﻿using ConsoleMenu.Controllers.Events;
 using ConsoleMenu.Methods.Members;
 using ConsoleMenu.Methods__Controllers.Blogs;
+using ConsoleMenu.Methods__Controllers.Boats;
 using Hillerød_Sejlklub_Library.Data;
 using Hillerød_Sejlklub_Library.Interfaces;
 using Hillerød_Sejlklub_Library.Models.Events;
@@ -16,8 +17,6 @@ namespace ConsoleMenu.Menu
         
         static string GuestMenuChoices = " 1. Events.\t\n 2. Signup.\t\n q. Exit. \n\t ";//Implement TODO.
         static string MemberMenuChoices = " 1. Events.\t\n 2. Members \t\n q. Exits. \n\t ";
-        static string AdminMenuChoices = "";
-        static string ChairmanMenuChoices = "";
 
         static string GuestEventChoices = " 1. View all events. \t\n 2. Search for events by date. \t\n q. Exit. \n\t ";
         static string MemberEventChoices = " 1. View all event/signup. \t\n 2. Search for events by date/signup. \t\n 3. Edit a Comment on a signup. \t\n 4. Delete a signup. \t\n q. quit. \n\t ";
@@ -52,6 +51,7 @@ namespace ConsoleMenu.Menu
         private EventMenuMethod eventMenu = new EventMenuMethod();
         private MemberMenu memberMenu = new MemberMenu();
         private BlogMenuMethod blogMenu = new BlogMenuMethod();
+        private BoatMenuMethod boatMenu = new BoatMenuMethod();
 
         private static string ReadChoice(string choices)
         {
@@ -73,9 +73,9 @@ namespace ConsoleMenu.Menu
                 switch (theChoice)
                 {
                     case "1":
-                        Console.WriteLine("Valg 1");
+                        //Console.WriteLine("Valg 1");
                         //print guestMenu
-                        string guestMenuChoices = ReadChoice(GuestMenuChoices);
+                        string guestMenuChoices = ReadChoice(GuestMenuChoices);//guestfield
                         while (guestMenuChoices != "q")
                         {
                             switch (guestMenuChoices)
@@ -95,13 +95,18 @@ namespace ConsoleMenu.Menu
                                         //blogMenu.BlogMenu(null, _blogRepo, _commentRepo, /*add blogGuestMenu string*/);
                                     }
                                     break;
+                                case "4":
+                                    {
+                                        //boatMenu.BoatMenu(/*add boatGuestMenu*/, null, _boatRepo);
+                                    }
+                                    break;
                             }
                             guestMenuChoices = ReadChoice(GuestMenuChoices);
                         }
                         //Console.ReadLine();
                         break;
                     case "2":
-                        Console.WriteLine("Valg 2");
+                        /*Console.WriteLine("Valg 2");*///loginfield
                         string mail = "";
                         string password = "";
                         bool validMail = false;
@@ -136,7 +141,7 @@ namespace ConsoleMenu.Menu
                                     else
                                     {
                                         Console.WriteLine($"Welcome {member.Name}");
-                                        if (member.Role == RoleEnum.Member)
+                                        if (member.Role == RoleEnum.Member)//memberfield
                                         {
                                             Console.WriteLine($"Signed in as : {member.Role}");
                                             string memberMenuChoices = ReadChoice(MemberMenuChoices);
@@ -159,7 +164,7 @@ namespace ConsoleMenu.Menu
                                                 memberMenuChoices = ReadChoice(MemberMenuChoices);
                                             }
                                         }
-                                        else if (member.Role == RoleEnum.Administrator)
+                                        else if (member.Role == RoleEnum.Administrator)//admin field
                                         {
                                             Console.WriteLine($"Signed in as : {member.Role}");
                                             string memberMenuChoices = ReadChoice(MemberMenuChoices);
@@ -182,7 +187,7 @@ namespace ConsoleMenu.Menu
                                                 memberMenuChoices = ReadChoice(MemberMenuChoices);
                                             }
                                         }
-                                        else if (member.Role == RoleEnum.Chairman)
+                                        else if (member.Role == RoleEnum.Chairman) //chairmanfield
                                         {
                                             Console.WriteLine($"Signed in as : {member.Role}");
                                             string memberMenuChoices = ReadChoice(MemberMenuChoices);
