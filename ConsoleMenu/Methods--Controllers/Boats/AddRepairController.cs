@@ -1,5 +1,6 @@
 ﻿using Hillerød_Sejlklub_Library.Interfaces;
 using Hillerød_Sejlklub_Library.Models.Boats;
+using Hillerød_Sejlklub_Library.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +13,15 @@ namespace ConsoleMenu.Methods__Controllers.Boats
     {
         IRepairRepo _repairLogList;
 
+        IBoatRepo _boat;
+
         public Repair TheRepair { get; set; }
         
-        public AddRepairController(int number, string comment, Boat theBoat, bool isFixed, bool haveToBeSolved, IRepairRepo repairLogList)
+        public AddRepairController(int number, string comment, Boat theBoat, bool isFixed, bool haveToBeSolved, RepairRepo repairRepo, BoatRepo boatRepo)
         {
             TheRepair = new Repair(number, comment, theBoat, isFixed, haveToBeSolved);
-            _repairLogList = repairLogList;
+            _repairLogList = repairRepo;
+            _boat = boatRepo;
         }
 
         public void AddTheCreatedRepair()
