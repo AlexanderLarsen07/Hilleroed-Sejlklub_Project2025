@@ -1,4 +1,5 @@
 ﻿using Hillerød_Sejlklub_Library.Models.Boats;
+using Hillerød_Sejlklub_Library.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,6 @@ namespace Hillerød_Sejlklub_Library.Interfaces
         public void RemoveRepair(int repairNumber);
         public void PrintAllRepairs();
 
-        public void PrintAllTheRepairsToEachBoat();
+        public void PrintAllTheRepairsToEachBoat(BoatRepo boatRepo);
     }
 }
