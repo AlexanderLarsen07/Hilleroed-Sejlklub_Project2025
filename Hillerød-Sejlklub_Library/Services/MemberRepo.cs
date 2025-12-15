@@ -61,10 +61,14 @@ namespace Hillerød_Sejlklub_Library.Services
         //adds a BoatLot to the member
         public void addBoatLotToMember(BoatLot b, Member member)
         {
-            if(b.IsRented == false)
+            if(b.IsRented == false && member._boatLotsRented.Capacity > member._boatLotsRented.Count)
             {
                 member._boatLotsRented.Add(b);
                 b.IsRented = true;
+            }
+            else
+            {
+                Console.WriteLine("Attempt failed");
             }
         }
 

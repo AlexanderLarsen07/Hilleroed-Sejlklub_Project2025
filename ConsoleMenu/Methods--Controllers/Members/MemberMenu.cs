@@ -1,4 +1,5 @@
-﻿using Hillerød_Sejlklub_Library.Interfaces;
+﻿using Hillerød_Sejlklub_Library.Data;
+using Hillerød_Sejlklub_Library.Interfaces;
 using Hillerød_Sejlklub_Library.Models.Members;
 using Hillerød_Sejlklub_Library.Services;
 using System;
@@ -649,7 +650,7 @@ namespace ConsoleMenu.Methods.Members
                                     Console.WriteLine(m1.ToString() + $"{m1.Mail}");
                                     Console.ReadLine();
                                     break;
-                                } 
+                                }
                                 if (enteredNumber != m1.MemberID)
                                 {
                                     Console.WriteLine("No member has the entered id");
@@ -691,7 +692,7 @@ namespace ConsoleMenu.Methods.Members
                             foreach (Member members in memberRepo.GetAll())
                             {
                                 Console.WriteLine($"There are {member.ToString().Count()} members in total.");
-                                
+
                             }
                             Console.WriteLine($"There are {memberRepo.GetMemberByRole()._members.Count} members in total with the role member.");
                             Console.WriteLine($"There are {memberRepo.GetAdministratorByRole()._members.Count} members in total with the role administrator.");
@@ -864,29 +865,56 @@ namespace ConsoleMenu.Methods.Members
                             }
                             break;
                         #endregion
-                        #region 10. tilføje boatlots til en selv - (doesnt seem to update boatlots) - not finished
-                        case "10"://tilføje boatlots
-                            Console.WriteLine($"Du har lige nu: {member._boatLotsRented.Count} boat lots som er lejet.");
+                        #region 10. tilføje boatlots til en selv - done
+                        case "10"://tilføje boatlots 
+                            Console.WriteLine($"You have currently: {member._boatLotsRented.Count} boat lots that your renting.");
+                            Console.WriteLine($"There are {member._boatLotsRented.Count}/{member._boatLotsRented.Capacity} boat lots rented");
                             Console.WriteLine($"-----------------------------------------------");
-                            Console.WriteLine("Indtast mængde af boat lots som du ønsker: ");
+                            Console.WriteLine("Inset the number of boat lots that you want: ");
                             Console.WriteLine("Familie member: 400 kr. = 1 boat lot");
                             Console.WriteLine("Senior  member: 400 kr. = 1 boat lot");
                             Console.WriteLine("Junior  member: 200 kr. = 1 boat lot");
-                            int boatLotsRented = Convert.ToInt32(Console.ReadLine());
-                            if (boatLotsRented < 0)
-                            {
-                                for (int i = 0; i < boatLotsRented; i++)
+                            //int boatLotsRented = Convert.ToInt32(Console.ReadLine());
+                            //Console.WriteLine("");
+                            //if (boatLotsRented >= 1)
+                            //{
+                                bool ying = true;
+                                while (ying == true)
                                 {
-                                    BoatLot bl = new BoatLot(20, 20);
-                                    member._boatLotsRented.Add(bl);
-                                    //member._boatLotsRented.Add() = boatLotsRented;
+                                    //if (boatLotRepo.GetAll() != null) //tries to see if there are any boat lots left
+                                    //{
+                                        foreach (BoatLot data in boatLotRepo.GetAll())
+                                        {
+                                            if (data.IsRented == false)//checks if there are boat lots that are not rented
+                                            {
+                                                {
+                                                    Console.WriteLine($"{data.ToString()}\n");
+                                                }
+                                            }
+                                        }
+                                        Console.WriteLine("Input the id of the boat lot, that you want:");
+                                        int numberInputted = Convert.ToInt32(Console.ReadLine());
+                                        if (boatLotRepo.GetBoatLotById(numberInputted) != null)
+                                        {
+                                            memberRepo.addBoatLotToMember(boatLotRepo.GetBoatLotById(numberInputted)!, member);
+                                            break;
+                                        }
+                                        ying = false;
+                                    //}
+                                    //else
+                                    //{
+                                    //    Console.WriteLine("There are no more boat lots left to rent");
+                                    //    Console.ReadLine();
+                                    //    ying = false;
+                                    //}
                                 }
-                            }
-                            else
-                            {
-                                Console.WriteLine("The amount of boatLots inserted must be 1 or above");
-                            }
-                                break;
+                            //}
+                            //else if (boatLotsRented <= 0)
+                            //{
+                            //    Console.WriteLine("The amount of boatLots inserted must be 1 or above");
+                            //    Console.ReadLine();
+                            //}
+                            break;
                             #endregion
                     }
                     theChoice = ReadChoice(readChoices);
