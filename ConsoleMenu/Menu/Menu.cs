@@ -13,19 +13,19 @@ namespace ConsoleMenu.Menu
     public class Menu
     {
         // static strings for choices
-        static string LoginChoices = " 1. Sign in as guest.\t\n 2. Sign in as Member. \t\n q. Exit. \n\t ";
+        static string LoginChoices = " 1. Sign in as guest.\t\n 2. Sign in as Member. \t\n q. Exit. \t\n ";
         
-        static string GuestMenuChoices = " 1. Events.\t\n 2. Signup.\t\n 3. Boats\t\n q. Exit. \n\t ";//Implement TODO.
-        static string MemberMenuChoices = " 1. Events.\t\n 2. Members \t\n q. Exits. \n\t ";
+        static string GuestMenuChoices = " 1. Events.\t\n 2. Signup.\t\n q. Exit. \t\n ";//Implement TODO.
+        static string MemberMenuChoices = " 1. Events.\t\n 2. Members \t\n q. Exits. \t\n ";
 
-        static string GuestEventChoices = " 1. View all events. \t\n 2. Search for events by date. \t\n q. Exit. \n\t ";
-        static string MemberEventChoices = " 1. View all event/signup. \t\n 2. Search for events by date/signup. \t\n 3. Edit a Comment on a signup. \t\n 4. Delete a signup. \t\n q. quit. \n\t ";
-        static string AdminEventChoices = " 1. View all event. \t\n 2. Search for events by date. \t\n 3. Edit a Comment on a signup. \t\n 4. Delete a signup. \t\n 5. Create new event. \t\n q. quit. \n\t ";
+        static string GuestEventChoices = " 1. View all events. \t\n 2. Search for events by date. \t\n q. Exit. \t\n ";
+        static string MemberEventChoices = " 1. View all event/signup. \t\n 2. Search for events by date/signup. \t\n 3. Edit a Comment on a signup. \t\n 4. Delete a signup. \t\n q. quit. \t\n ";
+        static string AdminEventChoices = " 1. View all event. \t\n 2. Search for events by date. \t\n 3. Edit a Comment on a signup. \t\n 4. Delete a signup. \t\n 5. Create new event. \t\n 6. Show events sorted by most signups. \t\n 7. show signups sorted by earliest. \t\n q. quit. \t\n ";
 
 
-        static string MemberMemberChoices = "1. View your details\t\n 2. Edit your account\t\n 3. View boat lots\t\n q. Exits. \n\t ";
-        static string AdminMemberChoices = "1. View all members\t\n 2. Search for a specific member of their id\t\n 3. Boat lots\t\n 4.simple statistics\t\n 5. Delete a user or make a custom user\t\n 6. View your account\t\n 7. Edit details of your account\t\n 8. Add boat lots\t\n 9. Events. \t\n q. Exits. \n\t ";
-        static string ChairmanMemberChoices = "1.  Crud Admins\t\n2.  Change chairman\t\n3.  View all members\t\n4.  Search for a specific member of their id\t\n5.  Boat lots\t\n6.  Simple statistics\t\n7.  Delete a user or make a custom user\t\n8.  View your account\t\n9.  Edit details of your account\t\n10. Add boat lots\t\n11. Events.\t\n q. Exits.\t\n\t\nIndtast Nummer: \t\n ";
+        static string MemberMemberChoices = "1. View your details\t\n 2. Edit your account\t\n 3. View boat lots\t\n q. Exits. \t\n ";
+        static string AdminMemberChoices = "1. View all members\t\n 2. Search for a specific member of their id\t\n 3. Boat lots\t\n 4.simple statistics\t\n 5. Delete a user or make a custom user\t\n 6. View your account\t\n 7. Edit details of your account\t\n 8. Add boat lots\t\n 9. Events. \t\n q. Exits. \t\n ";
+        static string ChairmanMemberChoices = "1.  Crud Admins\t\n2.  Change chairman\t\n3.  View all members\t\n4.  Search for a specific member of their id\t\n5.  Boat lots\t\n6.  Simple statistics\t\n7.  Delete a user or make a custom user\t\n8.  View your account\t\n9.  Edit details of your account\t\n10. Add boat lots\t\n q. Exits.\t\n\t\nIndtast Nummer:\t\n";
 
         static string GuestBoatChoices = "1. See the boats.\t\n q. Exit \t\n";
         static string MemberBoatChoices = "1. See all the boats with all the details.\t\n q. Exit. \t\n";

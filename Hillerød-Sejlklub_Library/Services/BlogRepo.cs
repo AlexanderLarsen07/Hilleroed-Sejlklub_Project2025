@@ -14,23 +14,29 @@ namespace Hillerød_Sejlklub_Library.Services
     public class BlogRepo : IBlogRepo
     {
         private List<Blog> _blogRepo;
-
-
+        
+        public int Count
+        {
+            get { return _blogRepo.Count; }
+        }
+       
         public BlogRepo()
         {
+            
             _blogRepo = new List<Blog>();
         }
 
-        public void AddBlog(Blog blog) //tilføj blog object ind til listen
+        #region Blog methods
+        public void AddBlog(Blog blog) 
         {
             if (!BlogNameExist(blog.Headline))
             {
                 _blogRepo.Add(blog);
             }
         }
-        public bool BlogNameExist(string headline)
+        public bool BlogNameExist(string headline) 
         {
-            foreach (var b in _blogRepo)
+            foreach (Blog b in _blogRepo)
             {
                 if (b.Headline == headline)
                 {
@@ -40,24 +46,25 @@ namespace Hillerød_Sejlklub_Library.Services
             return false;
         }
 
-        public Blog ReturnByDateRange(DateTime from, DateTime to) //return en liste af blog og vise det
+        public List<Blog> ReturnByDateRange(DateTime from, DateTime to) 
         {
+            List<Blog> list = new List<Blog>();
+
             foreach (Blog b in _blogRepo)
             {
                 if (b.Date >= from && b.Date <= to)
                 {
-                    return b;
+                    list.Add(b);
                 }
             }
-            return null;
+            return list;
         }
 
-        public void EditBlog(Blog blog, string headline, string theText, string description)
-        //return type Blog? fordi når man har ændret en bestemt blog så returner man den?
+        public void EditBlog(Blog blog, string headline, string theText, string description) 
         {
             foreach (Blog b in _blogRepo)
             {
-                if (b.Headline == blog.Headline) //headline (og) the text osv
+                if (b.Headline == blog.Headline) 
                 {
                     b.Headline = headline;
                     b.TheText = theText;
@@ -65,58 +72,75 @@ namespace Hillerød_Sejlklub_Library.Services
                 }
             }
         }
-       
-
-        public void Delete(Blog blog) //DeleteBlog metoden skal tilføjes i user story?
+        public void Delete(Blog blog) 
         {
-            _blogRepo.Remove(blog);
-        }
-        public void PrintAllComments()
-        {
-            foreach (Blog c in _blogRepo)
+            foreach(Blog b in _blogRepo) 
             {
-                Console.WriteLine(c.CommentsOnBlog);
-            }
-        }
-
-        //en metode for tjekke administrator eller formand?
-
-        public List<Blog> ReturnBlogHeadline(string title)
-        {
-            List<Blog> blogTitle = new List<Blog>();
-
-            for (int i = 0; i < _blogRepo.Count; i++)
-            {
-                if (_blogRepo[i].Headline == title.ToLower() || _blogRepo[i].Headline == title.ToUpper())
+                if(b.BlogID == blog.BlogID)
                 {
-                    blogTitle.Add(_blogRepo[i]);
+                    _blogRepo.Remove(b);
+                    Console.WriteLine($"Blog \"{b.Headline}\" is deleted");
+                    break;
                 }
-                return blogTitle;
+                
             }
-            return null;
         }
-        public void PrintAllBlog()
+
+
+        public void PrintAllCommentsOnAllBlogs() 
         {
             foreach (Blog b in _blogRepo)
             {
-                Console.WriteLine(b.Headline + b.Description);
+                Console.WriteLine();
+                Console.WriteLine($"Udskriver kommentarer for blog {b.Headline}");
+                foreach (Comment c in b._commentList)
+                {
+
+                    Console.WriteLine(c.MakeComment);
+                }
+
             }
         }
-        //public List<Comment> GetAllCommentsWithThisMember(Member member)
-        //{
 
-        //    List<Comment> blogList = new List<Comment>();
-        //    //foreach (Blog b in _blogRepo)
-        //    //{
-        //        //foreach (Comment comment in _blogRepo.Contains(this.CommentsOnBlog))
-        //        //{
-        //        //    if (comment.Member == member)
-        //        //    {
-        //        //        blogList.Add(comment);
-        //        //    }
-        //        //}
-        //    }
-        //    return blogList;
-        //}
+        public List<Blog> ReturnBlogHeadline(string headline) 
+        {
+            List<Blog> blogHeadline= new List<Blog>();
+            
+            for (int i = 0; i < _blogRepo.Count; i++)
+            {
+
+                if (_blogRepo[i].Headline.ToLower() == headline.ToLower() )
+                {
+                    
+                    blogHeadline.Add(_blogRepo[i]);
+                 
+                }
+                
+            }
+            return blogHeadline; 
+        }
+
+        public void PrintAllBlog() 
+        {
+            foreach (Blog b in _blogRepo)
+            {
+                Console.WriteLine($"Headline: {b.Headline}\nDescription: {b.Description}"); //toString()?
+            }
+        }
+
+        public Blog? GetBlog(int id)
+        {
+            foreach (Blog b in _blogRepo)
+            {
+                if (b.BlogID == id)
+                {
+                    return b;
+                }
+            }
+            return null;
+        }
+        #endregion
+
+
     }
 }

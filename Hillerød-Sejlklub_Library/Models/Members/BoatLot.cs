@@ -11,7 +11,8 @@ namespace Hillerød_Sejlklub_Library.Models.Members
     {
         public Dictionary<int, BoatLotRepo> _boatLots;
         private static int _lotID = 1;
-        public int LotID { get { return _lotID; } private set { value = _lotID; } }
+        private int _boatLotID;
+        public int LotID { get { return _boatLotID; } }
         public int Length { get; }
         public int Width { get; }
         public bool IsRented { get; set; }
@@ -20,12 +21,12 @@ namespace Hillerød_Sejlklub_Library.Models.Members
             _boatLots = new Dictionary<int, BoatLotRepo>();
             Length = length;
             Width = width;
-            LotID = _lotID++;
+            _boatLotID = _lotID++;
             IsRented = false;
         }
         public override string ToString() //implement those above
         {
-            return $"ID: {LotID}\n" +
+            return $"\nID: {LotID}\n" +
                 $"Length:{Length}cm.\n" +
                 $"Bredden:{Width}cm.";
         }

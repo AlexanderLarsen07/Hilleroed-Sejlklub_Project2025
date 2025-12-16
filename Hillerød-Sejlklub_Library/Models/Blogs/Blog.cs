@@ -11,22 +11,24 @@ namespace Hillerød_Sejlklub_Library.Models.Blogs
 {
     public class Blog
     {
-        private DateTime _startDate;
-        private DateTime _lastUpdateDate;
+        public List<Comment> _commentList;
+        private int _blogID;
+        private static int _counter = 1;
+        
 
         public DateTime Date
         {
-            get; set; //full eller auto?
+            get; set; 
         }
         public string Headline
         {
             get; set;
         }
-
-        public List<Comment> CommentsOnBlog
+        public int BlogID
         {
-            get; set; //full? auto?
+            get { return _blogID; }
         }
+
         public Member Member
         {
             get; private set;
@@ -41,14 +43,51 @@ namespace Hillerød_Sejlklub_Library.Models.Blogs
         }
         public Blog(string headline, Member member, string theText, string description)
         {
+            _blogID = _counter++;
+            _commentList = new List<Comment>();
             Headline = headline;
             Member = member;
             TheText = theText;
             Description = description;
+            Date = DateTime.Now;
         }
+        
+        #region Comments logic/methods
+        public void AddComment(Comment comment) 
+        {
+            _commentList.Add(comment);
+        }
+
+        public void EditComment(string updatedComment, int id)  
+        {
+            
+            for (int i = 0; i < _commentList.Count; i++)
+            {
+                if (_commentList[i].CounterID == id)
+                {
+                    _commentList[i].MakeComment = updatedComment;
+                }
+            }
+        }
+
+        public void RemoveComment(int id)
+        { 
+            foreach (Comment c in _commentList)
+            {
+                if (c.CounterID == id)
+                {
+                    _commentList.Remove(c);
+                    Console.WriteLine($"Comment \"{c.MakeComment}\" removed");
+                    break;
+                }
+            }
+
+        }
+        #endregion
+
         public override string ToString()
         {
-            return $"Member: {Member}   Headline: {Headline}    the Text: {TheText}    Description: {Description}   Date: {Date}    Comment Section: {CommentsOnBlog}";
+            return $"Member: {Member}   Headline: {Headline}    the Text: {TheText}    Description: {Description}   Date: {Date}    Comment Section: {_commentList}    ID: {_blogID}";
         }
     }
 }

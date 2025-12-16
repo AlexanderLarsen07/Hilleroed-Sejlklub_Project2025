@@ -294,7 +294,7 @@ namespace ConsoleMenu.Methods__Controllers.Blogs
                                 DateTime startDate = DateTime.Parse(Console.ReadLine());
                                 Console.WriteLine("write end date");
                                 DateTime endDate = DateTime.Parse(Console.ReadLine()); //herfra og op kan man putte i returnByDateRange metoden og returner svaret tilbage her og printe?
-                                Console.WriteLine(blogRepo.ReturnByDateRange(startDate, endDate).Headline);
+                                Console.WriteLine(blogRepo.ReturnByDateRange(startDate, endDate)/*.Headline*/);
                                 Console.WriteLine("enter title of the blog you wish to see.");
                                 string headLine = Console.ReadLine();
                                 List<Blog> blog = blogRepo.ReturnBlogHeadline(headLine);
@@ -350,7 +350,7 @@ namespace ConsoleMenu.Methods__Controllers.Blogs
                                     }
                                     Console.WriteLine("Make your comment");
                                     string comment = Console.ReadLine();
-                                    Comment theComment = new Comment(comment, memberType, blog[0]);
+                                    Comment theComment = new Comment(comment, memberType);
                                     Console.WriteLine($"Comment made to the blog {blog[0].Headline}");
                                 }
                             }
@@ -363,7 +363,7 @@ namespace ConsoleMenu.Methods__Controllers.Blogs
                                 DateTime startDate = DateTime.Parse(Console.ReadLine());
                                 Console.WriteLine("write end date");
                                 DateTime endDate = DateTime.Parse(Console.ReadLine());
-                                Console.WriteLine(blogRepo.ReturnByDateRange(startDate, endDate).Headline);
+                                Console.WriteLine(blogRepo.ReturnByDateRange(startDate, endDate)/*.Headline*/);
                                 Console.WriteLine("enter title of the blog you wish to see.");
                                 string headLine = Console.ReadLine();
                                 List<Blog> blog = blogRepo.ReturnBlogHeadline(headLine);
@@ -383,7 +383,7 @@ namespace ConsoleMenu.Methods__Controllers.Blogs
                                     }
                                     Console.WriteLine("Make your comment");
                                     string comment = Console.ReadLine();
-                                    Comment theComment = new Comment(comment, memberType, blog[0]);
+                                    Comment theComment = new Comment(comment, memberType);
                                     Console.WriteLine($"Comment made to the blog {blog[0].Headline}");
                                 }
                             }
@@ -435,7 +435,7 @@ namespace ConsoleMenu.Methods__Controllers.Blogs
                                             
                                             Console.WriteLine("Make your comment");
                                             string comment = Console.ReadLine();
-                                            Comment theComment = new Comment(comment, memberType, blog[0]);
+                                            Comment theComment = new Comment(comment, memberType);
                                             Console.WriteLine($"Comment made to the blog {blog[0].Headline}");
                                             isFalse = false;
                                         }
@@ -484,7 +484,7 @@ namespace ConsoleMenu.Methods__Controllers.Blogs
                                 DateTime startDate = DateTime.Parse(Console.ReadLine());
                                 Console.WriteLine("write end date");
                                 DateTime endDate = DateTime.Parse(Console.ReadLine());
-                                Console.WriteLine(blogRepo.ReturnByDateRange(startDate, endDate).Headline);
+                                Console.WriteLine(blogRepo.ReturnByDateRange(startDate, endDate)/*.Headline*/);
                                 Console.WriteLine("enter title of the blog you wish to see.");
                                 string headLine = Console.ReadLine();
                                 List<Blog> blog = blogRepo.ReturnBlogHeadline(headLine);
@@ -504,7 +504,7 @@ namespace ConsoleMenu.Methods__Controllers.Blogs
                                     }
                                     Console.WriteLine("Make your comment");
                                     string comment = Console.ReadLine();
-                                    Comment theComment = new Comment(comment, memberType, blog[0]);
+                                    Comment theComment = new Comment(comment, memberType);
                                     Console.WriteLine($"Comment made to the blog {blog[0].Headline}");
                                 }
                             }
