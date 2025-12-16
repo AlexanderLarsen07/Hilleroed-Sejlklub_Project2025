@@ -45,6 +45,20 @@ namespace Hillerød_Sejlklub_Library.Services
            return _memberDictionary.Values.ToList();
         }
 
+        //A method that can get a List of members determined by their role
+        public List<Member> GetSpecificMembersByRole(RoleEnum role)
+        {
+            List<Member> members = new List<Member>();
+            foreach (Member member in _memberDictionary.Values)
+            {
+                if (member.Role == role)
+                {
+                    members.Add(member);
+                }
+            }
+            return members;
+        }
+
         //removes a member by the entering id that matches member id
         public void RemoveMember(int id)
         {
@@ -90,7 +104,7 @@ namespace Hillerød_Sejlklub_Library.Services
                 if (member.Value.Role == RoleEnum.Administrator)
                 {
                     member.Value.Role = role;
-                    Console.WriteLine(member);
+                    Console.WriteLine(member.Value);
                 }
             }
             return null!;
@@ -104,7 +118,7 @@ namespace Hillerød_Sejlklub_Library.Services
                 if (member.Value.Role == RoleEnum.Member)
                 {
                     member.Value.Role = role;
-                    Console.WriteLine(member);
+                    Console.WriteLine(member.Value);
                 }
             }
             return null!;
@@ -118,7 +132,7 @@ namespace Hillerød_Sejlklub_Library.Services
                 if (member.Value.Role == RoleEnum.Chairman)
                 {
                     member.Value.Role = role;
-                    Console.WriteLine(member);
+                    Console.WriteLine(member.Value);
                 }
             }
             return null!;
@@ -140,11 +154,11 @@ namespace Hillerød_Sejlklub_Library.Services
             }
         }
 
-        //only administrator and chairmand can use this method
-        public Member EditMembersMembership(int id, MembershipEnum membershipEnum) // - not done
-        {
-            return null!;
-        }
+        ////only administrator and chairmand can use this method
+        //public Member EditMembersMembership(int id, MembershipEnum membershipEnum) // - not done
+        //{
+        //    return null!;
+        //}
 
         public Member? EditMember(int id, string name, int age, string mail, string password, string phoneNumber)
         {
@@ -163,7 +177,7 @@ namespace Hillerød_Sejlklub_Library.Services
                 {
                     Console.WriteLine("Mail is already in use. Please try a different Mail.");
                 }
-                    _memberDictionary[id].Password = password;
+                _memberDictionary[id].Password = password;
                 return _memberDictionary[id];
             }
             else
@@ -184,7 +198,6 @@ namespace Hillerød_Sejlklub_Library.Services
                 }
             }
             return null;
-      
         }
 
         //public Member ReturnMemberByPassword(string password)
