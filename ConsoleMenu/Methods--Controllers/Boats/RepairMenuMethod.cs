@@ -22,7 +22,7 @@ namespace ConsoleMenu.Methods__Controllers.Boats
             Console.Clear();
             return choice.ToLower();
         }
-        public void BoatMenu(string theChoices, Member? member, RepairRepo repairRepo, BoatRepo boatRepo)
+        public void RepairMenu(string theChoices, Member? member, RepairRepo repairRepo, BoatRepo boatRepo)
         {
             try
             {

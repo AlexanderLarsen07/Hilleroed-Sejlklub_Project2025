@@ -65,12 +65,12 @@ namespace Hillerød_Sejlklub_Library.Services
                 }
             }
         }
+       
+
         public void Delete(Blog blog) //DeleteBlog metoden skal tilføjes i user story?
         {
             _blogRepo.Remove(blog);
         }
-
-
         public void PrintAllComments()
         {
             foreach (Blog c in _blogRepo)
