@@ -9,30 +9,32 @@ namespace Hillerød_Sejlklub_Library.Models.Blogs
 {
     public class Comment
     {
+        private int _counterID;
+        private static int _counter = 1;
         private DateTime _dateOfPost;
         public string MakeComment
         {
             get; set;
         }
-        public Blog Blog
-        {
-            get; private set;
-        }
-        
+
         public Member Member { get; set; }
 
-
-        public Comment(string comment, Member member, Blog blog)
+        public int CounterID
         {
+            get { return _counterID; }
+        }
+
+        public Comment(string comment, Member member )
+        {
+            _counterID = _counter++;
             MakeComment = comment;
             Member = member;
-            Blog.CommentsOnBlog.Add(this);
             _dateOfPost = DateTime.Now;
         }
 
         public override string ToString()
         {
-            return $"Member: {Member}   Comment: {MakeComment}   Blog: {Blog}   Date of Post: {_dateOfPost}";
+            return $"Member: {Member}   Comment: {MakeComment}    Date of Post: {_dateOfPost}";
         }
     }
 }

@@ -1,9 +1,12 @@
-﻿using Hillerød_Sejlklub_Library.Interfaces;
+﻿using ConsoleMenu.Menu;
+using Hillerød_Sejlklub_Library.Data;
+using Hillerød_Sejlklub_Library.Interfaces;
 using Hillerød_Sejlklub_Library.Models.Members;
 using Hillerød_Sejlklub_Library.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.Design;
 using System.Data;
 using System.Linq;
 using System.Reflection;
@@ -385,9 +388,9 @@ namespace ConsoleMenu.Methods.Members
                 #region Members with role chairman
                 else if (member.Role == RoleEnum.Chairman) //skal alt admins kan, CRUD admins, ændre formandskab
                 {
-                    switch (theChoice) //(1, 2, 5, 6, 7 and 10) not finished
+                    switch (theChoice) //(1, 2, 5, 6 and 7) not finished
                     {
-                        #region 1. CRUD Admins      -       (look into the create admin) - not finished
+                        #region 1. CRUD Admins - not finished
                         case "1": //CRUD admins - not done
                             Console.WriteLine("Input Which Crud method u want to do:");
                             Console.WriteLine("1. (C) Create admin");
@@ -396,6 +399,7 @@ namespace ConsoleMenu.Methods.Members
                             Console.WriteLine("4. (D) Delete admin");
                             Console.WriteLine();
                             string decision = Console.ReadLine();
+                            #region (C) Create admin - (the lower part doesnt work) - almost done
                             if (decision == "1")  //Create admin - not done
                             {
                                 bool determination = true;
@@ -440,9 +444,8 @@ namespace ConsoleMenu.Methods.Members
                                         Console.WriteLine("Indtast Telefon nummer");
                                         string phoneNumber = Console.ReadLine();
                                         AddMembersController newMember = new AddMembersController(name, age, isMembership, mail, password, phoneNumber, memberRepo);
-                                        RoleEnum role = RoleEnum.Administrator;
-                                        newMember.Member.Role = role;
-                                        newMember.AddMember();
+                                        newMember.Member.Role = RoleEnum.Administrator;
+                                        memberRepo.AddMember(newMember.Member);
                                     }
                                     if (newDecision == "2") //ændrer en eksisterende member til administrator
                                     {
@@ -455,6 +458,8 @@ namespace ConsoleMenu.Methods.Members
                                         int number = Convert.ToInt32(Console.ReadLine());
                                         if (number == memberRepo.GetMemberByRole().MemberID)
                                         {
+                                            //memberRepo.GetMemberById(number).Role = RoleEnum.Administrator;
+                                            memberRepo.AddMember(memberRepo.GetMemberById(number));
                                             memberRepo.GetMemberById(number).Role = RoleEnum.Administrator;
                                             break;
                                         }
@@ -463,6 +468,8 @@ namespace ConsoleMenu.Methods.Members
                                 }
 
                             }
+                            #endregion
+                            #region (R) Read admin - done
                             else if (decision == "2") //Read admin
                             {
                                 bool determination = true;
@@ -473,12 +480,14 @@ namespace ConsoleMenu.Methods.Members
                                     determination = false;
                                 }
                             }
-                            else if (decision == "3")//Update admin - not done
+                            #endregion
+                            #region (U) Update admin - not done
+                            else if (decision == "3")//Update admin
                             {
                                 Console.WriteLine(memberRepo.GetAdministratorByRole());
                                 Console.WriteLine("Indtast en Admins id:");
                                 int idNumber = Convert.ToInt32(Console.ReadLine());
-                                if (idNumber == memberRepo.GetAdministratorByRole().MemberID)
+                                if (idNumber == memberRepo.GetAdministratorByRole().MemberID) //nulreference
                                 {
                                     Console.WriteLine("Admindens nuværende informationer:");
                                     if (idNumber == memberRepo.GetMemberByRole().MemberID)
@@ -569,36 +578,49 @@ namespace ConsoleMenu.Methods.Members
                                     Console.WriteLine("Brugeren med dette id findes ikke, prøv igen.");
                                 }
                             }
+                            #endregion
+                            #region (D) Delete admin - not done
                             else if (decision == "4")//Delete admin
                             {
+                                Console.WriteLine($"\nInsert the number associated with the action:" +
+                                    $"\n1: Changes the role of an admin to a member" +
+                                    $"\n2: Deletes an existing admin\n");
                                 string theSecondChoice = Console.ReadLine();
                                 if (theSecondChoice == "1") //omdøbes den valgte admins til at ændres til member rollen
                                 {
-                                    Console.WriteLine("Indtast en eksisterendes admins id for at give dem member rollen:");
+                                    Console.WriteLine("Insert an existing admins id to change their role to a member:");
                                     int newNumber = Convert.ToInt32(Console.ReadLine());
-                                    if (newNumber == memberRepo.GetMemberByRole().MemberID)
+                                    if (newNumber == memberRepo.GetAdministratorByRole().MemberID)
                                     {
                                         member.Role = RoleEnum.Member;
                                     }
                                 }
                                 else if (theSecondChoice == "2") //sletter helt kontoen
                                 {
-                                    Console.WriteLine("Indtast Adminindens id som du ønsker at slette:");
-                                    int enteredNumber = Convert.ToInt32(Console.ReadLine());
-                                    if (member.Role == RoleEnum.Administrator)
+                                    Console.WriteLine("Insert an existing admins id to delete their account:");
+                                    foreach (Member members in memberRepo.GetSpecificMembersByRole(RoleEnum.Administrator))
                                     {
-                                        if (enteredNumber == memberRepo.GetMemberByRole().MemberID)
+                                        Console.WriteLine(members.ToString());
+                                    }
+                                    //Console.WriteLine(memberRepo.GetAdministratorByRole().ToString());
+                                    int enteredNumber = Convert.ToInt32(Console.ReadLine());
+                                    foreach(Member members in memberRepo.GetAll())
+                                    {
+                                        if(members.Role == RoleEnum.Administrator && enteredNumber == members.MemberID)
                                         {
+
                                             memberRepo.RemoveMember(enteredNumber);
                                         }
                                         else
                                         {
-                                            Console.WriteLine("Ingen nuværende Admins tilhøre denne Id, prøv igen.");
+                                            Console.WriteLine("There are no admins associated with the inserted id.");
+                                            Console.ReadLine();
                                         }
                                     }
                                 }
                             }
                             break;
+                        #endregion
                         #endregion
                         #region 2. Change Chairman - (exception and roles not working) - not finished
                         case "2": //ændre formandskab
@@ -606,11 +628,11 @@ namespace ConsoleMenu.Methods.Members
                             int id = Convert.ToInt32(Console.ReadLine());
                             if (id == memberRepo.GetMemberById(id).MemberID) //exception makes me unable to output else
                             {
-                                Console.WriteLine("\nAre you sure that you want to change the users role to chairman and change your role to Administrator?");
+                                Console.WriteLine("\nDo you want to confirm your action?");
                                 Console.WriteLine(memberRepo.GetMemberById(id).ToString());
                                 Console.WriteLine("");
-                                string confirmation = Console.ReadLine();
-                                if (confirmation == "Ja" || confirmation == "Yes")
+                                string confirmation = Console.ReadLine().ToLower();
+                                if (confirmation == "ja" || confirmation == "yes")
                                 {
                                     if (member.Role == RoleEnum.Chairman) //rollen formandskab bliver fjernet for den nuværende formand
                                     {
@@ -619,6 +641,7 @@ namespace ConsoleMenu.Methods.Members
                                     while (id == memberRepo.GetMemberById(id).MemberID) //rollen bliver tildelt til en ny formand ud fra id
                                     {
                                         memberRepo.GetMemberById(id).Role = RoleEnum.Chairman; //not done
+                                        theChoice = ReadChoice(readChoices);
                                     }
                                 }
                             }
@@ -649,7 +672,7 @@ namespace ConsoleMenu.Methods.Members
                                     Console.WriteLine(m1.ToString() + $"{m1.Mail}");
                                     Console.ReadLine();
                                     break;
-                                } 
+                                }
                                 if (enteredNumber != m1.MemberID)
                                 {
                                     Console.WriteLine("No member has the entered id");
@@ -691,11 +714,10 @@ namespace ConsoleMenu.Methods.Members
                             foreach (Member members in memberRepo.GetAll())
                             {
                                 Console.WriteLine($"There are {member.ToString().Count()} members in total.");
-                                
                             }
-                            Console.WriteLine($"There are {memberRepo.GetMemberByRole()._members.Count} members in total with the role member.");
-                            Console.WriteLine($"There are {memberRepo.GetAdministratorByRole()._members.Count} members in total with the role administrator.");
-                            Console.WriteLine($"There are {memberRepo.GetChairmanByRole()._members.Count} members in total with the role chairman ");
+                            Console.WriteLine($"There are {memberRepo.GetSpecificMembersByRole(RoleEnum.Member).Count()} members in total with the role member."); //nulreference
+                            Console.WriteLine($"There are {memberRepo.GetSpecificMembersByRole(RoleEnum.Administrator).Count()} members in total with the role administrator.");//nulreference
+                            Console.WriteLine($"There are {memberRepo.GetSpecificMembersByRole(RoleEnum.Chairman).Count()} members in total with the role chairman ");//nulreference
                             Console.WriteLine("------------------------------------------");
                             Console.WriteLine($"Remaining boat lots left in total: {member._boatLotsRented.Capacity}");
                             Console.WriteLine("\nMembers that have a boat lot and how many boat lots:");
@@ -712,21 +734,25 @@ namespace ConsoleMenu.Methods.Members
                             Console.ReadLine();
                             break;
                         #endregion
-                        #region 7. Slette og lave users - (have not gone through) - not finished
+                        #region 7. Slette og lave members - (fix the delete version) - almost done
                         case "7": //kan delete users og lave user
+                            Console.WriteLine("Please insert a number to proceed:");
+                            Console.WriteLine("1: Create a new member");
+                            Console.WriteLine("2: Delete an existing member");
+                            Console.WriteLine("");
                             string firstChoice = Console.ReadLine();
                             if (firstChoice == "1") //Adds a new user
                             {
-                                Console.WriteLine("Indtast Informationerne om den nye member:");
+                                Console.WriteLine("Insert the following information that the member will contain:");
                                 Console.WriteLine("------------------------------------------");
-                                Console.WriteLine("Indtast Navnet");
+                                Console.WriteLine("Insert Name");
                                 string name = Console.ReadLine();
-                                Console.WriteLine("Indtast Alderen");
+                                Console.WriteLine("Insert Age:");
                                 int age = Convert.ToInt32(Console.ReadLine());
-                                Console.WriteLine("Indtast hvilken Membership som Memberen skal have");
-                                Console.WriteLine("1 = Familie Medlem");
-                                Console.WriteLine("2 = Medlem");
-                                //Console.WriteLine("3 = Passive Medlem");
+                                Console.WriteLine("Insert which membership that the member will have:");
+                                Console.WriteLine("1 = Family Member");
+                                Console.WriteLine("2 = Member");
+                                Console.WriteLine("3 = Passive Member");
                                 string membership = Console.ReadLine();
                                 MembershipEnum isMembership = new();
                                 if (membership == "1")
@@ -737,34 +763,37 @@ namespace ConsoleMenu.Methods.Members
                                 {
                                     isMembership = MembershipEnum.Medlem;
                                 }
-                                //else if (membership == "3")
-                                //{
-                                //    isMembership = MembershipEnum.PassiveMedlem;
-                                //}
-                                Console.WriteLine("Indtast Mailen");
+                                else if (membership == "3")
+                                {
+                                    isMembership = MembershipEnum.PassiveMedlem;
+                                }
+                                Console.WriteLine("Insert Mail:");
                                 string mail = Console.ReadLine();
-                                Console.WriteLine("Indtast Passwordet");
+                                Console.WriteLine("Insert Password:");
                                 string password = Console.ReadLine();
-                                Console.WriteLine("Indtast Telefon nummer");
+                                Console.WriteLine("Insert Phone number");
                                 string phoneNumber = Console.ReadLine();
                                 AddMembersController newMember = new AddMembersController(name, age, isMembership, mail, password, phoneNumber, memberRepo);
                                 newMember.Member.Role = RoleEnum.Member;
-                                newMember.AddMember();
+                                memberRepo.AddMember(newMember.Member);
                             }
                             else if (firstChoice == "2") //deletes an existing user
                             {
-                                foreach (Member m1 in memberRepo.GetAll()) //Maybe it works?
+                                Console.WriteLine("Members");
+                                Console.WriteLine("---------------------------------------------------");
+                                Console.WriteLine(memberRepo.GetAdministratorByRole());
+                                Console.WriteLine(memberRepo.GetMemberByRole());
+                                Console.WriteLine("");
+                                Console.WriteLine("Insert a members id that you would want to remove:");
+                                Console.WriteLine("---------------------------------------------------");
+                                int secondChoice = Convert.ToInt32(Console.ReadLine());
+                                if (secondChoice == memberRepo.GetAdministratorByRole().MemberID || secondChoice == memberRepo.GetMemberByRole().MemberID) //nullReference
                                 {
-                                    if (m1.Role == RoleEnum.Member)
-                                    {
-                                        Console.WriteLine("Indtast ID'et af memberen som der ønskes at slette:");
-                                        Console.WriteLine("---------------------------------------------------");
-                                        int secondChoice = Convert.ToInt32(Console.ReadLine());
-                                        if (secondChoice == m1.MemberID)
-                                        {
-                                            m1._members.Remove(m1.MemberID);
-                                        }
-                                    }
+                                    memberRepo.RemoveMember(secondChoice);
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Invalid id entered");
                                 }
                             }
                             break;
@@ -864,29 +893,56 @@ namespace ConsoleMenu.Methods.Members
                             }
                             break;
                         #endregion
-                        #region 10. tilføje boatlots til en selv - (doesnt seem to update boatlots) - not finished
-                        case "10"://tilføje boatlots
-                            Console.WriteLine($"Du har lige nu: {member._boatLotsRented.Count} boat lots som er lejet.");
+                        #region 10. tilføje boatlots til en selv - done
+                        case "10"://tilføje boatlots 
+                            Console.WriteLine($"You have currently: {member._boatLotsRented.Count} boat lots that your renting.");
+                            Console.WriteLine($"There are {member._boatLotsRented.Count}/{member._boatLotsRented.Capacity} boat lots rented");
                             Console.WriteLine($"-----------------------------------------------");
-                            Console.WriteLine("Indtast mængde af boat lots som du ønsker: ");
+                            Console.WriteLine("Inset the number of boat lots that you want: ");
                             Console.WriteLine("Familie member: 400 kr. = 1 boat lot");
                             Console.WriteLine("Senior  member: 400 kr. = 1 boat lot");
                             Console.WriteLine("Junior  member: 200 kr. = 1 boat lot");
-                            int boatLotsRented = Convert.ToInt32(Console.ReadLine());
-                            if (boatLotsRented < 0)
+                            //int boatLotsRented = Convert.ToInt32(Console.ReadLine());
+                            //Console.WriteLine("");
+                            //if (boatLotsRented >= 1)
+                            //{
+                            bool ying = true;
+                            while (ying == true)
                             {
-                                for (int i = 0; i < boatLotsRented; i++)
+                                //if (boatLotRepo.GetAll() != null) //tries to see if there are any boat lots left
+                                //{
+                                foreach (BoatLot data in boatLotRepo.GetAll())
                                 {
-                                    BoatLot bl = new BoatLot(20, 20);
-                                    member._boatLotsRented.Add(bl);
-                                    //member._boatLotsRented.Add() = boatLotsRented;
+                                    if (data.IsRented == false)//checks if there are boat lots that are not rented
+                                    {
+                                        {
+                                            Console.WriteLine($"{data.ToString()}\n");
+                                        }
+                                    }
                                 }
+                                Console.WriteLine("Input the id of the boat lot, that you want:");
+                                int numberInputted = Convert.ToInt32(Console.ReadLine());
+                                if (boatLotRepo.GetBoatLotById(numberInputted) != null)
+                                {
+                                    memberRepo.addBoatLotToMember(boatLotRepo.GetBoatLotById(numberInputted)!, member);
+                                    break;
+                                }
+                                ying = false;
+                                //}
+                                //else
+                                //{
+                                //    Console.WriteLine("There are no more boat lots left to rent");
+                                //    Console.ReadLine();
+                                //    ying = false;
+                                //}
                             }
-                            else
-                            {
-                                Console.WriteLine("The amount of boatLots inserted must be 1 or above");
-                            }
-                                break;
+                            //}
+                            //else if (boatLotsRented <= 0)
+                            //{
+                            //    Console.WriteLine("The amount of boatLots inserted must be 1 or above");
+                            //    Console.ReadLine();
+                            //}
+                            break;
                             #endregion
                     }
                     theChoice = ReadChoice(readChoices);
@@ -903,7 +959,7 @@ namespace ConsoleMenu.Methods.Members
             Console.WriteLine("Indtast hvilken Membership som du ønsker");
             Console.WriteLine("1 = Familie Medlem");
             Console.WriteLine("2 = Medlem");
-            //Console.WriteLine("3 = Passive Medlem");
+            Console.WriteLine("3 = Passive Medlem");
             string membership = Console.ReadLine();
             MembershipEnum isMembership = new();
             if (membership == "1")
@@ -914,10 +970,10 @@ namespace ConsoleMenu.Methods.Members
             {
                 isMembership = MembershipEnum.Medlem;
             }
-            //else if (membership == "3")
-            //{
-            //    isMembership = MembershipEnum.PassiveMedlem;
-            //}
+            else if (membership == "3")
+            {
+                isMembership = MembershipEnum.PassiveMedlem;
+            }
             Console.WriteLine("Indtast din Mail");
             string mail = Console.ReadLine();
             Console.WriteLine("Indtast Passwordet");
@@ -925,8 +981,7 @@ namespace ConsoleMenu.Methods.Members
             Console.WriteLine("Indtast Telefon nummer");
             string phoneNumber = Console.ReadLine();
             AddMembersController newMember = new AddMembersController(name, age, isMembership, mail, password, phoneNumber, memberRepo);
-            newMember.Member.Role = RoleEnum.Member;//bliver alleredee sat i constructor.
-            newMember.AddMember();
+            memberRepo.AddMember(newMember.Member);
         }
     }
 }

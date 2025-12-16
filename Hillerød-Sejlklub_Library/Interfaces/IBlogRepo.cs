@@ -13,12 +13,12 @@ namespace Hillerød_Sejlklub_Library.Interfaces
         void AddBlog(Blog blog);
         bool BlogNameExist(string headline);
 
-        Blog ReturnByDateRange(DateTime from, DateTime to);
+        List<Blog> ReturnByDateRange(DateTime from, DateTime to);
 
         void EditBlog(Blog blog, string headline, string theText, string description);
         void Delete(Blog blog);
 
-        void PrintAllComments();
+        void PrintAllCommentsOnAllBlogs();
 
         List<Blog> ReturnBlogHeadline(string title);
 
