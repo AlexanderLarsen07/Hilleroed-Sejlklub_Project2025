@@ -777,6 +777,7 @@ namespace ConsoleMenu.Methods.Members
                             {
                                 Console.WriteLine("Members");
                                 Console.WriteLine("---------------------------------------------------");
+                                foreach(Member members in memberRepo.)
                                 Console.WriteLine(memberRepo.GetAdministratorByRole());
                                 Console.WriteLine(memberRepo.GetMemberByRole());
                                 Console.WriteLine("");
