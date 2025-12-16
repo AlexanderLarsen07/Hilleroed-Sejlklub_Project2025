@@ -11,8 +11,6 @@ namespace Hillerød_Sejlklub_Library.Models.Blogs
 {
     public class Blog
     {
-        private DateTime _startDate;
-        private DateTime _lastUpdateDate;
         public List<Comment> _commentList;
         private int _blogID;
         private static int _counter = 1;
@@ -20,7 +18,7 @@ namespace Hillerød_Sejlklub_Library.Models.Blogs
 
         public DateTime Date
         {
-            get; set; //full eller auto?
+            get; set; 
         }
         public string Headline
         {
@@ -51,44 +49,40 @@ namespace Hillerød_Sejlklub_Library.Models.Blogs
             Member = member;
             TheText = theText;
             Description = description;
+            Date = DateTime.Now;
         }
-
+        
         #region Comments logic/methods
-        public void AddComment(Comment comment) //tjekket ish skal fikses - den adder 2 
+        public void AddComment(Comment comment) 
         {
             _commentList.Add(comment);
         }
 
-        public void EditComment(Comment comment)   //samme her bare med comment i stedet for?
+        public void EditComment(string updatedComment, int id)  
         {
-            string commentChangedByUser = Console.ReadLine();
+            
             for (int i = 0; i < _commentList.Count; i++)
             {
-                if (_commentList[i] == comment)
+                if (_commentList[i].CounterID == id)
                 {
-                    _commentList[i].MakeComment = commentChangedByUser;
+                    _commentList[i].MakeComment = updatedComment;
                 }
             }
         }
 
-        //    public void RemoveComment(Comment comment)
-        //    {
-        //        _commentRepo.Remove(comment);
-        //        Console.WriteLine($"Comment \"{comment.MakeComment}\" removed");
-        //    }
-        //    public List<Comment> ReturnAllCommentFromMembers()
-        //    {
-        //        return null;    //fjern
-        //    }
+        public void RemoveComment(int id)
+        { 
+            foreach (Comment c in _commentList)
+            {
+                if (c.CounterID == id)
+                {
+                    _commentList.Remove(c);
+                    Console.WriteLine($"Comment \"{c.MakeComment}\" removed");
+                    break;
+                }
+            }
 
-        //    public void PrintAllCommentsOnBlog(Blog blog)      //vil printe alle comments i den ene blog
-        //    {
-        //        for (int i = 0; i < blog._commentList.Count; i++)
-        //        {
-        //            Console.WriteLine(blog._commentList[i].MakeComment);
-        //        }
-        //    }
-        //}
+        }
         #endregion
 
         public override string ToString()
