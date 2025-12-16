@@ -20,7 +20,7 @@ namespace ConsoleMenu.Menu
 
         static string GuestEventChoices = " 1. View all events. \t\n 2. Search for events by date. \t\n q. Exit. \t\n ";
         static string MemberEventChoices = " 1. View all event/signup. \t\n 2. Search for events by date/signup. \t\n 3. Edit a Comment on a signup. \t\n 4. Delete a signup. \t\n q. quit. \t\n ";
-        static string AdminEventChoices = " 1. View all event. \t\n 2. Search for events by date. \t\n 3. Edit a Comment on a signup. \t\n 4. Delete a signup. \t\n 5. Create new event. \t\n 6. Show events sorted by most signups. \t\n q. quit. \t\n ";
+        static string AdminEventChoices = " 1. View all event. \t\n 2. Search for events by date. \t\n 3. Edit a Comment on a signup. \t\n 4. Delete a signup. \t\n 5. Create new event. \t\n 6. Show events sorted by most signups. \t\n 7. show signups sorted by earliest. \t\n q. quit. \t\n ";
 
 
         static string MemberMemberChoices = "1. View your details\t\n 2. Edit your account\t\n 3. View boat lots\t\n q. Exits. \t\n ";

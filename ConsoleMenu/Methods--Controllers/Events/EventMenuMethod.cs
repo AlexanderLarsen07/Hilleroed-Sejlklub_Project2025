@@ -102,13 +102,13 @@ namespace ConsoleMenu.Controllers.Events
                                                     Console.WriteLine(events[i]);
 
                                                     Console.WriteLine("press \"y\" to signup to event. Press \"n\" if Wrong event. Press \"q\" to cancel signing up.");
-                                                    string choice = Console.ReadLine();
+                                                    string choice = Console.ReadLine().ToLower();
 
-                                                    if (choice == "q".ToLower() || choice == "q".ToUpper())
+                                                    if (choice == "q")
                                                     {
                                                         isFalse = false;
                                                     }
-                                                    else if (choice == "y".ToLower() || choice == "y".ToUpper())
+                                                    else if (choice == "y")
                                                     {
                                                         Console.WriteLine("Write your comment:");
                                                         string comment = Console.ReadLine();
@@ -117,7 +117,7 @@ namespace ConsoleMenu.Controllers.Events
                                                         Console.WriteLine($"Succesfully signed up to {events[i].Title}");
                                                         Console.ReadLine();
                                                     }
-                                                    else if (choice == "n".ToLower() || choice == "n".ToUpper())
+                                                    else if (choice == "n")
                                                     {
                                                         continue;
                                                     }
@@ -179,13 +179,13 @@ namespace ConsoleMenu.Controllers.Events
                                                     Console.WriteLine(events[i]);
 
                                                     Console.WriteLine("press \"y\" to signup to event. Press \"n\" if Wrong event. Press \"q\" to cancel signing up.");
-                                                    string choice = Console.ReadLine();
+                                                    string choice = Console.ReadLine().ToLower();
 
-                                                    if (choice == "q".ToLower() || choice == "q".ToUpper())
+                                                    if (choice == "q")
                                                     {
                                                         isFalse = false;
                                                     }
-                                                    else if (choice == "y".ToLower() || choice == "y".ToUpper())
+                                                    else if (choice == "y")
                                                     {
                                                         Console.WriteLine("Write your comment:");
                                                         string comment = Console.ReadLine();
@@ -195,7 +195,7 @@ namespace ConsoleMenu.Controllers.Events
                                                         signupRepo.AddSignup(theSignup);
                                                         Console.ReadLine();
                                                     }
-                                                    else if (choice == "n".ToLower() || choice == "n".ToUpper())
+                                                    else if (choice == "n")
                                                     {
                                                         continue;
                                                     }
@@ -218,13 +218,58 @@ namespace ConsoleMenu.Controllers.Events
                                     }
                                     Console.WriteLine("Choose the signup to edit by writing the events title");
                                     string title = Console.ReadLine();
-                                    if (signupRepo.ReturnAllByMember(member).Count == 1)
+                                    List<Signup> signups = [];
+                                    for (int i = 0; i < signupRepo.ReturnAllByEventTitle(title).Count; i++)
                                     {
-                                        Console.WriteLine("Write edited comment:");
-                                        string comment = Console.ReadLine();
-                                        signupRepo.EditComment(member, comment, title);
-                                        Console.WriteLine("Comment added.");
-                                        Console.ReadLine();
+                                        if (signupRepo.ReturnAllByEventTitle(title)[i].Member == member)
+                                        {
+                                            signups.Add(signupRepo.ReturnAllByEventTitle(title)[i]);
+                                        }
+                                    }
+                                    bool isFalse = true;
+                                    while (isFalse)
+                                    {
+                                        if (signups.Count == 0)
+                                        {
+                                            Console.WriteLine("No event with the given title could be found.");
+                                            isFalse = false;
+                                        }
+                                        else
+                                        {
+                                            for (int i = 0; i < signups.Count; i++)
+                                            {
+                                                if (signups[i].Member == member)
+                                                {
+                                                    Console.Clear();
+                                                    Console.WriteLine(signupRepo.ReturnAllByEventTitle(title)[i]);
+
+                                                    Console.WriteLine("press \"y\" to Edit. Press \"n\" if wrong signup. Press \"q\" to cancel editing comment.");
+                                                    string choice = Console.ReadLine().ToLower();
+
+                                                    if (choice == "q")
+                                                    {
+                                                        isFalse = false;
+                                                    }
+                                                    else if (choice == "y")
+                                                    {
+                                                        Console.WriteLine("Write edited comment:");
+                                                        string comment = Console.ReadLine();
+                                                        signupRepo.EditComment(member, comment, title);
+                                                        Console.WriteLine("Comment added.");
+                                                        Console.ReadLine();
+                                                    }
+                                                    else if (choice == "n")
+                                                    {
+                                                        continue;
+                                                    }
+                                                    else
+                                                    {
+                                                        Console.WriteLine("Invalid input.");
+                                                        Console.ReadLine();
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
                                     break;
                                 }
@@ -234,16 +279,57 @@ namespace ConsoleMenu.Controllers.Events
                                     {
                                         Console.WriteLine(signup.ToString());
                                     }
-                                    Console.WriteLine("Choose signup to delete by writing the events title");
+                                    Console.WriteLine("Choose the signup to remove by writing the events title");
                                     string title = Console.ReadLine();
-                                    List<Signup> signups = signupRepo.ReturnAllByEventTitle(title);
-                                    for (int i = 0; i <= signups.Count; i++)
+                                    List<Signup> signups = [];
+                                    for (int i = 0; i < signupRepo.ReturnAllByEventTitle(title).Count; i++)
                                     {
-                                        if (signups[i].Member == member)
+                                        if (signupRepo.ReturnAllByEventTitle(title)[i].Member == member)
                                         {
-                                            signupRepo.RemoveSignup(signups[i]);
-                                            Console.WriteLine("Signup successfully removed.");
-                                            Console.ReadLine();
+                                            signups.Add(signupRepo.ReturnAllByEventTitle(title)[i]);
+                                        }
+                                    }
+                                    bool isFalse = true;
+                                    while (isFalse)
+                                    {
+                                        if (signups.Count == 0)
+                                        {
+                                            Console.WriteLine("No event with the given title could be found.");
+                                            isFalse = false;
+                                        }
+                                        else
+                                        {
+                                            for (int i = 0; i < signups.Count; i++)
+                                            {
+                                                if (signups[i].Member == member)
+                                                {
+                                                    Console.Clear();
+                                                    Console.WriteLine(signupRepo.ReturnAllByEventTitle(title)[i]);
+
+                                                    Console.WriteLine("press \"y\" to remove. Press \"n\" if wrong signup. Press \"q\" to cancel removing signups.");
+                                                    string choice = Console.ReadLine().ToLower();
+
+                                                    if (choice == "q")
+                                                    {
+                                                        isFalse = false;
+                                                    }
+                                                    else if (choice == "y")
+                                                    {
+                                                        signupRepo.RemoveSignup(signups[i]);
+                                                        Console.WriteLine("Signup removed.");
+                                                        Console.ReadLine();
+                                                    }
+                                                    else if (choice == "n")
+                                                    {
+                                                        continue;
+                                                    }
+                                                    else
+                                                    {
+                                                        Console.WriteLine("Invalid input.");
+                                                        Console.ReadLine();
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                     break;
@@ -303,13 +389,13 @@ namespace ConsoleMenu.Controllers.Events
                                                         Console.WriteLine(events[i].ToString());
 
                                                         Console.WriteLine("press \"y\" to signup to event. Press \"n\" if Wrong event. Press \"q\" to cancel signing up.");
-                                                        string choice = Console.ReadLine();
+                                                        string choice = Console.ReadLine().ToLower();
 
-                                                        if (choice == "q".ToLower() || choice == "q".ToUpper())
+                                                        if (choice == "q")
                                                         {
                                                             isFalse = false;
                                                         }
-                                                        else if (choice == "y".ToLower() || choice == "y".ToUpper())
+                                                        else if (choice == "y")
                                                         {
                                                             Console.WriteLine("Write your comment:");
                                                             string comment = Console.ReadLine();
@@ -317,8 +403,9 @@ namespace ConsoleMenu.Controllers.Events
                                                             signupRepo.AddSignup(theSignup);
                                                             Console.WriteLine($"Succesfully signed up to {events[i].Title}");
                                                             Console.ReadLine();
+                                                            isFalse = false;
                                                         }
-                                                        else if (choice == "n".ToLower() || choice == "n".ToUpper())
+                                                        else if (choice == "n")
                                                         {
                                                             continue;
                                                         }
@@ -425,13 +512,13 @@ namespace ConsoleMenu.Controllers.Events
 
                                                     Console.WriteLine("press \"y\" to choose event to edit. Press \"n\" if Wrong event. Press \"q\" to quit editing event.");
 
-                                                    string editEventChoice = Console.ReadLine();
+                                                    string editEventChoice = Console.ReadLine().ToLower();
 
-                                                    if (editEventChoice == "q".ToLower() || editEventChoice == "q".ToUpper())
+                                                    if (editEventChoice == "q")
                                                     {
                                                         isFalse = false;
                                                     }
-                                                    else if (editEventChoice == "y".ToLower() || editEventChoice == "y".ToUpper())
+                                                    else if (editEventChoice == "y")
                                                     {
                                                         Console.WriteLine("Write new title.");
                                                         string editTitle = Console.ReadLine();
@@ -444,7 +531,7 @@ namespace ConsoleMenu.Controllers.Events
                                                         isFalse = false;
                                                         Console.ReadLine();
                                                     }
-                                                    else if (editEventChoice == "n".ToLower() || editEventChoice == "n".ToUpper())
+                                                    else if (editEventChoice == "n")
                                                     {
                                                         continue;
                                                     }
@@ -498,13 +585,13 @@ namespace ConsoleMenu.Controllers.Events
                                                     Console.WriteLine(events[i]);
 
                                                     Console.WriteLine("press \"y\" to signup to event. Press \"n\" if Wrong event. Press \"q\" to cancel signing up.");
-                                                    string choice = Console.ReadLine();
+                                                    string choice = Console.ReadLine().ToLower();
 
-                                                    if (choice == "q".ToLower() || choice == "q".ToUpper())
+                                                    if (choice == "q")
                                                     {
                                                         isFalse = false;
                                                     }
-                                                    else if (choice == "y".ToLower() || choice == "y".ToUpper())
+                                                    else if (choice == "y")
                                                     {
                                                         Console.WriteLine("Write your comment:");
                                                         string comment = Console.ReadLine();
@@ -513,7 +600,7 @@ namespace ConsoleMenu.Controllers.Events
                                                         Console.WriteLine($"Succesfully signed up to {events[i].Title}");
                                                         Console.ReadLine();
                                                     }
-                                                    else if (choice == "n".ToLower() || choice == "n".ToUpper())
+                                                    else if (choice == "n")
                                                     {
                                                         continue;
                                                     }
@@ -542,17 +629,60 @@ namespace ConsoleMenu.Controllers.Events
                                     {
                                         Console.WriteLine(signup.ToString());
                                     }
-                                    Console.WriteLine("Choose your signup to edit by writing the events title. Press \"q\" to cancel.");
+                                    Console.WriteLine("Choose the signup to edit by writing the events title");
                                     string title = Console.ReadLine();
-                                    if (title == "q")
+                                    List<Signup> signups = [];
+                                    for (int i = 0; i < signupRepo.ReturnAllByEventTitle(title).Count; i++)
                                     {
-                                        break;
+                                        if (signupRepo.ReturnAllByEventTitle(title)[i].Member == member)
+                                        {
+                                            signups.Add(signupRepo.ReturnAllByEventTitle(title)[i]);
+                                        }
                                     }
-                                    else if (signupRepo.ReturnAllByEventTitle(title).Count == 1)
+                                    bool isFalse = true;
+                                    while (isFalse)
                                     {
-                                        Console.WriteLine("Write edited comment:");
-                                        string comment = Console.ReadLine();
-                                        signupRepo.EditComment(member, comment, title);
+                                        if (signups.Count == 0)
+                                        {
+                                            Console.WriteLine("No event with the given title could be found.");
+                                            isFalse = false;
+                                        }
+                                        else
+                                        {
+                                            for (int i = 0; i < signups.Count; i++)
+                                            {
+                                                if (signups[i].Member == member)
+                                                {
+                                                    Console.Clear();
+                                                    Console.WriteLine(signupRepo.ReturnAllByEventTitle(title)[i]);
+
+                                                    Console.WriteLine("press \"y\" to Edit. Press \"n\" if wrong signup. Press \"q\" to cancel editing comment.");
+                                                    string choice = Console.ReadLine().ToLower();
+
+                                                    if (choice == "q")
+                                                    {
+                                                        isFalse = false;
+                                                    }
+                                                    else if (choice == "y")
+                                                    {
+                                                        Console.WriteLine("Write edited comment:");
+                                                        string comment = Console.ReadLine();
+                                                        signupRepo.EditComment(member, comment, title);
+                                                        Console.WriteLine("Comment added.");
+                                                        Console.ReadLine();
+                                                    }
+                                                    else if (choice == "n")
+                                                    {
+                                                        continue;
+                                                    }
+                                                    else
+                                                    {
+                                                        Console.WriteLine("Invalid input.");
+                                                        Console.ReadLine();
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
                                     break;
                                 }
@@ -564,18 +694,57 @@ namespace ConsoleMenu.Controllers.Events
                                     {
                                         Console.WriteLine(signup.ToString());
                                     }
-                                    Console.WriteLine("Choose your signup to delete by writing the events title. Press \"q\" to cancel.");
+                                    Console.WriteLine("Choose the signup to remove by writing the events title");
                                     string title = Console.ReadLine();
-                                    if (title == "q")
+                                    List<Signup> signups = [];
+                                    for (int i = 0; i < signupRepo.ReturnAllByEventTitle(title).Count; i++)
                                     {
-                                        break;
-                                    }
-                                    List<Signup> signups = signupRepo.ReturnAllByEventTitle(title);
-                                    for (int i = 0; i < signups.Count; i++)
-                                    {
-                                        if (signups[i].Member == member)
+                                        if (signupRepo.ReturnAllByEventTitle(title)[i].Member == member)
                                         {
-                                            signups.Remove(signups[i]);
+                                            signups.Add(signupRepo.ReturnAllByEventTitle(title)[i]);
+                                        }
+                                    }
+                                    bool isFalse = true;
+                                    while (isFalse)
+                                    {
+                                        if (signups.Count == 0)
+                                        {
+                                            Console.WriteLine("No event with the given title could be found.");
+                                            isFalse = false;
+                                        }
+                                        else
+                                        {
+                                            for (int i = 0; i < signups.Count; i++)
+                                            {
+                                                if (signups[i].Member == member)
+                                                {
+                                                    Console.Clear();
+                                                    Console.WriteLine(signupRepo.ReturnAllByEventTitle(title)[i]);
+
+                                                    Console.WriteLine("press \"y\" to remove. Press \"n\" if wrong signup. Press \"q\" to cancel removing signups.");
+                                                    string choice = Console.ReadLine().ToLower();
+
+                                                    if (choice == "q")
+                                                    {
+                                                        isFalse = false;
+                                                    }
+                                                    else if (choice == "y")
+                                                    {
+                                                        signupRepo.RemoveSignup(signups[i]);
+                                                        Console.WriteLine("Signup removed.");
+                                                        Console.ReadLine();
+                                                    }
+                                                    else if (choice == "n")
+                                                    {
+                                                        continue;
+                                                    }
+                                                    else
+                                                    {
+                                                        Console.WriteLine("Invalid input.");
+                                                        Console.ReadLine();
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
                                     break;
@@ -586,16 +755,30 @@ namespace ConsoleMenu.Controllers.Events
                                 {
                                     Console.WriteLine("Enter Title. Press \"q\" to cancel creating event.");
                                     string title = Console.ReadLine();
-                                    Console.WriteLine("Enter description. Press \"q\" to cancel creating event.");
-                                    string description = Console.ReadLine();
-                                    Console.WriteLine("Enter date of event. Format : yyyy-mm-dd hh:mm. Press \"q\" to cancel creating event.");
-                                    DateTime date = DateTime.Parse(Console.ReadLine());
-                                    Console.WriteLine("Enter Maximum signups for event. Press \"q\" to cancel creating event.");
-                                    int maxMembers = Convert.ToInt32(Console.ReadLine());
-                                    if (title == "q" || description == "q" || date == Convert.ToDateTime("q") || maxMembers == Convert.ToInt32("q"))
+                                    if (title == "q")
                                     {
                                         break;
                                     }
+                                    Console.WriteLine("Enter description. Press \"q\" to cancel creating event.");
+                                    string description = Console.ReadLine();
+                                    if (description == "q")
+                                    {
+                                        break;
+                                    }
+                                    Console.WriteLine("Enter date of event. Format : yyyy-mm-dd hh:mm. Press \"q\" to cancel creating event.");
+                                    string dateString = Console.ReadLine();
+                                    if (dateString == "q")
+                                    {
+                                        break;
+                                    }
+                                    DateTime date = Convert.ToDateTime(dateString);
+                                    Console.WriteLine("Enter Maximum signups for event. Press \"q\" to cancel creating event.");
+                                    string maxMemberString = Console.ReadLine();
+                                    if (maxMemberString == "q")
+                                    {
+                                        break;
+                                    }
+                                    int maxMembers = Convert.ToInt32(maxMemberString);
                                     AddEventController newEvent = new AddEventController(maxMembers, title, date, description, eventRepo);
                                     newEvent.AddEvent();
                                     Console.WriteLine("Event successfully added.");
@@ -607,14 +790,24 @@ namespace ConsoleMenu.Controllers.Events
                             case "6":
                                 {
                                     List<Event> events = eventRepo.BubbleSortBySignups();
-                                    foreach(Event even in events)
+                                    foreach (Event even in events)
                                     {
                                         Console.WriteLine(even);
                                     }
                                     Console.ReadLine();
                                     break;
                                 }
-                                #endregion
+                            #endregion
+                            case "7":
+                                {
+                                    List<Signup> signups = signupRepo.SortByDateOfSignup();
+                                    foreach (Signup signup in signups)
+                                    {
+                                        Console.WriteLine(signup);
+                                    }
+                                    Console.ReadLine();
+                                    break;
+                                }
                         }
                         theChoice = ReadChoice(theChoices);
                     }
