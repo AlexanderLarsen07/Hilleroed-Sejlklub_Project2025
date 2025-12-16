@@ -610,8 +610,8 @@ namespace ConsoleMenu.Methods.Members
                                 Console.WriteLine("\nAre you sure that you want to change the users role to chairman and change your role to Administrator?");
                                 Console.WriteLine(memberRepo.GetMemberById(id).ToString());
                                 Console.WriteLine("");
-                                string confirmation = Console.ReadLine();
-                                if (confirmation == "Ja" || confirmation == "Yes")
+                                string confirmation = Console.ReadLine().ToLower();
+                                if (confirmation == "ja" || confirmation == "yes")
                                 {
                                     if (member.Role == RoleEnum.Chairman) //rollen formandskab bliver fjernet for den nuværende formand
                                     {
