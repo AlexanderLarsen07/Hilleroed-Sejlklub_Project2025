@@ -588,7 +588,7 @@ namespace ConsoleMenu.Methods.Members
                                 string theSecondChoice = Console.ReadLine();
                                 if (theSecondChoice == "1") //omdøbes den valgte admins til at ændres til member rollen
                                 {
-                                    Console.WriteLine("Inseret an existing admins id to change their role to a member:");
+                                    Console.WriteLine("Insert an existing admins id to change their role to a member:");
                                     int newNumber = Convert.ToInt32(Console.ReadLine());
                                     if (newNumber == memberRepo.GetAdministratorByRole().MemberID)
                                     {
@@ -598,7 +598,11 @@ namespace ConsoleMenu.Methods.Members
                                 else if (theSecondChoice == "2") //sletter helt kontoen
                                 {
                                     Console.WriteLine("Insert an existing admins id to delete their account:");
-                                    Console.WriteLine(memberRepo.GetAdministratorByRole().ToString());
+                                    foreach (Member members in memberRepo.GetSpecificMembersByRole(RoleEnum.Administrator))
+                                    {
+                                        Console.WriteLine(members.ToString());
+                                    }
+                                    //Console.WriteLine(memberRepo.GetAdministratorByRole().ToString());
                                     int enteredNumber = Convert.ToInt32(Console.ReadLine());
                                     foreach(Member members in memberRepo.GetAll())
                                     {
@@ -711,9 +715,9 @@ namespace ConsoleMenu.Methods.Members
                             {
                                 Console.WriteLine($"There are {member.ToString().Count()} members in total.");
                             }
-                            Console.WriteLine($"There are {memberRepo.GetMemberByRole()._members.Count} members in total with the role member."); //nulreference
-                            Console.WriteLine($"There are {memberRepo.GetAdministratorByRole()._members.Count} members in total with the role administrator.");//nulreference
-                            Console.WriteLine($"There are {memberRepo.GetChairmanByRole()._members.Count} members in total with the role chairman ");//nulreference
+                            Console.WriteLine($"There are {memberRepo.GetSpecificMembersByRole(RoleEnum.Member).Count()} members in total with the role member."); //nulreference
+                            Console.WriteLine($"There are {memberRepo.GetSpecificMembersByRole(RoleEnum.Administrator).Count()} members in total with the role administrator.");//nulreference
+                            Console.WriteLine($"There are {memberRepo.GetSpecificMembersByRole(RoleEnum.Chairman).Count()} members in total with the role chairman ");//nulreference
                             Console.WriteLine("------------------------------------------");
                             Console.WriteLine($"Remaining boat lots left in total: {member._boatLotsRented.Capacity}");
                             Console.WriteLine("\nMembers that have a boat lot and how many boat lots:");
