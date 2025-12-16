@@ -232,6 +232,7 @@ namespace ConsoleMenu.Controllers.Events
                                         if (signups.Count == 0)
                                         {
                                             Console.WriteLine("No event with the given title could be found.");
+                                            Console.ReadLine();
                                             isFalse = false;
                                         }
                                         else
@@ -295,6 +296,7 @@ namespace ConsoleMenu.Controllers.Events
                                         if (signups.Count == 0)
                                         {
                                             Console.WriteLine("No event with the given title could be found.");
+                                            Console.ReadLine();
                                             isFalse = false;
                                         }
                                         else
@@ -645,6 +647,7 @@ namespace ConsoleMenu.Controllers.Events
                                         if (signups.Count == 0)
                                         {
                                             Console.WriteLine("No event with the given title could be found.");
+                                            Console.ReadLine();
                                             isFalse = false;
                                         }
                                         else
@@ -710,6 +713,7 @@ namespace ConsoleMenu.Controllers.Events
                                         if (signups.Count == 0)
                                         {
                                             Console.WriteLine("No event with the given title could be found.");
+                                            Console.ReadLine();
                                             isFalse = false;
                                         }
                                         else
