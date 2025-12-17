@@ -388,7 +388,7 @@ namespace ConsoleMenu.Methods.Members
                 #region Members with role chairman
                 else if (member.Role == RoleEnum.Chairman) //skal alt admins kan, CRUD admins, ændre formandskab
                 {
-                    switch (theChoice) //(1, 2 and 7) not finished
+                    switch (theChoice)     
                     {
                         #region 1. CRUD Admins - done
                         case "1": //CRUD admins
@@ -687,8 +687,6 @@ namespace ConsoleMenu.Methods.Members
                                 {
                                     memberRepo.GetMemberById(id).Role = RoleEnum.Chairman;
                                     member.Role = RoleEnum.Member;
-                                    //theChoice = ReadChoice(readChoices);
-
                                 }
                             }
                             break;
@@ -1033,19 +1031,20 @@ namespace ConsoleMenu.Methods.Members
                             break;
                             #endregion
                     }
-                    //if (member.Role == RoleEnum.Member)
-                    //{
-                    //    readChoices = "1. View your details\t\n 2. Edit your account\t\n 3. View boat lots\t\n q. Exits. \t\n";
-                    //}
-                    //else if (member.Role == RoleEnum.Administrator)
-                    //{
-                    //    readChoices = "";
-                    //}
-                    //else if (member.Role == RoleEnum.Chairman)
-                    //{
-                    //    readChoices = "hej";
-                    //}
+                    if (memberRepo.GetMemberById(member.MemberID).Role == RoleEnum.Member)
+                    {
+                        readChoices = "1. View your details\t\n 2. Edit your account\t\n 3. View boat lots\t\n q. Exits. \t\n";
+                    }
+                    else if (memberRepo.GetMemberById(member.MemberID).Role == RoleEnum.Administrator)
+                    {
+                        readChoices = "";
+                    }
+                    else if (memberRepo.GetMemberById(member.MemberID).Role == RoleEnum.Chairman)
+                    {
+                        readChoices = "agurk";
+                    }
                     theChoice = ReadChoice(readChoices);
+                    
                 }
                 #endregion
             }
