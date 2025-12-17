@@ -390,7 +390,7 @@ namespace ConsoleMenu.Methods.Members
                 {
                     switch (theChoice) //(1, 2 and 7) not finished
                     {
-                        #region 1. CRUD Admins - not finished
+                        #region 1. CRUD Admins - done
                         case "1": //CRUD admins
                             Console.WriteLine("Input Which Crud method that you want to do:");
                             Console.WriteLine("1. (C) Create admin");
@@ -399,7 +399,7 @@ namespace ConsoleMenu.Methods.Members
                             Console.WriteLine("4. (D) Delete admin");
                             Console.WriteLine();
                             string decision = Console.ReadLine();
-                            #region (C) Create admin - (the lower part doesnt work) - almost done
+                            #region (C) Create admin - done
                             if (decision == "1")  //Create admin - not done
                             {
                                 bool determination = true;
@@ -459,15 +459,15 @@ namespace ConsoleMenu.Methods.Members
                                         Console.WriteLine("--------------------------");
                                         Console.WriteLine("");
                                         int number = Convert.ToInt32(Console.ReadLine());
-                                        foreach (Member members in memberRepo.GetSpecificMembersByRole(RoleEnum.Member))
+                                        if (number == memberRepo.GetMemberById(number).MemberID && memberRepo.GetMemberById(number).Role == RoleEnum.Member)
                                         {
-                                            if (number == members.MemberID)
-                                            {
-                                                //memberRepo.GetMemberById(number).Role = RoleEnum.Administrator;
-                                                memberRepo.AddMember(memberRepo.GetMemberById(number));
-                                                memberRepo.GetMemberById(number).Role = RoleEnum.Administrator;
-                                                break;
-                                            }
+                                            memberRepo.GetMemberById(number).Role = RoleEnum.Administrator;
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            Console.WriteLine("Invalid member used");
+                                            Console.ReadLine();
                                         }
                                     }
                                     determination = false;
@@ -594,7 +594,7 @@ namespace ConsoleMenu.Methods.Members
                                 }
                             }
                             #endregion
-                            #region (D) Delete admin - not done
+                            #region (D) Delete admin - done
                             else if (decision == "4")//Delete admin
                             {
                                 Console.WriteLine($"\nInsert the number associated with the action:" +
@@ -603,19 +603,24 @@ namespace ConsoleMenu.Methods.Members
                                 string theSecondChoice = Console.ReadLine();
                                 if (theSecondChoice == "1") //omdøbes den valgte admins til at ændres til member rollen
                                 {
-                                    Console.WriteLine("Insert an existing admins id to change their role to a member:");
-                                    int newNumber = Convert.ToInt32(Console.ReadLine());
+                                    Console.WriteLine("----------------------------------------------------------------");
+                                    Console.WriteLine("Admins:\n");
                                     foreach (Member members in memberRepo.GetSpecificMembersByRole(RoleEnum.Administrator))
                                     {
-                                        if (newNumber == member.MemberID)
-                                        {
-                                            member.Role = RoleEnum.Member;
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("No admin found from the inputted id");
-                                        }
+                                        Console.WriteLine(members.ToString());
                                     }
+                                    Console.WriteLine("----------------------------------------------------------------");
+                                    Console.WriteLine("Insert an existing admins id to change their role to a member:");
+                                    int newNumber = Convert.ToInt32(Console.ReadLine());
+                                    if (newNumber == memberRepo.GetMemberById(newNumber).MemberID && memberRepo.GetMemberById(newNumber).Role == RoleEnum.Administrator)
+                                    {
+                                        memberRepo.GetMemberById(newNumber).Role = RoleEnum.Member;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("No admin found from the inputted id");
+                                    }
+
                                 }
                                 else if (theSecondChoice == "2") //sletter helt kontoen
                                 {
@@ -626,75 +631,65 @@ namespace ConsoleMenu.Methods.Members
                                     }
                                     //Console.WriteLine(memberRepo.GetAdministratorByRole().ToString());
                                     int enteredNumber = Convert.ToInt32(Console.ReadLine());
-                                    foreach (Member members in memberRepo.GetAll())
+                                    if (enteredNumber == memberRepo.GetMemberById(enteredNumber).MemberID && memberRepo.GetMemberById(enteredNumber).Role == RoleEnum.Administrator) //NullReferenceException when no members
                                     {
-                                        if (members.Role == RoleEnum.Administrator && enteredNumber == members.MemberID)
+                                        memberRepo.RemoveMember(enteredNumber);
+                                        if (memberRepo.GetAll().Count <= 0)
                                         {
-
-                                            memberRepo.RemoveMember(enteredNumber);
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("There are no admins associated with the inserted id.");
+                                            Console.WriteLine("There are no admins");
                                             Console.ReadLine();
                                         }
+                                        break;
                                     }
+                                    else
+                                    {
+                                        Console.WriteLine("Invalid id entered");
+                                        Console.ReadLine();
+                                        break;
+                                    }
+
                                 }
                             }
                             break;
                         #endregion
                         #endregion
-                        #region 2. Change Chairman - (!WORKING ON CURRENTLY!) - not finished
+                        #region 2. Change Chairman - not done
                         case "2": //ændre formandskab
                             Console.WriteLine("Input the users id to change Chairman:");
                             Console.WriteLine("");
-                            foreach (Member getMembers in memberRepo.GetSpecificMembersByRole(RoleEnum.Administrator))
+                            foreach (Member getMembers in memberRepo.GetAll())
                             {
-                                Console.WriteLine(getMembers.ToString());
-                            }
-                            foreach (Member getAdmin in memberRepo.GetSpecificMembersByRole(RoleEnum.Member))
-                            {
-                                Console.WriteLine("");
-                                Console.WriteLine(getAdmin.ToString());
-                            }
-                            int id = Convert.ToInt32(Console.ReadLine());
-                            Console.WriteLine("\nChosen member/administrator");
-                            foreach (Member getMembers in memberRepo.GetSpecificMembersByRole(RoleEnum.Administrator))
-                            {
-                                foreach (Member getAdmin in memberRepo.GetSpecificMembersByRole(RoleEnum.Member))
+                                if (getMembers.Role != RoleEnum.Chairman)
                                 {
-                                    if (id == getMembers.MemberID)
-                                    {
-                                        Console.WriteLine(getMembers.ToString());
-                                    }
-                                    else if (id == getAdmin.MemberID)
-                                    {
-                                        Console.WriteLine(getAdmin.ToString());
-                                    }
-                                    else if (id != getMembers.MemberID && id != getAdmin.MemberID)
-                                    {
-                                        Console.WriteLine("Member/admin doesnt exist with that id.");
-                                        Console.ReadLine();
-                                    }
+                                    Console.WriteLine(getMembers.ToString());
                                 }
                             }
+                            int id = Convert.ToInt32(Console.ReadLine());
+                            Console.WriteLine("----------------------------------");
+                            Console.WriteLine("Chosen member/administrator:\n");
+                            if (id == memberRepo.GetMemberById(id).MemberID && memberRepo.GetMemberById(id).Role == RoleEnum.Member || memberRepo.GetMemberById(id).Role == RoleEnum.Administrator)
+                            {
+                                Console.WriteLine(memberRepo.GetMemberById(id).ToString());
+                            }
+                            else
+                            {
+                                Console.WriteLine("Member/admin doesnt exist with that id.");
+                                Console.ReadLine();
+                                break;
+                            }
+                            Console.WriteLine("---------------------------------------");
                             Console.WriteLine("\nDo you want to confirm your action?");
                             Console.WriteLine("");
                             string confirmation = Console.ReadLine().ToLower();
                             if (confirmation == "ja" || confirmation == "yes")
                             {
-                                foreach (Member getMembers in memberRepo.GetSpecificMembersByRole(RoleEnum.Administrator))
+                                while (id == memberRepo.GetMemberById(id).MemberID && memberRepo.GetMemberById(id).Role == RoleEnum.Member || memberRepo.GetMemberById(id).Role == RoleEnum.Member) //rollen bliver tildelt til en ny formand ud fra id
                                 {
-                                    foreach (Member getAdmin in memberRepo.GetSpecificMembersByRole(RoleEnum.Member))
-                                    {
-                                        while (id == getAdmin.MemberID || id == getMembers.MemberID) //rollen bliver tildelt til en ny formand ud fra id
-                                        {
-                                            memberRepo.GetMemberById(id).Role = RoleEnum.Chairman; //not done
-                                            theChoice = ReadChoice(readChoices);
-                                            member.Role = RoleEnum.Chairman;
-                                            break;
-                                        }
-                                    }
+
+                                    memberRepo.GetMemberById(id).Role = RoleEnum.Chairman; //not done
+                                    theChoice = ReadChoice(readChoices);
+                                    member.Role = RoleEnum.Member;
+                                    break;
                                 }
                             }
                             break;
@@ -814,7 +809,7 @@ namespace ConsoleMenu.Methods.Members
                             Console.ReadLine();
                             break;
                         #endregion
-                        #region 7. Slette og lave members - (test) - almost done 
+                        #region 7. Slette og lave members - (fix nullreferenceException) - done
                         case "7": //kan delete users og lave user
                             Console.WriteLine("Please insert a number to proceed:");
                             Console.WriteLine("1: Create a new member");
@@ -873,21 +868,21 @@ namespace ConsoleMenu.Methods.Members
                                 Console.WriteLine("Insert a members id that you would want to remove:");
                                 Console.WriteLine("---------------------------------------------------");
                                 int secondChoice = Convert.ToInt32(Console.ReadLine());
-                                foreach (Member members in memberRepo.GetSpecificMembersByRole(RoleEnum.Member))
+                                if (secondChoice == memberRepo.GetMemberById(secondChoice).MemberID && memberRepo.GetMemberById(secondChoice).Role == RoleEnum.Member || memberRepo.GetMemberById(secondChoice).Role == RoleEnum.Administrator) //NullReferenceException when no members
                                 {
-                                    foreach (Member admins in memberRepo.GetSpecificMembersByRole(RoleEnum.Administrator))
+                                    memberRepo.RemoveMember(secondChoice);
+                                    if (memberRepo.GetAll().Count <= 0)
                                     {
-                                        if (members.MemberID == secondChoice || admins.MemberID == secondChoice)
-                                        {
-                                            memberRepo.RemoveMember(secondChoice);
-                                        }
-                                        else if (secondChoice != members.MemberID || secondChoice != admins.MemberID)
-                                        {
-                                            Console.WriteLine("Invalid id entered");
-                                            Console.ReadLine();
-                                            break;
-                                        }
+                                        Console.WriteLine("There are no members");
+                                        Console.ReadLine();
                                     }
+                                    break;
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Invalid id entered");
+                                    Console.ReadLine();
+                                    break;
                                 }
                             }
                             break;
