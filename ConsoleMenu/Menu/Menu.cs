@@ -261,18 +261,19 @@ namespace ConsoleMenu.Menu
                                                         break;
                                                     case "2":
                                                         {
-                                                            while (_memberRepo.GetMemberById(member.MemberID).Role == RoleEnum.Member)
-                                                            {
-                                                                memberMenu.Roles(MemberMemberChoices, member, _memberRepo, _boatLotRepo);
-                                                            }
-                                                            while (_memberRepo.GetMemberById(member.MemberID).Role == RoleEnum.Administrator)
-                                                            {
-                                                                memberMenu.Roles(AdminMemberChoices, member, _memberRepo, _boatLotRepo);
-                                                            }
-                                                            while (_memberRepo.GetMemberById(member.MemberID).Role == RoleEnum.Chairman)
-                                                            {
-                                                                memberMenu.Roles(ChairmanMemberChoices, member, _memberRepo, _boatLotRepo);
-                                                            }
+                                                            memberMenu.Roles(ChairmanMemberChoices, member, _memberRepo, _boatLotRepo);
+                                                            //while (_memberRepo.GetMemberById(member.MemberID).Role == RoleEnum.Member)
+                                                            //{
+                                                            //    memberMenu.Members(MemberMemberChoices, member, _memberRepo, _boatLotRepo);
+                                                            //}
+                                                            //while (_memberRepo.GetMemberById(member.MemberID).Role == RoleEnum.Administrator)
+                                                            //{
+                                                            //    memberMenu.Administrator(AdminMemberChoices, member, _memberRepo, _boatLotRepo);
+                                                            //}
+                                                            //while (_memberRepo.GetMemberById(member.MemberID).Role == RoleEnum.Chairman)
+                                                            //{
+                                                            //    memberMenu.Chairman(ChairmanMemberChoices, member, _memberRepo, _boatLotRepo);
+                                                            //}
                                                         }
                                                         break;
                                                     case "3":
