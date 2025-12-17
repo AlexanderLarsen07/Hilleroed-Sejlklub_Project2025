@@ -268,6 +268,7 @@ namespace ConsoleMenu.Menu
                                                     case "2":
                                                         {
                                                             //memberMenu.Roles(ChairmanMemberChoices, member, _memberRepo, _boatLotRepo);
+                                                            //UPDATED FIXED
                                                             if (_memberRepo.GetMemberById(member.MemberID).Role == RoleEnum.Member)
                                                             {
                                                                 memberMenu.Roles(MemberMemberChoices, member, _memberRepo, _boatLotRepo);
