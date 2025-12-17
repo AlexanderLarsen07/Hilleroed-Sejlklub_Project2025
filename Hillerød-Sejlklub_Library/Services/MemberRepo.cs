@@ -96,49 +96,6 @@ namespace Hillerød_Sejlklub_Library.Services
             return null!;
         }
 
-        //public Member GetAdministratorByRole()
-        //{
-        //    RoleEnum role = RoleEnum.Administrator;
-        //    foreach (KeyValuePair<int, Member> member in _memberDictionary)
-        //    {
-        //        if (member.Value.Role == RoleEnum.Administrator)
-        //        {
-        //            member.Value.Role = role;
-        //            Console.WriteLine(member.Value);
-        //        }
-        //    }
-        //    return null!;
-        //}
-
-        //public Member GetMemberByRole()
-        //{
-        //    RoleEnum role = RoleEnum.Member;
-        //    foreach (KeyValuePair<int, Member> member in _memberDictionary)
-        //    {
-        //        if (member.Value.Role == RoleEnum.Member)
-        //        {
-        //            member.Value.Role = role;
-        //            Console.WriteLine(member.Value);
-        //        }
-        //    }
-        //    return null!;
-        //}
-
-        //public Member GetChairmanByRole()
-        //{
-        //    RoleEnum role = RoleEnum.Chairman;
-        //    foreach (KeyValuePair<int, Member> member in _memberDictionary)
-        //    {
-        //        if (member.Value.Role == RoleEnum.Chairman)
-        //        {
-        //            member.Value.Role = role;
-        //            Console.WriteLine(member.Value);
-        //        }
-        //    }
-        //    return null!;
-        //}
-
-
         public void Print(Dictionary<int, Member> dictionary)
         {
             foreach (KeyValuePair<int, Member> member in dictionary)
@@ -153,12 +110,6 @@ namespace Hillerød_Sejlklub_Library.Services
                 Console.WriteLine(members);
             }
         }
-
-        ////only administrator and chairmand can use this method
-        //public Member EditMembersMembership(int id, MembershipEnum membershipEnum) // - not done
-        //{
-        //    return null!;
-        //}
 
         public Member? EditMember(int id, string name, int age, string mail, string password, string phoneNumber)
         {
@@ -199,17 +150,5 @@ namespace Hillerød_Sejlklub_Library.Services
             }
             return null;
         }
-
-        //public Member ReturnMemberByPassword(string password)
-        //{
-        //    foreach(KeyValuePair<int, Member> member in _memberDictionary)
-        //    {
-        //        if(member.Value.Password == password)
-        //        {
-        //            return member.Value;
-        //        }
-        //    }
-        //    return null;
-        //}
     }
 }
