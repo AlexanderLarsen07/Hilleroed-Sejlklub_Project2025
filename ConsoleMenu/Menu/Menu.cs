@@ -36,8 +36,8 @@ namespace ConsoleMenu.Menu
         static string AdminBookingChoices = "1. Create booking\n2. Delete booking\n3. View all bookings\nq. Exit\n";
 
         static string GuestRepairChoices = "1. Repairs not available to guests, you need to become a member.\t\nq. Exit. \t\n";
-        static string MemberRepairChoices = "1. Repairs to each boat\t\n2. Create repair\t\nq. Exit. \t\n\"";
-        static string AdminRepairChoices = "1. Repairs to each boat\t\n2. Create repair\t\n3. delete repair\t\nq. Exit. \t\n\""; 
+        static string MemberRepairChoices = "1. Repairs to each boat\t\n2. Create repair\t\nq. Exit. \t\n";
+        static string AdminRepairChoices = "1. Repairs to each boat\t\n2. Create repair\t\n3. delete repair\t\nq. Exit. \t\n";
         //Gæst - basal adgang til systemet, kan se blogindlæg,
         //både og generel info om klubben og oprette sig som medlem, kan ikke leje både og melde sig til events.
 
