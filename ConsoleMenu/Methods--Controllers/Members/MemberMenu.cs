@@ -53,92 +53,98 @@ namespace ConsoleMenu.Methods.Members
                         #region 2. Edit ens konto
                         case "2": //redigere deres konto
                             {
+                                Console.WriteLine("Your current information:");
+                                member.ToString();
+                                Console.WriteLine("Choose which information which you would like to change of your account by inputting the number:" +
+                                    "\n1: Name" +
+                                    "\n2: Age" +
+                                    "\n3: Phone number" +
+                                    "\n4: Mail" +
+                                    "\n5: Password");
+                                string choice = Console.ReadLine();
+                                if (choice == "1") //navn
                                 {
-                                    Console.WriteLine("Dine Nuværende Informationer:");
-                                    member.ToString();
-                                    Console.WriteLine("Valg hvilke informationer du ville ændres ud fra tallet:" +
-                                        "\n1: Navn" +
-                                        "\n2: Alder" +
-                                        "\n3: Telefon Nummer" +
-                                        "\n4: Mail" +
-                                        "\n5: Password");
-                                    string choice = Console.ReadLine();
-                                    if (choice == "1") //navn
+                                    Console.WriteLine("Input a new name:");
+                                    string nameTyped = Console.ReadLine();
+                                    if (nameTyped != member.Name || nameTyped.Length < 0)
                                     {
-                                        Console.WriteLine("Indtast nyt navn:");
-                                        string nameTyped = Console.ReadLine();
-                                        if (nameTyped != member.Name || nameTyped.Length < 0)
-                                        {
-                                            member.Name = nameTyped!;
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("Navnet kan ikke være det samme som den tidligere og skal være større end 0 tegn" +
-                                                ",\nStart over.");
-                                        }
+                                        member.Name = nameTyped!;
                                     }
-                                    else if (choice == "2") //alder
+                                    else
                                     {
-                                        Console.WriteLine("Indtast nyt alder:");
-                                        int age = Convert.ToInt32(Console.ReadLine());
-                                        if (age != member.Age || age < 100 || age > 0)
-                                        {
-                                            member.Age = age;
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("Alderen må ikke være under 0 eller over 100 eller det samme som den tidligere alder, Start over.");
-                                        }
+                                        Console.WriteLine("The name must not be the same as the one before and have 1 or more characters");
+                                        Console.ReadLine();
                                     }
-                                    else if (choice == "3") //Telefon nummer
+                                }
+                                else if (choice == "2") //alder
+                                {
+                                    Console.WriteLine("Input a new age:");
+                                    int age = Convert.ToInt32(Console.ReadLine());
+                                    if (age != member.Age || age < 100 || age > 0)
                                     {
-                                        Console.WriteLine("Indtast nyt Telefon nummer:");
-                                        string phoneNumber = Console.ReadLine();
-                                        if (phoneNumber != member.PhoneNumber || phoneNumber.Length == 8)
-                                        {
-                                            member.PhoneNumber = phoneNumber!;
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("Telefon Nummeret skal have 8 cifre, start over.");
-                                        }
+                                        member.Age = age;
                                     }
-                                    else if (choice == "4") // Mail
+                                    else
                                     {
-                                        Console.WriteLine("Indtast nyt Mail:");
-                                        string mail = Console.ReadLine();
-                                        if (mail != member.Mail || mail.Contains("@gmail") || mail.Contains("@yahoo") || mail.Contains("@hotmail") || mail.Contains("@outlook") || mail.Contains("@office365"))
-                                        {
-                                            member.Mail = mail;
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("Den indtastede Mail er ikke korrekt, start over.");
-                                        }
+                                        Console.WriteLine("Age must be inbetween 0 and 100 and not the same as your old age.");
+                                        Console.ReadLine();
+                                        break;
                                     }
-                                    else if (choice == "5") //Password
+                                }
+                                else if (choice == "3") //Telefon nummer
+                                {
+                                    Console.WriteLine("Input a new phone number:");
+                                    string phoneNumber = Console.ReadLine();
+                                    if (phoneNumber != member.PhoneNumber || phoneNumber.Length == 8)
                                     {
-                                        Console.WriteLine("Indtast nyt password:");
-                                        string password = Console.ReadLine();
-                                        if (password != member.Password || password.Length < 5)
-                                        {
-                                            member.Password = password;
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("Passwordet må ikke være det samme som den gamle password og skal være større end 5 karakterer");
-                                        }
+                                        member.PhoneNumber = phoneNumber!;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("The phone number must have exactly 8 digits.");
+                                        Console.ReadLine();
+                                        break;
+                                    }
+                                }
+                                else if (choice == "4") // Mail
+                                {
+                                    Console.WriteLine("Input a new mail:");
+                                    string mail = Console.ReadLine();
+                                    if (mail != member.Mail || mail.Contains("@gmail") || mail.Contains("@yahoo") || mail.Contains("@hotmail") || mail.Contains("@outlook") || mail.Contains("@office365"))
+                                    {
+                                        member.Mail = mail;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("The new mail is incorrect, start over.");
+                                        Console.ReadLine();
+                                        break;
+                                    }
+                                    //member.Mail = Console.ReadLine();
+                                }
+                                else if (choice == "5") //Password
+                                {
+                                    Console.WriteLine("Input a new password:");
+                                    string password = Console.ReadLine();
+                                    if (password != member.Password || password.Length < 5)
+                                    {
+                                        member.Password = password;
+                                    }
+                                    else
+                                    {
+                                        Console.WriteLine("The password that has been entered must not be the same as the old and contain 5 or more characters.");
+                                        Console.ReadLine();
                                     }
                                 }
                             }
                             break;
                         #endregion
-                        #region 3. tilføje boatlots til en selv - done
+                        #region 3. tilføje boatlots til en selv
                         case "3"://tilføje boatlots 
                             Console.WriteLine($"You have currently: {member._boatLotsRented.Count} boat lots that your renting.");
                             Console.WriteLine($"There are {member._boatLotsRented.Count}/{member._boatLotsRented.Capacity} boat lots rented");
                             Console.WriteLine($"-----------------------------------------------");
-                            Console.WriteLine("Inset the number of boat lots that you want: ");
+                            Console.WriteLine("Insert the number of boat lots that you want: ");
                             Console.WriteLine("Familie member: 400 kr. = 1 boat lot");
                             Console.WriteLine("Senior  member: 400 kr. = 1 boat lot");
                             Console.WriteLine("Junior  member: 200 kr. = 1 boat lot");
@@ -185,7 +191,7 @@ namespace ConsoleMenu.Methods.Members
                         #endregion
                         #region 2. Vælge en bestemt member
                         case "2"://skal kunne vælge en bestemt valgt member (findes member ud fra deres id)
-                            foreach (Member m1 in memberRepo.GetAll()) //Maybe it works?
+                            foreach (Member m1 in memberRepo.GetAll())
                             {
                                 Console.WriteLine("Enter a members id number:");
                                 int enteredNumber = Convert.ToInt32(Console.ReadLine());
@@ -204,8 +210,8 @@ namespace ConsoleMenu.Methods.Members
                             }
                             break;
                         #endregion
-                        #region 3. Sortering af både pladser - done
-                        case "3"://sortere boatlots
+                        #region 3. Sortering af både pladser
+                        case "3"://sortere boatlots (contains more information about boat lots, compared to the statistics version of boatlot)
                             int theirNumber = 0;
                             Console.WriteLine("Every BoatLots:");
                             foreach (BoatLot boatLot in boatLotRepo.GetAll())
@@ -254,14 +260,14 @@ namespace ConsoleMenu.Methods.Members
                             Console.ReadLine();
                             break;
                         #endregion
-                        #region 4. Simple statistikker  -  done
+                        #region 4. Simple statistikker
                         case "4"://simple statistikker
                             Console.WriteLine("Members in total:");
                             Console.WriteLine("------------------------------------------");
                             Console.WriteLine($"There are {memberRepo.GetAll().Count()} members in total.");
-                            Console.WriteLine($"There are {memberRepo.GetSpecificMembersByRole(RoleEnum.Member).Count()} members in total with the role member."); //nulreference
-                            Console.WriteLine($"There are {memberRepo.GetSpecificMembersByRole(RoleEnum.Administrator).Count()} members in total with the role administrator.");//nulreference
-                            Console.WriteLine($"There are {memberRepo.GetSpecificMembersByRole(RoleEnum.Chairman).Count()} members in total with the role chairman ");//nulreference
+                            Console.WriteLine($"There are {memberRepo.GetSpecificMembersByRole(RoleEnum.Member).Count()} members in total with the role member.");
+                            Console.WriteLine($"There are {memberRepo.GetSpecificMembersByRole(RoleEnum.Administrator).Count()} members in total with the role administrator.");
+                            Console.WriteLine($"There are {memberRepo.GetSpecificMembersByRole(RoleEnum.Chairman).Count()} members in total with the role chairman ");
                             Console.WriteLine("------------------------------------------");
                             Console.WriteLine($"Remaining boat lots left in total: {member._boatLotsRented.Capacity - member._boatLotsRented.Count}");
                             Console.WriteLine("\nMembers that have a boat lot and how many boat lots:");
@@ -289,7 +295,7 @@ namespace ConsoleMenu.Methods.Members
                             Console.ReadLine();
                             break;
                         #endregion
-                        #region 5. Slette og lave members - (fix nullreferenceException) - done
+                        #region 5. Slette og lave members
                         case "5": //kan delete users og lave user
                             Console.WriteLine("Please insert a number to proceed:");
                             Console.WriteLine("1: Create a new member");
@@ -334,8 +340,8 @@ namespace ConsoleMenu.Methods.Members
                             }
                             else if (firstChoice == "2") //deletes an existing user
                             {
-                                Console.WriteLine("Members");
                                 Console.WriteLine("---------------------------------------------------");
+                                Console.WriteLine("Members:\n");
                                 foreach (Member members in memberRepo.GetSpecificMembersByRole(RoleEnum.Member))
                                 {
                                     Console.WriteLine(members.ToString());
@@ -348,10 +354,16 @@ namespace ConsoleMenu.Methods.Members
                                 Console.WriteLine("Insert a members id that you would want to remove:");
                                 Console.WriteLine("---------------------------------------------------");
                                 int secondChoice = Convert.ToInt32(Console.ReadLine());
-                                if (secondChoice == memberRepo.GetMemberById(secondChoice).MemberID && memberRepo.GetMemberById(secondChoice).Role == RoleEnum.Member || memberRepo.GetMemberById(secondChoice).Role == RoleEnum.Administrator) //NullReferenceException when no members
+                                if (memberRepo.GetMemberById(secondChoice) == null) //makes sure that the NullReferenceException is not being outputted
+                                {
+                                    Console.WriteLine("There are no members");
+                                    Console.ReadLine();
+                                    break;
+                                }
+                                else if (secondChoice == memberRepo.GetMemberById(secondChoice).MemberID && memberRepo.GetMemberById(secondChoice).Role == RoleEnum.Member || memberRepo.GetMemberById(secondChoice).Role == RoleEnum.Administrator)
                                 {
                                     memberRepo.RemoveMember(secondChoice);
-                                    if (memberRepo.GetAll().Count <= 0)
+                                    if (memberRepo.GetAll().Count == 0)
                                     {
                                         Console.WriteLine("There are no members");
                                         Console.ReadLine();
@@ -378,18 +390,18 @@ namespace ConsoleMenu.Methods.Members
                         #region 7. Edit ens konto
                         case "7": //redigere deres konto
                             {
-                                Console.WriteLine("Dine Nuværende Informationer:");
+                                Console.WriteLine("Your current information:");
                                 member.ToString();
-                                Console.WriteLine("Valg hvilke informationer du ville ændres ud fra tallet:" +
-                                    "\n1: Navn" +
-                                    "\n2: Alder" +
-                                    "\n3: Telefon Nummer" +
+                                Console.WriteLine("Choose which information which you would like to change of your account by inputting the number:" +
+                                    "\n1: Name" +
+                                    "\n2: Age" +
+                                    "\n3: Phone number" +
                                     "\n4: Mail" +
                                     "\n5: Password");
                                 string choice = Console.ReadLine();
                                 if (choice == "1") //navn
                                 {
-                                    Console.WriteLine("Indtast nyt navn:");
+                                    Console.WriteLine("Input a new name:");
                                     string nameTyped = Console.ReadLine();
                                     if (nameTyped != member.Name || nameTyped.Length < 0)
                                     {
@@ -397,15 +409,13 @@ namespace ConsoleMenu.Methods.Members
                                     }
                                     else
                                     {
-                                        Console.WriteLine("Navnet kan ikke være det samme som den tidligere og skal være større end 0 tegn" +
-                                            ",\nStart over.");
+                                        Console.WriteLine("The name must not be the same as the one before and have 1 or more characters");
+                                        Console.ReadLine();
                                     }
-                                    //member.Name = Console.ReadLine();
-
                                 }
                                 else if (choice == "2") //alder
                                 {
-                                    Console.WriteLine("Indtast nyt alder:");
+                                    Console.WriteLine("Input a new age:");
                                     int age = Convert.ToInt32(Console.ReadLine());
                                     if (age != member.Age || age < 100 || age > 0)
                                     {
@@ -413,13 +423,14 @@ namespace ConsoleMenu.Methods.Members
                                     }
                                     else
                                     {
-                                        Console.WriteLine("Alderen må ikke være under 0 eller over 100 eller det samme som den tidligere alder, Start over.");
+                                        Console.WriteLine("Age must be inbetween 0 and 100 and not the same as your old age.");
+                                        Console.ReadLine();
+                                        break;
                                     }
-                                    //member.Age = Convert.ToInt32(Console.ReadLine());
                                 }
                                 else if (choice == "3") //Telefon nummer
                                 {
-                                    Console.WriteLine("Indtast nyt Telefon nummer:");
+                                    Console.WriteLine("Input a new phone number:");
                                     string phoneNumber = Console.ReadLine();
                                     if (phoneNumber != member.PhoneNumber || phoneNumber.Length == 8)
                                     {
@@ -427,13 +438,14 @@ namespace ConsoleMenu.Methods.Members
                                     }
                                     else
                                     {
-                                        Console.WriteLine("Telefon Nummeret skal have 8 cifre, start over.");
+                                        Console.WriteLine("The phone number must have exactly 8 digits.");
+                                        Console.ReadLine();
+                                        break;
                                     }
-                                    //member.PhoneNumber = Console.ReadLine();
                                 }
                                 else if (choice == "4") // Mail
                                 {
-                                    Console.WriteLine("Indtast nyt Mail:");
+                                    Console.WriteLine("Input a new mail:");
                                     string mail = Console.ReadLine();
                                     if (mail != member.Mail || mail.Contains("@gmail") || mail.Contains("@yahoo") || mail.Contains("@hotmail") || mail.Contains("@outlook") || mail.Contains("@office365"))
                                     {
@@ -441,13 +453,15 @@ namespace ConsoleMenu.Methods.Members
                                     }
                                     else
                                     {
-                                        Console.WriteLine("Den indtastede Mail er ikke korrekt, start over.");
+                                        Console.WriteLine("The new mail is incorrect, start over.");
+                                        Console.ReadLine();
+                                        break;
                                     }
                                     //member.Mail = Console.ReadLine();
                                 }
                                 else if (choice == "5") //Password
                                 {
-                                    Console.WriteLine("Indtast nyt password:");
+                                    Console.WriteLine("Input a new password:");
                                     string password = Console.ReadLine();
                                     if (password != member.Password || password.Length < 5)
                                     {
@@ -455,31 +469,25 @@ namespace ConsoleMenu.Methods.Members
                                     }
                                     else
                                     {
-                                        Console.WriteLine("Passwordet må ikke være det samme som den gamle password og skal være større end 5 karakterer");
+                                        Console.WriteLine("The password that has been entered must not be the same as the old and contain 5 or more characters.");
+                                        Console.ReadLine();
                                     }
-                                    //member.Password = Console.ReadLine();
                                 }
                             }
                             break;
                         #endregion
-                        #region 8. tilføje boatlots til en selv - done
+                        #region 8. tilføje boatlots til en selv
                         case "8"://tilføje boatlots 
                             Console.WriteLine($"You have currently: {member._boatLotsRented.Count} boat lots that your renting.");
                             Console.WriteLine($"There are {member._boatLotsRented.Count}/{member._boatLotsRented.Capacity} boat lots rented");
                             Console.WriteLine($"-----------------------------------------------");
-                            Console.WriteLine("Inset the number of boat lots that you want: ");
+                            Console.WriteLine("Insert the number of boat lots that you want: ");
                             Console.WriteLine("Familie member: 400 kr. = 1 boat lot");
                             Console.WriteLine("Senior  member: 400 kr. = 1 boat lot");
                             Console.WriteLine("Junior  member: 200 kr. = 1 boat lot");
-                            //int boatLotsRented = Convert.ToInt32(Console.ReadLine());
-                            //Console.WriteLine("");
-                            //if (boatLotsRented >= 1)
-                            //{
                             bool ying = true;
                             while (ying == true)
                             {
-                                //if (boatLotRepo.GetAll() != null) //tries to see if there are any boat lots left
-                                //{
                                 foreach (BoatLot data in boatLotRepo.GetAll())
                                 {
                                     if (data.IsRented == false)//checks if there are boat lots that are not rented
@@ -497,20 +505,7 @@ namespace ConsoleMenu.Methods.Members
                                     break;
                                 }
                                 ying = false;
-                                //}
-                                //else
-                                //{
-                                //    Console.WriteLine("There are no more boat lots left to rent");
-                                //    Console.ReadLine();
-                                //    ying = false;
-                                //}
                             }
-                            //}
-                            //else if (boatLotsRented <= 0)
-                            //{
-                            //    Console.WriteLine("The amount of boatLots inserted must be 1 or above");
-                            //    Console.ReadLine();
-                            //}
                             break;
                             #endregion
                     }
@@ -823,7 +818,7 @@ namespace ConsoleMenu.Methods.Members
                             }
                             break;
                         #endregion
-                        #region 3. View alle user - done
+                        #region 3. View alle user
                         case "3"://skal kunne view alle members
                             foreach (Member members in memberRepo.GetAll())
                             {
@@ -1022,7 +1017,7 @@ namespace ConsoleMenu.Methods.Members
                             }
                             break;
                         #endregion
-                        #region 8. View ens oplysninger - done
+                        #region 8. View ens oplysninger
                         case "8"://skal kunne kigge på ens oplysninger
                             {
                                 Console.WriteLine(member.ToString() + $"Mail: {member.Mail}");
@@ -1030,7 +1025,7 @@ namespace ConsoleMenu.Methods.Members
                             }
                             break;
                         #endregion
-                        #region 9. Edit ens konto - done
+                        #region 9. Edit ens konto
                         case "9": //redigere deres konto
                             {
                                 Console.WriteLine("Your current information:");
@@ -1119,7 +1114,7 @@ namespace ConsoleMenu.Methods.Members
                             }
                             break;
                         #endregion
-                        #region 10. tilføje boatlots til en selv - done
+                        #region 10. tilføje boatlots til en selv
                         case "10"://tilføje boatlots 
                             Console.WriteLine($"You have currently: {member._boatLotsRented.Count} boat lots that your renting.");
                             Console.WriteLine($"There are {member._boatLotsRented.Count}/{member._boatLotsRented.Capacity} boat lots rented");
