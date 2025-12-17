@@ -1,4 +1,5 @@
-﻿using Hillerød_Sejlklub_Library.Models.Boats;
+﻿using Hillerød_Sejlklub_Library.Exceptions;
+using Hillerød_Sejlklub_Library.Models.Boats;
 using Hillerød_Sejlklub_Library.Services;
 using System;
 using System.Collections.Generic;

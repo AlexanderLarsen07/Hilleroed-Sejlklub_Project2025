@@ -21,11 +21,11 @@ namespace Hillerød_Sejlklub_Library.Services
         {
             foreach (Booking bookingOnList in _bookings)
             {
-                if (booking.BookingID == bookingOnList.BookingID)
+                if (booking.BookingID == bookingOnList.BookingID)                                                                         
                 {
                     throw new Exception(message: "BookingID already exist");                   //11              //13               //15            //10
                 }
-                else if (booking.TheBoat.SailNumber == bookingOnList.TheBoat.SailNumber && booking.Start < bookingOnList.End && booking.End > bookingOnList.Start)
+                else if (booking.TheBoat.SailNumber == bookingOnList.TheBoat.SailNumber && booking.Start <= bookingOnList.End && booking.End >= bookingOnList.Start)
                 {
                     throw new Exception(message: "You booked a boat that is already booked for the time you chose.");
 
