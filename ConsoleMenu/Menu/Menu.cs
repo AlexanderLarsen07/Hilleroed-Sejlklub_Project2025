@@ -15,8 +15,8 @@ namespace ConsoleMenu.Menu
         // static strings for choices
         static string LoginChoices = " 1. Sign in as guest.\t\n 2. Sign in as Member. \t\n q. Exit. \t\n ";
         
-        static string GuestMenuChoices = " 1. Events.\t\n 2. Signup.\t\n q. Exit. \t\n ";//Implement TODO.
-        static string MemberMenuChoices = " 1. Events.\t\n 2. Members \t\n q. Exits. \t\n ";
+        static string GuestMenuChoices = " 1. Events.\t\n 2. Signup.\t\n 3. Boats.\t\n 4. Bookings. \t\n 5. Repairs\t\n q. Exit. \t\n ";//Implement TODO.
+        static string MemberMenuChoices = " 1. Events.\t\n 2. Members \t\n 3. Boats.\t\n 4. Bookings. \t\n 5. Repairs\t\n q. Exits. \t\n ";
 
         static string GuestEventChoices = " 1. View all events. \t\n 2. Search for events by date. \t\n q. Exit. \t\n ";
         static string MemberEventChoices = " 1. View all event/signup. \t\n 2. Search for events by date/signup. \t\n 3. Edit a Comment on a signup. \t\n 4. Delete a signup. \t\n q. quit. \t\n ";
@@ -35,9 +35,9 @@ namespace ConsoleMenu.Menu
         static string MemberBookingChoices = "1. Create booking \t\n q. Exit. \t\n";
         static string AdminBookingChoices = "1. Create booking\n2. Delete booking\n3. View all bookings\nq. Exit\n";
 
-        static string GuestRepairChoices = "1. bookings not available to guests, you need to become a member.\t\nq. Exit. \t\n";
-        static string MemberRepairChoices = "1. Repairs to each boat\t\n2. Create repair\t\nq. Exit. \t\n\"";
-        static string AdminRepairChoices = "1. Repairs to each boat\t\n2. Create repair\t\n3. delete repair\t\nq. Exit. \t\n\""; 
+        static string GuestRepairChoices = "1. Repairs not available to guests, you need to become a member.\t\nq. Exit. \t\n";
+        static string MemberRepairChoices = "1. Repairs to each boat\t\n2. Create repair\t\nq. Exit. \t\n";
+        static string AdminRepairChoices = "1. Repairs to each boat\t\n2. Create repair\t\n3. delete repair\t\nq. Exit. \t\n";
         //Gæst - basal adgang til systemet, kan se blogindlæg,
         //både og generel info om klubben og oprette sig som medlem, kan ikke leje både og melde sig til events.
 
@@ -183,17 +183,17 @@ namespace ConsoleMenu.Menu
                                                             eventMenu.EventMenu(MemberEventChoices, member, _eventRepo, _signupRepo);
                                                         }
                                                         break;
-                                                    case "2":
+                                                    case "3":
                                                         {
                                                             boatMenu.BoatMenu(MemberBoatChoices, member, _boatRepo);
                                                         }
                                                         break;
-                                                    case "3":
+                                                    case "4":
                                                         {
                                                             bookingMenu.BookingMenu(MemberBookingChoices, member, _bookingRepo, _memberRepo, _boatRepo);
                                                         }
                                                         break;
-                                                    case "4":
+                                                    case "5":
                                                         {
                                                             repairMenu.RepairMenu(MemberRepairChoices, member, _repairRepo, _boatRepo);
                                                         }
@@ -221,17 +221,17 @@ namespace ConsoleMenu.Menu
                                                             eventMenu.EventMenu(MemberEventChoices, member, _eventRepo, _signupRepo);
                                                         }
                                                         break;
-                                                    case "2":
+                                                    case "3":
                                                         {
                                                             boatMenu.BoatMenu(AdminBoatChoices, member, _boatRepo);
                                                         }
                                                         break;
-                                                    case "3":
+                                                    case "4":
                                                         {
                                                             bookingMenu.BookingMenu(AdminBookingChoices, member, _bookingRepo, _memberRepo, _boatRepo);
                                                         }
                                                         break;
-                                                    case "4":
+                                                    case "5":
                                                         {
                                                             repairMenu.RepairMenu(AdminRepairChoices, member, _repairRepo, _boatRepo);
                                                         }

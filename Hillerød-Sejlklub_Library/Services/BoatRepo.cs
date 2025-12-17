@@ -1,4 +1,5 @@
-﻿using Hillerød_Sejlklub_Library.Interfaces;
+﻿using Hillerød_Sejlklub_Library.Exceptions;
+using Hillerød_Sejlklub_Library.Interfaces;
 using Hillerød_Sejlklub_Library.Models;
 using Hillerød_Sejlklub_Library.Models.Boats;
 using System;
@@ -29,9 +30,8 @@ namespace Hillerød_Sejlklub_Library.Services
             {
                 if (boat.SailNumber == boatOnList.SailNumber)
                 {
-                    throw new Exception(message: "SailNumber already exist");
+                    throw new ExceptionSailNumber(boat.SailNumber);
                 }
-
             }
             _boat.Add(boat);
         }

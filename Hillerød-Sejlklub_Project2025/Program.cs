@@ -110,7 +110,7 @@ try
     Console.WriteLine("---------------------------------------getAll-(name)-------------------------------------");
     List<Boat> getAllBoats = boatRepo.GetAll();
     foreach (Boat boatOnList in getAllBoats)
-        Console.WriteLine(boatOnList.Name);
+    Console.WriteLine(boatOnList.Name);
     Console.WriteLine("------------------------------------------Get by sailnumber test:----------------------------------------");
     Boat getByNumber = boatRepo.GetBoatBySailNumber("555555555");
     Console.WriteLine(getByNumber);
@@ -169,12 +169,17 @@ try
         Console.WriteLine(repairOnList);
     }
 }
-catch(Exception ex)
+catch (ExceptionSailNumber exs)
+{
+    Console.WriteLine("Exception sailnumber test:");
+    Console.WriteLine(exs.Message);
+}
+catch (Exception ex)
 {
     Console.WriteLine("Exception tests:");
-    Console.WriteLine(ex.Message);
-   
+    Console.WriteLine(ex.Message);   
 }
+
 
 //Member m1 = new Member("Justin", 22, true, "ddkwajld@gmail.com", "jidajip", 839139);
 //Console.WriteLine(m1);
