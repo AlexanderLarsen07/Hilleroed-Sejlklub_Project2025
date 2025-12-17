@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Diagnostics.Metrics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Hillerød_Sejlklub_Library.Models.Members;
@@ -11,7 +13,7 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
 {
     public class Booking
     {
-        private static int _bookingID = 1;
+        private static int _counter = 1;
 
         public int BookingID { get; private set; }
         public string Destination { get; private set; }
@@ -35,7 +37,7 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
         {
             if (theBoat.CanSail == true)
             {
-                BookingID = _bookingID++;
+                BookingID = _counter++;
                 Destination = destination;
                 Start = start;
                 End = end;
@@ -75,5 +77,3 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
         }
     }
 }
-
-   

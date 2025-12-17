@@ -23,7 +23,7 @@ namespace Hillerød_Sejlklub_Library.Services
             {
                 if (booking.BookingID == bookingOnList.BookingID)
                 {
-                    throw new Exception(message: "BookingID already exist");
+                    throw new Exception(message: "BookingID already exist");                   //11              //13               //15            //10
                 }
                 else if (booking.TheBoat.SailNumber == bookingOnList.TheBoat.SailNumber && booking.Start < bookingOnList.End && booking.End > bookingOnList.Start)
                 {
@@ -33,7 +33,7 @@ namespace Hillerød_Sejlklub_Library.Services
             }
             _bookings.Add(booking);
         }       
-
+     
         public Booking GetBookingByID(int BookingID)
         {
             for(int i = 0; _bookings.Count > i; i++)

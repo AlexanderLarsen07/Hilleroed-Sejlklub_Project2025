@@ -70,8 +70,7 @@ namespace Hillerød_Sejlklub_Library.Services
 
         public void PrintAllTheRepairsToEachBoat(BoatRepo boatRepo)
         {
-            List<Boat> _boat = boatRepo.GetAll();
-            foreach (Boat boat in _boat)
+            foreach (Boat boat in boatRepo.GetAll())
             {
                 Console.WriteLine(boat.Name);
                 if (boat.RepairLogList.Count == 0)

@@ -27,6 +27,17 @@ namespace ConsoleMenu.Menu
         static string AdminMemberChoices = "1. View all members\t\n 2. Search for a specific member of their id\t\n 3. Boat lots\t\n 4.simple statistics\t\n 5. Delete a user or make a custom user\t\n 6. View your account\t\n 7. Edit details of your account\t\n 8. Add boat lots\t\n 9. Events. \t\n q. Exits. \t\n ";
         static string ChairmanMemberChoices = "1.  Crud Admins\t\n2.  Change chairman\t\n3.  View all members\t\n4.  Search for a specific member of their id\t\n5.  Boat lots\t\n6.  Simple statistics\t\n7.  Delete a user or make a custom user\t\n8.  View your account\t\n9.  Edit details of your account\t\n10. Add boat lots\t\n q. Exits.\t\n\t\nIndtast Nummer:\t\n";
 
+        static string GuestBoatChoices = "1. See the boats.\t\n q. Exit \t\n";
+        static string MemberBoatChoices = "1. See all the boats with all the details.\t\n q. Exit. \t\n";
+        static string AdminBoatChoices = "1. See all boats\t\n2. Add boat\t\n3. Delete boat\t\nq. Exit\t\n";
+
+        static string GuestBookingChoices = "1. bookings not available to guests, you need to become a member.\t\n q. Exit. \t\n";
+        static string MemberBookingChoices = "1. Create booking \t\n q. Exit. \t\n";
+        static string AdminBookingChoices = "1. Create booking\n2. Delete booking\n3. View all bookings\nq. Exit\n";
+
+        static string GuestRepairChoices = "1. bookings not available to guests, you need to become a member.\t\nq. Exit. \t\n";
+        static string MemberRepairChoices = "1. Repairs to each boat\t\n2. Create repair\t\nq. Exit. \t\n\"";
+        static string AdminRepairChoices = "1. Repairs to each boat\t\n2. Create repair\t\n3. delete repair\t\nq. Exit. \t\n\""; 
         //Gæst - basal adgang til systemet, kan se blogindlæg,
         //både og generel info om klubben og oprette sig som medlem, kan ikke leje både og melde sig til events.
 
@@ -47,12 +58,14 @@ namespace ConsoleMenu.Menu
         private EventRepo _eventRepo = new EventRepo();
         private SignupRepo _signupRepo = new SignupRepo();
         private BookingRepo _bookingRepo = new BookingRepo();
+        private RepairRepo _repairRepo = new RepairRepo();
 
         private EventMenuMethod eventMenu = new EventMenuMethod();
         private MemberMenu memberMenu = new MemberMenu();
         private BlogMenuMethod blogMenu = new BlogMenuMethod();
         private BoatMenuMethod boatMenu = new BoatMenuMethod();
-
+        private RepairMenuMethod repairMenu = new RepairMenuMethod();
+        private BookingMenuMethod bookingMenu = new BookingMenuMethod();
         private static string ReadChoice(string choices)
         {
             Console.Write("\x1b[2J"); // Clear screen
@@ -92,12 +105,22 @@ namespace ConsoleMenu.Menu
                                     break;
                                 case "3":
                                     {
-                                        //blogMenu.BlogMenu(null, _blogRepo, _commentRepo, /*add blogGuestMenu string*/);
+                                        boatMenu.BoatMenu(GuestBoatChoices, null, _boatRepo);
                                     }
                                     break;
                                 case "4":
                                     {
-                                        //boatMenu.BoatMenu(/*add boatGuestMenu*/, null, _boatRepo);
+                                        bookingMenu.BookingMenu(GuestBookingChoices, null, _bookingRepo, _memberRepo, _boatRepo);
+                                    }
+                                    break;
+                                case "5":
+                                    {
+                                        repairMenu.RepairMenu(GuestRepairChoices, null, _repairRepo, _boatRepo);
+                                    }
+                                    break;
+                                case "6":
+                                    {
+                                        //blogMenu.BlogMenu(null, _blogRepo, _commentRepo, /*add blogGuestMenu string*/);
                                     }
                                     break;
                             }
@@ -160,6 +183,21 @@ namespace ConsoleMenu.Menu
                                                             eventMenu.EventMenu(MemberEventChoices, member, _eventRepo, _signupRepo);
                                                         }
                                                         break;
+                                                    case "2":
+                                                        {
+                                                            boatMenu.BoatMenu(MemberBoatChoices, member, _boatRepo);
+                                                        }
+                                                        break;
+                                                    case "3":
+                                                        {
+                                                            bookingMenu.BookingMenu(MemberBookingChoices, member, _bookingRepo, _memberRepo, _boatRepo);
+                                                        }
+                                                        break;
+                                                    case "4":
+                                                        {
+                                                            repairMenu.RepairMenu(MemberRepairChoices, member, _repairRepo, _boatRepo);
+                                                        }
+                                                        break;
                                                 }
                                                 memberMenuChoices = ReadChoice(MemberMenuChoices);
                                             }
@@ -181,6 +219,21 @@ namespace ConsoleMenu.Menu
                                                     case "1":
                                                         {
                                                             eventMenu.EventMenu(MemberEventChoices, member, _eventRepo, _signupRepo);
+                                                        }
+                                                        break;
+                                                    case "2":
+                                                        {
+                                                            boatMenu.BoatMenu(AdminBoatChoices, member, _boatRepo);
+                                                        }
+                                                        break;
+                                                    case "3":
+                                                        {
+                                                            bookingMenu.BookingMenu(AdminBookingChoices, member, _bookingRepo, _memberRepo, _boatRepo);
+                                                        }
+                                                        break;
+                                                    case "4":
+                                                        {
+                                                            repairMenu.RepairMenu(AdminRepairChoices, member, _repairRepo, _boatRepo);
                                                         }
                                                         break;
                                                 }
@@ -209,6 +262,21 @@ namespace ConsoleMenu.Menu
                                                     case "2":
                                                         {
                                                             memberMenu.Roles(ChairmanMemberChoices, member, _memberRepo, _boatLotRepo);
+                                                        }
+                                                        break;
+                                                    case "3":
+                                                        {
+                                                            boatMenu.BoatMenu(AdminBoatChoices, member, _boatRepo);
+                                                        }
+                                                        break;
+                                                    case "4":
+                                                        {
+                                                            bookingMenu.BookingMenu(AdminBookingChoices, member, _bookingRepo, _memberRepo, _boatRepo);
+                                                        }
+                                                        break;
+                                                    case "5":
+                                                        {
+                                                            repairMenu.RepairMenu(AdminRepairChoices, member, _repairRepo, _boatRepo);
                                                         }
                                                         break;
                                                 }

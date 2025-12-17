@@ -36,8 +36,7 @@ namespace Hillerød_Sejlklub_Library.Models.Boats
 
         public override string ToString()
         {
-            return $"The name of the boat: {TheBoat.Name}\n" +
-                   $"Made: {_dateOfRepair}\n" +
+            return $"Made: {_dateOfRepair}\n" +
                    $"Number: {Number}\n" +
                    $"Comment: {Comment}\n" +
                    $"IsFixed: {IsFixed}\n" +
