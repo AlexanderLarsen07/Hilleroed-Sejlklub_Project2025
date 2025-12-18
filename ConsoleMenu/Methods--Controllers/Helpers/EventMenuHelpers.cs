@@ -70,7 +70,7 @@ namespace ConsoleMenu.Methods__Controllers.Helpers
                 }
             }
         }
-        public void RemoveSignup(SignupRepo signupRepo, Member member)
+        public void RemoveSignup(SignupRepo signupRepo, Member member, EventRepo eventRepo)
         {
             foreach (Signup signup in signupRepo.ReturnAllByMember(member))
             {
@@ -106,6 +106,7 @@ namespace ConsoleMenu.Methods__Controllers.Helpers
                             }
                             else if (choice == "y")
                             {
+                                eventRepo.RemoveSignupOnEvent(signups[i].Event, signups[i]);
                                 signupRepo.RemoveSignup(signups[i]);
                                 Console.WriteLine("Signup removed.");
                                 isFalse = false;
@@ -154,7 +155,7 @@ namespace ConsoleMenu.Methods__Controllers.Helpers
                     Pause();
                     isFalse = false;
                 }
-                else if (events.Count == 1 && !events[0]._signups.Count.Equals(events[0].MaxMembers) && !eventRepo.SignupExistsCheck(member, events[0]))
+                else if (events.Count == 1 && !events[0].Signups.Count.Equals(events[0].MaxMembers) && !eventRepo.SignupExistsCheck(member, events[0]))
                 {
                     Console.WriteLine("Write your comment:");
                     string comment = Console.ReadLine();
@@ -168,7 +169,7 @@ namespace ConsoleMenu.Methods__Controllers.Helpers
                 {
                     for (int i = 0; i < events.Count; i++)
                     {
-                        if (!events[i]._signups.Count.Equals(events[i].MaxMembers) && !eventRepo.SignupExistsCheck(member, events[i]))
+                        if (!events[i].Signups.Count.Equals(events[i].MaxMembers) && !eventRepo.SignupExistsCheck(member, events[i]))
                         {
                             Console.Clear();
                             Console.WriteLine(events[i].ToString());

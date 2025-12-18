@@ -92,7 +92,7 @@ namespace ConsoleMenu.Controllers.Events
                                 } //DONE
                             case "4":
                                 {//remove signup
-                                    menuHelpers.RemoveSignup(signupRepo, member);
+                                    menuHelpers.RemoveSignup(signupRepo, member, eventRepo);
                                     break;
                                 } //DONE
                         }
@@ -136,7 +136,7 @@ namespace ConsoleMenu.Controllers.Events
                             #region Admin/Chairman Case 4
                             case "4":
                                 {//delete signup by title
-                                    menuHelpers.RemoveSignup(signupRepo, member);
+                                    menuHelpers.RemoveSignup(signupRepo, member, eventRepo);
                                     break;
                                 } //DONE
                             #endregion

@@ -21,9 +21,9 @@ namespace Hillerød_Sejlklub_Library.Services
 
         public bool SignupExistsCheck(Member member, Event even) //use to ensure no double signups
         {
-            for (int i = 0; i < even._signups.Count; i++)
+            for (int i = 0; i < even.Signups.Count; i++)
             {
-                if (even._signups[i].Member.MemberID == member.MemberID)
+                if (even.Signups[i].Member.MemberID == member.MemberID)
                 {
                     return true;
                 }
@@ -102,7 +102,7 @@ namespace Hillerød_Sejlklub_Library.Services
                 int timesSwapped = 0;
                 for (int i = 1; i < unsortedEvents; i++)
                 {
-                    if (events[i]._signups.Count > events[i - 1]._signups.Count)
+                    if (events[i].Signups.Count > events[i - 1].Signups.Count)
                     {
                         Event tempEvent = events[i];
                         events[i] = events[i - 1];
@@ -117,6 +117,10 @@ namespace Hillerød_Sejlklub_Library.Services
                 unsortedEvents--;
             }
             return events;
+        }
+        public void RemoveSignupOnEvent(Event even, Signup signup)
+        {
+            even.Signups.Remove(signup);
         }
     }
 }
