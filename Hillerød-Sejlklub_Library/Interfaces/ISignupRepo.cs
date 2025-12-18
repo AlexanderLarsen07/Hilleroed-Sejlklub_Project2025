@@ -16,5 +16,7 @@ namespace Hillerød_Sejlklub_Library.Interfaces
         void RemoveSignup(Signup signup);
         void AddSignup(Signup signup);
         void PrintAll();
+        List<Signup> SortByDateOfSignup();
+        void EditComment(Member member, string comment, string title);
     }
 }

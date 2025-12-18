@@ -81,7 +81,7 @@ namespace Hillerød_Sejlklub_Library.Services
                 }
             }
         }
-        public List<Signup> SortByDateOfSignup()//
+        public List<Signup> SortByDateOfSignup()
         {
             List<Signup> signups = _signupList;
             int unsortedSignups = signups.Count;
