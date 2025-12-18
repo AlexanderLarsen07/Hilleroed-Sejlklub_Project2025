@@ -30,9 +30,9 @@ namespace Hillerød_Sejlklub_Library.Models.Events
             try
             {
 
-                if (Event._signups.Count < Event.MaxMembers)
+                if (Event.Signups.Count < Event.MaxMembers)
                 {
-                    Event._signups.Add(this);
+                    Event.Signups.Add(this);
                 }
             }
             catch (EventFullException efv)

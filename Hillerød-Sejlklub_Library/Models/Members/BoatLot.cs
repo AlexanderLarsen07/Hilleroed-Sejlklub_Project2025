@@ -26,7 +26,7 @@ namespace Hillerød_Sejlklub_Library.Models.Members
         }
         public override string ToString() //implement those above
         {
-            return $"ID: {LotID}\n" +
+            return $"\nID: {LotID}\n" +
                 $"Length:{Length}cm.\n" +
                 $"Bredden:{Width}cm.";
         }

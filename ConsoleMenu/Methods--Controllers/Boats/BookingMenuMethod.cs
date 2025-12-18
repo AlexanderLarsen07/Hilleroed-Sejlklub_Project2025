@@ -148,10 +148,11 @@ namespace ConsoleMenu.Methods__Controllers.Boats
                 Console.WriteLine("Enter destination");
                 string destination = Console.ReadLine();
 
-                Console.WriteLine("Enter start date (example: 2025 12 03 06 00 00)");
+
+                Console.WriteLine("Enter start date (example: 2025-12-3 6:0)");
                 DateTime start = DateTime.Parse(Console.ReadLine());
 
-                Console.WriteLine("Enter end date (example: 2025 12 05 06 00 00)");
+                Console.WriteLine("Enter end date (example: 2025-12-3 12:0)");
                 DateTime end = DateTime.Parse(Console.ReadLine());
 
                 Console.WriteLine("Enter member");

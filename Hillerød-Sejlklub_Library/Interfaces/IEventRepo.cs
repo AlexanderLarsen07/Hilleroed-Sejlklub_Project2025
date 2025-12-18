@@ -20,5 +20,6 @@ namespace Hillerød_Sejlklub_Library.Interfaces
         List<Event> ReturnAllEventsByTitle(string title);
         bool SignupExistsCheck(Member member, Event even);
         List<Event> BubbleSortBySignups();
+        void RemoveSignupOnEvent(Event even, Signup signup);
     }
 }
