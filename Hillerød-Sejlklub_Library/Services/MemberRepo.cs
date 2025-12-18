@@ -93,7 +93,7 @@ namespace Hillerød_Sejlklub_Library.Services
             {
                 return _memberDictionary[id];
             }
-            return null!;
+            return null;
         }
 
         public void Print(Dictionary<int, Member> dictionary)

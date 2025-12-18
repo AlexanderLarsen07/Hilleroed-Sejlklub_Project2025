@@ -797,14 +797,14 @@ namespace ConsoleMenu.Methods.Members
                                 Console.ReadLine();
                                 break;
                             }
-                            Console.WriteLine("----------------------------------");
-                            Console.WriteLine("Chosen member/administrator:\n");
-                            if (id == memberRepo.GetMemberById(id).MemberID && memberRepo.GetMemberById(id).Role == RoleEnum.Member || memberRepo.GetMemberById(id).Role == RoleEnum.Administrator)
+                            else
                             {
+                                Console.WriteLine("----------------------------------");
+                                Console.WriteLine("Chosen member/administrator:\n");
                                 Console.WriteLine(memberRepo.GetMemberById(id).ToString());
                             }
                             Console.WriteLine("---------------------------------------");
-                            Console.WriteLine("\nDo you want to confirm your action?");
+                            Console.WriteLine("\nDo you want to confirm your action? (Yes/ja to confirm)");
                             Console.WriteLine("");
                             string confirmation = Console.ReadLine().ToLower();
                             if (confirmation == "ja" || confirmation == "yes")
