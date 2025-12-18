@@ -11,7 +11,7 @@ namespace Hillerød_Sejlklub_Library.Models.Blogs
 {
     public class Blog
     {
-        public List<Comment> _commentList;
+        private  List<Comment> _commentList;
         private int _blogID;
         private static int _counter = 1;
         
@@ -55,7 +55,7 @@ namespace Hillerød_Sejlklub_Library.Models.Blogs
         #region Comments logic/methods
         public void AddComment(Comment comment) 
         {
-            _commentList.Add(comment);
+            _commentList.Add(comment);                
         }
 
         public void EditComment(string updatedComment, int id)  
@@ -77,11 +77,19 @@ namespace Hillerød_Sejlklub_Library.Models.Blogs
                 if (c.CounterID == id)
                 {
                     _commentList.Remove(c);
-                    Console.WriteLine($"Comment \"{c.MakeComment}\" removed");
+                    Console.WriteLine($"Comment \"{c.MakeComment}\" removed");//fjerne efter
                     break;
                 }
             }
 
+        }
+
+        public void PrintComments()
+        {
+            foreach (Comment c in _commentList)
+            {
+                Console.WriteLine(c.MakeComment);
+            }
         }
         #endregion
 

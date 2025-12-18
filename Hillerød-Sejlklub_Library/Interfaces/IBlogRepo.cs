@@ -16,20 +16,12 @@ namespace Hillerød_Sejlklub_Library.Interfaces
         List<Blog> ReturnByDateRange(DateTime from, DateTime to);
 
         void EditBlog(Blog blog, string headline, string theText, string description);
-        void Delete(Blog blog);
+        void DeleteBlog(Blog blog);
 
         void PrintAllCommentsOnAllBlogs();
 
         List<Blog> ReturnBlogHeadline(string title);
 
         void PrintAllBlog();
-
-        //skal jeg have en metode der printer alle blogs?                   //skal jeg have en metode der printer alle blogs?                   //skal jeg have en metode der printer alle blogs?           
-        //printe alle vil være via foreach loop
-
-        //skal jeg have en metode der opdater listen af blogs?              //skal jeg have en metode der opdater listen af blogs?               //skal jeg have en metode der opdater listen af blogs?
-        //tjek uml 1 og 2 for den her
-
-        //en metode for tjekke administrator eller formand?
     }
 }

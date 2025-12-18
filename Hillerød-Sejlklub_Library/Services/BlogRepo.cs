@@ -72,14 +72,14 @@ namespace Hillerød_Sejlklub_Library.Services
                 }
             }
         }
-        public void Delete(Blog blog) 
+        public void DeleteBlog(Blog blog) 
         {
             foreach(Blog b in _blogRepo) 
             {
                 if(b.BlogID == blog.BlogID)
                 {
                     _blogRepo.Remove(b);
-                    Console.WriteLine($"Blog \"{b.Headline}\" is deleted");
+                    Console.WriteLine($"Blog \"{b.Headline}\" is deleted"); //fjern efter 
                     break;
                 }
                 
@@ -92,12 +92,8 @@ namespace Hillerød_Sejlklub_Library.Services
             foreach (Blog b in _blogRepo)
             {
                 Console.WriteLine();
-                Console.WriteLine($"Udskriver kommentarer for blog {b.Headline}");
-                foreach (Comment c in b._commentList)
-                {
-
-                    Console.WriteLine(c.MakeComment);
-                }
+                Console.WriteLine($"Udskriver kommentarer for blog {b.Headline}"); //fjern efter
+                b.PrintComments();
 
             }
         }
@@ -124,7 +120,7 @@ namespace Hillerød_Sejlklub_Library.Services
         {
             foreach (Blog b in _blogRepo)
             {
-                Console.WriteLine($"Headline: {b.Headline}\nDescription: {b.Description}"); //toString()?
+                Console.WriteLine($"Headline: {b.Headline}\nDescription: {b.Description}"); 
             }
         }
 
