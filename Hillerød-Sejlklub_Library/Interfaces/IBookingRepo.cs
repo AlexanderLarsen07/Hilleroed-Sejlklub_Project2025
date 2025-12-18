@@ -11,7 +11,7 @@ namespace Hillerød_Sejlklub_Library.Interfaces
     {
         public List<Booking> GetAll();
         public void AddBooking(Booking booking); 
-        public Booking GetBookingByID(int BookingID); //+ GetBookingByID(BookingID : int) : Booking
+        public Booking GetBookingByID(int BookingID); 
         public void RemoveBookingByID(int BookingID);
         public void PrintAllBookings();
     }
