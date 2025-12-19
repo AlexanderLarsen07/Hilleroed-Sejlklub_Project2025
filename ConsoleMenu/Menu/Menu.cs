@@ -54,7 +54,6 @@ namespace ConsoleMenu.Menu
         private BlogRepo _blogRepo = new BlogRepo();
         private BoatLotRepo _boatLotRepo = new BoatLotRepo();
         private BoatRepo _boatRepo = new BoatRepo();
-        private CommentRepo _commentRepo = new CommentRepo();
         private EventRepo _eventRepo = new EventRepo();
         private SignupRepo _signupRepo = new SignupRepo();
         private BookingRepo _bookingRepo = new BookingRepo();
